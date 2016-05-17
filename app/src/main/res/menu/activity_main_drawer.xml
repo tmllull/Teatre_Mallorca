@@ -19,9 +19,13 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Eliminar obra" />
         <item
-            android:id="@+id/nav_llistar"
+            android:id="@+id/nav_llistar_entrades"
             android:icon="@drawable/ic_menu_manage"
             android:title="Llistar entrades" />
+        <item
+            android:id="@+id/nav_llistar_obres"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Llistar obres" />
     </group>
 
     <item android:title="Communicate">

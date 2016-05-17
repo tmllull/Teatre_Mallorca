@@ -18,8 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Prova_butaques" />
-        <activity android:name=".NovaObra"></activity>
+        <activity android:name=".OcupacioButaques" />
+        <activity android:name=".NovaObra" />
+        <activity android:name=".NovaObraDates" />
+        <activity android:name=".LlistarObres" />
+        <activity android:name=".ComprarEntrades" />
+        <activity android:name=".EliminarObra"></activity>
     </application>
 
 </manifest>

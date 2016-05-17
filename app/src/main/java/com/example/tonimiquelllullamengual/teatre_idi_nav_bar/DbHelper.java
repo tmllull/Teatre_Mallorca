@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
-public class DB_Helper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
 
     //Versió de la base de datos
     public static final int DATABASE_VERSION = 1;
@@ -25,19 +25,23 @@ public class DB_Helper extends SQLiteOpenHelper {
     public static final String CN_DATA = "data";
     public static final String CN_DURADA = "durada";
     public static final String CN_PREU = "preu";
+    public static final String CN_BUTAQUES = "butaques";
     public static final String CN_PLACES_LLIURES = "places_lliures";
 
     //sentencia global de cracion de la base de datos
-    public static final String USER_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
+    public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
             CN_NOM + " TEXT PRIMARY KEY UNIQUE, " +
             CN_DESCRIPCIO + " TEXT, " +
             CN_DATA + " TEXT, " +
             CN_DURADA + " INTEGER, " +
             CN_PREU + " INTEGER, " +
+            CN_BUTAQUES + "BLOB," +
             CN_PLACES_LLIURES + " INTEGER);";
 
+    //"create table obrasdia ( obra foreign key (Obra.nom), dia INT, ocupados blob) Primary key(obra, dia);"
 
-    public DB_Helper(Context context) {
+
+    public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -53,7 +57,8 @@ public class DB_Helper extends SQLiteOpenHelper {
     //Obtenir una obra
     public Cursor getObra (String obra) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_PLACES_LLIURES};
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES};
         String[] where = {obra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -70,7 +75,8 @@ public class DB_Helper extends SQLiteOpenHelper {
     //Obtenir totes les obres ordenades pel nom
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_PLACES_LLIURES};
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
@@ -99,9 +105,16 @@ public class DB_Helper extends SQLiteOpenHelper {
         return c;
     }
 
+    public void updateData (String nom, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CN_DATA, data);
+        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(USER_TABLE_CREATE);
+        db.execSQL(OBRA_TABLE_CREATE);
     }
 
     @Override
