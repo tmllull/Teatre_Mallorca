@@ -35,7 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_DATA + " TEXT, " +
             CN_DURADA + " INTEGER, " +
             CN_PREU + " INTEGER, " +
-            CN_BUTAQUES + "BLOB," +
+            CN_BUTAQUES + " BLOB, " +
             CN_PLACES_LLIURES + " INTEGER);";
 
     //"create table obrasdia ( obra foreign key (Obra.nom), dia INT, ocupados blob) Primary key(obra, dia);"
@@ -120,5 +120,10 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public void resetAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(OBRA_TABLE, null, null);
     }
 }

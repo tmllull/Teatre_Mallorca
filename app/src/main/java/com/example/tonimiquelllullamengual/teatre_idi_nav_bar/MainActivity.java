@@ -1,5 +1,6 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,9 +14,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
+
+    DbHelper dbHelper;
+
+    Button reset, init;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                //init_data();
             }
         });
 
@@ -41,6 +50,31 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        dbHelper = new DbHelper(this);
+
+        reset = (Button) findViewById(R.id.bt_reset);
+        init = (Button) findViewById(R.id.init_data);
+        reset.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Base de dades eliminada", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                dbHelper.resetAll();
+            }
+        });
+
+        init.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Dades iniciades", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                //init_data();
+            }
+        });
+        //init_data();
+
+
     }
 
     @Override
@@ -108,4 +142,60 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void init_data() {
+        byte[] places = new byte[41];
+        for (int i = 0; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n%2 ==0) places[i] = 0;
+            else places[i] = 1;
+        }
+        ContentValues values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "El rey leon");
+        values.put(dbHelper.CN_DESCRIPCIO, "Mor un lleó. Fin");
+        values.put(dbHelper.CN_DURADA, String.valueOf(120));
+        values.put(dbHelper.CN_PREU, String.valueOf(60));
+        values.put(dbHelper.CN_DATA, String.valueOf("Dilluns"));
+        values.put(dbHelper.CN_BUTAQUES, places);
+        values.put(dbHelper.CN_PLACES_LLIURES, 6);
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+
+        for (int i = 0; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n%2 ==0) places[i] = 0;
+            else places[i] = 1;
+        }
+        values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "Mamma Mia");
+        values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
+        values.put(dbHelper.CN_DURADA, String.valueOf(90));
+        values.put(dbHelper.CN_PREU, String.valueOf(45));
+        values.put(dbHelper.CN_DATA, String.valueOf("Dimecres"));
+        values.put(dbHelper.CN_BUTAQUES, places);
+        values.put(dbHelper.CN_PLACES_LLIURES, 6);
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+
+        for (int i = 0; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n%2 ==0) places[i] = 0;
+            else places[i] = 1;
+        }
+        values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "Queen");
+        values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
+        values.put(dbHelper.CN_DURADA, String.valueOf(120));
+        values.put(dbHelper.CN_PREU, String.valueOf(60));
+        values.put(dbHelper.CN_DATA, String.valueOf("Divendres"));
+        values.put(dbHelper.CN_BUTAQUES, places);
+        values.put(dbHelper.CN_PLACES_LLIURES, 6);
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+    }
+
+
 }
