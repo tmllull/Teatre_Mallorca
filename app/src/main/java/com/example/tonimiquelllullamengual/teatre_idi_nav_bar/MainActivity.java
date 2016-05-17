@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Dades iniciades", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                //init_data();
+                init_data();
             }
         });
         //init_data();
@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_llistar_entrades) {
 
         } else if (id == R.id.nav_llistar_obres) {
-
+            intent = new Intent(getApplicationContext(), LlistarObres.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -161,6 +162,22 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_PLACES_LLIURES, 6);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+        for (int i = 0; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n%2 ==0) places[i] = 0;
+            else places[i] = 1;
+        }
+        ContentValues values2 = new ContentValues();
+        values2.put(dbHelper.CN_NOM, "Mamma Mia");
+        values2.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
+        values2.put(dbHelper.CN_DURADA, String.valueOf(90));
+        values2.put(dbHelper.CN_PREU, String.valueOf(45));
+        values2.put(dbHelper.CN_DATA, String.valueOf("Dimecres"));
+        values2.put(dbHelper.CN_BUTAQUES, places);
+        values2.put(dbHelper.CN_PLACES_LLIURES, 6);
+
+        dbHelper.newObra(values2, dbHelper.OBRA_TABLE);
 
         for (int i = 0; i < 41; ++i) {
             Random rand = new Random();
@@ -168,33 +185,16 @@ public class MainActivity extends AppCompatActivity
             if (n%2 ==0) places[i] = 0;
             else places[i] = 1;
         }
-        values = new ContentValues();
-        values.put(dbHelper.CN_NOM, "Mamma Mia");
-        values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
-        values.put(dbHelper.CN_DURADA, String.valueOf(90));
-        values.put(dbHelper.CN_PREU, String.valueOf(45));
-        values.put(dbHelper.CN_DATA, String.valueOf("Dimecres"));
-        values.put(dbHelper.CN_BUTAQUES, places);
-        values.put(dbHelper.CN_PLACES_LLIURES, 6);
+        ContentValues values3 = new ContentValues();
+        values3.put(dbHelper.CN_NOM, "Queen");
+        values3.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
+        values3.put(dbHelper.CN_DURADA, String.valueOf(120));
+        values3.put(dbHelper.CN_PREU, String.valueOf(60));
+        values3.put(dbHelper.CN_DATA, String.valueOf("Divendres"));
+        values3.put(dbHelper.CN_BUTAQUES, places);
+        values3.put(dbHelper.CN_PLACES_LLIURES, 6);
 
-        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-
-        for (int i = 0; i < 41; ++i) {
-            Random rand = new Random();
-            int n = rand.nextInt(200);
-            if (n%2 ==0) places[i] = 0;
-            else places[i] = 1;
-        }
-        values = new ContentValues();
-        values.put(dbHelper.CN_NOM, "Queen");
-        values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
-        values.put(dbHelper.CN_DURADA, String.valueOf(120));
-        values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("Divendres"));
-        values.put(dbHelper.CN_BUTAQUES, places);
-        values.put(dbHelper.CN_PLACES_LLIURES, 6);
-
-        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+        dbHelper.newObra(values3, dbHelper.OBRA_TABLE);
     }
 
 

@@ -64,6 +64,12 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.bt_confirmarNovaObra:
+                newObra(v);
+                break;
+            default:
+                break;
+        }
     }
 }
