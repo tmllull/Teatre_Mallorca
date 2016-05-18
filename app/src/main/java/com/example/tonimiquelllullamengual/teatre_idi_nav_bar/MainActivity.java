@@ -145,12 +145,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void init_data() {
-        byte[] places = new byte[41];
+        //byte[] places = new byte[41];
+        String places = "-";
+        int p = 0;
         for (int i = 0; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places[i] = 0;
-            else places[i] = 1;
+            if (n%2 ==0) places = places+"0";
+            else {
+                places = places+"1";
+                p++;
+            }
         }
         ContentValues values = new ContentValues();
         values.put(dbHelper.CN_NOM, "El rey leon");
@@ -158,15 +163,20 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
         values.put(dbHelper.CN_DATA, String.valueOf("Dilluns"));
-        values.put(dbHelper.CN_BUTAQUES, places);
-        values.put(dbHelper.CN_PLACES_LLIURES, 6);
+        values.put(dbHelper.CN_BUTAQUES, places.toString());
+        values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+
+        /*p=0;
         for (int i = 0; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
             if (n%2 ==0) places[i] = 0;
-            else places[i] = 1;
+            else {
+                places[i] = 1;
+                p++;
+            }
         }
         ContentValues values2 = new ContentValues();
         values2.put(dbHelper.CN_NOM, "Mamma Mia");
@@ -175,15 +185,19 @@ public class MainActivity extends AppCompatActivity
         values2.put(dbHelper.CN_PREU, String.valueOf(45));
         values2.put(dbHelper.CN_DATA, String.valueOf("Dimecres"));
         values2.put(dbHelper.CN_BUTAQUES, places);
-        values2.put(dbHelper.CN_PLACES_LLIURES, 6);
+        values2.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values2, dbHelper.OBRA_TABLE);
 
+        p=0;
         for (int i = 0; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
             if (n%2 ==0) places[i] = 0;
-            else places[i] = 1;
+            else {
+                places[i] = 1;
+                p++;
+            }
         }
         ContentValues values3 = new ContentValues();
         values3.put(dbHelper.CN_NOM, "Queen");
@@ -192,10 +206,8 @@ public class MainActivity extends AppCompatActivity
         values3.put(dbHelper.CN_PREU, String.valueOf(60));
         values3.put(dbHelper.CN_DATA, String.valueOf("Divendres"));
         values3.put(dbHelper.CN_BUTAQUES, places);
-        values3.put(dbHelper.CN_PLACES_LLIURES, 6);
+        values3.put(dbHelper.CN_PLACES_LLIURES, p);
 
-        dbHelper.newObra(values3, dbHelper.OBRA_TABLE);
+        dbHelper.newObra(values3, dbHelper.OBRA_TABLE);*/
     }
-
-
 }

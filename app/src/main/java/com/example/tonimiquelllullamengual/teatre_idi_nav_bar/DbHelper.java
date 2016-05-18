@@ -35,7 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_DATA + " TEXT, " +
             CN_DURADA + " INTEGER, " +
             CN_PREU + " INTEGER, " +
-            CN_BUTAQUES + " BLOB, " +
+            CN_BUTAQUES + " TEXT, " +
             CN_PLACES_LLIURES + " INTEGER);";
 
     //"create table obrasdia ( obra foreign key (Obra.nom), dia INT, ocupados blob) Primary key(obra, dia);"
@@ -111,6 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(CN_DATA, data);
         db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

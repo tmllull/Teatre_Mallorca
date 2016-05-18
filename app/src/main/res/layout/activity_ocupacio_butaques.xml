@@ -451,8 +451,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Mostrar nom obra i dia"
-            android:id="@+id/textView3"
+            android:text="Nom de l&apos;obra"
+            android:id="@+id/tv_titol_ocupacio"
             android:textSize="22dp"
             android:gravity="center_vertical"
             android:layout_weight="1" />
@@ -461,7 +461,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comprar"
-            android:id="@+id/button41" />
+            android:id="@+id/bt_Comprar_ocupacio" />
 
     </TableRow>
 </LinearLayout>

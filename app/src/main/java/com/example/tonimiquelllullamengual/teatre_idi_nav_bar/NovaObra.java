@@ -51,12 +51,13 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 places[i] = 0;
             }
             ContentValues values = new ContentValues();
-            values.put(dbHelper.CN_NOM, String.valueOf(etNom));
-            values.put(dbHelper.CN_DESCRIPCIO, String.valueOf(etDescripcio));
-            values.put(dbHelper.CN_DURADA, String.valueOf(etDurada));
-            values.put(dbHelper.CN_PREU, String.valueOf(etPreu));
-            values.put(dbHelper.CN_DATA, String.valueOf(etData));
+            values.put(dbHelper.CN_NOM, etNom.getText().toString());
+            values.put(dbHelper.CN_DESCRIPCIO, etDescripcio.getText().toString());
+            values.put(dbHelper.CN_DURADA, etDurada.getText().toString());
+            values.put(dbHelper.CN_PREU, etPreu.getText().toString());
+            values.put(dbHelper.CN_DATA, etData.getText().toString());
             values.put(dbHelper.CN_BUTAQUES, places);
+            values.put(dbHelper.CN_PLACES_LLIURES, 40);
 
             dbHelper.newObra(values, dbHelper.OBRA_TABLE);
         }
