@@ -5,12 +5,13 @@ package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
  */
 public class Obra {
 
-    private String nom;
+    private String nom, dia;
     private Integer places;
 
-    Obra(String nom, Integer places) {
+    Obra(String nom, Integer places, String dia) {
         this.nom = nom;
         this.places = places;
+        this.dia = dia;
     }
 
     Obra() {}
@@ -18,6 +19,8 @@ public class Obra {
     public String getNom() {return nom;}
 
     public Integer getPlaces() {return places;}
+
+    public String getDia() {return dia;}
 
     public void setNom(String nom){this.nom = nom;}
 }

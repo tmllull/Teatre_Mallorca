@@ -37,8 +37,9 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
     @Override
     public void onBindViewHolder(MyCustomAdapter.AdapterViewHolder adapterViewHolder, int position) {
         if (obres != null) {
-            adapterViewHolder.nom.setText("Títol: "+obres.get(position).getNom());
-            adapterViewHolder.places.setText("Butaques lliures: "+obres.get(position).getPlaces().toString());
+            adapterViewHolder.nom.setText(obres.get(position).getNom());
+            adapterViewHolder.places.setText(obres.get(position).getPlaces().toString());
+            adapterViewHolder.dia.setText(obres.get(position).getDia().toString());
         }
     }
 
@@ -58,6 +59,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
 
         public TextView nom;
         public TextView places;
+        public TextView dia;
         public View v;
         private String mTextView;
         private String mItem;
@@ -69,6 +71,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
             this.v = itemView;
             this.nom = (TextView) itemView.findViewById(R.id.tv_nom_row);
             this.places = (TextView) itemView.findViewById(R.id.tv_places_row);
+            this.dia = (TextView) itemView.findViewById(R.id.tv_dia_row);
         }
 
         public void setItem (String item) {

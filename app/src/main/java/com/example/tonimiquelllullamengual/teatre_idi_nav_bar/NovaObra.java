@@ -6,16 +6,22 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class NovaObra extends AppCompatActivity implements View.OnClickListener {
 
     private Button btNew;
     private EditText etNom, etDescripcio, etDurada, etPreu, etData;
+    private Spinner spinner;
+    private List<String> lista;
 
     DbHelper dbHelper;
 
@@ -34,16 +40,18 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         btNew.setOnClickListener(this);
 
         dbHelper = new DbHelper(this);
+
+        carregar_spinner();
     }
 
-    public void newObra(View v) {
+    public void newObra() {
         if (etNom.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
                     Toast.LENGTH_LONG).show();
             return;
         }
         else  {
-            Cursor c = dbHelper.getObra(String.valueOf(etNom.getText()));
+            /*Cursor c = dbHelper.getObra(String.valueOf(etNom.getText()));
             if (c.moveToFirst()) {
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
                 if (data.equals(etData))
@@ -51,7 +59,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                             "nom per aquest dia.",
                             Toast.LENGTH_LONG).show();
                 return;
-            }
+            }*/
             String places = "-";
             for (int i = 1; i < 41; ++i) {
                 places = places+"1";
@@ -61,7 +69,8 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
             values.put(dbHelper.CN_DESCRIPCIO, etDescripcio.getText().toString());
             values.put(dbHelper.CN_DURADA, etDurada.getText().toString());
             values.put(dbHelper.CN_PREU, etPreu.getText().toString());
-            values.put(dbHelper.CN_DATA, etData.getText().toString());
+            //values.put(dbHelper.CN_DATA, etData.getText().toString());
+            values.put(dbHelper.CN_DATA, spinner.getSelectedItem().toString());
             values.put(dbHelper.CN_BUTAQUES, places);
             values.put(dbHelper.CN_PLACES_LLIURES, 40);
 
@@ -69,11 +78,28 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    public void carregar_spinner() {
+        spinner = (Spinner) findViewById(R.id.spinner);
+        lista = new ArrayList<String>();
+        spinner = (Spinner) this.findViewById(R.id.spinner);
+        lista.add("Dilluns");
+        lista.add("Dimarts");
+        lista.add("Dimecres");
+        lista.add("Dijous");
+        lista.add("Divendres");
+        lista.add("Dissabte");
+        lista.add("Diumenge");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, lista);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
-                newObra(v);
+                newObra();
                 Intent intent = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();

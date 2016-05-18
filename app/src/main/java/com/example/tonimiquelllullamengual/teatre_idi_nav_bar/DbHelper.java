@@ -94,15 +94,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
-                null//CN_NOM + " ASC"                // The sort order
+                CN_NOM + " ASC"                // The sort order
         );
         return c;
     }
 
     //Obtenir només el nom de totes les obres
-    public Cursor getAllObresName() {
+    public Cursor getAllObresData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM};
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
@@ -110,7 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
-                CN_NOM + " ASC"                // The sort order
+                CN_DATA + " ASC"                // The sort order
         );
         return c;
     }
