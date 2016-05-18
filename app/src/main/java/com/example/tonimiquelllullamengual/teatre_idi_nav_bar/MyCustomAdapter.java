@@ -38,7 +38,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
     public void onBindViewHolder(MyCustomAdapter.AdapterViewHolder adapterViewHolder, int position) {
         if (obres != null) {
             adapterViewHolder.nom.setText("Títol: "+obres.get(position).getNom());
-            adapterViewHolder.places.setText("Places lliures: "+obres.get(position).getPlaces().toString());
+            adapterViewHolder.places.setText("Butaques lliures: "+obres.get(position).getPlaces().toString());
         }
     }
 

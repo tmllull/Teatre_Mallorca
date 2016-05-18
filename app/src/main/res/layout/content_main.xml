@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="Init_Data"
         android:id="@+id/init_data"
+        android:layout_marginBottom="62dp"
         android:layout_above="@+id/bt_reset"
-        android:layout_toEndOf="@+id/textView10"
-        android:layout_marginBottom="60dp" />
+        android:layout_alignEnd="@+id/bt_reset" />
 </RelativeLayout>

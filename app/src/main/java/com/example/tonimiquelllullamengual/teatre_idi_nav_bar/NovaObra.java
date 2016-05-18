@@ -1,6 +1,7 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Random;
 
 public class NovaObra extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,9 +52,9 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                             Toast.LENGTH_LONG).show();
                 return;
             }
-            byte[] places = new byte[41];
-            for (int i = 0; i < 41; ++i) {
-                places[i] = 0;
+            String places = "-";
+            for (int i = 1; i < 41; ++i) {
+                places = places+"1";
             }
             ContentValues values = new ContentValues();
             values.put(dbHelper.CN_NOM, etNom.getText().toString());
@@ -71,6 +74,9 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
                 newObra(v);
+                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             default:
                 break;

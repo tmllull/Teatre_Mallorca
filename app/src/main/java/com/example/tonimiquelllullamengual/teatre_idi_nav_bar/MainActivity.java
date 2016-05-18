@@ -117,22 +117,22 @@ public class MainActivity extends AppCompatActivity
         Intent intent;
 
         if (id == R.id.nav_ocupacio) {
-            intent = new Intent(getApplicationContext(), OcupacioButaques.class);
-            startActivity(intent);
+            //intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+            //startActivity(intent);
         } else if (id == R.id.nav_comprar) {
-            intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+            intent = new Intent(getApplicationContext(), LlistarObres.class);
             startActivity(intent);
         } else if (id == R.id.nav_afegir) {
             intent = new Intent(getApplicationContext(), NovaObra.class);
             startActivity(intent);
         } else if (id == R.id.nav_eliminar) {
-            intent = new Intent(getApplicationContext(), EliminarObra.class);
-            startActivity(intent);
+            //intent = new Intent(getApplicationContext(), EliminarObra.class);
+            //startActivity(intent);
         } else if (id == R.id.nav_llistar_entrades) {
 
         } else if (id == R.id.nav_llistar_obres) {
-            intent = new Intent(getApplicationContext(), LlistarObres.class);
-            startActivity(intent);
+            //intent = new Intent(getApplicationContext(), LlistarObres.class);
+            //startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
