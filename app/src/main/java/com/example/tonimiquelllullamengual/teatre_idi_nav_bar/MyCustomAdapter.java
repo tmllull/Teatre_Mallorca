@@ -84,6 +84,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
             Intent intent = new Intent (v.getContext(), InfoObra.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
+            //return;
             /*Toast.makeText(v.getContext(), getAdapterPosition() + " " +
                     obres.get(getAdapterPosition()).getNom(),
                     Toast.LENGTH_LONG).show();*/

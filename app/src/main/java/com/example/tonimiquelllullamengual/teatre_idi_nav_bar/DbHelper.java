@@ -122,6 +122,34 @@ public class DbHelper extends SQLiteOpenHelper {
         db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
     }
 
+    public void updateOcupacio(String nom, String ocupacio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CN_BUTAQUES, ocupacio);
+        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+    }
+
+    public void updatePlacesLliures(String nom, int places) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CN_PLACES_LLIURES, places);
+        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+    }
+
+    public void updateDescripcio(String nom, String ocupacio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CN_BUTAQUES, ocupacio);
+        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+    }
+
+    public void updateMasCosas(String nom, String ocupacio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CN_BUTAQUES, ocupacio);
+        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

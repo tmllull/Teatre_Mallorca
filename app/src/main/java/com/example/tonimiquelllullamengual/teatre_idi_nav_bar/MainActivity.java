@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent(getApplicationContext(), OcupacioButaques.class);
             startActivity(intent);
         } else if (id == R.id.nav_comprar) {
-            intent = new Intent(getApplicationContext(), ComprarEntrades.class);
+            intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
             startActivity(intent);
         } else if (id == R.id.nav_afegir) {
             intent = new Intent(getApplicationContext(), NovaObra.class);
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
         //byte[] places = new byte[41];
         String places = "-";
         int p = 0;
-        for (int i = 0; i < 41; ++i) {
+        for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
             if (n%2 ==0) places = places+"0";
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity
 
         p=0;
         places = "-";
-        for (int i = 0; i < 41; ++i) {
+        for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
             if (n%2 ==0) places = places+"0";
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity
 
         p=0;
         places = "-";
-        for (int i = 0; i < 41; ++i) {
+        for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
             if (n%2 ==0) places = places+"0";

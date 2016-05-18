@@ -1,5 +1,6 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class OcupacioButaques extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,6 +19,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     DbHelper dbHelper;
     TextView tvTitol;
     Button btComprar;
+    String butaques_seleccionades;
+    Integer places_lliures, preu, entrades;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -51,6 +53,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         btComprar = (Button) findViewById(R.id.bt_Comprar_ocupacio);
         btComprar.setOnClickListener(this);
 
+        entrades = 0;
+
         String places = "init places";
 
         dbHelper = new DbHelper(this);
@@ -66,8 +70,11 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         Cursor c = dbHelper.getObra(titol);
         if (c.moveToFirst()) {
             places = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
+            butaques_seleccionades = places;
+            places_lliures = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+            preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
         }
-        /*Toast.makeText(getApplicationContext(), places,
+        /*Toast.makeText(getApplicationContext(), butaques_seleccionades,
                 Toast.LENGTH_LONG).show();*/
 
         String aux = "p";
@@ -80,7 +87,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
             //else butaca[i].setBackgroundColor(0xffff0000);
         }
-        /*Toast.makeText(getApplicationContext(), aux,
+        /*Toast.makeText(getApplicationContext(), butaques_seleccionades,
                 Toast.LENGTH_LONG).show();*/
     }
 
@@ -95,15 +102,38 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         if (v.getId() != R.id.bt_Comprar_ocupacio) {
             Button aux = (Button) findViewById(v.getId());
             aux.setBackgroundColor(0xffff0000);
-            Resources r = getResources();
-            String name = getPackageName();
             for(Integer i = 1; i < 41; i++) {
                 if (findViewById(v.getId()).equals(butaca[i])){
-                    Toast.makeText(getApplicationContext(),
-                            i.toString(), Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(getApplicationContext(),
+                            i.toString(), Toast.LENGTH_LONG).show();*/
+                    char[] aux2 = butaques_seleccionades.toCharArray();
+                    aux2[i] = '0';
+                    butaques_seleccionades = String.valueOf(aux2);
+                    places_lliures--;
+                    entrades++;
+                    //return;
                 }
             }
+            /*Toast.makeText(getApplicationContext(),
+                    butaques_seleccionades, Toast.LENGTH_LONG).show();*/
+            //dbHelper.updateOcupacio(tvTitol.toString(), butaques_seleccionades);
+            return;
         }
-        return;
+        else {
+            /*Toast.makeText(getApplicationContext(),
+                    tvTitol.getText(), Toast.LENGTH_LONG).show();*/
+            dbHelper.updateOcupacio(tvTitol.getText().toString(), butaques_seleccionades);
+            dbHelper.updatePlacesLliures(tvTitol.getText().toString(), places_lliures);
+            int total = entrades*preu;
+            Bundle bundle = new Bundle();
+            bundle.putInt("Total", total);
+            bundle.putInt("Entrades", entrades);
+            bundle.putString("Titol", tvTitol.getText().toString());
+            Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+            return;
+        }
     }
 }

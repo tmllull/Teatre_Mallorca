@@ -22,9 +22,10 @@
         <activity android:name=".NovaObra" />
         <activity android:name=".NovaObraDates" />
         <activity android:name=".LlistarObres" />
-        <activity android:name=".ComprarEntrades" />
+        <activity android:name=".ConfirmarCompra" />
         <activity android:name=".EliminarObra" />
-        <activity android:name=".InfoObra"></activity>
+        <activity android:name=".InfoObra" />
+        <activity android:name=".FinalCompra"></activity>
     </application>
 
 </manifest>
