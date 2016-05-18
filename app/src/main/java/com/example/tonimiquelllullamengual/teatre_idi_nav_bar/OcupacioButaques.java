@@ -92,8 +92,18 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        Button aux = (Button) findViewById(v.getId());
-        aux.setBackgroundColor(0xffff0000);
+        if (v.getId() != R.id.bt_Comprar_ocupacio) {
+            Button aux = (Button) findViewById(v.getId());
+            aux.setBackgroundColor(0xffff0000);
+            Resources r = getResources();
+            String name = getPackageName();
+            for(Integer i = 1; i < 41; i++) {
+                if (findViewById(v.getId()).equals(butaca[i])){
+                    Toast.makeText(getApplicationContext(),
+                            i.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
         return;
     }
 }

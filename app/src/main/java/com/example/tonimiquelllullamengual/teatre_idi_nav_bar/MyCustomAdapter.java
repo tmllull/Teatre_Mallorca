@@ -23,6 +23,8 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
         obres = new ArrayList<>();
     }
 
+    Context mContext;
+
     @Override
     public MyCustomAdapter.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //Instancia un layout XML en la correspondiente vista.

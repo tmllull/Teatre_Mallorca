@@ -168,13 +168,14 @@ public class MainActivity extends AppCompatActivity
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
 
-        /*p=0;
+        p=0;
+        places = "-";
         for (int i = 0; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places[i] = 0;
+            if (n%2 ==0) places = places+"0";
             else {
-                places[i] = 1;
+                places = places+"1";
                 p++;
             }
         }
@@ -184,18 +185,19 @@ public class MainActivity extends AppCompatActivity
         values2.put(dbHelper.CN_DURADA, String.valueOf(90));
         values2.put(dbHelper.CN_PREU, String.valueOf(45));
         values2.put(dbHelper.CN_DATA, String.valueOf("Dimecres"));
-        values2.put(dbHelper.CN_BUTAQUES, places);
+        values2.put(dbHelper.CN_BUTAQUES, places.toString());
         values2.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values2, dbHelper.OBRA_TABLE);
 
         p=0;
+        places = "-";
         for (int i = 0; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places[i] = 0;
+            if (n%2 ==0) places = places+"0";
             else {
-                places[i] = 1;
+                places = places+"1";
                 p++;
             }
         }
@@ -205,9 +207,9 @@ public class MainActivity extends AppCompatActivity
         values3.put(dbHelper.CN_DURADA, String.valueOf(120));
         values3.put(dbHelper.CN_PREU, String.valueOf(60));
         values3.put(dbHelper.CN_DATA, String.valueOf("Divendres"));
-        values3.put(dbHelper.CN_BUTAQUES, places);
+        values3.put(dbHelper.CN_BUTAQUES, places.toString());
         values3.put(dbHelper.CN_PLACES_LLIURES, p);
 
-        dbHelper.newObra(values3, dbHelper.OBRA_TABLE);*/
+        dbHelper.newObra(values3, dbHelper.OBRA_TABLE);
     }
 }

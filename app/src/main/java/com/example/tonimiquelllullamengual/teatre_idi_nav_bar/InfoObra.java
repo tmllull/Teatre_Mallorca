@@ -73,6 +73,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener{
                     v.getContext().startActivity(intent);
                     /*Toast.makeText(getApplicationContext(), aux,
                             Toast.LENGTH_LONG).show();*/
+                    finish();
                     break;
                 }
                 else

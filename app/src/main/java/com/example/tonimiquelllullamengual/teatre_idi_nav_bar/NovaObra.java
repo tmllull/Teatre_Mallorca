@@ -42,8 +42,11 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         else  {
             Cursor c = dbHelper.getObra(String.valueOf(etNom.getText()));
             if (c.moveToFirst()) {
-                Toast.makeText(getApplicationContext(), "L'obra ja existeix",
-                        Toast.LENGTH_LONG).show();
+                String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                if (data.equals(etData))
+                    Toast.makeText(getApplicationContext(), "Ja hi ha una obra amb el mateix " +
+                            "nom per aquest dia.",
+                            Toast.LENGTH_LONG).show();
                 return;
             }
             byte[] places = new byte[41];

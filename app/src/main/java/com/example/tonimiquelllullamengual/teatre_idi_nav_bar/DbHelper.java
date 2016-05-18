@@ -29,14 +29,24 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CN_PLACES_LLIURES = "places_lliures";
 
     //sentencia global de cracion de la base de datos
-    public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
+    /*public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
             CN_NOM + " TEXT PRIMARY KEY UNIQUE, " +
             CN_DESCRIPCIO + " TEXT, " +
             CN_DATA + " TEXT, " +
             CN_DURADA + " INTEGER, " +
             CN_PREU + " INTEGER, " +
             CN_BUTAQUES + " TEXT, " +
-            CN_PLACES_LLIURES + " INTEGER);";
+            CN_PLACES_LLIURES + " INTEGER);";*/
+
+    public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
+            CN_NOM + " TEXT, " +
+            CN_DESCRIPCIO + " TEXT, " +
+            CN_DATA + " TEXT, " +
+            CN_DURADA + " INTEGER, " +
+            CN_PREU + " INTEGER, " +
+            CN_BUTAQUES + " TEXT, " +
+            CN_PLACES_LLIURES + " INTEGER, " +
+            "PRIMARY KEY (nom,data));";
 
     //"create table obrasdia ( obra foreign key (Obra.nom), dia INT, ocupados blob) Primary key(obra, dia);"
 
