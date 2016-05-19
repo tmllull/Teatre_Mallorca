@@ -47,8 +47,8 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmar_compra:
-                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                //startActivity(intent);
                 finish();
                 break;
             default:

@@ -1,5 +1,6 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,6 +88,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
             Intent intent = new Intent (v.getContext(), InfoObra.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
+            ((Activity)v.getContext()).finish();
             //return;
             /*Toast.makeText(v.getContext(), getAdapterPosition() + " " +
                     obres.get(getAdapterPosition()).getNom(),
