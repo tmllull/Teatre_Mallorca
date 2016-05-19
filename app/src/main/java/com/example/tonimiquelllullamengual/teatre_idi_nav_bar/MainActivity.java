@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
+        values.put(dbHelper.CN_DATA, String.valueOf("04-05-16"));
         values.put(dbHelper.CN_BUTAQUES, places.toString());
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 

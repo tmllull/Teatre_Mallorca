@@ -18,7 +18,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
-    String aux;
+    String aux, auxTitol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             titol = bundle.getString("Titol");
 
         tvTitol.setText(titol.toString());
-        aux = titol;
+        auxTitol = titol;
 
         Cursor c = dbHelper.getObra(titol);
         if (c.moveToFirst()) {
@@ -56,7 +56,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             tvPreu.setText(preu.toString());
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             //aux = places.toString();
-            tvPlaces.setText(places.toString());
+            //tvPlaces.setText(places.toString());
             durada = c.getInt(c.getColumnIndex(dbHelper.CN_DURADA));
             tvDurada.setText(durada.toString());
             tvData.setText(c.getString(c.getColumnIndex(dbHelper.CN_DATA)));
@@ -70,20 +70,22 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_Comprar_Info:
-                if (places_lliures) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Titol", aux);
-                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
-                    intent.putExtras(bundle);
-                    v.getContext().startActivity(intent);
+                //if (places_lliures) {
+                Bundle bundle = new Bundle();
+                bundle.putString("Titol", auxTitol);
+                Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+                //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                //Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
                     /*Toast.makeText(getApplicationContext(), aux,
                             Toast.LENGTH_LONG).show();*/
-                    finish();
-                    break;
-                } else
-                    Toast.makeText(getApplicationContext(), "No queden places lliures",
-                            Toast.LENGTH_LONG).show();
+                finish();
                 break;
+            //} else
+            //  Toast.makeText(getApplicationContext(), "No queden places lliures",
+            //        Toast.LENGTH_LONG).show();
+            //break;
             default:
                 break;
         }

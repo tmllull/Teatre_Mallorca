@@ -27,10 +27,12 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CN_PREU = "preu";
     public static final String CN_BUTAQUES = "butaques";
     public static final String CN_PLACES_LLIURES = "places_lliures";
+    public static final String CN_ID = "_id";
 
     //sentencia global de cracion de la base de datos
     /*public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
-            CN_NOM + " TEXT PRIMARY KEY UNIQUE, " +
+            CN_ID + " integer primary key autoincrement," +
+            CN_NOM + " TEXT, " +
             CN_DESCRIPCIO + " TEXT, " +
             CN_DATA + " TEXT, " +
             CN_DURADA + " INTEGER, " +
@@ -87,6 +89,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES};
+        //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
@@ -99,16 +102,38 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //Obtenir només el nom de totes les obres
-    public Cursor getAllObresData() {
+    //Obtenir totes les obres ordenades pel nom
+    public Cursor getAllObresDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES};
-        Cursor c = db.query(
+        String[] where = {CN_NOM};
+        //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
+        Cursor c = db.query(true,
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
                 null,               // The columns for the WHERE clause
                 null,               // The values for the WHERE clause
+                CN_NOM,               // don't group the rows
+                null,               // don't filter by row groups
+                CN_NOM + " ASC",
+                null// The sort order
+        );
+        return c;
+    }
+
+
+    //Obtenir només el nom de totes les obres
+    public Cursor getAllObresData(String nom) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES};
+        String[] where = {nom};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                columns,            // The columns to return
+                "nom=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
                 CN_DATA + " ASC"                // The sort order

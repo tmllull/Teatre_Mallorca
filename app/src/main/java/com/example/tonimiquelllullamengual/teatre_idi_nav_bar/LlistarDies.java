@@ -10,22 +10,24 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class LlistarObres extends AppCompatActivity {
+public class LlistarDies extends AppCompatActivity {
 
-    //ListView obres;
+    //ListView dies;
 
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
     boolean ordre = false;
 
-    private MyCustomAdapterObres adapter;
-    ArrayList<Obra> obres = new ArrayList<>();
+    Bundle bundle;
+
+    private MyCustomAdapterDies adapter;
+    ArrayList<Dia> dies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_llistar_obres);
+        setContentView(R.layout.activity_llistar_dies);
 
         carregar_view();
 
@@ -34,21 +36,24 @@ public class LlistarObres extends AppCompatActivity {
     public void carregar_view() {
         dbHelper = new DbHelper(this);
 
-        //Cursor c = dbHelper.getAllObresDistinct();
+        bundle = getIntent().getExtras();
+        String titol = bundle.getString("Titol");
         Cursor c = dbHelper.getAllObres();
+        //Cursor c = dbHelper.getAllObresDistinct();
+        //Cursor c = dbHelper.getObra(titol);
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
-                Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                Obra obra = new Obra(nom, places, dia);
-                //Obra obra = new Obra(nom);
-                obres.add(obra);
+                //Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                //String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                //Obra obra = new Obra(nom, places, dia);
+                Dia dia = new Dia(nom);
+                dies.add(dia);
             } while (c.moveToNext());
         }
 
         //findViewById del layout activity_main
-        mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);
 
         //LinearLayoutManager necesita el contexto de la Activity.
         //El LayoutManager se encarga de posicionar los items dentro del recyclerview
@@ -62,14 +67,14 @@ public class LlistarObres extends AppCompatActivity {
         //El adapter se encarga de  adaptar un objeto definido en el c�digo a una vista en xml
         //seg�n la estructura definida.
         //Asignamos nuestro custom Adapter
-        adapter = new MyCustomAdapterObres();
+        adapter = new MyCustomAdapterDies();
         mRecyclerView.setAdapter(adapter);
-        adapter.setDataSet(obres);
+        adapter.setDataSet(dies);
 
     }
 
     public void updateData(boolean ordre) {
-        obres = new ArrayList<>();
+        dies = new ArrayList<>();
         carregar_view();
     }
 
@@ -101,4 +106,3 @@ public class LlistarObres extends AppCompatActivity {
         }
     }
 }
-

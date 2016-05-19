@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class OcupacioButaques extends AppCompatActivity implements View.OnClickListener {
 
     private Button[] butaca = new Button[41];
+    private int[] butaca_clicada = new int[41];
 
     Bundle bundle;
     DbHelper dbHelper;
@@ -44,9 +45,10 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
         Resources r = getResources();
         String name = getPackageName();
-        for(int i = 1; i < 41; i++) {
+        for (int i = 1; i < 41; i++) {
             butaca[i] = (Button) findViewById(r.getIdentifier("button" + i, "id", name));
             butaca[i].setOnClickListener(this);
+            butaca_clicada[i] = 0;
         }
 
         tvTitol = (TextView) findViewById(R.id.tv_titol_ocupacio);
@@ -101,41 +103,58 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v.getId() != R.id.bt_Comprar_ocupacio) {
-            Button aux = (Button) findViewById(v.getId());
-            aux.setBackgroundColor(0xffff0000);
-            for(Integer i = 1; i < 41; i++) {
-                if (findViewById(v.getId()).equals(butaca[i])){
+            //Button aux = (Button) findViewById(v.getId());
+            //aux.setBackgroundColor(0xffff0000);
+            for (Integer i = 1; i < 41; i++) {
+                if (findViewById(v.getId()).equals(butaca[i])) {
+                    if (butaca_clicada[i] == 0) { //Butaca no clicada
+                        butaca_clicada[i] = 1;
                     /*Toast.makeText(getApplicationContext(),
                             i.toString(), Toast.LENGTH_LONG).show();*/
-                    char[] aux2 = butaques_seleccionades.toCharArray();
-                    aux2[i] = '0';
-                    butaques_seleccionades = String.valueOf(aux2);
-                    places_lliures--;
-                    entrades++;
-                    //return;
+                        char[] aux2 = butaques_seleccionades.toCharArray();
+                        aux2[i] = '0';
+                        butaques_seleccionades = String.valueOf(aux2);
+                        places_lliures--;
+                        entrades++;
+                        Button aux = (Button) findViewById(v.getId());
+                        aux.setBackgroundColor(0xffff0000);
+                        //return;
+                        // }
+                    } else {
+                        butaca_clicada[i] = 0;
+                    /*Toast.makeText(getApplicationContext(),
+                            i.toString(), Toast.LENGTH_LONG).show();*/
+                        char[] aux2 = butaques_seleccionades.toCharArray();
+                        aux2[i] = '1';
+                        butaques_seleccionades = String.valueOf(aux2);
+                        places_lliures++;
+                        entrades--;
+                        Button aux = (Button) findViewById(v.getId());
+                        aux.setBackgroundColor(0xff4efe4b);
+                    }
                 }
             }
             /*Toast.makeText(getApplicationContext(),
                     butaques_seleccionades, Toast.LENGTH_LONG).show();*/
-            //dbHelper.updateOcupacio(tvTitol.toString(), butaques_seleccionades);
-            return;
-        }
-        else {
+                //dbHelper.updateOcupacio(tvTitol.toString(), butaques_seleccionades);
+                return;
+            }
+            else{
             /*Toast.makeText(getApplicationContext(),
                     tvTitol.getText(), Toast.LENGTH_LONG).show();*/
-            dbHelper.updateOcupacio(tvTitol.getText().toString(), butaques_seleccionades);
-            dbHelper.updatePlacesLliures(tvTitol.getText().toString(), places_lliures);
-            int total = entrades*preu;
-            Bundle bundle = new Bundle();
-            bundle.putInt("Total", total);
-            bundle.putInt("Entrades", entrades);
-            bundle.putString("Titol", tvTitol.getText().toString());
-            bundle.putString("Data", data);
-            Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            finish();
-            return;
+                dbHelper.updateOcupacio(tvTitol.getText().toString(), butaques_seleccionades);
+                dbHelper.updatePlacesLliures(tvTitol.getText().toString(), places_lliures);
+                int total = entrades * preu;
+                Bundle bundle = new Bundle();
+                bundle.putInt("Total", total);
+                bundle.putInt("Entrades", entrades);
+                bundle.putString("Titol", tvTitol.getText().toString());
+                bundle.putString("Data", data);
+                Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+                return;
+            }
         }
     }
-}

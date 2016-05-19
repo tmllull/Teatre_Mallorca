@@ -27,7 +27,7 @@
         <activity android:name=".NovaObraDates" />
         <activity
             android:name=".LlistarObres"
-            android:label="Llistat d'obres" />
+            android:label="Llistat d&apos;obres" />
         <activity android:name=".ConfirmarCompra" />
         <activity
             android:name=".EliminarObra"
@@ -35,7 +35,8 @@
         <activity
             android:name=".InfoObra"
             android:label="Info obra" />
-        <activity android:name=".FinalCompra"></activity>
+        <activity android:name=".FinalCompra" />
+        <activity android:name=".LlistarDies"></activity>
     </application>
 
 </manifest>

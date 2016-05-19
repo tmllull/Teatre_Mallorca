@@ -25,8 +25,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
 
     private Button btNew;
     private EditText etNom, etDescripcio, etDurada, etPreu, etData;
-    private Spinner spinner;
-    private List<String> lista;
     private TextView tvData;
 
     private DatePickerDialog pickerDialog;
@@ -57,7 +55,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
 
         dbHelper = new DbHelper(this);
 
-        //carregar_spinner();
     }
 
     public void prepareCalendar() {
@@ -91,6 +88,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
             }*/
             String places = "-";
             for (int i = 1; i < 41; ++i) {
+                //Plaça lliure indicat amb un 1
                 places = places+"1";
             }
             ContentValues values = new ContentValues();
@@ -99,7 +97,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
             values.put(dbHelper.CN_DURADA, etDurada.getText().toString());
             values.put(dbHelper.CN_PREU, etPreu.getText().toString());
             values.put(dbHelper.CN_DATA, tvData.getText().toString());
-            //values.put(dbHelper.CN_DATA, spinner.getSelectedItem().toString());
             values.put(dbHelper.CN_BUTAQUES, places);
             values.put(dbHelper.CN_PLACES_LLIURES, 40);
 
@@ -107,29 +104,24 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    public void carregar_spinner() {
-        spinner = (Spinner) findViewById(R.id.spinner);
-        lista = new ArrayList<String>();
-        spinner = (Spinner) this.findViewById(R.id.spinner);
-        lista.add("Dilluns");
-        lista.add("Dimarts");
-        lista.add("Dimecres");
-        lista.add("Dijous");
-        lista.add("Divendres");
-        lista.add("Dissabte");
-        lista.add("Diumenge");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lista);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
-                newObra();
-                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                //newObra();
+                //Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                if (etNom.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
+                            Toast.LENGTH_LONG).show();
+                    break;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("Nom",etNom.getText().toString());
+                bundle.putString("Descricpio", etDescripcio.getText().toString());
+                bundle.putString("Durada", etDurada.getText().toString());
+                bundle.putString("Preu", etPreu.getText().toString());
+                Intent intent = new Intent (getApplicationContext(), NovaObraDates.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
                 break;

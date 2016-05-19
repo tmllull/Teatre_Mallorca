@@ -5,38 +5,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
-public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.AdapterViewHolder> {
+public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterObres.AdapterViewHolder> {
 
     ArrayList<Obra> obres;
-    MyCustomAdapter() {
+    MyCustomAdapterObres() {
         obres = new ArrayList<>();
     }
 
     Context mContext;
 
     @Override
-    public MyCustomAdapter.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MyCustomAdapterObres.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //Instancia un layout XML en la correspondiente vista.
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         //Inflamos en la vista el layout para cada elemento
-        View view = inflater.inflate(R.layout.row_layout, viewGroup, false);
+        View view = inflater.inflate(R.layout.row_layout_obres, viewGroup, false);
         return new AdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyCustomAdapter.AdapterViewHolder adapterViewHolder, int position) {
+    public void onBindViewHolder(MyCustomAdapterObres.AdapterViewHolder adapterViewHolder, int position) {
         if (obres != null) {
             adapterViewHolder.nom.setText(obres.get(position).getNom());
             adapterViewHolder.places.setText(obres.get(position).getPlaces().toString());
