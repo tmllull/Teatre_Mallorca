@@ -7,8 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,6 +71,7 @@ public class LlistarObres extends AppCompatActivity {
         adapter = new MyCustomAdapter();
         mRecyclerView.setAdapter(adapter);
         adapter.setDataSet(obres);
+
     }
 
     public void updateData(boolean ordre) {
@@ -88,12 +93,12 @@ public class LlistarObres extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         //noinspection SimplifiableIfStatement
-        switch (item.getItemId()){
-            case  R.id.menu_ordenar_llista_alf:
+        switch (item.getItemId()) {
+            case R.id.menu_ordenar_llista_alf:
                 ordre = false;
                 updateData(ordre);
                 return false;
-            case  R.id.menu_ordenar_llista_data:
+            case R.id.menu_ordenar_llista_data:
                 ordre = true;
                 updateData(ordre);
                 return false;

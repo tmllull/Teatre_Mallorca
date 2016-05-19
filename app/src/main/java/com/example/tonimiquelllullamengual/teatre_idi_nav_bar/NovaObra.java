@@ -1,5 +1,6 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,11 +9,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +27,11 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
     private EditText etNom, etDescripcio, etDurada, etPreu, etData;
     private Spinner spinner;
     private List<String> lista;
+    private TextView tvData;
+
+    private DatePickerDialog pickerDialog;
+
+    private SimpleDateFormat formatDate;
 
     DbHelper dbHelper;
 
@@ -36,12 +46,31 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         etDurada = (EditText) findViewById(R.id.et_duradaNovaObra);
         etPreu = (EditText) findViewById(R.id.et_preuNovaObra);
         etData = (EditText) findViewById(R.id.et_dataNovaObra);
+        tvData = (TextView) findViewById(R.id.tv_data_nova_obra);
 
         btNew.setOnClickListener(this);
+        tvData.setOnClickListener(this);
+
+        formatDate = new SimpleDateFormat("dd-MM-yy");
+
+        prepareCalendar();
 
         dbHelper = new DbHelper(this);
 
-        carregar_spinner();
+        //carregar_spinner();
+    }
+
+    public void prepareCalendar() {
+        Calendar calendari = Calendar.getInstance();
+        pickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar date = Calendar.getInstance();
+                date.set(year, monthOfYear, dayOfMonth);
+                tvData.setText(formatDate.format(date.getTime()));
+            }
+        }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
+                calendari.get(Calendar.DAY_OF_MONTH));
     }
 
     public void newObra() {
@@ -69,8 +98,8 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
             values.put(dbHelper.CN_DESCRIPCIO, etDescripcio.getText().toString());
             values.put(dbHelper.CN_DURADA, etDurada.getText().toString());
             values.put(dbHelper.CN_PREU, etPreu.getText().toString());
-            //values.put(dbHelper.CN_DATA, etData.getText().toString());
-            values.put(dbHelper.CN_DATA, spinner.getSelectedItem().toString());
+            values.put(dbHelper.CN_DATA, tvData.getText().toString());
+            //values.put(dbHelper.CN_DATA, spinner.getSelectedItem().toString());
             values.put(dbHelper.CN_BUTAQUES, places);
             values.put(dbHelper.CN_PLACES_LLIURES, 40);
 
@@ -104,6 +133,8 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.tv_data_nova_obra:
+                pickerDialog.show();
             default:
                 break;
         }

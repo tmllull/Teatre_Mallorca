@@ -19,11 +19,11 @@ import android.widget.Button;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     DbHelper dbHelper;
 
-    Button reset, init;
+    Button btAfegir, btEliminar, btButaques, btUsuaris;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +53,35 @@ public class MainActivity extends AppCompatActivity
 
         dbHelper = new DbHelper(this);
 
-        reset = (Button) findViewById(R.id.bt_reset);
-        init = (Button) findViewById(R.id.init_data);
-        reset.setOnClickListener(new View.OnClickListener(){
+        btAfegir = (Button) findViewById(R.id.bt_afegir_obra_main);
+        btEliminar = (Button) findViewById(R.id.bt_eliminar_obra_main);
+        btButaques = (Button) findViewById(R.id.bt_llistar_obres_main);
+        btUsuaris = (Button) findViewById(R.id.bt_mostrar_usuaris_main);
+
+        btAfegir.setOnClickListener(this);
+        btEliminar.setOnClickListener(this);
+        btButaques.setOnClickListener(this);
+        btUsuaris.setOnClickListener(this);
+
+        //reset = (Button) findViewById(R.id.bt_reset);
+        //init = (Button) findViewById(R.id.init_data);
+        /*reset.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Base de dades eliminada", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 dbHelper.resetAll();
             }
-        });
+        });*/
 
-        init.setOnClickListener(new View.OnClickListener() {
+        /*init.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Dades iniciades", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 init_data();
             }
-        });
+        });*/
         //init_data();
 
 
@@ -116,23 +126,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
 
-        if (id == R.id.nav_ocupacio) {
-            //intent = new Intent(getApplicationContext(), OcupacioButaques.class);
-            //startActivity(intent);
-        } else if (id == R.id.nav_comprar) {
-            intent = new Intent(getApplicationContext(), LlistarObres.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_afegir) {
-            intent = new Intent(getApplicationContext(), NovaObra.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_eliminar) {
-            //intent = new Intent(getApplicationContext(), EliminarObra.class);
-            //startActivity(intent);
-        } else if (id == R.id.nav_llistar_entrades) {
-
-        } else if (id == R.id.nav_llistar_obres) {
-            //intent = new Intent(getApplicationContext(), LlistarObres.class);
-            //startActivity(intent);
+        if (id == R.id.init_data) {
+            init_data();
+        } else if (id == R.id.delete_data) {
+            dbHelper.resetAll();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -162,7 +159,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_DESCRIPCIO, "Mor un lleó. Fin");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("Dilluns"));
+        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
         values.put(dbHelper.CN_BUTAQUES, places.toString());
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
@@ -184,7 +181,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
         values.put(dbHelper.CN_DURADA, String.valueOf(90));
         values.put(dbHelper.CN_PREU, String.valueOf(45));
-        values.put(dbHelper.CN_DATA, String.valueOf("Dimecres"));
+        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
         values.put(dbHelper.CN_PLACES_LLIURES, p);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
 
@@ -206,7 +203,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("Divendres"));
+        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
         values.put(dbHelper.CN_BUTAQUES, places.toString());
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
@@ -228,10 +225,35 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("Dilluns"));
+        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
         values.put(dbHelper.CN_BUTAQUES, places.toString());
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.bt_afegir_obra_main:
+                intent = new Intent(getApplicationContext(), NovaObra.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_eliminar_obra_main:
+                intent = new Intent(getApplicationContext(), EliminarObra.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_llistar_obres_main:
+                intent = new Intent(getApplicationContext(), LlistarObres.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_mostrar_usuaris_main:
+                //intent = new Intent(getApplicationContext(), NovaObra.class);
+                //startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }
