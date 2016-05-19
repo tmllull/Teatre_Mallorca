@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class InfoObra extends AppCompatActivity implements View.OnClickListener {
 
     Bundle bundle;
-    TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada;
+    TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada, tvData;
     Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
@@ -32,6 +32,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvPreu = (TextView) findViewById(R.id.tv_Preu_Info);
         tvPlaces = (TextView) findViewById(R.id.tv_Places_Info);
         tvDurada = (TextView) findViewById(R.id.tv_Durada_Info);
+        tvData = (TextView) findViewById(R.id.tv_data_info);
 
         comprar = (Button) findViewById(R.id.bt_Comprar_Info);
 
@@ -58,7 +59,9 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             tvPlaces.setText(places.toString());
             durada = c.getInt(c.getColumnIndex(dbHelper.CN_DURADA));
             tvDurada.setText(durada.toString());
+            tvData.setText(c.getString(c.getColumnIndex(dbHelper.CN_DATA)));
             //aux = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
+
             if (c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES)) > 0) places_lliures = true;
         }
     }

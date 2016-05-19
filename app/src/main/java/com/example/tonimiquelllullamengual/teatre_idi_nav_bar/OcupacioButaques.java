@@ -19,7 +19,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     DbHelper dbHelper;
     TextView tvTitol;
     Button btComprar;
-    String butaques_seleccionades;
+    String butaques_seleccionades, data;
     Integer places_lliures, preu, entrades;
 
     @Override
@@ -73,6 +73,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             butaques_seleccionades = places;
             places_lliures = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
+            data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
         }
         /*Toast.makeText(getApplicationContext(), butaques_seleccionades,
                 Toast.LENGTH_LONG).show();*/
@@ -129,6 +130,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             bundle.putInt("Total", total);
             bundle.putInt("Entrades", entrades);
             bundle.putString("Titol", tvTitol.getText().toString());
+            bundle.putString("Data", data);
             Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
             intent.putExtras(bundle);
             startActivity(intent);
