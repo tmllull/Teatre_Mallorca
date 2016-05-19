@@ -148,9 +148,9 @@ public class MainActivity extends AppCompatActivity
         for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places = places+"0";
+            if (n % 2 == 0) places = places + "0";
             else {
-                places = places+"1";
+                places = places + "1";
                 p++;
             }
         }
@@ -165,14 +165,14 @@ public class MainActivity extends AppCompatActivity
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
 
-        p=0;
+        p = 0;
         places = "-";
         for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places = places+"0";
+            if (n % 2 == 0) places = places + "0";
             else {
-                places = places+"1";
+                places = places + "1";
                 p++;
             }
         }
@@ -187,14 +187,14 @@ public class MainActivity extends AppCompatActivity
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
 
-        p=0;
+        p = 0;
         places = "-";
         for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places = places+"0";
+            if (n % 2 == 0) places = places + "0";
             else {
-                places = places+"1";
+                places = places + "1";
                 p++;
             }
         }
@@ -209,14 +209,14 @@ public class MainActivity extends AppCompatActivity
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
 
-        p=0;
+        p = 0;
         places = "-";
         for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
             int n = rand.nextInt(200);
-            if (n%2 ==0) places = places+"0";
+            if (n % 2 == 0) places = places + "0";
             else {
-                places = places+"1";
+                places = places + "1";
                 p++;
             }
         }

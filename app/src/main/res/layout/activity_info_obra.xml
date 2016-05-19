@@ -10,6 +10,8 @@
     android:orientation="vertical"
     tools:context="com.example.tonimiquelllullamengual.teatre_idi_nav_bar.InfoObra">
 
+
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,22 +25,24 @@
             android:textSize="36dp" />
     </TableRow>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Descripció: "
-            android:id="@+id/textView11" />
+            android:id="@+id/textView11"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/tv_Descripcio_Info" />
-    </TableRow>
+    </LinearLayout>
 
     <TableRow
         android:layout_width="match_parent"

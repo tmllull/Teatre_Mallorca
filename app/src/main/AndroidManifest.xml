@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="Teatre TalTalTal"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,13 +18,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OcupacioButaques" />
-        <activity android:name=".NovaObra" />
+        <activity
+            android:name=".OcupacioButaques"
+            android:label="Pati de butaques" />
+        <activity
+            android:name=".NovaObra"
+            android:label="Nova obra" />
         <activity android:name=".NovaObraDates" />
-        <activity android:name=".LlistarObres" />
+        <activity
+            android:name=".LlistarObres"
+            android:label="Llistat d'obres" />
         <activity android:name=".ConfirmarCompra" />
-        <activity android:name=".EliminarObra" />
-        <activity android:name=".InfoObra" />
+        <activity
+            android:name=".EliminarObra"
+            android:label="Eliminar obra" />
+        <activity
+            android:name=".InfoObra"
+            android:label="Info obra" />
         <activity android:name=".FinalCompra"></activity>
     </application>
 

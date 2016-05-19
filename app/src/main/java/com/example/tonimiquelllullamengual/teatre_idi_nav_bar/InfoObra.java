@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InfoObra extends AppCompatActivity implements View.OnClickListener{
+public class InfoObra extends AppCompatActivity implements View.OnClickListener {
 
     Bundle bundle;
     TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada;
@@ -68,20 +70,43 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener{
                 if (places_lliures) {
                     Bundle bundle = new Bundle();
                     bundle.putString("Titol", aux);
-                    Intent intent = new Intent (getApplicationContext(), OcupacioButaques.class);
+                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
                     /*Toast.makeText(getApplicationContext(), aux,
                             Toast.LENGTH_LONG).show();*/
                     finish();
                     break;
-                }
-                else
+                } else
                     Toast.makeText(getApplicationContext(), "No queden places lliures",
                             Toast.LENGTH_LONG).show();
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_llista, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        //noinspection SimplifiableIfStatement
+        switch (item.getItemId()) {
+            case R.id.menu_info_1:
+                return false;
+            case R.id.menu_info_2:
+                return false;
+            default:
+                return false;
         }
     }
 }
