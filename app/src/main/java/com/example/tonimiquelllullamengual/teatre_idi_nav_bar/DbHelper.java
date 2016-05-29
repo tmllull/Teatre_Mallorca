@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CN_PREU = "preu";
     public static final String CN_BUTAQUES = "butaques";
     public static final String CN_PLACES_LLIURES = "places_lliures";
-    public static final String CN_ID = "_id";
+    public static final String CN_MILIS = "milis";
 
     //sentencia global de cracion de la base de datos
     /*public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
@@ -48,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_PREU + " INTEGER, " +
             CN_BUTAQUES + " TEXT, " +
             CN_PLACES_LLIURES + " INTEGER, " +
+            CN_MILIS + " TEXT, " +
             "PRIMARY KEY (nom,data));";
 
     //"create table obrasdia ( obra foreign key (Obra.nom), dia INT, ocupados blob) Primary key(obra, dia);"
@@ -70,7 +71,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getObra (String obra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES};
+                CN_PLACES_LLIURES, CN_MILIS};
         String[] where = {obra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -88,7 +89,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES};
+                CN_PLACES_LLIURES, CN_MILIS};
         //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -106,7 +107,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObresDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES};
+                CN_PLACES_LLIURES, CN_MILIS};
         String[] where = {CN_NOM};
         //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(true,
@@ -123,16 +124,34 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    //Obtenir només el nom de totes les obres
+    //
     public Cursor getAllObresData(String nom) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES};
+                CN_PLACES_LLIURES, CN_MILIS};
         String[] where = {nom};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
                 "nom=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
+                null,               // don't group the rows
+                null,               // don't filter by row groups
+                CN_MILIS + " ASC"                // The sort order
+        );
+        return c;
+    }
+
+    //Obtenir només el nom de totes les obres
+    public Cursor getObraData(String nom, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES, CN_MILIS};
+        String[] where = {nom, data};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                columns,            // The columns to return
+                "nom=?" + " and " + "data=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups

@@ -18,6 +18,7 @@ public class LlistarDies extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
     boolean ordre = false;
+    String titolAux;
 
     Bundle bundle;
 
@@ -38,16 +39,19 @@ public class LlistarDies extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         String titol = bundle.getString("Titol");
-        Cursor c = dbHelper.getAllObres();
+        titolAux = titol;
+        Cursor c = dbHelper.getAllObresData(titol);
+        //Cursor c = dbHelper.getAllObres();
         //Cursor c = dbHelper.getAllObresDistinct();
         //Cursor c = dbHelper.getObra(titol);
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
-                //Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                //String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
                 //Obra obra = new Obra(nom, places, dia);
-                Dia dia = new Dia(nom);
+                //Dia dia = new Dia(nom);
+                Dia dia = new Dia(nom, places, data);
                 dies.add(dia);
             } while (c.moveToNext());
         }

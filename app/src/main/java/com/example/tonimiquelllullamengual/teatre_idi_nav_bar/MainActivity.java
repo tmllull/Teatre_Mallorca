@@ -16,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
@@ -142,7 +145,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void init_data() {
-        //byte[] places = new byte[41];
+        String dataObra = "03-05-16";
         String places = "-";
         int p = 0;
         for (int i = 1; i < 41; ++i) {
@@ -154,13 +157,23 @@ public class MainActivity extends AppCompatActivity
                 p++;
             }
         }
+
+        /*SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        Date d = null;
+        try {
+            d = (Date) f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milliseconds = d.getTime();*/
         ContentValues values = new ContentValues();
         values.put(dbHelper.CN_NOM, "El rey leon");
         values.put(dbHelper.CN_DESCRIPCIO, "Mor un lleó. Fin");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
+        values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
+        //values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
@@ -176,13 +189,23 @@ public class MainActivity extends AppCompatActivity
                 p++;
             }
         }
+        dataObra = "03-05-16";
+        /*f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = (Date) f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();*/
         values = new ContentValues();
         values.put(dbHelper.CN_NOM, "Mamma Mia");
         values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
         values.put(dbHelper.CN_DURADA, String.valueOf(90));
         values.put(dbHelper.CN_PREU, String.valueOf(45));
-        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
+        values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
+        //values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
@@ -198,13 +221,23 @@ public class MainActivity extends AppCompatActivity
                 p++;
             }
         }
+        /*dataObra = "03-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = (Date) f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();*/
         values = new ContentValues();
         values.put(dbHelper.CN_NOM, "Queen");
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("03-05-16"));
+        values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
+        //values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
@@ -220,13 +253,23 @@ public class MainActivity extends AppCompatActivity
                 p++;
             }
         }
+        /*dataObra = "04-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = (Date) f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();*/
         values = new ContentValues();
         values.put(dbHelper.CN_NOM, "Queen");
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
         values.put(dbHelper.CN_DURADA, String.valueOf(120));
         values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, String.valueOf("04-05-16"));
+        values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
+        //values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);

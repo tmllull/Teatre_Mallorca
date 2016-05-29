@@ -62,14 +62,17 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         dbHelper = new DbHelper(this);
         bundle = getIntent().getExtras();
         String titol = "Titol inicial";
+        String dia = "Dia sense determinar";
         if (bundle != null) {
             titol = bundle.getString("Titol");
+            dia = bundle.getString("Data");
         }
         tvTitol.setText(titol.toString());
         /*Toast.makeText(getApplicationContext(), titol,
                 Toast.LENGTH_LONG).show();*/
 
-        Cursor c = dbHelper.getObra(titol);
+        //Cursor c = dbHelper.getObra(titol);
+        Cursor c = dbHelper.getObraData(titol, dia);
         if (c.moveToFirst()) {
             places = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
             butaques_seleccionades = places;

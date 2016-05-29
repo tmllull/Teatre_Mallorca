@@ -34,8 +34,8 @@ public class LlistarObres extends AppCompatActivity {
     public void carregar_view() {
         dbHelper = new DbHelper(this);
 
-        //Cursor c = dbHelper.getAllObresDistinct();
-        Cursor c = dbHelper.getAllObres();
+        Cursor c = dbHelper.getAllObresDistinct();
+        //Cursor c = dbHelper.getAllObres();
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));

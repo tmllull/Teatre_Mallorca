@@ -37,8 +37,8 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
     public void onBindViewHolder(MyCustomAdapterDies.AdapterViewHolder adapterViewHolder, int position) {
         if (dies != null) {
             adapterViewHolder.nom.setText(dies.get(position).getNom());
-            //adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
-            //adapterViewHolder.dia.setText(dies.get(position).getDia().toString());
+            adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
+            adapterViewHolder.dia.setText(dies.get(position).getDia().toString());
         }
     }
 
@@ -83,7 +83,9 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 
             Bundle bundle = new Bundle();
             bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
-            Intent intent = new Intent (v.getContext(), InfoObra.class);
+            bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
+            //Intent intent = new Intent (v.getContext(), InfoObra.class);
+            Intent intent = new Intent (v.getContext(), OcupacioButaques.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
             ((Activity)v.getContext()).finish();

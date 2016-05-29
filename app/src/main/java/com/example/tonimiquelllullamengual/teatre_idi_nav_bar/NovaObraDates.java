@@ -11,9 +11,11 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class NovaObraDates extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +29,13 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
     private DbHelper dbHelper;
 
+    private String from, to, any_from, any_to, mes_from, mes_to, dia_from, dia_to,
+    diaObra, mesObra, anyObra;
+
+    private int cont;
+
+    private Integer dia_from_val, mes_from_val, any_from_val, dia_to_val, mes_to_val, any_to_val;
+
     TextView tvDia1, tvDia2, tvDia3, tvDia4, tvDia5, tvDia6, tvDia7;
     ArrayList<String> dates;
 
@@ -35,22 +44,24 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_obra_dates);
 
+        cont = 0;
+
         tvDia1 = (TextView) findViewById(R.id.tv_dia_1);
         tvDia2 = (TextView) findViewById(R.id.tv_dia_2);
-        tvDia3 = (TextView) findViewById(R.id.tv_dia_3);
+        /*tvDia3 = (TextView) findViewById(R.id.tv_dia_3);
         tvDia4 = (TextView) findViewById(R.id.tv_dia_4);
         tvDia5 = (TextView) findViewById(R.id.tv_dia_5);
         tvDia6 = (TextView) findViewById(R.id.tv_dia_6);
-        tvDia7 = (TextView) findViewById(R.id.tv_dia_7);
+        tvDia7 = (TextView) findViewById(R.id.tv_dia_7);*/
         btGuardar = (Button) findViewById(R.id.bt_guardar_dates_obra);
 
         tvDia1.setOnClickListener(this);
         tvDia2.setOnClickListener(this);
-        tvDia3.setOnClickListener(this);
+        /*tvDia3.setOnClickListener(this);
         tvDia4.setOnClickListener(this);
         tvDia5.setOnClickListener(this);
         tvDia6.setOnClickListener(this);
-        tvDia7.setOnClickListener(this);
+        tvDia7.setOnClickListener(this);*/
         btGuardar.setOnClickListener(this);
 
         formatDate = new SimpleDateFormat("dd-MM-yy");
@@ -86,7 +97,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             }
         }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
                 calendari.get(Calendar.DAY_OF_MONTH));
-        pdDia3 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        /*pdDia3 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar date = Calendar.getInstance();
@@ -130,7 +141,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 tvDia7.setText(formatDate.format(date.getTime()));
             }
         }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
-                calendari.get(Calendar.DAY_OF_MONTH));
+                calendari.get(Calendar.DAY_OF_MONTH));*/
     }
 
     public void guardarObra() {
@@ -158,44 +169,63 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
         }*/
 
-        int cont = 0;
+        //int cont = 0;
 
-        String from = tvDia1.getText().toString();
-        String to = tvDia2.getText().toString();
+        //Guardem els valors del dia, mes y any de la data inici
+        from = tvDia1.getText().toString();
+        to = tvDia2.getText().toString();
         char[] aux1 = from.toCharArray();
         char[] aux2 = to.toCharArray();
-        String any_from = String.valueOf(aux1[6]) + String.valueOf(aux1[7]);
-        Integer any_from_val = Integer.valueOf(any_from);
-        String mes_from = String.valueOf(aux1[3]) + String.valueOf(aux1[4]);
-        Integer mes_from_val = Integer.valueOf(mes_from);
-        String dia_from = String.valueOf(aux1[0]) + String.valueOf(aux1[1]);
-        Integer dia_from_val = Integer.valueOf(dia_from);
-        //
-        String any_to = String.valueOf(aux2[6]) + String.valueOf(aux2[7]);
-        Integer any_to_val = Integer.valueOf(any_to);
-        String mes_to = String.valueOf(aux2[3]) + String.valueOf(aux2[4]);
-        Integer mes_to_val = Integer.valueOf(mes_to);
-        String dia_to = String.valueOf(aux2[0]) + String.valueOf(aux2[1]);
-        Integer dia_to_val = Integer.valueOf(dia_to);
+        any_from = String.valueOf(aux1[6]) + String.valueOf(aux1[7]);
+        any_from_val = Integer.valueOf(any_from);
+        mes_from = String.valueOf(aux1[3]) + String.valueOf(aux1[4]);
+        mes_from_val = Integer.valueOf(mes_from);
+        dia_from = String.valueOf(aux1[0]) + String.valueOf(aux1[1]);
+        dia_from_val = Integer.valueOf(dia_from);
 
-        String diaObra = dia_from_val.toString();
-        String mesObra = mes_from_val.toString();
-        String anyObra = any_from_val.toString();
+        //Guardem els valor del dia, mes i any de la data final
+        any_to = String.valueOf(aux2[6]) + String.valueOf(aux2[7]);
+        any_to_val = Integer.valueOf(any_to);
+        mes_to = String.valueOf(aux2[3]) + String.valueOf(aux2[4]);
+        mes_to_val = Integer.valueOf(mes_to);
+        dia_to = String.valueOf(aux2[0]) + String.valueOf(aux2[1]);
+        dia_to_val = Integer.valueOf(dia_to);
+
+        diaObra = dia_from_val.toString();
+        mesObra = mes_from_val.toString();
+        anyObra = any_from_val.toString();
         //String dataObra = diaObra + "-" + mesObra + "-" + anyObra;
-
-        /*Toast.makeText(getApplicationContext(), "DIA FROM " + dia_from_val.toString() +
-                        " MES FROM " + mes_from + " ANY FROM " + any_from +
-                        "DIA TO" + dia_to +
-                        " MES TO" + mes_to + " ANY TO" + any_to,
-                Toast.LENGTH_LONG).show();*/
-
 
         if (any_to_val > any_from_val) {
 
-        } else if (mes_to_val > mes_from_val) {
-
-        } else if (dia_to_val > dia_from_val) {
-            for (int i = dia_from_val; i < dia_to_val; ++i) {
+        }
+        else if (mes_to_val > mes_from_val) {
+            while (mes_to_val > mes_from_val) {
+                mesObra = mes_from_val.toString();
+                if (mes_from_val == 1 || mes_from_val == 3 || mes_from_val == 5 ||
+                        mes_from_val == 7 || mes_from_val == 8 || mes_from_val == 10 ||
+                        mes_from_val == 12) {
+                    calcul_dies(dia_from_val, 31);
+                    dia_from_val = 1;
+                    mes_from_val++;
+                }
+                else if (mes_from_val == 2) {
+                    calcul_dies(dia_from_val, 28);
+                    dia_from_val = 1;
+                    mes_from_val++;
+                }
+                else {
+                    calcul_dies(dia_from_val, 30);
+                    dia_from_val = 1;
+                    mes_from_val++;
+                }
+                mesObra = mes_from_val.toString();
+            }
+            calcul_dies(dia_from_val, dia_to_val);
+        }
+        else if (dia_to_val > dia_from_val) {
+            calcul_dies(dia_from_val, dia_to_val);
+            /*for (int i = dia_from_val; i < dia_to_val; ++i) {
                 String dataObra = i + "-" + mesObra + "-" + anyObra;
                 String places = "-";
                 for (int j = 1; j < 41; ++j) {
@@ -212,6 +242,44 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 values.put(dbHelper.CN_PLACES_LLIURES, 40);
 
                 dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                ++cont;
+            }*/
+
+        }
+        else {
+
+        }
+        Toast.makeText(getApplicationContext(), String.valueOf(cont),
+                Toast.LENGTH_LONG).show();
+    }
+
+    void calcul_dies(int dia_from_val, int dia_to_val) {
+        for (int i = dia_from_val; i < dia_to_val; ++i) {
+            String dataObra = i + "-" + mesObra + "-" + anyObra;
+            String places = "-";
+            for (int j = 1; j < 41; ++j) {
+                //Plaça lliure indicat amb un 1
+                places = places + "1";
+            }
+            SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+            Date d = null;
+            try {
+                d = f.parse(dataObra);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long milliseconds = d.getTime();
+            ContentValues values = new ContentValues();
+            values.put(dbHelper.CN_NOM, bundle.getString("Nom"));
+            values.put(dbHelper.CN_DESCRIPCIO, bundle.getString("Descripcio"));
+            values.put(dbHelper.CN_DURADA, bundle.getString("Durada"));
+            values.put(dbHelper.CN_PREU, bundle.getString("Preu"));
+            values.put(dbHelper.CN_DATA, dataObra.toString());
+            values.put(dbHelper.CN_BUTAQUES, places);
+            values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
+            values.put(dbHelper.CN_PLACES_LLIURES, 40);
+
+            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
 
                 /*places = "-";
                 for (int j = 1; j < 41; ++j) {
@@ -245,14 +313,8 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
                 dbHelper.newObra(values, dbHelper.OBRA_TABLE);
                 //dbHelper.close();*/
-                ++cont;
-            }
-
-        } else {
-
+            ++cont;
         }
-        Toast.makeText(getApplicationContext(), String.valueOf(cont),
-                Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -263,21 +325,6 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.tv_dia_2:
                 pdDia2.show();
-                break;
-            case R.id.tv_dia_3:
-                pdDia3.show();
-                break;
-            case R.id.tv_dia_4:
-                pdDia4.show();
-                break;
-            case R.id.tv_dia_5:
-                pdDia5.show();
-                break;
-            case R.id.tv_dia_6:
-                pdDia6.show();
-                break;
-            case R.id.tv_dia_7:
-                pdDia7.show();
                 break;
             case R.id.bt_guardar_dates_obra:
                 guardarObra();
