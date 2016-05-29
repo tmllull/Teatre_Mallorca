@@ -115,10 +115,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 columns,            // The columns to return
                 null,               // The columns for the WHERE clause
                 null,               // The values for the WHERE clause
-                CN_NOM,               // don't group the rows
+                CN_NOM,             // don't group the rows
                 null,               // don't filter by row groups
-                CN_NOM + " ASC",
-                null// The sort order
+                CN_NOM + " ASC",    // The sort order
+                null
         );
         return c;
     }

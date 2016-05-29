@@ -104,4 +104,5 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
         this.obres = obres;
         notifyDataSetChanged();
     }
+
 }

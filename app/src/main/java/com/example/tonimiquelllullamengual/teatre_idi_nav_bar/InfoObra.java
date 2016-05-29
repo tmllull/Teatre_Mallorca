@@ -116,4 +116,11 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                 return false;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+        startActivity(intent);
+        finish();
+    }
 }

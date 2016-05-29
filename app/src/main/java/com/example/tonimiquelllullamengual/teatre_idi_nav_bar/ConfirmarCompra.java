@@ -16,10 +16,17 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
 
     Bundle bundle;
 
+    DbHelper dbHelper;
+
+    String data, butaques_seleccionades, titol;
+    Integer places_lliures;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmar_compra);
+
+        dbHelper = new DbHelper(this);
 
         tvTitol = (TextView) findViewById(R.id.tv_titol_compra);
         tvData = (TextView) findViewById(R.id.tv_data_compra);
@@ -31,28 +38,48 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         btConfirmar.setOnClickListener(this);
 
         Integer total, entrades;
-        String titol, data;
         bundle = getIntent().getExtras();
         if (bundle != null) {
             tvTitol.setText(bundle.getString("Titol"));
+            titol = bundle.getString("Titol");
             tvData.setText(bundle.getString("Data"));
             entrades = bundle.getInt("Entrades");
             tvEntrades.setText(String.valueOf(entrades));
             total = bundle.getInt("Total");
             tvTotal.setText(String.valueOf(total));
+            data = bundle.getString("Data");
+            places_lliures = bundle.getInt("Places");
+            butaques_seleccionades = bundle.getString("Butaques");
         }
+    }
+
+    void confirmar_compra() {
+        dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
+        dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmar_compra:
-                //Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                //startActivity(intent);
+                confirmar_compra();
+                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Bundle bundle = new Bundle();
+        bundle.putString("Titol",titol);
+        bundle.putString("Data", data);
+        Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }
