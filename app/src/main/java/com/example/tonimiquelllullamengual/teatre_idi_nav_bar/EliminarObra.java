@@ -1,7 +1,9 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -82,9 +84,26 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_eliminar_eliminar:
-                String obra_sel = spinner_obres.getSelectedItem().toString();
-                dbHelper.deteleObra(obra_sel);
-                finish();
+                final String obra_sel = spinner_obres.getSelectedItem().toString();
+                new AlertDialog.Builder(this)
+                        .setTitle("Eliminar obra")
+                        .setMessage("Estàs segur que vols eliminar l'obra?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHelper.deteleObra(obra_sel);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                //finish();
                 break;
             default:
                 break;

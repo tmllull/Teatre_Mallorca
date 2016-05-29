@@ -117,7 +117,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 }
                 Bundle bundle = new Bundle();
                 bundle.putString("Nom",etNom.getText().toString());
-                bundle.putString("Descricpio", etDescripcio.getText().toString());
+                bundle.putString("Descripcio", etDescripcio.getText().toString());
                 bundle.putString("Durada", etDurada.getText().toString());
                 bundle.putString("Preu", etPreu.getText().toString());
                 Intent intent = new Intent (getApplicationContext(), NovaObraDates.class);

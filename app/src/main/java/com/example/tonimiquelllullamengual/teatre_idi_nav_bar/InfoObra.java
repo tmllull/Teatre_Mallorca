@@ -1,7 +1,9 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +17,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
     Bundle bundle;
     TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada, tvData;
-    Button comprar, eliminar;
+    Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
     String aux, auxTitol;
@@ -35,10 +37,8 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvData = (TextView) findViewById(R.id.tv_data_info);
 
         comprar = (Button) findViewById(R.id.bt_Comprar_Info);
-        eliminar = (Button) findViewById(R.id.bt_eliminar);
 
         comprar.setOnClickListener(this);
-        eliminar.setOnClickListener(this);
 
         String titol = "Cap obra Seleccionada";
         String descripcio = "Descripcio: ";
@@ -84,10 +84,6 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                             Toast.LENGTH_LONG).show();*/
                 finish();
                 break;
-            case R.id.bt_eliminar:
-                dbHelper.deteleObra(auxTitol);
-                finish();
-                break;
             default:
                 break;
         }
@@ -96,7 +92,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_llista, menu);
+        getMenuInflater().inflate(R.menu.menu_info_obra, menu);
         return true;
     }
 
@@ -108,9 +104,25 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.menu_info_1:
-                return false;
-            case R.id.menu_info_2:
+            case R.id.menu_eliminar_obra:
+                new AlertDialog.Builder(this)
+                        .setTitle("Eliminar obra")
+                        .setMessage("Estàs segur que vols eliminar l'obra?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHelper.deteleObra(auxTitol);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
                 return false;
             default:
                 return false;

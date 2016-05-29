@@ -28,17 +28,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CN_BUTAQUES = "butaques";
     public static final String CN_PLACES_LLIURES = "places_lliures";
     public static final String CN_MILIS = "milis";
+    public static final String CN_COMPRADORS = "compradors";
 
-    //sentencia global de cracion de la base de datos
-    /*public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
-            CN_ID + " integer primary key autoincrement," +
-            CN_NOM + " TEXT, " +
-            CN_DESCRIPCIO + " TEXT, " +
-            CN_DATA + " TEXT, " +
-            CN_DURADA + " INTEGER, " +
-            CN_PREU + " INTEGER, " +
-            CN_BUTAQUES + " TEXT, " +
-            CN_PLACES_LLIURES + " INTEGER);";*/
 
     public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
             CN_NOM + " TEXT, " +
@@ -49,15 +40,12 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_BUTAQUES + " TEXT, " +
             CN_PLACES_LLIURES + " INTEGER, " +
             CN_MILIS + " TEXT, " +
+            CN_COMPRADORS + " TEXT " +
             "PRIMARY KEY (nom,data));";
-
-    //"create table obrasdia ( obra foreign key (Obra.nom), dia INT, ocupados blob) Primary key(obra, dia);"
-
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
 
     public void newObra (ContentValues values, String tableName) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -71,7 +59,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getObra (String obra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
         String[] where = {obra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -89,7 +77,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
         //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -107,9 +95,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObresDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
         String[] where = {CN_NOM};
-        //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(true,
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
@@ -124,11 +111,11 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    //
+    //Obtenir totes les dates d'una obra
     public Cursor getAllObresData(String nom) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
         String[] where = {nom};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -142,11 +129,11 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //Obtenir només el nom de totes les obres
+    //Obtenir una funció d'una obra a una data determinada
     public Cursor getObraData(String nom, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
         String[] where = {nom, data};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -188,11 +175,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
     }
 
-    public void updateMasCosas(String nom, String ocupacio) {
+    public void updateCompradors(String nom, String data, String compradors) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(CN_BUTAQUES, ocupacio);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+        values.put(CN_COMPRADORS, compradors);
+        db.update(OBRA_TABLE, values, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
     }
 
     //

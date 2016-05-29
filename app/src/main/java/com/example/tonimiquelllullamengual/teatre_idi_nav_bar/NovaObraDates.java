@@ -21,7 +21,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
     Button btGuardar;
 
-    private DatePickerDialog pdDia1, pdDia2, pdDia3, pdDia4, pdDia5, pdDia6, pdDia7;
+    private DatePickerDialog pdDia1, pdDia2;
     private SimpleDateFormat formatDate;
     private Bundle bundle;
     private DbHelper dbHelper;
@@ -31,7 +31,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
     private Integer dia_from_val, mes_from_val, any_from_val, dia_to_val, mes_to_val, any_to_val;
     private Boolean ok = true;
 
-    TextView tvDia1, tvDia2, tvDia3, tvDia4, tvDia5, tvDia6, tvDia7;
+    TextView tvDia1, tvDia2;
     ArrayList<String> dates;
 
     @Override
@@ -154,8 +154,8 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             ok = true;
         }
         else {
-            //Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
-              //      Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+                    Toast.LENGTH_LONG).show();
             ok = false;
             return;
         }
