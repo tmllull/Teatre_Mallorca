@@ -72,7 +72,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" >
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,7 +115,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,5 +143,12 @@
             android:layout_height="wrap_content"
             android:text="Comprar Entrades"
             android:id="@+id/bt_Comprar_Info" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar obra"
+            android:id="@+id/bt_eliminar"
+            android:layout_marginLeft="50dp" />
     </TableRow>
 </LinearLayout>

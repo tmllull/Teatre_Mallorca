@@ -167,18 +167,18 @@ public class DbHelper extends SQLiteOpenHelper {
         db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
     }
 
-    public void updateOcupacio(String nom, String ocupacio) {
+    public void updateOcupacio(String nom, String data, String ocupacio) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_BUTAQUES, ocupacio);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+        db.update(OBRA_TABLE, values, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
     }
 
-    public void updatePlacesLliures(String nom, int places) {
+    public void updatePlacesLliures(String nom, String data, int places) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_PLACES_LLIURES, places);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+        db.update(OBRA_TABLE, values, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
     }
 
     public void updateDescripcio(String nom, String ocupacio) {
@@ -193,6 +193,12 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(CN_BUTAQUES, ocupacio);
         db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+    }
+
+    //
+    public void deteleObra (String nom) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(OBRA_TABLE, CN_NOM + "=?", new String[]{nom});
     }
 
 

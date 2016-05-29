@@ -17,36 +17,14 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Títol: "
-                    android:id="@+id/textView38"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/tv_titol_dies"
-                    android:textSize="30dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dia: "
+                    android:text="Data:"
                     android:id="@+id/textView40"
-                    android:textSize="20dp"
-                    android:visibility="gone" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -59,28 +37,20 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Butaques lliures: "
-                    android:id="@+id/textView42" />
+                    android:text="Places lliures:"
+                    android:id="@+id/textView26" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/tv_places_dies" />
+                    android:id="@+id/tv_places_llista_dies" />
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#000000"
-                android:minHeight="2dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

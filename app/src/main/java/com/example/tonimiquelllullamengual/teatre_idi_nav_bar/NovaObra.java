@@ -43,11 +43,11 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         etDescripcio = (EditText) findViewById(R.id.et_descripcioNovaObra);
         etDurada = (EditText) findViewById(R.id.et_duradaNovaObra);
         etPreu = (EditText) findViewById(R.id.et_preuNovaObra);
-        etData = (EditText) findViewById(R.id.et_dataNovaObra);
-        tvData = (TextView) findViewById(R.id.tv_data_nova_obra);
+        //etData = (EditText) findViewById(R.id.et_dataNovaObra);
+        //tvData = (TextView) findViewById(R.id.tv_data_nova_obra);
 
         btNew.setOnClickListener(this);
-        tvData.setOnClickListener(this);
+        //tvData.setOnClickListener(this);
 
         formatDate = new SimpleDateFormat("dd-MM-yy");
 
@@ -125,8 +125,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.tv_data_nova_obra:
-                pickerDialog.show();
             default:
                 break;
         }

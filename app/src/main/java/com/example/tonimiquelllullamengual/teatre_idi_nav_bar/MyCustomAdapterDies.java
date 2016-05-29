@@ -36,9 +36,15 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
     @Override
     public void onBindViewHolder(MyCustomAdapterDies.AdapterViewHolder adapterViewHolder, int position) {
         if (dies != null) {
-            adapterViewHolder.nom.setText(dies.get(position).getNom());
+//            adapterViewHolder.nom.setText(dies.get(position).getNom());
             adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
             adapterViewHolder.dia.setText(dies.get(position).getDia().toString());
+            if (position % 2 == 0) {
+                adapterViewHolder.itemView.setBackgroundColor(0xFFE0F2F1);
+            }
+            else {
+                adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
+            }
         }
     }
 
@@ -68,8 +74,8 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             itemView.setOnClickListener(this);
             mTextView = itemView.toString();
             this.v = itemView;
-            this.nom = (TextView) itemView.findViewById(R.id.tv_titol_dies);
-            this.places = (TextView) itemView.findViewById(R.id.tv_places_dies);
+            //this.nom = (TextView) itemView.findViewById(R.id.tv_titol_dies);
+            this.places = (TextView) itemView.findViewById(R.id.tv_places_llista_dies);
             this.dia = (TextView) itemView.findViewById(R.id.tv_dia_dies);
         }
 

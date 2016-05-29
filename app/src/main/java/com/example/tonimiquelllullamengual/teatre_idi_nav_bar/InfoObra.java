@@ -15,7 +15,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
     Bundle bundle;
     TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada, tvData;
-    Button comprar;
+    Button comprar, eliminar;
     DbHelper dbHelper;
     boolean places_lliures = false;
     String aux, auxTitol;
@@ -35,8 +35,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvData = (TextView) findViewById(R.id.tv_data_info);
 
         comprar = (Button) findViewById(R.id.bt_Comprar_Info);
+        eliminar = (Button) findViewById(R.id.bt_eliminar);
 
         comprar.setOnClickListener(this);
+        eliminar.setOnClickListener(this);
 
         String titol = "Cap obra Seleccionada";
         String descripcio = "Descripcio: ";
@@ -82,10 +84,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                             Toast.LENGTH_LONG).show();*/
                 finish();
                 break;
-            //} else
-            //  Toast.makeText(getApplicationContext(), "No queden places lliures",
-            //        Toast.LENGTH_LONG).show();
-            //break;
+            case R.id.bt_eliminar:
+                dbHelper.deteleObra(auxTitol);
+                finish();
+                break;
             default:
                 break;
         }

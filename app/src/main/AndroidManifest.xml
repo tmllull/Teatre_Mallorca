@@ -24,19 +24,24 @@
         <activity
             android:name=".NovaObra"
             android:label="Nova obra" />
-        <activity android:name=".NovaObraDates" />
+        <activity
+            android:name=".NovaObraDates"
+            android:label="Selecció de dates"/>
         <activity
             android:name=".LlistarObres"
-            android:label="Llistat d&apos;obres" />
-        <activity android:name=".ConfirmarCompra" />
+            android:label="Llistat d'obres" />
+        <activity
+            android:name=".ConfirmarCompra" />
         <activity
             android:name=".EliminarObra"
             android:label="Eliminar obra" />
         <activity
             android:name=".InfoObra"
             android:label="Info obra" />
-        <activity android:name=".FinalCompra" />
-        <activity android:name=".LlistarDies"></activity>
+        <activity
+            android:name=".FinalCompra" />
+        <activity
+            android:name=".LlistarDies"></activity>
     </application>
 
 </manifest>

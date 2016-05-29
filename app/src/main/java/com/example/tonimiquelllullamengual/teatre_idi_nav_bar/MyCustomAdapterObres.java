@@ -39,6 +39,12 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
             adapterViewHolder.nom.setText(obres.get(position).getNom());
             adapterViewHolder.places.setText(obres.get(position).getPlaces().toString());
             adapterViewHolder.dia.setText(obres.get(position).getDia().toString());
+            if (position % 2 == 0) {
+                adapterViewHolder.itemView.setBackgroundColor(0xFFE0F2F1);
+            }
+            else {
+                adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
+            }
         }
     }
 

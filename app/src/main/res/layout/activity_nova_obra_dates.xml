@@ -14,13 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center|top">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Desde ...fins"
-            android:id="@+id/textView30" />
+            android:text="Selecciona el rang de dates en que es realitzarà l&apos;obra"
+            android:id="@+id/textView30"
+            android:textSize="25dp"
+            android:textAlignment="center" />
 
     </TableRow>
 
@@ -32,15 +34,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data 1:"
-            android:id="@+id/textView31" />
+            android:text="Des de:"
+            android:id="@+id/textView31"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seleccionar data"
             android:id="@+id/tv_dia_1"
-            android:layout_marginLeft="40dp" />
+            android:layout_marginLeft="40dp"
+            android:textSize="20dp" />
     </TableRow>
 
     <TableRow
@@ -51,15 +55,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data 2:"
-            android:id="@+id/textView37" />
+            android:text="Fins:"
+            android:id="@+id/textView37"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seleccionar data"
             android:id="@+id/tv_dia_2"
-            android:layout_marginLeft="40dp" />
+            android:layout_marginLeft="65dp"
+            android:textSize="20dp" />
     </TableRow>
 
     <TableRow

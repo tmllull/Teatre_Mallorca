@@ -145,8 +145,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             else{
             /*Toast.makeText(getApplicationContext(),
                     tvTitol.getText(), Toast.LENGTH_LONG).show();*/
-                dbHelper.updateOcupacio(tvTitol.getText().toString(), butaques_seleccionades);
-                dbHelper.updatePlacesLliures(tvTitol.getText().toString(), places_lliures);
+                dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
+                dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
                 int total = entrades * preu;
                 Bundle bundle = new Bundle();
                 bundle.putInt("Total", total);
