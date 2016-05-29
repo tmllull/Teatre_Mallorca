@@ -22,19 +22,14 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
     Button btGuardar;
 
     private DatePickerDialog pdDia1, pdDia2, pdDia3, pdDia4, pdDia5, pdDia6, pdDia7;
-
     private SimpleDateFormat formatDate;
-
     private Bundle bundle;
-
     private DbHelper dbHelper;
-
     private String from, to, any_from, any_to, mes_from, mes_to, dia_from, dia_to,
     diaObra, mesObra, anyObra;
-
     private int cont;
-
     private Integer dia_from_val, mes_from_val, any_from_val, dia_to_val, mes_to_val, any_to_val;
+    private Boolean ok = true;
 
     TextView tvDia1, tvDia2, tvDia3, tvDia4, tvDia5, tvDia6, tvDia7;
     ArrayList<String> dates;
@@ -116,10 +111,17 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
         mesObra = mes_from_val.toString();
         anyObra = any_from_val.toString();
 
-        if (any_to_val > any_from_val) {
-            Toast.makeText(getApplicationContext(), "Afegir obres entre diferents anys no està" +
+        if (any_from_val != any_to_val) {
+            Toast.makeText(getApplicationContext(), "Afegir obres entre diferents anys no està " +
                     "implementat",
                     Toast.LENGTH_LONG).show();
+            ok = false;
+            return;
+        }
+        else if (mes_from_val > mes_to_val) {
+            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+                    Toast.LENGTH_LONG).show();
+            ok = false;
             return;
         }
         else if (mes_to_val > mes_from_val) {
@@ -145,17 +147,18 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 mesObra = mes_from_val.toString();
             }
             calcul_dies(dia_from_val, dia_to_val);
+            ok = true;
         }
         else if (dia_to_val >= dia_from_val) {
             calcul_dies(dia_from_val, dia_to_val);
+            ok = true;
         }
         else {
-            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+              //      Toast.LENGTH_LONG).show();
+            ok = false;
             return;
         }
-        Toast.makeText(getApplicationContext(), "S'han afegit "+String.valueOf(cont)+" dates",
-                Toast.LENGTH_LONG).show();
     }
 
     void calcul_dies(int dia_from_val, int dia_to_val) {
@@ -200,9 +203,13 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.bt_guardar_dates_obra:
                 guardarObra();
-                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                if (ok) {
+                    Toast.makeText(getApplicationContext(), "S'han afegit "+String.valueOf(cont)+" dates",
+                            Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
             default:
                 break;
