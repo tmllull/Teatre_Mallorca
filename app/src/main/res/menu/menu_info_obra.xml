@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_eliminar_obra"
+        android:id="@+id/menu_eliminar_funcio"
         android:orderInCategory="100"
-        android:title="Eliminar obra"
+        android:title="Eliminar funció"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_usuaris_obra"

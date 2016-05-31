@@ -7,6 +7,10 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Random;
+
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
@@ -238,6 +242,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.delete(OBRA_TABLE, CN_NOM + "=?", new String[]{nom});
     }
 
+    public void deteleFuncio (String nom, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(OBRA_TABLE, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -252,5 +261,158 @@ public class DbHelper extends SQLiteOpenHelper {
     public void resetAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(OBRA_TABLE, null, null);
+    }
+
+    public void initData() {
+        String usuaris = "^";
+        String usuari = "usuari@prova.com";
+        String dataObra = "03-05-16";
+        String places = "-";
+        int p = 0;
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        java.util.Date d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milliseconds = d.getTime();
+        ContentValues values = new ContentValues();
+        values.put(this.CN_NOM, "El rey leon");
+        values.put(this.CN_DESCRIPCIO, "Mor un lleó. Fin");
+        values.put(this.CN_DURADA, String.valueOf(120));
+        values.put(this.CN_PREU, String.valueOf(60));
+        values.put(this.CN_DATA, dataObra);
+        values.put(this.CN_BUTAQUES, places.toString());
+        values.put(this.CN_MILIS, milliseconds);
+        values.put(this.CN_PLACES_LLIURES, p);
+        values.put(this.CN_COMPRADORS, usuaris);
+
+        this.newObra(values, this.OBRA_TABLE);
+
+        usuaris = "^";
+        p = 0;
+        places = "-";
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+        dataObra = "03-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();
+        values = new ContentValues();
+        values.put(this.CN_NOM, "Mamma Mia");
+        values.put(this.CN_DESCRIPCIO, "Cuando serás mia");
+        values.put(this.CN_DURADA, String.valueOf(90));
+        values.put(this.CN_PREU, String.valueOf(45));
+        values.put(this.CN_DATA, dataObra);
+        values.put(this.CN_PLACES_LLIURES, p);
+        values.put(this.CN_MILIS, milliseconds);
+        values.put(this.CN_BUTAQUES, places.toString());
+        values.put(this.CN_COMPRADORS, usuaris);
+
+
+        this.newObra(values, this.OBRA_TABLE);
+
+        usuaris = "^";
+        p = 0;
+        places = "-";
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+        dataObra = "05-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();
+        values = new ContentValues();
+        values.put(this.CN_NOM, "Queen");
+        values.put(this.CN_DESCRIPCIO, "Freddy for president");
+        values.put(this.CN_DURADA, String.valueOf(120));
+        values.put(this.CN_PREU, String.valueOf(60));
+        values.put(this.CN_DATA, dataObra);
+        values.put(this.CN_BUTAQUES, places.toString());
+        values.put(this.CN_MILIS, milliseconds);
+        values.put(this.CN_PLACES_LLIURES, p);
+        values.put(this.CN_COMPRADORS, usuaris);
+
+        this.newObra(values, this.OBRA_TABLE);
+
+        usuaris = "^";
+        p = 0;
+        places = "-";
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+        dataObra = "03-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();
+        values = new ContentValues();
+        values.put(this.CN_NOM, "Queen");
+        values.put(this.CN_DESCRIPCIO, "Freddy for president");
+        values.put(this.CN_DURADA, String.valueOf(120));
+        values.put(this.CN_PREU, String.valueOf(60));
+        values.put(this.CN_DATA, dataObra);
+        values.put(this.CN_BUTAQUES, places.toString());
+        values.put(this.CN_MILIS, milliseconds);
+        values.put(this.CN_PLACES_LLIURES, p);
+        values.put(this.CN_COMPRADORS, usuaris);
+
+        this.newObra(values, this.OBRA_TABLE);
     }
 }

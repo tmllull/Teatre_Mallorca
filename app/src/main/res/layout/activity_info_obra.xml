@@ -29,8 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,8 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,8 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,8 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,8 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -130,17 +125,32 @@
             android:id="@+id/tv_Places_Info" />
     </LinearLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:orientation="vertical"
         android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="89dp"
+            android:layout_height="87dp"
+            android:id="@+id/iv_comprar_entrades"
+            android:src="@drawable/butaques"
+            android:background="#dddddd" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar butaques"
+            android:id="@+id/textView32" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comprar Entrades"
-            android:id="@+id/bt_Comprar_Info" />
+            android:id="@+id/bt_Comprar_Info"
+            android:visibility="gone" />
 
-    </TableRow>
+    </LinearLayout>
 </LinearLayout>

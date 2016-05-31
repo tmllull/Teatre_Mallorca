@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent;
 
         if (id == R.id.init_data) {
-            init_data();
+            dbHelper.initData();
         } else if (id == R.id.delete_data) {
             dbHelper.resetAll();
         } else if (id == R.id.nav_share) {
@@ -119,137 +119,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void init_data() {
-        String dataObra = "03-05-16";
-        String places = "-";
-        int p = 0;
-        for (int i = 1; i < 41; ++i) {
-            Random rand = new Random();
-            int n = rand.nextInt(200);
-            if (n % 2 == 0) places = places + "0";
-            else {
-                places = places + "1";
-                p++;
-            }
-        }
-
-        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
-        java.util.Date d = null;
-        try {
-            d = f.parse(dataObra);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long milliseconds = d.getTime();
-        ContentValues values = new ContentValues();
-        values.put(dbHelper.CN_NOM, "El rey leon");
-        values.put(dbHelper.CN_DESCRIPCIO, "Mor un lleó. Fin");
-        values.put(dbHelper.CN_DURADA, String.valueOf(120));
-        values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, dataObra);
-        values.put(dbHelper.CN_BUTAQUES, places.toString());
-        values.put(dbHelper.CN_MILIS, milliseconds);
-        values.put(dbHelper.CN_PLACES_LLIURES, p);
-
-        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-
-        p = 0;
-        places = "-";
-        for (int i = 1; i < 41; ++i) {
-            Random rand = new Random();
-            int n = rand.nextInt(200);
-            if (n % 2 == 0) places = places + "0";
-            else {
-                places = places + "1";
-                p++;
-            }
-        }
-        dataObra = "03-05-16";
-        f = new SimpleDateFormat("dd-MM-yy");
-        d = null;
-        try {
-            d = f.parse(dataObra);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        milliseconds = d.getTime();
-        values = new ContentValues();
-        values.put(dbHelper.CN_NOM, "Mamma Mia");
-        values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
-        values.put(dbHelper.CN_DURADA, String.valueOf(90));
-        values.put(dbHelper.CN_PREU, String.valueOf(45));
-        values.put(dbHelper.CN_DATA, dataObra);
-        values.put(dbHelper.CN_PLACES_LLIURES, p);
-        values.put(dbHelper.CN_MILIS, milliseconds);
-        values.put(dbHelper.CN_BUTAQUES, places.toString());
-
-        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-
-        p = 0;
-        places = "-";
-        for (int i = 1; i < 41; ++i) {
-            Random rand = new Random();
-            int n = rand.nextInt(200);
-            if (n % 2 == 0) places = places + "0";
-            else {
-                places = places + "1";
-                p++;
-            }
-        }
-        dataObra = "05-05-16";
-        f = new SimpleDateFormat("dd-MM-yy");
-        d = null;
-        try {
-            d = f.parse(dataObra);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        milliseconds = d.getTime();
-        values = new ContentValues();
-        values.put(dbHelper.CN_NOM, "Queen");
-        values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
-        values.put(dbHelper.CN_DURADA, String.valueOf(120));
-        values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, dataObra);
-        values.put(dbHelper.CN_BUTAQUES, places.toString());
-        values.put(dbHelper.CN_MILIS, milliseconds);
-        values.put(dbHelper.CN_PLACES_LLIURES, p);
-
-        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-
-        p = 0;
-        places = "-";
-        for (int i = 1; i < 41; ++i) {
-            Random rand = new Random();
-            int n = rand.nextInt(200);
-            if (n % 2 == 0) places = places + "0";
-            else {
-                places = places + "1";
-                p++;
-            }
-        }
-        dataObra = "03-05-16";
-        f = new SimpleDateFormat("dd-MM-yy");
-        d = null;
-        try {
-            d = f.parse(dataObra);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        milliseconds = d.getTime();
-        values = new ContentValues();
-        values.put(dbHelper.CN_NOM, "Queen");
-        values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
-        values.put(dbHelper.CN_DURADA, String.valueOf(120));
-        values.put(dbHelper.CN_PREU, String.valueOf(60));
-        values.put(dbHelper.CN_DATA, dataObra);
-        values.put(dbHelper.CN_BUTAQUES, places.toString());
-        values.put(dbHelper.CN_MILIS, milliseconds);
-        values.put(dbHelper.CN_PLACES_LLIURES, p);
-
-        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
     }
 
     @Override
@@ -276,4 +145,163 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+
+
+    /*
+    public void init_data() {
+        String usuaris = "^";
+        String usuari = "usuari@prova.com";
+        String dataObra = "03-05-16";
+        String places = "-";
+        int p = 0;
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        java.util.Date d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milliseconds = d.getTime();
+        ContentValues values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "El rey leon");
+        values.put(dbHelper.CN_DESCRIPCIO, "Mor un lleó. Fin");
+        values.put(dbHelper.CN_DURADA, String.valueOf(120));
+        values.put(dbHelper.CN_PREU, String.valueOf(60));
+        values.put(dbHelper.CN_DATA, dataObra);
+        values.put(dbHelper.CN_BUTAQUES, places.toString());
+        values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_PLACES_LLIURES, p);
+        values.put(dbHelper.CN_COMPRADORS, usuaris);
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+
+        usuaris = "^";
+        p = 0;
+        places = "-";
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+        dataObra = "03-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();
+        values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "Mamma Mia");
+        values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
+        values.put(dbHelper.CN_DURADA, String.valueOf(90));
+        values.put(dbHelper.CN_PREU, String.valueOf(45));
+        values.put(dbHelper.CN_DATA, dataObra);
+        values.put(dbHelper.CN_PLACES_LLIURES, p);
+        values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_BUTAQUES, places.toString());
+        values.put(dbHelper.CN_COMPRADORS, usuaris);
+
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+
+        usuaris = "^";
+        p = 0;
+        places = "-";
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+        dataObra = "05-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();
+        values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "Queen");
+        values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
+        values.put(dbHelper.CN_DURADA, String.valueOf(120));
+        values.put(dbHelper.CN_PREU, String.valueOf(60));
+        values.put(dbHelper.CN_DATA, dataObra);
+        values.put(dbHelper.CN_BUTAQUES, places.toString());
+        values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_PLACES_LLIURES, p);
+        values.put(dbHelper.CN_COMPRADORS, usuaris);
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+
+        usuaris = "^";
+        p = 0;
+        places = "-";
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i+usuari+"^"+usuaris;
+            }
+            else {
+                places = places + "1";
+                p++;
+            }
+        }
+        dataObra = "03-05-16";
+        f = new SimpleDateFormat("dd-MM-yy");
+        d = null;
+        try {
+            d = f.parse(dataObra);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        milliseconds = d.getTime();
+        values = new ContentValues();
+        values.put(dbHelper.CN_NOM, "Queen");
+        values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
+        values.put(dbHelper.CN_DURADA, String.valueOf(120));
+        values.put(dbHelper.CN_PREU, String.valueOf(60));
+        values.put(dbHelper.CN_DATA, dataObra);
+        values.put(dbHelper.CN_BUTAQUES, places.toString());
+        values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_PLACES_LLIURES, p);
+        values.put(dbHelper.CN_COMPRADORS, usuaris);
+
+        dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+    }*/
 }

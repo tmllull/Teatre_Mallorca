@@ -32,65 +32,76 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Títol: "
-            android:id="@+id/textView15" />
+            android:id="@+id/textView15"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/tv_titol_compra" />
+            android:id="@+id/tv_titol_compra"
+            android:textSize="19dp" />
 
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data: "
-            android:id="@+id/textView16" />
+            android:id="@+id/textView16"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/tv_data_compra" />
+            android:id="@+id/tv_data_compra"
+            android:textSize="19dp" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nº entrades: "
-            android:id="@+id/textView17" />
+            android:id="@+id/textView17"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/tv_numero_entrades_compra" />
+            android:id="@+id/tv_numero_entrades_compra"
+            android:textSize="19dp" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total: "
-            android:id="@+id/textView18" />
+            android:id="@+id/textView18"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/tv_total_compra" />
+            android:id="@+id/tv_total_compra"
+            android:textSize="19dp" />
     </TableRow>
 
     <TableRow
@@ -102,7 +113,7 @@
             android:layout_height="wrap_content"
             android:text="Per confirmar la compra, introdueix les següents dades:"
             android:id="@+id/textView24"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="30dp" />
     </TableRow>
 
     <LinearLayout
@@ -110,6 +121,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="e-mail: "
+                android:id="@+id/textView19" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/et_mail_compra" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -143,23 +172,6 @@
                 android:id="@+id/editText2" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="e-mail: "
-                android:id="@+id/textView19" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                android:id="@+id/et_mail_compra" />
-        </TableRow>
     </LinearLayout>
 
     <TableRow

@@ -186,6 +186,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             values.put(dbHelper.CN_BUTAQUES, places);
             values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
             values.put(dbHelper.CN_PLACES_LLIURES, 40);
+            values.put(dbHelper.CN_COMPRADORS, "^");
 
             dbHelper.newObra(values, dbHelper.OBRA_TABLE);
             ++cont;

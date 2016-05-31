@@ -40,7 +40,8 @@ public class LlistarUsuaris extends AppCompatActivity {
         }*/
         if (usuaris != null) {
             for (int i = 0; i < usuaris.length; ++i) {
-                llista.add(usuaris[i]);
+                if (!usuaris[i].isEmpty())
+                    llista.add(usuaris[i]);
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(

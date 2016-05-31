@@ -1,15 +1,19 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OcupacioButaques extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +26,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     Button btComprar;
     String butaques_seleccionades, data;
     Integer places_lliures, preu, entrades;
+    ImageView ivComprar;
+    Integer descompte;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -54,6 +60,55 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         tvTitol = (TextView) findViewById(R.id.tv_titol_ocupacio);
         btComprar = (Button) findViewById(R.id.bt_Comprar_ocupacio);
         btComprar.setOnClickListener(this);
+
+        descompte = 0;
+        ivComprar = (ImageView) findViewById(R.id.iv_compra_pati_butaques);
+        ivComprar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (entrades == 0) {
+                    Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
+                                    " una butaca",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Aplicar descompte")
+                            .setMessage("Si tens el carnet Jove o tarjeta universitària " +
+                                    "tens un 30% de descompte")
+                            .setPositiveButton("Sí, en tinc", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    descompte = 20;
+                                    confirmar();
+                                }
+                            })
+                            .setNegativeButton("No tinc cap carnet", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    confirmar();
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    //finish();
+                    /*int total = entrades * preu;
+                    total -= (total*descompte)/100;
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("Total", total);
+                    bundle.putInt("Entrades", entrades);
+                    bundle.putString("Titol", tvTitol.getText().toString());
+                    bundle.putString("Data", data);
+                    bundle.putString("Butaques", butaques_seleccionades);
+                    bundle.putInt("Places", places_lliures);
+                    Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();*/
+                    //return;
+                }
+            }
+        });
 
         entrades = 0;
 
@@ -95,6 +150,22 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         }
         /*Toast.makeText(getApplicationContext(), butaques_seleccionades,
                 Toast.LENGTH_LONG).show();*/
+    }
+
+    void confirmar() {
+        int total = entrades * preu;
+        total -= (total*descompte)/100;
+        Bundle bundle = new Bundle();
+        bundle.putInt("Total", total);
+        bundle.putInt("Entrades", entrades);
+        bundle.putString("Titol", tvTitol.getText().toString());
+        bundle.putString("Data", data);
+        bundle.putString("Butaques", butaques_seleccionades);
+        bundle.putInt("Places", places_lliures);
+        Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     @Override

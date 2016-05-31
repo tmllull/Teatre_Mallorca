@@ -29,17 +29,25 @@
             android:label="Selecció de dates" />
         <activity
             android:name=".LlistarObres"
-            android:label="Llistat d&apos;obres" />
-        <activity android:name=".ConfirmarCompra" />
+            android:label="Llistat obres" />
+        <activity
+            android:name=".ConfirmarCompra"
+            android:label="Confirmar la compra" />
         <activity
             android:name=".EliminarObra"
             android:label="Eliminar obra" />
         <activity
             android:name=".InfoObra"
             android:label="Info obra" />
-        <activity android:name=".FinalCompra" />
-        <activity android:name=".LlistarDies" />
-        <activity android:name=".LlistarUsuaris"></activity>
+        <activity
+            android:name=".FinalCompra"
+            android:label="Final de la compra" />
+        <activity
+            android:name=".LlistarDies"
+            android:label="Llista de funcions" />
+        <activity
+            android:name=".LlistarUsuaris"
+            android:label="Usuaris" />
     </application>
 
 </manifest>

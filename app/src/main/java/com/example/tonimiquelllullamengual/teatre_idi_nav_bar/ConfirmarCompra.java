@@ -1,6 +1,7 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -58,8 +59,14 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         if (!etMail.getText().toString().isEmpty()) {
             dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
             dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
-            String usuari = etMail.getText().toString()+"^";
-            dbHelper.updateCompradors(tvTitol.getText().toString(), data, usuari);
+            Cursor c = dbHelper.getUsuaris(tvTitol.getText().toString(),data);
+            if (c.moveToFirst()) {
+                String usuari = c.getString(c.getColumnIndex(dbHelper.CN_COMPRADORS));
+                usuari = etMail.getText().toString()+"^"+usuari;
+                dbHelper.updateCompradors(tvTitol.getText().toString(), data, usuari);
+            }
+            Toast.makeText(getApplicationContext(), "La seva compra s'ha realitzat correctament",
+                    Toast.LENGTH_LONG).show();
             //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             //startActivity(intent);
             finish();

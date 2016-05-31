@@ -11,18 +11,20 @@
     android:orientation="vertical">
 
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:orientation="vertical">
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Escenari"
                 android:id="@+id/textView2"
@@ -30,12 +32,12 @@
                 android:layout_span="4"
                 android:gravity="center_horizontal"
                 android:textSize="40dp"
-                android:background="#707070" />
-        </TableRow>
+                android:background="#a5a5a5" />
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -82,11 +84,11 @@
                 android:layout_weight="1"
                 android:background="#4efe4b"
                 android:layout_margin="5dp" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -133,11 +135,11 @@
                 android:layout_weight="1"
                 android:background="#4efe4b"
                 android:layout_margin="5dp" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -184,11 +186,11 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:background="#4efe4b" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -235,11 +237,11 @@
                 android:layout_weight="1"
                 android:background="#4efe4b"
                 android:layout_margin="5dp" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -286,11 +288,11 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:background="#4efe4b" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -337,11 +339,11 @@
                 android:layout_weight="1"
                 android:background="#4efe4b"
                 android:layout_margin="5dp" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -388,11 +390,11 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:background="#4efe4b" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
@@ -439,29 +441,49 @@
                 android:layout_weight="1"
                 android:background="#4efe4b"
                 android:layout_margin="5dp" />
-        </TableRow>
+        </LinearLayout>
 
-    </TableLayout>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Nom de l&apos;obra"
-            android:id="@+id/tv_titol_ocupacio"
-            android:textSize="22dp"
-            android:gravity="center_vertical"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Comprar"
-            android:id="@+id/bt_Comprar_ocupacio" />
+            android:orientation="vertical">
 
-    </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Nom de l&apos;obra"
+                android:id="@+id/tv_titol_ocupacio"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="63dp"
+                android:id="@+id/iv_compra_pati_butaques"
+                android:src="@drawable/entrada"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comprar entrades"
+                android:id="@+id/textView33"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comprar"
+                android:id="@+id/bt_Comprar_ocupacio"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

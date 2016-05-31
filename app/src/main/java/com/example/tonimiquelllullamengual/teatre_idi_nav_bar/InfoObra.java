@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     DbHelper dbHelper;
     boolean places_lliures = false;
     String titol, auxTitol, data;
+    ImageView ivComprar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,30 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvPlaces = (TextView) findViewById(R.id.tv_Places_Info);
         tvDurada = (TextView) findViewById(R.id.tv_Durada_Info);
         tvData = (TextView) findViewById(R.id.tv_data_info);
-
+        ivComprar = (ImageView) findViewById(R.id.iv_comprar_entrades);
         comprar = (Button) findViewById(R.id.bt_Comprar_Info);
 
         comprar.setOnClickListener(this);
+
+        ivComprar.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (places_lliures) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Titol", auxTitol);
+                    bundle.putString("Data", data);
+                    //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+                    //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                    intent.putExtras(bundle);
+                    v.getContext().startActivity(intent);
+                    /*Toast.makeText(getApplicationContext(), aux,
+                            Toast.LENGTH_LONG).show();*/
+                    finish();
+                }
+            }
+        });
 
         //String titol = "Cap obra Seleccionada";
         String descripcio = "Descripcio: ";
@@ -63,7 +85,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             tvPlaces.setText(places.toString());
             durada = c.getInt(c.getColumnIndex(dbHelper.CN_DURADA));
             tvDurada.setText(durada.toString());
-            tvData.setText(c.getString(c.getColumnIndex(dbHelper.CN_DATA)));
+            tvData.setText(data);
             //aux = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
 
             if (c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES)) > 0) places_lliures = true;
@@ -74,18 +96,19 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_Comprar_Info:
-                //if (places_lliures) {
-                Bundle bundle = new Bundle();
-                bundle.putString("Titol", auxTitol);
-                bundle.putString("Data", data);
-                //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
-                //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
-                Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
-                intent.putExtras(bundle);
-                v.getContext().startActivity(intent);
+                if (places_lliures) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Titol", auxTitol);
+                    bundle.putString("Data", data);
+                    //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+                    //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                    intent.putExtras(bundle);
+                    v.getContext().startActivity(intent);
                     /*Toast.makeText(getApplicationContext(), aux,
                             Toast.LENGTH_LONG).show();*/
-                finish();
+                    finish();
+                }
                 break;
             default:
                 break;
@@ -107,13 +130,13 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.menu_eliminar_obra:
+            case R.id.menu_eliminar_funcio:
                 new AlertDialog.Builder(this)
                         .setTitle("Eliminar obra")
-                        .setMessage("Estàs segur que vols eliminar l'obra?")
+                        .setMessage("Estàs segur que vols eliminar la funció?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                dbHelper.deteleObra(auxTitol);
+                                dbHelper.deteleFuncio(auxTitol,data);
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
