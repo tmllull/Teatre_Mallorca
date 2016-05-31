@@ -89,7 +89,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                                     // do nothing
                                 }
                             })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setIcon(R.drawable.discount)
                             .show();
                     //finish();
                     /*int total = entrades * preu;

@@ -2,6 +2,7 @@ package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity
     DbHelper dbHelper;
 
     Button btAfegir, btEliminar, btButaques, btUsuaris;
+
+    ImageView ivLlistar, ivEliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +63,31 @@ public class MainActivity extends AppCompatActivity
         btEliminar = (Button) findViewById(R.id.bt_eliminar_obra_main);
         btButaques = (Button) findViewById(R.id.bt_llistar_obres_main);
         btUsuaris = (Button) findViewById(R.id.bt_mostrar_usuaris_main);
+        ivLlistar = (ImageView) findViewById(R.id.iv_main_llistar);
+        ivEliminar = (ImageView) findViewById(R.id.iv_main_eliminar);
 
         btAfegir.setOnClickListener(this);
         btEliminar.setOnClickListener(this);
         btButaques.setOnClickListener(this);
         btUsuaris.setOnClickListener(this);
+
+        ivLlistar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                startActivity(intent);
+            }
+        });
+
+        ivEliminar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

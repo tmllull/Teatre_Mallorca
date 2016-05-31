@@ -134,7 +134,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                 new AlertDialog.Builder(this)
                         .setTitle("Eliminar obra")
                         .setMessage("Estàs segur que vols eliminar la funció?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleFuncio(auxTitol,data);
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -142,12 +142,12 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                                 finish();
                             }
                         })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        .setNegativeButton("No!!!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(R.drawable.trash)
                         .show();
                 return false;
             case R.id.menu_usuaris_obra:

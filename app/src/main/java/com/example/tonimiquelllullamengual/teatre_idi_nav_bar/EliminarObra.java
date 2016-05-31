@@ -88,7 +88,7 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
                 new AlertDialog.Builder(this)
                         .setTitle("Eliminar obra")
                         .setMessage("Estàs segur que vols eliminar l'obra?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleObra(obra_sel);
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -96,12 +96,12 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
                                 finish();
                             }
                         })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        .setNegativeButton("No!!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(R.drawable.trash)
                         .show();
                 //finish();
                 break;

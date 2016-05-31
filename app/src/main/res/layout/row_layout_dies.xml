@@ -24,14 +24,14 @@
                     android:layout_height="wrap_content"
                     android:text="Dia:"
                     android:id="@+id/textView40"
-                    android:textSize="30dp" />
+                    android:textSize="25dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/tv_dia_dies"
-                    android:textSize="30dp" />
+                    android:textSize="25dp" />
             </LinearLayout>
 
             <LinearLayout

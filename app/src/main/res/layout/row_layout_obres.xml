@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/tv_nom_row"
-                    android:textSize="30dp" />
+                    android:textSize="25dp" />
             </LinearLayout>
 
             <LinearLayout
