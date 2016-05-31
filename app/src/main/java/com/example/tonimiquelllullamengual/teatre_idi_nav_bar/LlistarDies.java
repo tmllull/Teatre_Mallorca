@@ -1,5 +1,6 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -108,5 +109,12 @@ public class LlistarDies extends AppCompatActivity {
             default:
                 return false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+        startActivity(intent);
+        finish();
     }
 }

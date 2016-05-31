@@ -33,7 +33,6 @@ public class LlistarObres extends AppCompatActivity {
 
     public void carregar_view() {
         dbHelper = new DbHelper(this);
-
         Cursor c = dbHelper.getAllObresDistinct();
         //Cursor c = dbHelper.getAllObres();
         if (c.moveToFirst()) {
@@ -41,7 +40,8 @@ public class LlistarObres extends AppCompatActivity {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                Obra obra = new Obra(nom, places, dia);
+                Integer sessions = dbHelper.comptarSessions(nom);
+                Obra obra = new Obra(nom, places, dia,sessions.toString());
                 //Obra obra = new Obra(nom);
                 obres.add(obra);
             } while (c.moveToNext());

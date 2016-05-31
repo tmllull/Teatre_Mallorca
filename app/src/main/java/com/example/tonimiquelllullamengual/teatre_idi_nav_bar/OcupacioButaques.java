@@ -139,27 +139,41 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             }
             /*Toast.makeText(getApplicationContext(),
                     butaques_seleccionades, Toast.LENGTH_LONG).show();*/
-                //dbHelper.updateOcupacio(tvTitol.toString(), butaques_seleccionades);
-                return;
-            }
-            else{
+            //dbHelper.updateOcupacio(tvTitol.toString(), butaques_seleccionades);
+            return;
+        } else {
             /*Toast.makeText(getApplicationContext(),
                     tvTitol.getText(), Toast.LENGTH_LONG).show();*/
-                //dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
-                //dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
-                int total = entrades * preu;
-                Bundle bundle = new Bundle();
-                bundle.putInt("Total", total);
-                bundle.putInt("Entrades", entrades);
-                bundle.putString("Titol", tvTitol.getText().toString());
-                bundle.putString("Data", data);
-                bundle.putString("Butaques", butaques_seleccionades);
-                bundle.putInt("Places",places_lliures);
-                Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-                return;
-            }
+            //dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
+            //dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
+            int total = entrades * preu;
+            Bundle bundle = new Bundle();
+            bundle.putInt("Total", total);
+            bundle.putInt("Entrades", entrades);
+            bundle.putString("Titol", tvTitol.getText().toString());
+            bundle.putString("Data", data);
+            bundle.putString("Butaques", butaques_seleccionades);
+            bundle.putInt("Places", places_lliures);
+            Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+            return;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Bundle bundle = new Bundle();
+        bundle.putString("Titol", tvTitol.getText().toString());
+        bundle.putString("Data", data);
+        //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+        //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+
+        Intent intent = new Intent(getApplicationContext(), InfoObra.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+        finish();
+    }
+}

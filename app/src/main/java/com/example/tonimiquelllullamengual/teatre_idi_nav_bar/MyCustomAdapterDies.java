@@ -90,8 +90,8 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             Bundle bundle = new Bundle();
             bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
             bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
-            //Intent intent = new Intent (v.getContext(), InfoObra.class);
-            Intent intent = new Intent (v.getContext(), OcupacioButaques.class);
+            Intent intent = new Intent (v.getContext(), InfoObra.class);
+            //Intent intent = new Intent (v.getContext(), OcupacioButaques.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
             ((Activity)v.getContext()).finish();

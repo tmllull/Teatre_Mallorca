@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="Eliminar obra"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_usuaris_obra"
+        android:orderInCategory="100"
+        android:title="Consultar compradors"
+        app:showAsAction="never" />
 </menu>

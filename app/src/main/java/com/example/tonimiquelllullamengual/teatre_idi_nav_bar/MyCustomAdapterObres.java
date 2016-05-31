@@ -37,8 +37,8 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
     public void onBindViewHolder(MyCustomAdapterObres.AdapterViewHolder adapterViewHolder, int position) {
         if (obres != null) {
             adapterViewHolder.nom.setText(obres.get(position).getNom());
-            adapterViewHolder.places.setText(obres.get(position).getPlaces().toString());
-            adapterViewHolder.dia.setText(obres.get(position).getDia().toString());
+            //adapterViewHolder.places.setText(obres.get(position).getPlaces().toString());
+            adapterViewHolder.sessions.setText(obres.get(position).getSessions().toString());
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFE0F2F1);
             }
@@ -64,7 +64,7 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
 
         public TextView nom;
         public TextView places;
-        public TextView dia;
+        public TextView sessions;
         public View v;
         private String mTextView;
         private String mItem;
@@ -75,8 +75,8 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
             mTextView = itemView.toString();
             this.v = itemView;
             this.nom = (TextView) itemView.findViewById(R.id.tv_nom_row);
-            this.places = (TextView) itemView.findViewById(R.id.tv_places_row);
-            this.dia = (TextView) itemView.findViewById(R.id.tv_dia_row);
+            //this.places = (TextView) itemView.findViewById(R.id.tv_places_row);
+            this.sessions = (TextView) itemView.findViewById(R.id.tv_sessions_row);
         }
 
         public void setItem (String item) {
@@ -89,7 +89,8 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
 
             Bundle bundle = new Bundle();
             bundle.putString("Titol", obres.get(getAdapterPosition()).getNom());
-            Intent intent = new Intent (v.getContext(), InfoObra.class);
+            //Intent intent = new Intent (v.getContext(), InfoObra.class);
+            Intent intent = new Intent (v.getContext(), LlistarDies.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
             ((Activity)v.getContext()).finish();

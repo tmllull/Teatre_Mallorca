@@ -3,6 +3,7 @@ package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -40,7 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_BUTAQUES + " TEXT, " +
             CN_PLACES_LLIURES + " INTEGER, " +
             CN_MILIS + " TEXT, " +
-            CN_COMPRADORS + " TEXT " +
+            CN_COMPRADORS + " TEXT, " +
             "PRIMARY KEY (nom,data));";
 
     public DbHelper(Context context) {
@@ -143,6 +144,55 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,               // don't group the rows
                 null,               // don't filter by row groups
                 CN_DATA + " ASC"                // The sort order
+        );
+        return c;
+    }
+
+    public int comptarSessions(String nom) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] where = {nom};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                null,            // The columns to return
+                "nom=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
+                null,               // don't group the rows
+                null,               // don't filter by row groups
+                null                // The sort order
+        );
+        int cnt = c.getCount();
+        //c.close();
+        return cnt;
+    }
+
+    public String[] consultarUsuaris(String nom, String data) {
+        Cursor c = this.getUsuaris(nom, data);
+        String[] usuaris;
+        String s_usuaris = new String();
+        if (c.moveToFirst()) {
+            s_usuaris = c.getString(c.getColumnIndex(CN_COMPRADORS));
+        }
+        if (s_usuaris != null) {
+            usuaris = s_usuaris.split("\\^");
+            return usuaris;
+        }
+        return null;
+    }
+
+    //Obtenir una funció d'una obra a una data determinada
+    public Cursor getUsuaris(String nom, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+        String[] where = {nom, data};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                columns,            // The columns to return
+                "nom=?" + " and " + "data=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
+                null,               // don't group the rows
+                null,               // don't filter by row groups
+                null                // The sort order
         );
         return c;
     }

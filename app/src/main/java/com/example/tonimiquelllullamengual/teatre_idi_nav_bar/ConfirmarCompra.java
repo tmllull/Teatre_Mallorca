@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ConfirmarCompra extends AppCompatActivity implements View.OnClickListener{
+public class ConfirmarCompra extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvTitol, tvData, tvEntrades, tvTotal;
     Button btConfirmar;
@@ -54,8 +55,19 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
     }
 
     void confirmar_compra() {
-        dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
-        dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
+        if (!etMail.getText().toString().isEmpty()) {
+            dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
+            dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
+            String usuari = etMail.getText().toString()+"^";
+            dbHelper.updateCompradors(tvTitol.getText().toString(), data, usuari);
+            //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            //startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), "Has d'emplenar el mail com a mínim",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
     }
 
     @Override
@@ -63,9 +75,9 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.bt_confirmar_compra:
                 confirmar_compra();
-                Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                //Intent intent = new Intent (getApplicationContext(), MainActivity.class);
+                //startActivity(intent);
+                //finish();
                 break;
             default:
                 break;
@@ -75,7 +87,7 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Titol",titol);
+        bundle.putString("Titol", titol);
         bundle.putString("Data", data);
         Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
         intent.putExtras(bundle);

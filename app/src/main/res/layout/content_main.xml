@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teatre TalTalTal"
+            android:text="Teatre"
             android:id="@+id/textView10"
             android:textSize="40dp" />
     </TableRow>
@@ -35,20 +35,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Afegir obra"
-            android:id="@+id/bt_afegir_obra_main"
-            android:layout_marginRight="30dp"
-            android:minHeight="60dp"
-            android:minWidth="120dp"
-            android:maxWidth="120dp"
-            android:maxHeight="60dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eliminar obra"
-            android:id="@+id/bt_eliminar_obra_main"
-            android:layout_marginLeft="30dp"
+            android:text="Llistar obres"
+            android:id="@+id/bt_llistar_obres_main"
             android:minHeight="60dp"
             android:minWidth="120dp"
             android:maxWidth="120dp"
@@ -64,20 +52,25 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Llistar obres"
-            android:id="@+id/bt_llistar_obres_main"
-            android:layout_marginRight="30dp"
+            android:text="Afegir obra"
+            android:id="@+id/bt_afegir_obra_main"
             android:minHeight="60dp"
             android:minWidth="120dp"
             android:maxWidth="120dp"
             android:maxHeight="60dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mostrar usuaris"
-            android:id="@+id/bt_mostrar_usuaris_main"
-            android:layout_marginLeft="30dp"
+            android:text="Eliminar obra"
+            android:id="@+id/bt_eliminar_obra_main"
             android:minHeight="60dp"
             android:minWidth="120dp"
             android:maxWidth="120dp"
@@ -88,12 +81,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="40dp"
+        android:visibility="gone">
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView23" />
+            android:text="Mostrar usuaris"
+            android:id="@+id/bt_mostrar_usuaris_main"
+            android:minHeight="60dp"
+            android:minWidth="120dp"
+            android:maxWidth="120dp"
+            android:maxHeight="60dp" />
     </TableRow>
+
 </LinearLayout>

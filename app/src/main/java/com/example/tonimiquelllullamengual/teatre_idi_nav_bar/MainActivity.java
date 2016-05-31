@@ -39,9 +39,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                //init_data();
+                Intent intent = new Intent(getApplicationContext(), NovaObra.class);
+                startActivity(intent);
             }
         });
 
@@ -65,28 +64,6 @@ public class MainActivity extends AppCompatActivity
         btEliminar.setOnClickListener(this);
         btButaques.setOnClickListener(this);
         btUsuaris.setOnClickListener(this);
-
-        //reset = (Button) findViewById(R.id.bt_reset);
-        //init = (Button) findViewById(R.id.init_data);
-        /*reset.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Base de dades eliminada", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                dbHelper.resetAll();
-            }
-        });*/
-
-        /*init.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Dades iniciades", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                init_data();
-            }
-        });*/
-        //init_data();
-
 
     }
 
@@ -158,14 +135,14 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        /*SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
-        Date d = null;
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        java.util.Date d = null;
         try {
-            d = (Date) f.parse(dataObra);
+            d = f.parse(dataObra);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        long milliseconds = d.getTime();*/
+        long milliseconds = d.getTime();
         ContentValues values = new ContentValues();
         values.put(dbHelper.CN_NOM, "El rey leon");
         values.put(dbHelper.CN_DESCRIPCIO, "Mor un lleó. Fin");
@@ -173,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_PREU, String.valueOf(60));
         values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
-        //values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
@@ -190,14 +167,14 @@ public class MainActivity extends AppCompatActivity
             }
         }
         dataObra = "03-05-16";
-        /*f = new SimpleDateFormat("dd-MM-yy");
+        f = new SimpleDateFormat("dd-MM-yy");
         d = null;
         try {
-            d = (Date) f.parse(dataObra);
+            d = f.parse(dataObra);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        milliseconds = d.getTime();*/
+        milliseconds = d.getTime();
         values = new ContentValues();
         values.put(dbHelper.CN_NOM, "Mamma Mia");
         values.put(dbHelper.CN_DESCRIPCIO, "Cuando serás mia");
@@ -205,7 +182,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_PREU, String.valueOf(45));
         values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
-        //values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
@@ -221,15 +198,15 @@ public class MainActivity extends AppCompatActivity
                 p++;
             }
         }
-        /*dataObra = "03-05-16";
+        dataObra = "05-05-16";
         f = new SimpleDateFormat("dd-MM-yy");
         d = null;
         try {
-            d = (Date) f.parse(dataObra);
+            d = f.parse(dataObra);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        milliseconds = d.getTime();*/
+        milliseconds = d.getTime();
         values = new ContentValues();
         values.put(dbHelper.CN_NOM, "Queen");
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
@@ -237,7 +214,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_PREU, String.valueOf(60));
         values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
-        //values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);
@@ -253,15 +230,15 @@ public class MainActivity extends AppCompatActivity
                 p++;
             }
         }
-        /*dataObra = "04-05-16";
+        dataObra = "03-05-16";
         f = new SimpleDateFormat("dd-MM-yy");
         d = null;
         try {
-            d = (Date) f.parse(dataObra);
+            d = f.parse(dataObra);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        milliseconds = d.getTime();*/
+        milliseconds = d.getTime();
         values = new ContentValues();
         values.put(dbHelper.CN_NOM, "Queen");
         values.put(dbHelper.CN_DESCRIPCIO, "Freddy for president");
@@ -269,7 +246,7 @@ public class MainActivity extends AppCompatActivity
         values.put(dbHelper.CN_PREU, String.valueOf(60));
         values.put(dbHelper.CN_DATA, dataObra);
         values.put(dbHelper.CN_BUTAQUES, places.toString());
-        //values.put(dbHelper.CN_MILIS, milliseconds);
+        values.put(dbHelper.CN_MILIS, milliseconds);
         values.put(dbHelper.CN_PLACES_LLIURES, p);
 
         dbHelper.newObra(values, dbHelper.OBRA_TABLE);

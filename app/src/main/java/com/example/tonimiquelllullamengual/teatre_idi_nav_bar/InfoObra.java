@@ -20,7 +20,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
-    String aux, auxTitol;
+    String titol, auxTitol, data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +40,15 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
         comprar.setOnClickListener(this);
 
-        String titol = "Cap obra Seleccionada";
+        //String titol = "Cap obra Seleccionada";
         String descripcio = "Descripcio: ";
         Integer preu, places, durada;
         preu = places = 0;
         bundle = getIntent().getExtras();
-        if (bundle != null)
+        if (bundle != null) {
             titol = bundle.getString("Titol");
+            data = bundle.getString("Data");
+        }
 
         tvTitol.setText(titol.toString());
         auxTitol = titol;
@@ -55,10 +57,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         if (c.moveToFirst()) {
             tvDescripcio.setText(c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
             preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
-            tvPreu.setText(preu.toString());
+            tvPreu.setText(preu.toString()+"€");
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             //aux = places.toString();
-            //tvPlaces.setText(places.toString());
+            tvPlaces.setText(places.toString());
             durada = c.getInt(c.getColumnIndex(dbHelper.CN_DURADA));
             tvDurada.setText(durada.toString());
             tvData.setText(c.getString(c.getColumnIndex(dbHelper.CN_DATA)));
@@ -75,9 +77,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                 //if (places_lliures) {
                 Bundle bundle = new Bundle();
                 bundle.putString("Titol", auxTitol);
-                Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+                bundle.putString("Data", data);
+                //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
                 //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
-                //Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
                     /*Toast.makeText(getApplicationContext(), aux,
@@ -124,6 +127,22 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
                 return false;
+            case R.id.menu_usuaris_obra:
+                //Toast.makeText(getApplicationContext(), "Falta implementar",
+                //        Toast.LENGTH_LONG).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("Titol", auxTitol);
+                bundle.putString("Data", data);
+                //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+                //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                Intent intent = new Intent(getApplicationContext(), LlistarUsuaris.class);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+                    /*Toast.makeText(getApplicationContext(), aux,
+                            Toast.LENGTH_LONG).show();*/
+                //finish();
+                return false;
             default:
                 return false;
         }
@@ -131,7 +150,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("Titol", auxTitol);
+        Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
