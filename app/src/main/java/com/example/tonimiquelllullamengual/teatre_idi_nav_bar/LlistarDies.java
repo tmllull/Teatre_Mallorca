@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class LlistarDies extends AppCompatActivity {
 
-    //ListView dies;
-
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
@@ -30,7 +28,6 @@ public class LlistarDies extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llistar_dies);
-
         carregar_view();
 
     }
@@ -42,16 +39,11 @@ public class LlistarDies extends AppCompatActivity {
         String titol = bundle.getString("Titol");
         titolAux = titol;
         Cursor c = dbHelper.getAllObresData(titol);
-        //Cursor c = dbHelper.getAllObres();
-        //Cursor c = dbHelper.getAllObresDistinct();
-        //Cursor c = dbHelper.getObra(titol);
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                //Obra obra = new Obra(nom, places, dia);
-                //Dia dia = new Dia(nom);
                 Dia dia = new Dia(nom, places, data);
                 dies.add(dia);
             } while (c.moveToNext());

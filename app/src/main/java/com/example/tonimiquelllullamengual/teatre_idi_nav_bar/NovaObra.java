@@ -43,11 +43,8 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         etDescripcio = (EditText) findViewById(R.id.et_descripcioNovaObra);
         etDurada = (EditText) findViewById(R.id.et_duradaNovaObra);
         etPreu = (EditText) findViewById(R.id.et_preuNovaObra);
-        //etData = (EditText) findViewById(R.id.et_dataNovaObra);
-        //tvData = (TextView) findViewById(R.id.tv_data_nova_obra);
 
         btNew.setOnClickListener(this);
-        //tvData.setOnClickListener(this);
 
         formatDate = new SimpleDateFormat("dd-MM-yy");
 
@@ -77,15 +74,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
             return;
         }
         else  {
-            /*Cursor c = dbHelper.getObra(String.valueOf(etNom.getText()));
-            if (c.moveToFirst()) {
-                String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                if (data.equals(etData))
-                    Toast.makeText(getApplicationContext(), "Ja hi ha una obra amb el mateix " +
-                            "nom per aquest dia.",
-                            Toast.LENGTH_LONG).show();
-                return;
-            }*/
             String places = "-";
             for (int i = 1; i < 41; ++i) {
                 //Plaça lliure indicat amb un 1
@@ -108,8 +96,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
-                //newObra();
-                //Intent intent = new Intent (getApplicationContext(), MainActivity.class);
                 if (etNom.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
                             Toast.LENGTH_LONG).show();

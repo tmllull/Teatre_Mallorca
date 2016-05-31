@@ -91,21 +91,6 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                             })
                             .setIcon(R.drawable.discount)
                             .show();
-                    //finish();
-                    /*int total = entrades * preu;
-                    total -= (total*descompte)/100;
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("Total", total);
-                    bundle.putInt("Entrades", entrades);
-                    bundle.putString("Titol", tvTitol.getText().toString());
-                    bundle.putString("Data", data);
-                    bundle.putString("Butaques", butaques_seleccionades);
-                    bundle.putInt("Places", places_lliures);
-                    Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    finish();*/
-                    //return;
                 }
             }
         });
@@ -123,10 +108,6 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             dia = bundle.getString("Data");
         }
         tvTitol.setText(titol.toString());
-        /*Toast.makeText(getApplicationContext(), titol,
-                Toast.LENGTH_LONG).show();*/
-
-        //Cursor c = dbHelper.getObra(titol);
         Cursor c = dbHelper.getObraData(titol, dia);
         if (c.moveToFirst()) {
             places = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
@@ -135,9 +116,6 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
             data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
         }
-        /*Toast.makeText(getApplicationContext(), butaques_seleccionades,
-                Toast.LENGTH_LONG).show();*/
-
         String aux = "p";
         for (int i = 1; i < 41; ++i) {
             aux = Character.toString(places.charAt(i));
@@ -145,11 +123,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                 butaca[i].setBackgroundColor(0xffd3d3d3);
                 butaca[i].setOnClickListener(null);
             }
-
-            //else butaca[i].setBackgroundColor(0xffff0000);
         }
-        /*Toast.makeText(getApplicationContext(), butaques_seleccionades,
-                Toast.LENGTH_LONG).show();*/
     }
 
     void confirmar() {
@@ -177,14 +151,10 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v.getId() != R.id.bt_Comprar_ocupacio) {
-            //Button aux = (Button) findViewById(v.getId());
-            //aux.setBackgroundColor(0xffff0000);
             for (Integer i = 1; i < 41; i++) {
                 if (findViewById(v.getId()).equals(butaca[i])) {
                     if (butaca_clicada[i] == 0) { //Butaca no clicada
                         butaca_clicada[i] = 1;
-                    /*Toast.makeText(getApplicationContext(),
-                            i.toString(), Toast.LENGTH_LONG).show();*/
                         char[] aux2 = butaques_seleccionades.toCharArray();
                         aux2[i] = '0';
                         butaques_seleccionades = String.valueOf(aux2);
@@ -192,12 +162,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                         entrades++;
                         Button aux = (Button) findViewById(v.getId());
                         aux.setBackgroundColor(0xffff0000);
-                        //return;
-                        // }
                     } else {
                         butaca_clicada[i] = 0;
-                    /*Toast.makeText(getApplicationContext(),
-                            i.toString(), Toast.LENGTH_LONG).show();*/
                         char[] aux2 = butaques_seleccionades.toCharArray();
                         aux2[i] = '1';
                         butaques_seleccionades = String.valueOf(aux2);
@@ -208,15 +174,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                     }
                 }
             }
-            /*Toast.makeText(getApplicationContext(),
-                    butaques_seleccionades, Toast.LENGTH_LONG).show();*/
-            //dbHelper.updateOcupacio(tvTitol.toString(), butaques_seleccionades);
             return;
         } else {
-            /*Toast.makeText(getApplicationContext(),
-                    tvTitol.getText(), Toast.LENGTH_LONG).show();*/
-            //dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
-            //dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
             int total = entrades * preu;
             Bundle bundle = new Bundle();
             bundle.putInt("Total", total);
@@ -238,12 +197,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         Bundle bundle = new Bundle();
         bundle.putString("Titol", tvTitol.getText().toString());
         bundle.putString("Data", data);
-        //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
-        //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
-
         Intent intent = new Intent(getApplicationContext(), InfoObra.class);
         intent.putExtras(bundle);
-
         startActivity(intent);
         finish();
     }

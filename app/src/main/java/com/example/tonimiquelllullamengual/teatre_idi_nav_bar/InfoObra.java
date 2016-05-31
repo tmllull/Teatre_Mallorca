@@ -50,22 +50,16 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                     Bundle bundle = new Bundle();
                     bundle.putString("Titol", auxTitol);
                     bundle.putString("Data", data);
-                    //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
-                    //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
                     Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
-                    /*Toast.makeText(getApplicationContext(), aux,
-                            Toast.LENGTH_LONG).show();*/
                     finish();
                 }
             }
         });
 
         //String titol = "Cap obra Seleccionada";
-        String descripcio = "Descripcio: ";
         Integer preu, places, durada;
-        preu = places = 0;
         bundle = getIntent().getExtras();
         if (bundle != null) {
             titol = bundle.getString("Titol");
@@ -81,12 +75,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
             tvPreu.setText(preu.toString()+"€");
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-            //aux = places.toString();
             tvPlaces.setText(places.toString());
             durada = c.getInt(c.getColumnIndex(dbHelper.CN_DURADA));
             tvDurada.setText(durada.toString());
             tvData.setText(data);
-            //aux = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
 
             if (c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES)) > 0) places_lliures = true;
         }
@@ -100,13 +92,9 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                     Bundle bundle = new Bundle();
                     bundle.putString("Titol", auxTitol);
                     bundle.putString("Data", data);
-                    //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
-                    //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
                     Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
-                    /*Toast.makeText(getApplicationContext(), aux,
-                            Toast.LENGTH_LONG).show();*/
                     finish();
                 }
                 break;
@@ -151,20 +139,13 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                         .show();
                 return false;
             case R.id.menu_usuaris_obra:
-                //Toast.makeText(getApplicationContext(), "Falta implementar",
-                //        Toast.LENGTH_LONG).show();
                 Bundle bundle = new Bundle();
                 bundle.putString("Titol", auxTitol);
                 bundle.putString("Data", data);
-                //Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
-                //Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
                 Intent intent = new Intent(getApplicationContext(), LlistarUsuaris.class);
 
                 intent.putExtras(bundle);
                 startActivity(intent);
-                    /*Toast.makeText(getApplicationContext(), aux,
-                            Toast.LENGTH_LONG).show();*/
-                //finish();
                 return false;
             default:
                 return false;

@@ -50,10 +50,6 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
-                //Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                //String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                //Obra obra = new Obra(nom, places, dia);
-                //Obra obra = new Obra(nom);
                 obres.add(nom);
             } while (c.moveToNext());
         }
@@ -103,7 +99,6 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
                         })
                         .setIcon(R.drawable.trash)
                         .show();
-                //finish();
                 break;
             default:
                 break;

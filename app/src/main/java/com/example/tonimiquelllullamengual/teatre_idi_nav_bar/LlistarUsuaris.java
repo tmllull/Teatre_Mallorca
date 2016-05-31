@@ -31,19 +31,12 @@ public class LlistarUsuaris extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
         List<String> llista = new ArrayList<String>();
-        //Cursor c = dbHelper.getUsuaris(titol, data);
-        //String[] usuaris = new String[1000];
         String[] usuaris = dbHelper.consultarUsuaris(titol, data);
-        /*if (c.moveToFirst()) {
-            String s_usuaris = c.getString(c.getColumnIndex(dbHelper.CN_COMPRADORS));
-            usuaris = s_usuaris.split("-");
-        }*/
         if (usuaris != null) {
             for (int i = 0; i < usuaris.length; ++i) {
                 if (!usuaris[i].isEmpty())
                     llista.add(usuaris[i]);
             }
-
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     this, android.R.layout.simple_list_item_1, usuaris);
             lvUsuaris.setAdapter(adapter);

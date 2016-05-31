@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 public class LlistarObres extends AppCompatActivity {
 
-    //ListView obres;
-
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
@@ -34,7 +32,6 @@ public class LlistarObres extends AppCompatActivity {
     public void carregar_view() {
         dbHelper = new DbHelper(this);
         Cursor c = dbHelper.getAllObresDistinct();
-        //Cursor c = dbHelper.getAllObres();
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
@@ -42,7 +39,6 @@ public class LlistarObres extends AppCompatActivity {
                 String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
                 Integer sessions = dbHelper.comptarSessions(nom);
                 Obra obra = new Obra(nom, places, dia,sessions.toString());
-                //Obra obra = new Obra(nom);
                 obres.add(obra);
             } while (c.moveToNext());
         }

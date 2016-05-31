@@ -22,8 +22,6 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
         obres = new ArrayList<>();
     }
 
-    Context mContext;
-
     @Override
     public MyCustomAdapterObres.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //Instancia un layout XML en la correspondiente vista.
@@ -75,7 +73,6 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
             mTextView = itemView.toString();
             this.v = itemView;
             this.nom = (TextView) itemView.findViewById(R.id.tv_nom_row);
-            //this.places = (TextView) itemView.findViewById(R.id.tv_places_row);
             this.sessions = (TextView) itemView.findViewById(R.id.tv_sessions_row);
         }
 
@@ -89,15 +86,10 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
 
             Bundle bundle = new Bundle();
             bundle.putString("Titol", obres.get(getAdapterPosition()).getNom());
-            //Intent intent = new Intent (v.getContext(), InfoObra.class);
             Intent intent = new Intent (v.getContext(), LlistarDies.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
             ((Activity)v.getContext()).finish();
-            //return;
-            /*Toast.makeText(v.getContext(), getAdapterPosition() + " " +
-                    obres.get(getAdapterPosition()).getNom(),
-                    Toast.LENGTH_LONG).show();*/
         }
     }
 

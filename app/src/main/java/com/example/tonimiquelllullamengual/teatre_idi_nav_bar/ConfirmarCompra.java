@@ -67,8 +67,6 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
             }
             Toast.makeText(getApplicationContext(), "La seva compra s'ha realitzat correctament",
                     Toast.LENGTH_LONG).show();
-            //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            //startActivity(intent);
             finish();
         } else {
             Toast.makeText(getApplicationContext(), "Has d'emplenar el mail com a mínim",
@@ -82,9 +80,6 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.bt_confirmar_compra:
                 confirmar_compra();
-                //Intent intent = new Intent (getApplicationContext(), MainActivity.class);
-                //startActivity(intent);
-                //finish();
                 break;
             default:
                 break;

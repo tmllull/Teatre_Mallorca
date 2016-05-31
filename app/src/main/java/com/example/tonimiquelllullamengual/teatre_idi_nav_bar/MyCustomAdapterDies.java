@@ -22,8 +22,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
         dies = new ArrayList<>();
     }
 
-    Context mContext;
-
     @Override
     public MyCustomAdapterDies.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //Instancia un layout XML en la correspondiente vista.
@@ -74,7 +72,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             itemView.setOnClickListener(this);
             mTextView = itemView.toString();
             this.v = itemView;
-            //this.nom = (TextView) itemView.findViewById(R.id.tv_titol_dies);
             this.places = (TextView) itemView.findViewById(R.id.tv_places_llista_dies);
             this.dia = (TextView) itemView.findViewById(R.id.tv_dia_dies);
         }
@@ -91,14 +88,9 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
             bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
             Intent intent = new Intent (v.getContext(), InfoObra.class);
-            //Intent intent = new Intent (v.getContext(), OcupacioButaques.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
             ((Activity)v.getContext()).finish();
-            //return;
-            /*Toast.makeText(v.getContext(), getAdapterPosition() + " " +
-                    dies.get(getAdapterPosition()).getNom(),
-                    Toast.LENGTH_LONG).show();*/
         }
     }
 
