@@ -29,7 +29,8 @@ public class LlistarDies extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llistar_dies);
         filtre = "No";
-        carregar_view(filtre);
+        //carregar_view(filtre);
+        carregar_view();
 
     }
 
@@ -53,6 +54,46 @@ public class LlistarDies extends AppCompatActivity {
                 else {
                     if (filtre.equals(dia_setmana)) dia = new Dia(nom, places, data, dia_setmana);
                 }
+                dies.add(dia);
+            } while (c.moveToNext());
+        }
+
+        //findViewById del layout activity_main
+        mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);
+
+        //LinearLayoutManager necesita el contexto de la Activity.
+        //El LayoutManager se encarga de posicionar los items dentro del recyclerview
+        //Y de definir la politica de reciclaje de los items no visibles.
+        mLinearLayout = new LinearLayoutManager(this);
+
+        //Asignamos el LinearLayoutManager al recycler:
+        mRecyclerView.setLayoutManager(mLinearLayout);
+
+
+        //El adapter se encarga de  adaptar un objeto definido en el c�digo a una vista en xml
+        //seg�n la estructura definida.
+        //Asignamos nuestro custom Adapter
+        adapter = new MyCustomAdapterDies();
+        mRecyclerView.setAdapter(adapter);
+        adapter.setDataSet(dies);
+
+    }
+
+    public void carregar_view() {
+        dbHelper = new DbHelper(this);
+
+        bundle = getIntent().getExtras();
+        String titol = bundle.getString("Titol");
+        titolAux = titol;
+        Dia dia = new Dia();
+        Cursor c = dbHelper.getAllObresData(titol);
+        if (c.moveToFirst()) {
+            do {
+                String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
+                Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                String dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
+                dia = new Dia(nom, places, data, dia_setmana);
                 dies.add(dia);
             } while (c.moveToNext());
         }

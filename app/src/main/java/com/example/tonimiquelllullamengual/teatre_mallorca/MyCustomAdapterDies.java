@@ -38,14 +38,21 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
             data = dies.get(position).getDia().toString();
             String dia_setmana = dies.get(position).getDiaSetmana().toString();
-            if (dia_setmana.equals("Mon")) dia_setmana = "Dilluns";
-            else if (dia_setmana.equals("Tue")) dia_setmana = "Dimarts";
-            else if (dia_setmana.equals("Wed")) dia_setmana = "Dimecres";
-            else if (dia_setmana.equals("Thu")) dia_setmana = "Dijous";
-            else if (dia_setmana.equals("Fri")) dia_setmana = "Divendres";
-            else if (dia_setmana.equals("Sat")) dia_setmana = "Dissabte";
-            else if (dia_setmana.equals("Sun")) dia_setmana = "Diumenge";
-            else return;
+            if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun.")) dia_setmana = "Dilluns";
+            else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
+                dia_setmana = "Dimarts";
+            else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mie."))
+                dia_setmana = "Dimecres";
+            else if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue."))
+                dia_setmana = "Dijous";
+            else if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie."))
+                dia_setmana = "Divendres";
+            else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sab."))
+                dia_setmana = "Dissabte";
+            else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
+                dia_setmana = "Diumenge";
+            //else return;
+            //adapterViewHolder.dia.setText("Hola");
             adapterViewHolder.dia.setText(dia_setmana+", "+data);
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
