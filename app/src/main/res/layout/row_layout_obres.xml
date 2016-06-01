@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/tv_nom_row"
-                    android:textSize="25dp" />
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -46,14 +46,14 @@
                     android:layout_height="wrap_content"
                     android:text="Sessions disponibles:"
                     android:id="@+id/textView22"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/tv_sessions_row"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 

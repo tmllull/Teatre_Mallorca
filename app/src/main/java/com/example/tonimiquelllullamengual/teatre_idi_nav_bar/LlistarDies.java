@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class LlistarDies extends AppCompatActivity {
@@ -16,8 +18,8 @@ public class LlistarDies extends AppCompatActivity {
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    boolean ordre = false;
-    String titolAux;
+    String filtre;
+    String titolAux, dia_setmana;
 
     Bundle bundle;
 
@@ -28,23 +30,31 @@ public class LlistarDies extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llistar_dies);
-        carregar_view();
+        filtre = "No";
+        carregar_view(filtre);
 
     }
 
-    public void carregar_view() {
+    public void carregar_view(String filtre) {
         dbHelper = new DbHelper(this);
 
         bundle = getIntent().getExtras();
         String titol = bundle.getString("Titol");
         titolAux = titol;
+        Dia dia = new Dia();
         Cursor c = dbHelper.getAllObresData(titol);
         if (c.moveToFirst()) {
             do {
                 String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                Dia dia = new Dia(nom, places, data);
+                String dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
+                if (filtre.equals("No")) {
+                    dia = new Dia(nom, places, data, dia_setmana);
+                }
+                else {
+                    if (filtre.equals(dia_setmana)) dia = new Dia(nom, places, data, dia_setmana);
+                }
                 dies.add(dia);
             } while (c.moveToNext());
         }
@@ -70,15 +80,15 @@ public class LlistarDies extends AppCompatActivity {
 
     }
 
-    public void updateData(boolean ordre) {
+    public void updateData(String filtre) {
         dies = new ArrayList<>();
-        carregar_view();
+        carregar_view(filtre);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_llista, menu);
+        //getMenuInflater().inflate(R.menu.menu_llista, menu);
         return true;
     }
 
@@ -90,13 +100,33 @@ public class LlistarDies extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.menu_ordenar_llista_alf:
-                ordre = false;
-                updateData(ordre);
+            case R.id.menu_seleccionar_dia:
+                //ordre = false;
+                //updateData(ordre);
                 return false;
-            case R.id.menu_ordenar_llista_data:
-                ordre = true;
-                updateData(ordre);
+            case R.id.dilluns:
+                updateData("Mon");
+                return false;
+            case R.id.dimarts:
+                updateData("Tue");
+                return false;
+            case R.id.dimecres:
+                updateData("Wed");
+                return false;
+            case R.id.dijous:
+                updateData("Thu");
+                return false;
+            case R.id.divendres:
+                updateData("Fri");
+                return false;
+            case R.id.dissabte:
+                updateData("Sat");
+                return false;
+            case R.id.diumenge:
+                updateData("Sun");
+                return false;
+            case R.id.menu_mostrar_tot:
+                updateData("No");
                 return false;
             default:
                 return false;

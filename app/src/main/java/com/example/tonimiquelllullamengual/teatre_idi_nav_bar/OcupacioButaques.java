@@ -24,7 +24,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     DbHelper dbHelper;
     TextView tvTitol;
     Button btComprar;
-    String butaques_seleccionades, data;
+    String butaques_seleccionades, data, dataDiaSetmana;
     Integer places_lliures, preu, entrades;
     ImageView ivComprar;
     Integer descompte;
@@ -75,15 +75,15 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                 else {
                     new AlertDialog.Builder(v.getContext())
                             .setTitle("Aplicar descompte")
-                            .setMessage("Si tens el carnet Jove o tarjeta universitària " +
+                            .setMessage("Si tens el carnet Jove o universitari " +
                                     "tens un 30% de descompte")
-                            .setPositiveButton("Sí, en tinc", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     descompte = 20;
                                     confirmar();
                                 }
                             })
-                            .setNegativeButton("No tinc cap carnet", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("No tinc cap carnet   ", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     confirmar();
                                     // do nothing
@@ -103,9 +103,11 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         bundle = getIntent().getExtras();
         String titol = "Titol inicial";
         String dia = "Dia sense determinar";
+        dataDiaSetmana = "provaaaaaa";
         if (bundle != null) {
             titol = bundle.getString("Titol");
             dia = bundle.getString("Data");
+            dataDiaSetmana = bundle.getString("DiaSetmana");
         }
         tvTitol.setText(titol.toString());
         Cursor c = dbHelper.getObraData(titol, dia);
@@ -136,6 +138,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         bundle.putString("Data", data);
         bundle.putString("Butaques", butaques_seleccionades);
         bundle.putInt("Places", places_lliures);
+        bundle.putString("DiaSetmana", dataDiaSetmana);
         Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -144,7 +147,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_ocupacio, menu);
+        //getMenuInflater().inflate(R.menu.menu_ocupacio, menu);
         return true;
     }
 
@@ -176,7 +179,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             }
             return;
         } else {
-            int total = entrades * preu;
+            /*int total = entrades * preu;
             Bundle bundle = new Bundle();
             bundle.putInt("Total", total);
             bundle.putInt("Entrades", entrades);
@@ -184,11 +187,12 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             bundle.putString("Data", data);
             bundle.putString("Butaques", butaques_seleccionades);
             bundle.putInt("Places", places_lliures);
+            bundle.putString("DiaSetmana", dataDiaSetmana);
             Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
-            return;
+            return;*/
         }
     }
 
@@ -197,6 +201,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         Bundle bundle = new Bundle();
         bundle.putString("Titol", tvTitol.getText().toString());
         bundle.putString("Data", data);
+        bundle.putString("DiaSetmana", dataDiaSetmana);
         Intent intent = new Intent(getApplicationContext(), InfoObra.class);
         intent.putExtras(bundle);
         startActivity(intent);

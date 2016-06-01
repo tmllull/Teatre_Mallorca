@@ -24,14 +24,15 @@
                     android:layout_height="wrap_content"
                     android:text="Dia:"
                     android:id="@+id/textView40"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/tv_dia_dies"
-                    android:textSize="25dp" />
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -46,13 +47,13 @@
                     android:layout_height="wrap_content"
                     android:text="Places lliures:"
                     android:id="@+id/textView26"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_places_llista_dies"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
             </LinearLayout>
 
         </LinearLayout>

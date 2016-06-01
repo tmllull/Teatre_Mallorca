@@ -2,14 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_ordenar_llista_alf"
+        android:id="@+id/menu_seleccionar_dia"
         android:orderInCategory="100"
-        android:title="Ord. Alfabetic"
-        app:showAsAction="never" />
+        android:title="Filtrar per dia de la setmana"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/dilluns"
+                android:title="Dilluns" />
+            <item
+                android:id="@+id/dimarts"
+                android:title="Dimarts" />
+            <item
+                android:id="@+id/dimecres"
+                android:title="Dimecres" />
+            <item
+                android:id="@+id/dijous"
+                android:title="Dijous" />
+            <item
+                android:id="@+id/divendres"
+                android:title="Divendres" />
+            <item
+                android:id="@+id/dissabte"
+                android:title="Dissabte" />
+            <item
+                android:id="@+id/diumenge"
+                android:title="Diumenge" />
+        </menu>
+    </item>
     <item
-        android:id="@+id/menu_ordenar_llista_data"
+        android:id="@+id/menu_mostrar_tot"
         android:orderInCategory="100"
-        android:title="Ord. Data"
+        android:title="Mostrar tot"
         app:showAsAction="never" />
 
 </menu>

@@ -72,7 +72,7 @@ public class LlistarObres extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_llista, menu);
+        //getMenuInflater().inflate(R.menu.menu_llista, menu);
         return true;
     }
 
@@ -84,13 +84,13 @@ public class LlistarObres extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.menu_ordenar_llista_alf:
-                ordre = false;
-                updateData(ordre);
+            case R.id.menu_seleccionar_dia:
+                //ordre = false;
+                //updateData(ordre);
                 return false;
-            case R.id.menu_ordenar_llista_data:
-                ordre = true;
-                updateData(ordre);
+            case R.id.menu_mostrar_tot:
+                //ordre = true;
+                //updateData(ordre);
                 return false;
             default:
                 return false;

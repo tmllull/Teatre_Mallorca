@@ -5,13 +5,14 @@ package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
  */
 public class Dia {
 
-    private String nom, dia;
+    private String nom, dia, dia_setmana;
     private Integer places;
 
-    Dia(String nom, Integer places, String dia) {
+    Dia(String nom, Integer places, String dia, String dia_setmana) {
         this.nom = nom;
         this.places = places;
         this.dia = dia;
+        this.dia_setmana = dia_setmana;
     }
 
     Dia(String nom) {
@@ -27,4 +28,6 @@ public class Dia {
     public String getDia() {return dia;}
 
     public void setNom(String nom){this.nom = nom;}
+
+    public String getDiaSetmana() {return dia_setmana;}
 }

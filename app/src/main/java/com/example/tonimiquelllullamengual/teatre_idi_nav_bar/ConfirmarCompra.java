@@ -20,7 +20,7 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
 
     DbHelper dbHelper;
 
-    String data, butaques_seleccionades, titol;
+    String data, butaques_seleccionades, titol, dataDiaSetmana;
     Integer places_lliures;
 
     @Override
@@ -42,9 +42,10 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         Integer total, entrades;
         bundle = getIntent().getExtras();
         if (bundle != null) {
+            dataDiaSetmana = bundle.getString("DiaSetmana");
             tvTitol.setText(bundle.getString("Titol"));
             titol = bundle.getString("Titol");
-            tvData.setText(bundle.getString("Data"));
+            tvData.setText(dataDiaSetmana);
             entrades = bundle.getInt("Entrades");
             tvEntrades.setText(String.valueOf(entrades));
             total = bundle.getInt("Total");
@@ -66,11 +67,11 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
                 dbHelper.updateCompradors(tvTitol.getText().toString(), data, usuari);
             }
             Toast.makeText(getApplicationContext(), "La seva compra s'ha realitzat correctament",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
             finish();
         } else {
             Toast.makeText(getApplicationContext(), "Has d'emplenar el mail com a mínim",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
             return;
         }
     }

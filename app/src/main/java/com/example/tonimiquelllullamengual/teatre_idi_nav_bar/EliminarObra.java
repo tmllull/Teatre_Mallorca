@@ -83,12 +83,14 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
                 final String obra_sel = spinner_obres.getSelectedItem().toString();
                 new AlertDialog.Builder(this)
                         .setTitle("Eliminar obra")
-                        .setMessage("Estàs segur que vols eliminar l'obra?")
+                        .setMessage("Aquesta acció no es pot desfer. " +
+                                "Estàs segur que vols eliminar l'obra i totes " +
+                                "les seves funcions?")
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleObra(obra_sel);
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
+                                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                //startActivity(intent);
                                 finish();
                             }
                         })

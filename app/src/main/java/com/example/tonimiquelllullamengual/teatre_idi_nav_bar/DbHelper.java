@@ -7,6 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -34,6 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CN_PLACES_LLIURES = "places_lliures";
     public static final String CN_MILIS = "milis";
     public static final String CN_COMPRADORS = "compradors";
+    public static final String CN_DIA_SETMANA = "dia_setmana";
 
 
     public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
@@ -46,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_PLACES_LLIURES + " INTEGER, " +
             CN_MILIS + " TEXT, " +
             CN_COMPRADORS + " TEXT, " +
+            CN_DIA_SETMANA + " TEXT, " +
             "PRIMARY KEY (nom,data));";
 
     public DbHelper(Context context) {
@@ -64,7 +67,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getObra (String obra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {obra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -82,7 +85,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -100,7 +103,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObresDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {CN_NOM};
         Cursor c = db.query(true,
                 OBRA_TABLE,          // The table to query
@@ -120,7 +123,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObresData(String nom) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {nom};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -138,7 +141,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getObraData(String nom, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {nom, data};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
@@ -187,12 +190,30 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getUsuaris(String nom, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS};
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {nom, data};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
                 "nom=?" + " and " + "data=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
+                null,               // don't group the rows
+                null,               // don't filter by row groups
+                null                // The sort order
+        );
+        return c;
+    }
+
+    //Obtenir una funció d'una obra a una data determinada
+    public Cursor getObresDiaSetmana(String nom, String dia) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
+        String[] where = {nom, dia};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                columns,            // The columns to return
+                "nom=?" + " and " + "dia_setmana=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -266,8 +287,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public void initData() {
         String usuaris = "^";
         String usuari = "usuari@prova.com";
-        String dataObra = "03-05-16";
+        String dataObra = "03/05/16";
         String places = "-";
+        String dia_setmana = "";
         int p = 0;
         for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
@@ -282,7 +304,7 @@ public class DbHelper extends SQLiteOpenHelper {
             }
         }
 
-        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
         java.util.Date d = null;
         try {
             d = f.parse(dataObra);
@@ -290,9 +312,30 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         long milliseconds = d.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("c");
+        dia_setmana = formatter.format(new Date(milliseconds));
         ContentValues values = new ContentValues();
         values.put(this.CN_NOM, "El rey leon");
-        values.put(this.CN_DESCRIPCIO, "Mor un lleó. Fin");
+        values.put(this.CN_DESCRIPCIO, "Gracias al genio, visión artística y creativa " +
+                "de su directora, Julie Taymor, el género musical da un paso adelante. " +
+                "Con su sorprendente y colorida puesta en escena, EL REY LEÓN transporta " +
+                "al espectador al exotismo africano, con evocadoras músicas, " +
+                "constituyendo un nuevo hito en el mundo del espectáculo, un punto " +
+                "de inflexión en el diseño artístico, y en general, en el género " +
+                "musical, que a nadie deja indiferente. Un genial equipo creativo " +
+                "para un musical inolvidable.\n" +
+                "\n" +
+                "EL REY LEÓN es un musical excepcional, fruto de la unión de " +
+                "reconocidos talentos musicales y teatrales a nivel mundial y " +
+                "de la fusión de las más sofisticadas disciplinas de las artes " +
+                "escénicas africanas, occidentales y asiáticas. \n\n" +
+                "Un espectáculo único cargado de valores familiares, que demuestra " +
+                "la vinculación de cada uno de nosotros con nuestras raíces. " +
+                "EL REY LEÓN hace que el espectador recapacite sobre la importancia " +
+                "de cada una de nuestras acciones y el efecto que causan en nuestro " +
+                "entorno, así como la importancia de sentir que pertenecemos a un " +
+                "grupo, y como todo ello conforma nuestro destino. Además un canto " +
+                "al respeto y al amor por la naturaleza.");
         values.put(this.CN_DURADA, String.valueOf(120));
         values.put(this.CN_PREU, String.valueOf(60));
         values.put(this.CN_DATA, dataObra);
@@ -300,6 +343,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(this.CN_MILIS, milliseconds);
         values.put(this.CN_PLACES_LLIURES, p);
         values.put(this.CN_COMPRADORS, usuaris);
+        values.put(this.CN_DIA_SETMANA, dia_setmana);
 
         this.newObra(values, this.OBRA_TABLE);
 
@@ -318,8 +362,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 p++;
             }
         }
-        dataObra = "03-05-16";
-        f = new SimpleDateFormat("dd-MM-yy");
+        dataObra = "03/05/16";
         d = null;
         try {
             d = f.parse(dataObra);
@@ -327,9 +370,26 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         milliseconds = d.getTime();
+        dia_setmana = formatter.format(new Date(milliseconds));
         values = new ContentValues();
         values.put(this.CN_NOM, "Mamma Mia");
-        values.put(this.CN_DESCRIPCIO, "Cuando serás mia");
+        values.put(this.CN_DESCRIPCIO, "En una idíl•lica illa grega dies abans de " +
+                "contreure matrimoni, una jove decideix convidar al seu pare al casament.\n" +
+                "Però, qui serà realment? Quin dels tres homes que van passar per " +
+                "la vida de la seva mare ja fa 20 anys hauria de portar-la a l'altar? \n" +
+                "\n" +
+                "Així comença Mamma Mia! La deliciosa comèdia musical que, construïda " +
+                "al voltant de les enganxoses i inoblidables cançons d’ABBA, ha " +
+                "aconseguit que 54 milions d'espectadors a tot el món s'hagin enamorat " +
+                "dels seus personatges, de la seva música, i d'aquesta encantadora " +
+                "història d'amor, d'humor i d'amistat. \n" +
+                "\n" +
+                "Una invitació a cantar, a ballar i a lliurar-se a l'espectacle des " +
+                "del mateix instant en què s'aixeca el teló, gràcies a aquesta injecció " +
+                "d'energia positiva que torna a Espanya per fer-nos viatjar de nou al " +
+                "costat més optimista i reconfortant de la vida.\n" +
+                "\n" +
+                "Et resistiràs?");
         values.put(this.CN_DURADA, String.valueOf(90));
         values.put(this.CN_PREU, String.valueOf(45));
         values.put(this.CN_DATA, dataObra);
@@ -337,6 +397,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(this.CN_MILIS, milliseconds);
         values.put(this.CN_BUTAQUES, places.toString());
         values.put(this.CN_COMPRADORS, usuaris);
+        values.put(this.CN_DIA_SETMANA, dia_setmana);
 
 
         this.newObra(values, this.OBRA_TABLE);
@@ -356,8 +417,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 p++;
             }
         }
-        dataObra = "05-05-16";
-        f = new SimpleDateFormat("dd-MM-yy");
+        dataObra = "05/05/16";
+        f = new SimpleDateFormat("dd/MM/yy");
         d = null;
         try {
             d = f.parse(dataObra);
@@ -365,9 +426,24 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         milliseconds = d.getTime();
+        dia_setmana = formatter.format(new Date(milliseconds));
         values = new ContentValues();
         values.put(this.CN_NOM, "Queen");
-        values.put(this.CN_DESCRIPCIO, "Freddy for president");
+        values.put(this.CN_DESCRIPCIO, "La formación original con Brian May y Roger " +
+                "Taylor se une al cantante Adam Lambert para hacernos revivir todo el " +
+                "sonido y espectacularidad de uno de los grupos de nuestra vida.\n" +
+                "Queen + Adam Lambert hicieron la mayor parte de su gira por el " +
+                "hemisferio sur y reservaron una gira de seis fechas en tres países " +
+                "latinoamericanos: Brasil, Argentina y Chile, tocando en seis estadios. " +
+                "La gira agotó las entradas en un tiempo récord y Queen – esta vez liderado " +
+                "por Adam Lambert- hicieron un retorno triunfal al continente, el cual " +
+                "en los ochenta les proporcionó el concierto más multitudinario jamás " +
+                "logrado: sus dos actuaciones en el Rock in Río de 1985 tuvieron una " +
+                "audiencia total de más de medio millón de personas, la audiencia " +
+                "pagada más grande de la historia.\n" +
+                "\n" +
+                "No te lo pierdas y consigue las entradas para el concierto Queen + " +
+                "Adam Lambert. ");
         values.put(this.CN_DURADA, String.valueOf(120));
         values.put(this.CN_PREU, String.valueOf(60));
         values.put(this.CN_DATA, dataObra);
@@ -375,6 +451,8 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(this.CN_MILIS, milliseconds);
         values.put(this.CN_PLACES_LLIURES, p);
         values.put(this.CN_COMPRADORS, usuaris);
+        values.put(this.CN_DIA_SETMANA, dia_setmana);
+
 
         this.newObra(values, this.OBRA_TABLE);
 
@@ -393,8 +471,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 p++;
             }
         }
-        dataObra = "03-05-16";
-        f = new SimpleDateFormat("dd-MM-yy");
+        dataObra = "03/05/16";
+        f = new SimpleDateFormat("dd/MM/yy");
         d = null;
         try {
             d = f.parse(dataObra);
@@ -402,9 +480,24 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         milliseconds = d.getTime();
+        dia_setmana = formatter.format(new Date(milliseconds));
         values = new ContentValues();
         values.put(this.CN_NOM, "Queen");
-        values.put(this.CN_DESCRIPCIO, "Freddy for president");
+        values.put(this.CN_DESCRIPCIO, "La formación original con Brian May y Roger " +
+                "Taylor se une al cantante Adam Lambert para hacernos revivir todo el " +
+                "sonido y espectacularidad de uno de los grupos de nuestra vida.\n" +
+                "Queen + Adam Lambert hicieron la mayor parte de su gira por el " +
+                "hemisferio sur y reservaron una gira de seis fechas en tres países " +
+                "latinoamericanos: Brasil, Argentina y Chile, tocando en seis estadios. " +
+                "La gira agotó las entradas en un tiempo récord y Queen – esta vez liderado " +
+                "por Adam Lambert- hicieron un retorno triunfal al continente, el cual " +
+                "en los ochenta les proporcionó el concierto más multitudinario jamás " +
+                "logrado: sus dos actuaciones en el Rock in Río de 1985 tuvieron una " +
+                "audiencia total de más de medio millón de personas, la audiencia " +
+                "pagada más grande de la historia.\n" +
+                "\n" +
+                "No te lo pierdas y consigue las entradas para el concierto Queen + " +
+                "Adam Lambert. ");
         values.put(this.CN_DURADA, String.valueOf(120));
         values.put(this.CN_PREU, String.valueOf(60));
         values.put(this.CN_DATA, dataObra);
@@ -412,6 +505,8 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(this.CN_MILIS, milliseconds);
         values.put(this.CN_PLACES_LLIURES, p);
         values.put(this.CN_COMPRADORS, usuaris);
+        values.put(this.CN_DIA_SETMANA, dia_setmana);
+
 
         this.newObra(values, this.OBRA_TABLE);
     }

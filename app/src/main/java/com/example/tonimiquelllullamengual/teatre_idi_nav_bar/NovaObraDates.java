@@ -49,7 +49,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
         tvDia2.setOnClickListener(this);
         btGuardar.setOnClickListener(this);
 
-        formatDate = new SimpleDateFormat("dd-MM-yy");
+        formatDate = new SimpleDateFormat("dd/MM/yy");
 
         dates = new ArrayList<>();
 
@@ -163,13 +163,14 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
     void calcul_dies(int dia_from_val, int dia_to_val) {
         for (int i = dia_from_val; i <= dia_to_val; ++i) {
-            String dataObra = i + "-" + mesObra + "-" + anyObra;
+            String dataObra = i + "/" + mesObra + "/" + anyObra;
             String places = "-";
+            String dia_setmana = "";
             for (int j = 1; j < 41; ++j) {
                 //Plaça lliure indicat amb un 1
                 places = places + "1";
             }
-            SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
             Date d = null;
             try {
                 d = f.parse(dataObra);
@@ -177,6 +178,8 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 e.printStackTrace();
             }
             long milliseconds = d.getTime();
+            SimpleDateFormat formatter = new SimpleDateFormat("c");
+            dia_setmana = formatter.format(new java.sql.Date(milliseconds));
             ContentValues values = new ContentValues();
             values.put(dbHelper.CN_NOM, bundle.getString("Nom"));
             values.put(dbHelper.CN_DESCRIPCIO, bundle.getString("Descripcio"));
@@ -187,6 +190,8 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
             values.put(dbHelper.CN_PLACES_LLIURES, 40);
             values.put(dbHelper.CN_COMPRADORS, "^");
+            values.put(dbHelper.CN_DIA_SETMANA, dia_setmana);
+
 
             dbHelper.newObra(values, dbHelper.OBRA_TABLE);
             ++cont;
@@ -207,8 +212,8 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 if (ok) {
                     Toast.makeText(getApplicationContext(), "S'han afegit "+String.valueOf(cont)+" dates",
                             Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    //startActivity(intent);
                     finish();
                 }
                 break;

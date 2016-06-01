@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.tonimiquelllullamengual.teatre_idi_nav_bar.EliminarObra">
+    tools:context="com.example.tonimiquelllullamengual.teatre_idi_nav_bar.EliminarObra"
+    android:background="#ffffff">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,7 +17,10 @@
         android:text="Escull de la llista quina obra vols eliminar"
         android:id="@+id/textView9"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -24,7 +28,9 @@
         android:id="@+id/sp_obres"
         android:layout_below="@+id/textView9"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp" />
+        android:layout_marginTop="57dp"
+        android:spinnerMode="dialog"
+        android:scrollIndicators="right" />
 
     <Button
         android:layout_width="wrap_content"

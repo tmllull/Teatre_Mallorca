@@ -11,7 +11,8 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.tonimiquelllullamengual.teatre_idi_nav_bar.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:background="#ffffff">
 
     <TableRow
         android:layout_width="match_parent"

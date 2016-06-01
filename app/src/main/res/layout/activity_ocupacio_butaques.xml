@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".OcupacioButaques"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
 
 
     <LinearLayout
@@ -32,7 +33,7 @@
                 android:layout_span="4"
                 android:gravity="center_horizontal"
                 android:textSize="40dp"
-                android:background="#a5a5a5" />
+                android:background="#ebebeb" />
         </LinearLayout>
 
         <LinearLayout

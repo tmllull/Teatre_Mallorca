@@ -1,11 +1,13 @@
 package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -134,10 +136,27 @@ public class MainActivity extends AppCompatActivity
             dbHelper.initData();
         } else if (id == R.id.delete_data) {
             dbHelper.resetAll();
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_help) {
+            Intent intent2 = new Intent(getApplicationContext(), Help.class);
+            startActivity(intent2);
+        } else if (id == R.id.nav_about) {
+            new AlertDialog.Builder(this)
+                    .setTitle("About")
+                    .setMessage("Teatre Mallorca\n" +
+                            "Autor: Toni Miquel Llull\n" +
+                            "Verssió: 0.1\n" +
+                            "toni.miquel.llull@est.fib.upc.edu")
+                    .setPositiveButton("Tancar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setNegativeButton("", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(R.drawable.info)
+                    .show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
