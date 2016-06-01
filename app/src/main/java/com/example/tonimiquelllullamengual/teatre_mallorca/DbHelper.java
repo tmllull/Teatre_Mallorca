@@ -1,9 +1,8 @@
-package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
+package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 

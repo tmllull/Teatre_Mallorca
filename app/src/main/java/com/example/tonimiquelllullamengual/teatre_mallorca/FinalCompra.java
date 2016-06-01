@@ -1,6 +1,5 @@
-package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
+package com.example.tonimiquelllullamengual.teatre_mallorca;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;

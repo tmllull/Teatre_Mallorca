@@ -1,8 +1,7 @@
-package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
+package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +25,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
     private Bundle bundle;
     private DbHelper dbHelper;
     private String from, to, any_from, any_to, mes_from, mes_to, dia_from, dia_to,
-    diaObra, mesObra, anyObra;
+            diaObra, mesObra, anyObra;
     private int cont;
     private Integer dia_from_val, mes_from_val, any_from_val, dia_to_val, mes_to_val, any_to_val;
     private Boolean ok = true;
@@ -113,18 +112,16 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
         if (any_from_val != any_to_val) {
             Toast.makeText(getApplicationContext(), "Afegir obres entre diferents anys no està " +
-                    "implementat",
+                            "implementat",
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
-        }
-        else if (mes_from_val > mes_to_val) {
+        } else if (mes_from_val > mes_to_val) {
             Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
-        }
-        else if (mes_to_val > mes_from_val) {
+        } else if (mes_to_val > mes_from_val) {
             while (mes_to_val > mes_from_val) {
                 mesObra = mes_from_val.toString();
                 if (mes_from_val == 1 || mes_from_val == 3 || mes_from_val == 5 ||
@@ -133,13 +130,11 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                     calcul_dies(dia_from_val, 31);
                     dia_from_val = 1;
                     mes_from_val++;
-                }
-                else if (mes_from_val == 2) {
+                } else if (mes_from_val == 2) {
                     calcul_dies(dia_from_val, 28);
                     dia_from_val = 1;
                     mes_from_val++;
-                }
-                else {
+                } else {
                     calcul_dies(dia_from_val, 30);
                     dia_from_val = 1;
                     mes_from_val++;
@@ -148,12 +143,10 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             }
             calcul_dies(dia_from_val, dia_to_val);
             ok = true;
-        }
-        else if (dia_to_val >= dia_from_val) {
+        } else if (dia_to_val >= dia_from_val) {
             calcul_dies(dia_from_val, dia_to_val);
             ok = true;
-        }
-        else {
+        } else {
             Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
                     Toast.LENGTH_LONG).show();
             ok = false;
@@ -208,12 +201,17 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 pdDia2.show();
                 break;
             case R.id.bt_guardar_dates_obra:
+                if (tvDia1.getText().toString().equals("Seleccionar data") ||
+                        tvDia2.getText().toString().equals("Seleccionar data")) {
+                    Toast.makeText(getApplicationContext(), "Has de seleccionar data d'inici" +
+                                    " i data de fi",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 guardarObra();
                 if (ok) {
-                    Toast.makeText(getApplicationContext(), "S'han afegit "+String.valueOf(cont)+" dates",
-                            Toast.LENGTH_LONG).show();
-                    //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    //startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
+                            Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 break;

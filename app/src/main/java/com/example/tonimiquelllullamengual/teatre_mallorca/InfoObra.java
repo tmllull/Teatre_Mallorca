@@ -1,4 +1,4 @@
-package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
+package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,9 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 public class InfoObra extends AppCompatActivity implements View.OnClickListener {
 

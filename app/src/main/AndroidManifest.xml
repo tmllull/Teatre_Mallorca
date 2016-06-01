@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tonimiquelllullamengual.teatre_idi_nav_bar">
+    package="com.example.tonimiquelllullamengual.teatre_mallorca">
 
     <application
         android:allowBackup="true"
@@ -9,8 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="Teatre"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.MainActivity"
+            android:label="Teatre Mallorca"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,36 +19,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OcupacioButaques"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.OcupacioButaques"
             android:label="Pati de butaques" />
         <activity
-            android:name=".NovaObra"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.NovaObra"
             android:label="Nova obra" />
         <activity
-            android:name=".NovaObraDates"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.NovaObraDates"
             android:label="Selecció de dates" />
         <activity
-            android:name=".LlistarObres"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarObres"
             android:label="Llistat obres" />
         <activity
-            android:name=".ConfirmarCompra"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.ConfirmarCompra"
             android:label="Confirmar la compra" />
         <activity
-            android:name=".EliminarObra"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.EliminarObra"
             android:label="Eliminar obra" />
         <activity
-            android:name=".InfoObra"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.InfoObra"
             android:label="Info obra" />
         <activity
-            android:name=".FinalCompra"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.FinalCompra"
             android:label="Final de la compra" />
         <activity
-            android:name=".LlistarDies"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarDies"
             android:label="Llista de funcions" />
         <activity
-            android:name=".LlistarUsuaris"
+            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarUsuaris"
             android:label="Usuaris" />
-        <activity android:name=".Help"></activity>
+        <activity android:name="com.example.tonimiquelllullamengual.teatre_mallorca.Help"></activity>
     </application>
 
 </manifest>

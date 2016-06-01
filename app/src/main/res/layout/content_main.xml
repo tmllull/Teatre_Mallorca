@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.tonimiquelllullamengual.teatre_idi_nav_bar.MainActivity"
+    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:background="#ffffff">
 
@@ -22,9 +22,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teatre"
+            android:text="Teatre Mallorca"
             android:id="@+id/textView10"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:textStyle="bold|italic" />
     </TableRow>
 
     <LinearLayout

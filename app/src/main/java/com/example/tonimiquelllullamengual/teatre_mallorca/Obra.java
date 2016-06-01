@@ -1,4 +1,4 @@
-package com.example.tonimiquelllullamengual.teatre_idi_nav_bar;
+package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
