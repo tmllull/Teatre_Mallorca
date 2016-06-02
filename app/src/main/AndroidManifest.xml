@@ -40,9 +40,6 @@
             android:name="com.example.tonimiquelllullamengual.teatre_mallorca.InfoObra"
             android:label="Info obra" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.FinalCompra"
-            android:label="Final de la compra" />
-        <activity
             android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarDies"
             android:label="Llista de funcions" />
         <activity

@@ -204,7 +204,7 @@ public class LlistarDies extends AppCompatActivity {
             this.dia_setmana = "Dijous";
         else if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie."))
             this.dia_setmana = "Divendres";
-        else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sab."))
+        else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sáb."))
             this.dia_setmana = "Dissabte";
         else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
             this.dia_setmana = "Diumenge";
