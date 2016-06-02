@@ -21,9 +21,8 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
-    String titol, data;
+    String titol, data, dia_setmana;
     ImageView ivComprar;
-    String dia_setmana;
     Integer places;
 
     @Override
@@ -41,7 +40,6 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvData = (TextView) findViewById(R.id.tv_data_info);
         ivComprar = (ImageView) findViewById(R.id.iv_comprar_entrades);
         comprar = (Button) findViewById(R.id.bt_Comprar_Info);
-        dia_setmana ="0";
 
         comprar.setOnClickListener(this);
 
@@ -53,6 +51,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                     Bundle bundle = new Bundle();
                     bundle.putString("Titol", titol);
                     bundle.putString("Data", data);
+                    bundle.putString("DiaSetmana", dia_setmana);
                     Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
@@ -67,6 +66,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         if (bundle != null) {
             titol = bundle.getString("Titol");
             data = bundle.getString("Data");
+            dia_setmana = bundle.getString("DiaSetmana");
         }
 
         Cursor c = dbHelper.getObra(titol, data);
@@ -74,7 +74,8 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             tvTitol.setText(titol);
             tvDescripcio.setText(c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
             tvDurada.setText(c.getInt(c.getColumnIndex(dbHelper.CN_DURADA))+" min.");
-            tvData.setText(data);
+            //PROVES DE MOSTRAR DIA SETMANA
+            tvData.setText(dia_setmana+", "+data);
             tvPreu.setText(c.getInt(c.getColumnIndex(dbHelper.CN_PREU))+"€");
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             tvPlaces.setText(places.toString());

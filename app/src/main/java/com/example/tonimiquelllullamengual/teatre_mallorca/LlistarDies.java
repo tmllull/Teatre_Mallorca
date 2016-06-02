@@ -16,7 +16,7 @@ public class LlistarDies extends AppCompatActivity {
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    String titol, filtre;
+    String titol, filtre, dia_setmana;
 
     Bundle bundle;
 
@@ -27,7 +27,7 @@ public class LlistarDies extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llistar_dies);
-        filtre = "No";
+        //filtre = "No";
         //carregar_view(filtre);
         carregar_view();
 
@@ -46,14 +46,19 @@ public class LlistarDies extends AppCompatActivity {
             do {
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                String dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
+                dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
+                traduir_dia(dia_setmana);
                 if (filtre.equals("No")) {
                     dia = new Dia(titol, places, data, dia_setmana);
+                    dies.add(dia);
                 }
                 else {
-                    if (filtre.equals(dia_setmana)) dia = new Dia(titol, places, data, dia_setmana);
+                    if (filtre.equals(dia_setmana)) {
+                        dia = new Dia(titol, places, data, dia_setmana);
+                        dies.add(dia);
+                    }
                 }
-                dies.add(dia);
+                //dies.add(dia);
             } while (c.moveToNext());
         }
 
@@ -80,7 +85,6 @@ public class LlistarDies extends AppCompatActivity {
 
     public void carregar_view() {
         dbHelper = new DbHelper(this);
-
         bundle = getIntent().getExtras();
         if (bundle != null) {
             titol = bundle.getString("Titol");
@@ -91,7 +95,8 @@ public class LlistarDies extends AppCompatActivity {
             do {
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                String dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
+                dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
+                traduir_dia(dia_setmana);
                 dia = new Dia(titol, places, data, dia_setmana);
                 dies.add(dia);
             } while (c.moveToNext());
@@ -126,7 +131,7 @@ public class LlistarDies extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_llista, menu);
+        getMenuInflater().inflate(R.menu.menu_llista, menu);
         return true;
     }
 
@@ -143,25 +148,25 @@ public class LlistarDies extends AppCompatActivity {
                 //updateData(ordre);
                 return false;
             case R.id.dilluns:
-                updateData("Mon");
+                updateData("Dilluns");
                 return false;
             case R.id.dimarts:
-                updateData("Tue");
+                updateData("Dimarts");
                 return false;
             case R.id.dimecres:
-                updateData("Wed");
+                updateData("Dimecres");
                 return false;
             case R.id.dijous:
-                updateData("Thu");
+                updateData("Dijous");
                 return false;
             case R.id.divendres:
-                updateData("Fri");
+                updateData("Divendres");
                 return false;
             case R.id.dissabte:
-                updateData("Sat");
+                updateData("Dissabte");
                 return false;
             case R.id.diumenge:
-                updateData("Sun");
+                updateData("Diumenge");
                 return false;
             case R.id.menu_mostrar_tot:
                 updateData("No");
@@ -176,5 +181,22 @@ public class LlistarDies extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
         startActivity(intent);
         finish();
+    }
+
+    void traduir_dia(String dia_setmana) {
+        if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
+            this.dia_setmana = "Dilluns";
+        else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
+            this.dia_setmana = "Dimarts";
+        else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié."))
+            this.dia_setmana = "Dimecres";
+        else if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue."))
+            this.dia_setmana = "Dijous";
+        else if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie."))
+            this.dia_setmana = "Divendres";
+        else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sab."))
+            this.dia_setmana = "Dissabte";
+        else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
+            this.dia_setmana = "Diumenge";
     }
 }

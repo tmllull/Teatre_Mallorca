@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
 
     Spinner spinner_obres;
 
+    List<String> obres = new ArrayList<>();
     Button btEliminar;
 
     DbHelper dbHelper;
@@ -41,7 +43,8 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
 
     void carregar_spinner_obres() {
         // Spinner obres
-        List<String> obres = new ArrayList<>();
+
+        obres.add("Selecciona una obra de la llista");
 
         Cursor c = dbHelper.getAllObresDistinct();
         //Cursor c = dbHelper.getAllObres();
@@ -79,24 +82,30 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
         switch (v.getId()) {
             case R.id.bt_eliminar_eliminar:
                 final String obra_sel = spinner_obres.getSelectedItem().toString();
-                new AlertDialog.Builder(this)
-                        .setTitle("Eliminar obra")
-                        .setMessage("Aquesta acció no es pot desfer. " +
-                                "Estàs segur que vols eliminar l'obra i totes " +
-                                "les seves funcions?")
-                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dbHelper.deteleObra(obra_sel);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton("No!!", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
-                        .setIcon(R.drawable.trash)
-                        .show();
-                break;
+                if (!obra_sel.equals("Selecciona una obra de la llista")) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Eliminar obra")
+                            .setMessage("Aquesta acció no es pot desfer. " +
+                                    "Estàs segur que vols eliminar l'obra i totes " +
+                                    "les seves funcions?")
+                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dbHelper.deteleObra(obra_sel);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("No!!", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(R.drawable.trash)
+                            .show();
+                    break;
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Has de seleccionar una obra",
+                            Toast.LENGTH_LONG).show();
+                }
             default:
                 break;
         }

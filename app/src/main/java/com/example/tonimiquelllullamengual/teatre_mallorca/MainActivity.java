@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
                     .setTitle("About")
                     .setMessage("Teatre Mallorca\n" +
                             "Autor: Toni Miquel Llull\n" +
-                            "Verssió: 0.1\n" +
+                            "Versió: 0.1\n" +
                             "toni.miquel.llull@est.fib.upc.edu")
                     .setPositiveButton("Tancar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

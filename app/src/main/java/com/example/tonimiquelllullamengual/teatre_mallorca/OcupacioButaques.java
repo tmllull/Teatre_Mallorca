@@ -24,7 +24,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     DbHelper dbHelper;
     TextView tvTitol;
     Button btComprar;
-    String butaques_seleccionades, data, dataDiaSetmana, titol, butaques;
+    String butaques_seleccionades, data, dia_setmana, titol, butaques;
     Integer places_lliures, preu, entrades;
     ImageView ivComprar;
     Integer descompte;
@@ -100,6 +100,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         if (bundle != null) {
             titol = bundle.getString("Titol");
             data = bundle.getString("Data");
+            dia_setmana = bundle.getString("DiaSetmana");
         }
         tvTitol.setText(titol);
         Cursor c = dbHelper.getObraData(titol, data);
@@ -129,6 +130,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         bundle.putString("Data", data);
         bundle.putString("Butaques", butaques_seleccionades);
         bundle.putInt("Places", places_lliures);
+        bundle.putString("DiaSetmana", dia_setmana);
         Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -178,7 +180,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         Bundle bundle = new Bundle();
         bundle.putString("Titol", tvTitol.getText().toString());
         bundle.putString("Data", data);
-        bundle.putString("DiaSetmana", dataDiaSetmana);
+        bundle.putString("DiaSetmana", dia_setmana);
         Intent intent = new Intent(getApplicationContext(), InfoObra.class);
         intent.putExtras(bundle);
         startActivity(intent);

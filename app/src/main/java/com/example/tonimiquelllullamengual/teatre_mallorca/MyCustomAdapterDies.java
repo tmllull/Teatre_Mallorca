@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDies.AdapterViewHolder> {
 
     ArrayList<Dia> dies;
-    String data;
+    String data, dia_setmana;
     MyCustomAdapterDies() {
         dies = new ArrayList<>();
     }
@@ -37,11 +37,12 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 //            adapterViewHolder.nom.setText(dies.get(position).getNom());
             adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
             data = dies.get(position).getDia().toString();
-            String dia_setmana = dies.get(position).getDiaSetmana().toString();
-            if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun.")) dia_setmana = "Dilluns";
+            dia_setmana = dies.get(position).getDiaSetmana().toString();
+            /*if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
+                dia_setmana = "Dilluns";
             else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
                 dia_setmana = "Dimarts";
-            else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mie."))
+            else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié."))
                 dia_setmana = "Dimecres";
             else if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue."))
                 dia_setmana = "Dijous";
@@ -50,10 +51,10 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sab."))
                 dia_setmana = "Dissabte";
             else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
-                dia_setmana = "Diumenge";
+                dia_setmana = "Diumenge";*/
             //else return;
-            adapterViewHolder.dia.setText(data);
-            //adapterViewHolder.dia.setText(dia_setmana+", "+data);
+            //adapterViewHolder.dia.setText(data);
+            adapterViewHolder.dia.setText(dia_setmana+", "+data);
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
             }
@@ -104,6 +105,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             Bundle bundle = new Bundle();
             bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
             bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
+            bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
             Intent intent = new Intent (v.getContext(), InfoObra.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);

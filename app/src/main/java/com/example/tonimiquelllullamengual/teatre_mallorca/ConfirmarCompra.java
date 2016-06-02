@@ -20,7 +20,7 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
 
     DbHelper dbHelper;
 
-    String data, butaques_seleccionades, titol, dataDiaSetmana;
+    String data, butaques_seleccionades, titol, dia_setmana;
     Integer places_lliures;
 
     @Override
@@ -44,14 +44,15 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         if (bundle != null) {
             titol = bundle.getString("Titol");
             tvTitol.setText(titol);
-            data = bundle.getString("Data");
-            tvData.setText(data);
             entrades = bundle.getInt("Entrades");
             tvEntrades.setText(String.valueOf(entrades));
             total = bundle.getInt("Total");
             tvTotal.setText(String.valueOf(total)+"€");
             places_lliures = bundle.getInt("Places");
             butaques_seleccionades = bundle.getString("Butaques");
+            dia_setmana = bundle.getString("DiaSetmana");
+            data = bundle.getString("Data");
+            tvData.setText(dia_setmana+", "+data);
         }
     }
 
