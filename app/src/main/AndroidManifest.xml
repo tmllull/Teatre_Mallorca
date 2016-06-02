@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.MainActivity"
+            android:name=".MainActivity"
             android:label="Teatre Mallorca"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,33 +19,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.OcupacioButaques"
+            android:name=".OcupacioButaques"
             android:label="Pati de butaques" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.NovaObra"
+            android:name=".NovaObra"
             android:label="Nova obra" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.NovaObraDates"
+            android:name=".NovaObraDates"
             android:label="Selecció de dates" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarObres"
+            android:name=".LlistarObres"
             android:label="Llistat obres" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.ConfirmarCompra"
+            android:name=".ConfirmarCompra"
             android:label="Confirmar la compra" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.EliminarObra"
+            android:name=".EliminarObra"
             android:label="Eliminar obra" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.InfoObra"
+            android:name=".InfoObra"
             android:label="Info obra" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarDies"
+            android:name=".LlistarDies"
             android:label="Llista de funcions" />
         <activity
-            android:name="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarUsuaris"
+            android:name=".LlistarUsuaris"
             android:label="Usuaris" />
-        <activity android:name="com.example.tonimiquelllullamengual.teatre_mallorca.Help"></activity>
+        <activity android:name=".Help" />
+        <activity android:name=".Estadistiques"></activity>
     </application>
 
 </manifest>

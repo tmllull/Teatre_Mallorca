@@ -10,6 +10,10 @@
             android:id="@+id/delete_data"
             android:icon="@drawable/garbage"
             android:title="Esborrar les dades" />
+        <item
+            android:id="@+id/estadistiques"
+            android:icon="@drawable/add"
+            android:title="Estadístiques" />
     </group>
 
     <item android:title="Més informació">

@@ -129,8 +129,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.delete_data) {
             dbHelper.resetAll();
         } else if (id == R.id.nav_help) {
-            Intent intent2 = new Intent(getApplicationContext(), Help.class);
-            startActivity(intent2);
+            intent = new Intent(getApplicationContext(), Help.class);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
             new AlertDialog.Builder(this)
                     .setTitle("About")
@@ -149,6 +149,10 @@ public class MainActivity extends AppCompatActivity
                     })
                     .setIcon(R.drawable.info)
                     .show();
+        }
+        else if (id == R.id.estadistiques) {
+            intent = new Intent(getApplicationContext(), Estadistiques.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

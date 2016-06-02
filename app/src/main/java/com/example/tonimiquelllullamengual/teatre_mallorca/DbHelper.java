@@ -23,7 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "database.sqlite";
 
     //Nom de la taula
-    public static final String OBRA_TABLE ="Obra";
+    public static final String OBRA_TABLE = "Obra";
 
     public static final String CN_TITOL = "titol";
     public static final String CN_DESCRIPCIO = "descripcio";
@@ -54,7 +54,7 @@ public class DbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void newObra (ContentValues values, String tableName) {
+    public void newObra(ContentValues values, String tableName) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(
                 tableName,
@@ -63,9 +63,9 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una obra
-    public Cursor getObra (String titol) {
+    public Cursor getObra(String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {titol};
         Cursor c = db.query(
@@ -81,9 +81,9 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una obra
-    public Cursor getObra (String titol, String data) {
+    public Cursor getObra(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {titol, data};
         Cursor c = db.query(
@@ -101,7 +101,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir totes les obres ordenades pel nom
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(
@@ -119,7 +119,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir totes les obres ordenades pel nom
     public Cursor getAllObresDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {CN_TITOL};
         Cursor c = db.query(true,
@@ -139,7 +139,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir totes les dates d'una obra
     public Cursor getDatesObra(String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {titol};
         Cursor c = db.query(
@@ -157,7 +157,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir una funció d'una obra a una data determinada
     public Cursor getObraData(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {titol, data};
         Cursor c = db.query(
@@ -206,7 +206,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir una funció d'una obra a una data determinada
     public Cursor getUsuaris(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         String[] where = {titol, data};
         Cursor c = db.query(
@@ -221,29 +221,79 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //Obtenir una funció d'una obra a una data determinada
-    public Cursor getObresDiaSetmana(String titol, String dia) {
+    //Obtenir totes les dates d'una obra
+    public Cursor getDies(String dia) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol, dia};
+        String[] where = {dia};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
-                "titol=?" + " and " + "dia_setmana=?",               // The columns for the WHERE clause
+                "dia_setmana=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
-                null                // The sort order
+                CN_MILIS + " ASC"                // The sort order
         );
         return c;
     }
 
-    public void updateData (String titol, String data) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(CN_DATA, data);
-        db.update(OBRA_TABLE, values, CN_TITOL + "=?", new String[]{titol});
+    public int getVentesDia(String dia) {
+        Cursor c = this.getDies(dia);
+        int cont = 0;
+        if (c.moveToFirst()) {
+            do {
+                int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
+                int aux = 40 - lliures;
+                cont += aux;
+            } while (c.moveToNext());
+        }
+        return cont;
+    }
+
+    public int getTotalEntrades() {
+        Cursor c = this.getAllObres();
+        int cont = 0;
+        if (c.moveToFirst()) {
+            do {
+                int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
+                int aux = 40 - lliures;
+                cont += aux;
+            } while (c.moveToNext());
+        }
+        return cont;
+    }
+
+    public int getTotalVentes() {
+        Cursor c = this.getAllObres();
+        int cont = 0;
+        if (c.moveToFirst()) {
+            do {
+                if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
+                    int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
+                    int aux = 40 - lliures;
+                    cont += aux*c.getInt(c.getColumnIndex(CN_PREU));
+                }
+            } while (c.moveToNext());
+        }
+        return cont;
+    }
+
+    public int getVentesDies(String dia) {
+        Cursor c = this.getDies(dia);
+        int cont = 0;
+        if (c.moveToFirst()) {
+            do {
+                if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
+                    int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
+                    int aux = 40 - lliures;
+                    cont += aux * c.getInt(c.getColumnIndex(CN_PREU));
+                }
+            } while (c.moveToNext());
+        }
+
+        return cont;
     }
 
     public void updateOcupacio(String titol, String data, String ocupacio) {
@@ -260,13 +310,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
     }
 
-    public void updateDescripcio(String titol, String ocupacio) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(CN_BUTAQUES, ocupacio);
-        db.update(OBRA_TABLE, values, CN_TITOL + "=?", new String[]{titol});
-    }
-
     public void updateCompradors(String titol, String data, String compradors) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -275,12 +318,12 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //
-    public void deteleObra (String titol) {
+    public void deteleObra(String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(OBRA_TABLE, CN_TITOL + "=?", new String[]{titol});
     }
 
-    public void deteleFuncio (String titol, String data) {
+    public void deteleFuncio(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(OBRA_TABLE, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
     }
@@ -313,9 +356,8 @@ public class DbHelper extends SQLiteOpenHelper {
             int n = rand.nextInt(200);
             if (n % 2 == 0) {
                 places = places + "0";
-                usuaris = i+usuari+"^"+usuaris;
-            }
-            else {
+                usuaris = i + usuari + "^" + usuaris;
+            } else {
                 places = places + "1";
                 p++;
             }
@@ -372,9 +414,8 @@ public class DbHelper extends SQLiteOpenHelper {
             int n = rand.nextInt(200);
             if (n % 2 == 0) {
                 places = places + "0";
-                usuaris = i+usuari+"^"+usuaris;
-            }
-            else {
+                usuaris = i + usuari + "^" + usuaris;
+            } else {
                 places = places + "1";
                 p++;
             }
@@ -427,9 +468,8 @@ public class DbHelper extends SQLiteOpenHelper {
             int n = rand.nextInt(200);
             if (n % 2 == 0) {
                 places = places + "0";
-                usuaris = i+usuari+"^"+usuaris;
-            }
-            else {
+                usuaris = i + usuari + "^" + usuaris;
+            } else {
                 places = places + "1";
                 p++;
             }
@@ -481,9 +521,8 @@ public class DbHelper extends SQLiteOpenHelper {
             int n = rand.nextInt(200);
             if (n % 2 == 0) {
                 places = places + "0";
-                usuaris = i+usuari+"^"+usuaris;
-            }
-            else {
+                usuaris = i + usuari + "^" + usuaris;
+            } else {
                 places = places + "1";
                 p++;
             }
