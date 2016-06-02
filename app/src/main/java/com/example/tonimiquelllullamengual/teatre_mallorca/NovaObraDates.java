@@ -174,7 +174,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             SimpleDateFormat formatter = new SimpleDateFormat("c");
             dia_setmana = formatter.format(new java.sql.Date(milliseconds));
             ContentValues values = new ContentValues();
-            values.put(dbHelper.CN_NOM, bundle.getString("Nom"));
+            values.put(dbHelper.CN_TITOL, bundle.getString("Nom"));
             values.put(dbHelper.CN_DESCRIPCIO, bundle.getString("Descripcio"));
             values.put(dbHelper.CN_DURADA, bundle.getString("Durada"));
             values.put(dbHelper.CN_PREU, bundle.getString("Preu"));

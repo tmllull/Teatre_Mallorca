@@ -42,15 +42,14 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         Integer total, entrades;
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            dataDiaSetmana = bundle.getString("DiaSetmana");
-            tvTitol.setText(bundle.getString("Titol"));
             titol = bundle.getString("Titol");
-            tvData.setText(dataDiaSetmana);
+            tvTitol.setText(titol);
+            data = bundle.getString("Data");
+            tvData.setText(data);
             entrades = bundle.getInt("Entrades");
             tvEntrades.setText(String.valueOf(entrades));
             total = bundle.getInt("Total");
             tvTotal.setText(String.valueOf(total)+"€");
-            data = bundle.getString("Data");
             places_lliures = bundle.getInt("Places");
             butaques_seleccionades = bundle.getString("Butaques");
         }

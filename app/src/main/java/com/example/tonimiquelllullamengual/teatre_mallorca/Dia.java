@@ -5,18 +5,20 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
  */
 public class Dia {
 
-    private String nom, dia, dia_setmana;
+    private String nom, data, dia_setmana;
     private Integer places;
 
-    Dia(String nom, Integer places, String dia, String dia_setmana) {
+    Dia(String nom, Integer places, String data, String dia_setmana) {
         this.nom = nom;
         this.places = places;
-        this.dia = dia;
+        this.data = data;
         this.dia_setmana = dia_setmana;
     }
 
-    Dia(String nom) {
-        this.nom = nom;
+    Dia(String data, Integer places, String dia_setmana) {
+        this.data = data;
+        this.places = places;
+        this.dia_setmana = dia_setmana;
     }
 
     Dia() {}
@@ -25,7 +27,7 @@ public class Dia {
 
     public Integer getPlaces() {return places;}
 
-    public String getDia() {return dia;}
+    public String getDia() {return data;}
 
     public void setNom(String nom){this.nom = nom;}
 

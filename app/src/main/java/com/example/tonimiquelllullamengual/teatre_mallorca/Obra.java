@@ -15,6 +15,11 @@ public class Obra {
         this.sessions = sessions;
     }
 
+    Obra(String nom, String sessions) {
+        this.nom = nom;
+        this.sessions = sessions;
+    }
+
     Obra (String nom) {
         this.nom = nom;
     }

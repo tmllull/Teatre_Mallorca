@@ -24,7 +24,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     DbHelper dbHelper;
     TextView tvTitol;
     Button btComprar;
-    String butaques_seleccionades, data, dataDiaSetmana;
+    String butaques_seleccionades, data, dataDiaSetmana, titol, butaques;
     Integer places_lliures, preu, entrades;
     ImageView ivComprar;
     Integer descompte;
@@ -71,8 +71,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
                                     " una butaca",
                             Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     new AlertDialog.Builder(v.getContext())
                             .setTitle("Aplicar descompte")
                             .setMessage("Si tens el carnet Jove o universitari " +
@@ -96,31 +95,23 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         });
 
         entrades = 0;
-
-        String places = "init places";
-
         dbHelper = new DbHelper(this);
         bundle = getIntent().getExtras();
-        String titol = "Titol inicial";
-        String dia = "Dia sense determinar";
-        dataDiaSetmana = "provaaaaaa";
         if (bundle != null) {
             titol = bundle.getString("Titol");
-            dia = bundle.getString("Data");
-            dataDiaSetmana = bundle.getString("DiaSetmana");
+            data = bundle.getString("Data");
         }
-        tvTitol.setText(titol.toString());
-        Cursor c = dbHelper.getObraData(titol, dia);
+        tvTitol.setText(titol);
+        Cursor c = dbHelper.getObraData(titol, data);
         if (c.moveToFirst()) {
-            places = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
-            butaques_seleccionades = places;
+            butaques = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
+            butaques_seleccionades = butaques;
             places_lliures = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
-            data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
         }
-        String aux = "p";
+        String aux;
         for (int i = 1; i < 41; ++i) {
-            aux = Character.toString(places.charAt(i));
+            aux = Character.toString(butaques.charAt(i));
             if (aux.equals("0")) {
                 butaca[i].setBackgroundColor(0xffd3d3d3);
                 butaca[i].setOnClickListener(null);
@@ -130,15 +121,14 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
     void confirmar() {
         int total = entrades * preu;
-        total -= (total*descompte)/100;
+        total -= (total * descompte) / 100;
         Bundle bundle = new Bundle();
         bundle.putInt("Total", total);
         bundle.putInt("Entrades", entrades);
-        bundle.putString("Titol", tvTitol.getText().toString());
+        bundle.putString("Titol", titol);
         bundle.putString("Data", data);
         bundle.putString("Butaques", butaques_seleccionades);
         bundle.putInt("Places", places_lliures);
-        bundle.putString("DiaSetmana", dataDiaSetmana);
         Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -179,20 +169,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             }
             return;
         } else {
-            /*int total = entrades * preu;
-            Bundle bundle = new Bundle();
-            bundle.putInt("Total", total);
-            bundle.putInt("Entrades", entrades);
-            bundle.putString("Titol", tvTitol.getText().toString());
-            bundle.putString("Data", data);
-            bundle.putString("Butaques", butaques_seleccionades);
-            bundle.putInt("Places", places_lliures);
-            bundle.putString("DiaSetmana", dataDiaSetmana);
-            Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            finish();
-            return;*/
+            //confirmar();
         }
     }
 

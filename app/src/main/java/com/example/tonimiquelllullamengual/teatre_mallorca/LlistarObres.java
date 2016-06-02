@@ -34,11 +34,9 @@ public class LlistarObres extends AppCompatActivity {
         Cursor c = dbHelper.getAllObresDistinct();
         if (c.moveToFirst()) {
             do {
-                String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
-                Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                String dia = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                Integer sessions = dbHelper.comptarSessions(nom);
-                Obra obra = new Obra(nom, places, dia,sessions.toString());
+                String titol = c.getString(c.getColumnIndex(dbHelper.CN_TITOL));
+                Integer sessions = dbHelper.comptarSessions(titol);
+                Obra obra = new Obra(titol,sessions.toString());
                 obres.add(obra);
             } while (c.moveToNext());
         }

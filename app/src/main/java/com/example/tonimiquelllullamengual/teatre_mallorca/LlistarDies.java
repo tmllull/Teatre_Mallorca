@@ -16,8 +16,7 @@ public class LlistarDies extends AppCompatActivity {
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    String filtre;
-    String titolAux, dia_setmana;
+    String titol, filtre;
 
     Bundle bundle;
 
@@ -38,21 +37,21 @@ public class LlistarDies extends AppCompatActivity {
         dbHelper = new DbHelper(this);
 
         bundle = getIntent().getExtras();
-        String titol = bundle.getString("Titol");
-        titolAux = titol;
+        if (bundle != null) {
+            titol = bundle.getString("Titol");
+        }
         Dia dia = new Dia();
-        Cursor c = dbHelper.getAllObresData(titol);
+        Cursor c = dbHelper.getDatesObra(titol);
         if (c.moveToFirst()) {
             do {
-                String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
                 String dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
                 if (filtre.equals("No")) {
-                    dia = new Dia(nom, places, data, dia_setmana);
+                    dia = new Dia(titol, places, data, dia_setmana);
                 }
                 else {
-                    if (filtre.equals(dia_setmana)) dia = new Dia(nom, places, data, dia_setmana);
+                    if (filtre.equals(dia_setmana)) dia = new Dia(titol, places, data, dia_setmana);
                 }
                 dies.add(dia);
             } while (c.moveToNext());
@@ -83,17 +82,17 @@ public class LlistarDies extends AppCompatActivity {
         dbHelper = new DbHelper(this);
 
         bundle = getIntent().getExtras();
-        String titol = bundle.getString("Titol");
-        titolAux = titol;
-        Dia dia = new Dia();
-        Cursor c = dbHelper.getAllObresData(titol);
+        if (bundle != null) {
+            titol = bundle.getString("Titol");
+        }
+        Dia dia;
+        Cursor c = dbHelper.getDatesObra(titol);
         if (c.moveToFirst()) {
             do {
-                String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
                 Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
                 String dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
-                dia = new Dia(nom, places, data, dia_setmana);
+                dia = new Dia(titol, places, data, dia_setmana);
                 dies.add(dia);
             } while (c.moveToNext());
         }

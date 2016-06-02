@@ -21,9 +21,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
-    String titol, auxTitol, data, dataDiaSetmana;
+    String titol, data;
     ImageView ivComprar;
     String dia_setmana;
+    Integer places;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,8 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             public void onClick(View v) {
                 if (places_lliures) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Titol", auxTitol);
+                    bundle.putString("Titol", titol);
                     bundle.putString("Data", data);
-                    bundle.putString("DiaSetmana", dataDiaSetmana);
                     Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
@@ -63,37 +63,24 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        Integer preu, places, durada;
         bundle = getIntent().getExtras();
         if (bundle != null) {
             titol = bundle.getString("Titol");
             data = bundle.getString("Data");
-            dataDiaSetmana = bundle.getString("DiaSetmana");
         }
 
-        tvTitol.setText(titol.toString());
-        auxTitol = titol;
-
-        Cursor c = dbHelper.getObra(titol);
+        Cursor c = dbHelper.getObra(titol, data);
         if (c.moveToFirst()) {
+            tvTitol.setText(titol);
             tvDescripcio.setText(c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
-            preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
-            tvPreu.setText(preu.toString()+"€");
+            tvDurada.setText(c.getInt(c.getColumnIndex(dbHelper.CN_DURADA))+" min.");
+            tvData.setText(data);
+            tvPreu.setText(c.getInt(c.getColumnIndex(dbHelper.CN_PREU))+"€");
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             tvPlaces.setText(places.toString());
-            durada = c.getInt(c.getColumnIndex(dbHelper.CN_DURADA));
-            tvDurada.setText(durada.toString()+" min.");
-            tvData.setText(dataDiaSetmana);
-            //String prova = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
-            //SimpleDateFormat formatter = new SimpleDateFormat("F");
-            //String milis = c.getString(c.getColumnIndex(dbHelper.CN_MILIS));
-            //dia_setmana = formatter.format(new Date(Long.parseLong(milis)));
-            //dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
 
             if (c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES)) > 0) places_lliures = true;
         }
-        //Toast.makeText(getApplicationContext(), dia_setmana,
-        //        Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -127,15 +114,12 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                         .setMessage("Estàs segur que vols eliminar la funció?")
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                dbHelper.deteleFuncio(auxTitol,data);
-                                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                //startActivity(intent);
+                                dbHelper.deteleFuncio(titol,data);
                                 finish();
                             }
                         })
                         .setNegativeButton("No!!!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
                             }
                         })
                         .setIcon(R.drawable.trash)
@@ -143,10 +127,9 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                 return false;
             case R.id.menu_usuaris_obra:
                 Bundle bundle = new Bundle();
-                bundle.putString("Titol", auxTitol);
+                bundle.putString("Titol", titol);
                 bundle.putString("Data", data);
                 Intent intent = new Intent(getApplicationContext(), LlistarUsuaris.class);
-
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return false;
@@ -158,7 +141,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Titol", auxTitol);
+        bundle.putString("Titol", titol);
         Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
         intent.putExtras(bundle);
         startActivity(intent);

@@ -52,8 +52,8 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
                 dia_setmana = "Diumenge";
             //else return;
-            //adapterViewHolder.dia.setText("Hola");
-            adapterViewHolder.dia.setText(dia_setmana+", "+data);
+            adapterViewHolder.dia.setText(data);
+            //adapterViewHolder.dia.setText(dia_setmana+", "+data);
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
             }
@@ -103,8 +103,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 
             Bundle bundle = new Bundle();
             bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
-            bundle.putString("Data", data);
-            bundle.putString("DiaSetmana", dia.getText().toString());
+            bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
             Intent intent = new Intent (v.getContext(), InfoObra.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);

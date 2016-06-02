@@ -25,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Nom de la taula
     public static final String OBRA_TABLE ="Obra";
 
-    public static final String CN_NOM = "nom";
+    public static final String CN_TITOL = "titol";
     public static final String CN_DESCRIPCIO = "descripcio";
     public static final String CN_DATA = "data";
     public static final String CN_DURADA = "durada";
@@ -38,7 +38,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
-            CN_NOM + " TEXT, " +
+            CN_TITOL + " TEXT, " +
             CN_DESCRIPCIO + " TEXT, " +
             CN_DATA + " TEXT, " +
             CN_DURADA + " INTEGER, " +
@@ -48,7 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
             CN_MILIS + " TEXT, " +
             CN_COMPRADORS + " TEXT, " +
             CN_DIA_SETMANA + " TEXT, " +
-            "PRIMARY KEY (nom,data));";
+            "PRIMARY KEY (titol,data));";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,15 +63,33 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una obra
-    public Cursor getObra (String obra) {
+    public Cursor getObra (String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {obra};
+        String[] where = {titol};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
                 columns,                                    // The columns to return
-                "nom=?",                                   // The columns for the WHERE clause
+                "titol=?",                                   // The columns for the WHERE clause
+                where,                                      // The values for the WHERE clause
+                null,                                       // don't group the rows
+                null,                                       // don't filter by row groups
+                null                                        // The sort order
+        );
+        return c;
+    }
+
+    //Obtenir una obra
+    public Cursor getObra (String titol, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
+        String[] where = {titol, data};
+        Cursor c = db.query(
+                OBRA_TABLE,  // The table to query
+                columns,                                    // The columns to return
+                "titol=?" + " and " + "data=?",                                   // The columns for the WHERE clause
                 where,                                      // The values for the WHERE clause
                 null,                                       // don't group the rows
                 null,                                       // don't filter by row groups
@@ -83,7 +101,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir totes les obres ordenades pel nom
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
         //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
         Cursor c = db.query(
@@ -93,7 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
-                CN_NOM + " ASC"                // The sort order
+                CN_TITOL + " ASC"                // The sort order
         );
         return c;
     }
@@ -101,17 +119,17 @@ public class DbHelper extends SQLiteOpenHelper {
     //Obtenir totes les obres ordenades pel nom
     public Cursor getAllObresDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {CN_NOM};
+        String[] where = {CN_TITOL};
         Cursor c = db.query(true,
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
                 null,               // The columns for the WHERE clause
                 null,               // The values for the WHERE clause
-                CN_NOM,             // don't group the rows
+                CN_TITOL,             // don't group the rows
                 null,               // don't filter by row groups
-                CN_NOM + " ASC",    // The sort order
+                CN_TITOL + " ASC",    // The sort order
                 null
         );
         return c;
@@ -119,15 +137,15 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     //Obtenir totes les dates d'una obra
-    public Cursor getAllObresData(String nom) {
+    public Cursor getDatesObra(String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {nom};
+        String[] where = {titol};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
-                "nom=?",               // The columns for the WHERE clause
+                "titol=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -137,15 +155,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una funció d'una obra a una data determinada
-    public Cursor getObraData(String nom, String data) {
+    public Cursor getObraData(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {nom, data};
+        String[] where = {titol, data};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
-                "nom=?" + " and " + "data=?",               // The columns for the WHERE clause
+                "titol=?" + " and " + "data=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -154,13 +172,13 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public int comptarSessions(String nom) {
+    public int comptarSessions(String titol) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] where = {nom};
+        String[] where = {titol};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 null,            // The columns to return
-                "nom=?",               // The columns for the WHERE clause
+                "titol=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -171,8 +189,8 @@ public class DbHelper extends SQLiteOpenHelper {
         return cnt;
     }
 
-    public String[] consultarUsuaris(String nom, String data) {
-        Cursor c = this.getUsuaris(nom, data);
+    public String[] consultarUsuaris(String titol, String data) {
+        Cursor c = this.getUsuaris(titol, data);
         String[] usuaris;
         String s_usuaris = new String();
         if (c.moveToFirst()) {
@@ -186,15 +204,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una funció d'una obra a una data determinada
-    public Cursor getUsuaris(String nom, String data) {
+    public Cursor getUsuaris(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {nom, data};
+        String[] where = {titol, data};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
-                "nom=?" + " and " + "data=?",               // The columns for the WHERE clause
+                "titol=?" + " and " + "data=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -204,15 +222,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una funció d'una obra a una data determinada
-    public Cursor getObresDiaSetmana(String nom, String dia) {
+    public Cursor getObresDiaSetmana(String titol, String dia) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_NOM,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
+        String[] columns = {CN_TITOL,CN_DESCRIPCIO,CN_DATA,CN_DURADA,CN_PREU,CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {nom, dia};
+        String[] where = {titol, dia};
         Cursor c = db.query(
                 OBRA_TABLE,          // The table to query
                 columns,            // The columns to return
-                "nom=?" + " and " + "dia_setmana=?",               // The columns for the WHERE clause
+                "titol=?" + " and " + "dia_setmana=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -221,50 +239,50 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public void updateData (String nom, String data) {
+    public void updateData (String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_DATA, data);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+        db.update(OBRA_TABLE, values, CN_TITOL + "=?", new String[]{titol});
     }
 
-    public void updateOcupacio(String nom, String data, String ocupacio) {
+    public void updateOcupacio(String titol, String data, String ocupacio) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_BUTAQUES, ocupacio);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
+        db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
     }
 
-    public void updatePlacesLliures(String nom, String data, int places) {
+    public void updatePlacesLliures(String titol, String data, int places) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_PLACES_LLIURES, places);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
+        db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
     }
 
-    public void updateDescripcio(String nom, String ocupacio) {
+    public void updateDescripcio(String titol, String ocupacio) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_BUTAQUES, ocupacio);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?", new String[]{nom});
+        db.update(OBRA_TABLE, values, CN_TITOL + "=?", new String[]{titol});
     }
 
-    public void updateCompradors(String nom, String data, String compradors) {
+    public void updateCompradors(String titol, String data, String compradors) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CN_COMPRADORS, compradors);
-        db.update(OBRA_TABLE, values, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
+        db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
     }
 
     //
-    public void deteleObra (String nom) {
+    public void deteleObra (String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(OBRA_TABLE, CN_NOM + "=?", new String[]{nom});
+        db.delete(OBRA_TABLE, CN_TITOL + "=?", new String[]{titol});
     }
 
-    public void deteleFuncio (String nom, String data) {
+    public void deteleFuncio (String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(OBRA_TABLE, CN_NOM + "=?" + " and " + "data=?", new String[]{nom, data});
+        db.delete(OBRA_TABLE, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
     }
 
 
@@ -314,7 +332,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SimpleDateFormat formatter = new SimpleDateFormat("c");
         dia_setmana = formatter.format(new Date(milliseconds));
         ContentValues values = new ContentValues();
-        values.put(this.CN_NOM, "El rey leon");
+        values.put(this.CN_TITOL, "El rey leon");
         values.put(this.CN_DESCRIPCIO, "Gracias al genio, visión artística y creativa " +
                 "de su directora, Julie Taymor, el género musical da un paso adelante. " +
                 "Con su sorprendente y colorida puesta en escena, EL REY LEÓN transporta " +
@@ -371,7 +389,7 @@ public class DbHelper extends SQLiteOpenHelper {
         milliseconds = d.getTime();
         dia_setmana = formatter.format(new Date(milliseconds));
         values = new ContentValues();
-        values.put(this.CN_NOM, "Mamma Mia");
+        values.put(this.CN_TITOL, "Mamma Mia");
         values.put(this.CN_DESCRIPCIO, "En una idíl•lica illa grega dies abans de " +
                 "contreure matrimoni, una jove decideix convidar al seu pare al casament.\n" +
                 "Però, qui serà realment? Quin dels tres homes que van passar per " +
@@ -427,7 +445,7 @@ public class DbHelper extends SQLiteOpenHelper {
         milliseconds = d.getTime();
         dia_setmana = formatter.format(new Date(milliseconds));
         values = new ContentValues();
-        values.put(this.CN_NOM, "Queen");
+        values.put(this.CN_TITOL, "Queen");
         values.put(this.CN_DESCRIPCIO, "La formación original con Brian May y Roger " +
                 "Taylor se une al cantante Adam Lambert para hacernos revivir todo el " +
                 "sonido y espectacularidad de uno de los grupos de nuestra vida.\n" +
@@ -481,7 +499,7 @@ public class DbHelper extends SQLiteOpenHelper {
         milliseconds = d.getTime();
         dia_setmana = formatter.format(new Date(milliseconds));
         values = new ContentValues();
-        values.put(this.CN_NOM, "Queen");
+        values.put(this.CN_TITOL, "Queen");
         values.put(this.CN_DESCRIPCIO, "La formación original con Brian May y Roger " +
                 "Taylor se une al cantante Adam Lambert para hacernos revivir todo el " +
                 "sonido y espectacularidad de uno de los grupos de nuestra vida.\n" +

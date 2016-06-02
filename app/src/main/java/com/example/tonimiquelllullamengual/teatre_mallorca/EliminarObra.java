@@ -47,7 +47,7 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
         //Cursor c = dbHelper.getAllObres();
         if (c.moveToFirst()) {
             do {
-                String nom = c.getString(c.getColumnIndex(dbHelper.CN_NOM));
+                String nom = c.getString(c.getColumnIndex(dbHelper.CN_TITOL));
                 obres.add(nom);
             } while (c.moveToNext());
         }
@@ -87,14 +87,11 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleObra(obra_sel);
-                                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                //startActivity(intent);
                                 finish();
                             }
                         })
                         .setNegativeButton("No!!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
                             }
                         })
                         .setIcon(R.drawable.trash)

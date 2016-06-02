@@ -40,7 +40,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
 
         btNew.setOnClickListener(this);
 
-        formatDate = new SimpleDateFormat("dd-MM-yy");
+        formatDate = new SimpleDateFormat("dd/MM/yy");
 
         prepareCalendar();
 
@@ -61,7 +61,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 calendari.get(Calendar.DAY_OF_MONTH));
     }
 
-    public void newObra() {
+    /*public void newObra() {
         if (etNom.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
                     Toast.LENGTH_LONG).show();
@@ -74,7 +74,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 places = places+"1";
             }
             ContentValues values = new ContentValues();
-            values.put(dbHelper.CN_NOM, etNom.getText().toString());
+            values.put(dbHelper.CN_TITOL, etNom.getText().toString());
             values.put(dbHelper.CN_DESCRIPCIO, etDescripcio.getText().toString());
             values.put(dbHelper.CN_DURADA, etDurada.getText().toString());
             values.put(dbHelper.CN_PREU, etPreu.getText().toString());
@@ -84,7 +84,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
 
             dbHelper.newObra(values, dbHelper.OBRA_TABLE);
         }
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
