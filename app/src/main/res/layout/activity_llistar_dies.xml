@@ -16,6 +16,15 @@
         android:orientation="vertical"
         tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarDies">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sessions programades"
+            android:id="@+id/tv_sessions"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

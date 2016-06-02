@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class LlistarDies extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
     String titol, filtre, dia_setmana;
+    TextView tvSessio;
 
     Bundle bundle;
 
@@ -27,6 +29,8 @@ public class LlistarDies extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llistar_dies);
+
+        tvSessio = (TextView) findViewById(R.id.tv_sessions);
         //filtre = "No";
         //carregar_view(filtre);
         carregar_view();
@@ -61,6 +65,9 @@ public class LlistarDies extends AppCompatActivity {
                 //dies.add(dia);
             } while (c.moveToNext());
         }
+
+        if (dies.isEmpty()) tvSessio.setText("Cap sessio programada");
+        else tvSessio.setText("Sessions programades");
 
         //findViewById del layout activity_main
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);
@@ -101,6 +108,9 @@ public class LlistarDies extends AppCompatActivity {
                 dies.add(dia);
             } while (c.moveToNext());
         }
+
+        if (dies.isEmpty()) tvSessio.setText("Cap sessio programada");
+        else tvSessio.setText("Sessions programades");
 
         //findViewById del layout activity_main
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);

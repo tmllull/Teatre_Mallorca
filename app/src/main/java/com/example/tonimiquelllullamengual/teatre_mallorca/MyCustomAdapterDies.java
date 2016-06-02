@@ -61,6 +61,10 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             else {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFECEFF1);
             }
+            //adapterViewHolder.tvSessions.setText("Ho hi ha sessions programades");
+        }
+        else {
+            //adapterViewHolder.tvSessions.setText("Ho hi ha sessions programades");
         }
     }
 
@@ -78,7 +82,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
         *  llamaríamos a la referencia en el ViewHolder, ahorrándonos procesamiento.
         */
 
-        public TextView nom;
+        public TextView tvSessions;
         public TextView places;
         public TextView dia;
         public View v;
@@ -92,6 +96,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             this.v = itemView;
             this.places = (TextView) itemView.findViewById(R.id.tv_places_llista_dies);
             this.dia = (TextView) itemView.findViewById(R.id.tv_dia_dies);
+            //this.tvSessions = (TextView) itemView.findViewById(R.id.tv_sessions);
         }
 
         public void setItem (String item) {
