@@ -154,7 +154,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    void calcul_dies(int dia_from_val, int dia_to_val) {
+    public void calcul_dies(int dia_from_val, int dia_to_val) {
         for (int i = dia_from_val; i <= dia_to_val; ++i) {
             String dataObra = i + "/" + mesObra + "/" + anyObra;
             String places = "-";
@@ -177,7 +177,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             values.put(dbHelper.CN_TITOL, bundle.getString("Nom"));
             values.put(dbHelper.CN_DESCRIPCIO, bundle.getString("Descripcio"));
             values.put(dbHelper.CN_DURADA, bundle.getString("Durada"));
-            values.put(dbHelper.CN_PREU, bundle.getString("Preu"));
+            values.put(dbHelper.CN_PREU, String.valueOf(bundle.getString("Preu")));
             values.put(dbHelper.CN_DATA, dataObra.toString());
             values.put(dbHelper.CN_BUTAQUES, places);
             values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));

@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class ConfirmarCompra extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvTitol, tvData, tvEntrades, tvTotal;
@@ -39,15 +41,17 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
 
         btConfirmar.setOnClickListener(this);
 
-        Integer total, entrades;
+        Integer entrades;
+        Double total;
         bundle = getIntent().getExtras();
         if (bundle != null) {
             titol = bundle.getString("Titol");
             tvTitol.setText(titol);
             entrades = bundle.getInt("Entrades");
             tvEntrades.setText(String.valueOf(entrades));
-            total = bundle.getInt("Total");
-            tvTotal.setText(String.valueOf(total)+"€");
+            total = bundle.getDouble("Total");
+            DecimalFormat total_nou = new DecimalFormat("#.00");
+            tvTotal.setText(total_nou.format(total)+"€");
             places_lliures = bundle.getInt("Places");
             butaques_seleccionades = bundle.getString("Butaques");
             dia_setmana = bundle.getString("DiaSetmana");
@@ -92,6 +96,7 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         Bundle bundle = new Bundle();
         bundle.putString("Titol", titol);
         bundle.putString("Data", data);
+        bundle.putString("DiaSetmana", dia_setmana);
         Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
         intent.putExtras(bundle);
         startActivity(intent);

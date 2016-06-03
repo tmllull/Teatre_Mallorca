@@ -40,6 +40,5 @@ public class LlistarUsuaris extends AppCompatActivity {
                     this, android.R.layout.simple_list_item_1, usuaris);
             lvUsuaris.setAdapter(adapter);
         }
-
     }
 }

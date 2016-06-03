@@ -16,6 +16,10 @@ import java.util.Random;
  */
 public class DbHelper extends SQLiteOpenHelper {
 
+    String dataObra, places, dia_setmana;
+
+    long milliseconds;
+
     //Versió de la base de datos
     public static final int DATABASE_VERSION = 1;
 
@@ -185,7 +189,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 null                // The sort order
         );
         int cnt = c.getCount();
-        //c.close();
         return cnt;
     }
 
@@ -273,7 +276,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
                     int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
                     int aux = 40 - lliures;
-                    cont += aux*c.getInt(c.getColumnIndex(CN_PREU));
+                    cont += aux * c.getInt(c.getColumnIndex(CN_PREU));
                 }
             } while (c.moveToNext());
         }
@@ -565,5 +568,27 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         this.newObra(values, this.OBRA_TABLE);
+    }
+
+    public void calcul_dies(int dia_from_val, int dia_to_val) {
+        for (int i = dia_from_val; i <= dia_to_val; ++i) {
+            dataObra = i + "/" + 05 + "/" + 16;
+            places = "-";
+            dia_setmana = "";
+            for (int j = 1; j < 41; ++j) {
+                //Plaça lliure indicat amb un 1
+                places = places + "1";
+            }
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
+            java.util.Date d = null;
+            try {
+                d = f.parse(dataObra);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            milliseconds = d.getTime();
+            SimpleDateFormat formatter = new SimpleDateFormat("c");
+            dia_setmana = formatter.format(new java.sql.Date(milliseconds));
+        }
     }
 }

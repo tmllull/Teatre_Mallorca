@@ -76,7 +76,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             tvDurada.setText(c.getInt(c.getColumnIndex(dbHelper.CN_DURADA))+" min.");
             //PROVES DE MOSTRAR DIA SETMANA
             tvData.setText(dia_setmana+", "+data);
-            tvPreu.setText(c.getInt(c.getColumnIndex(dbHelper.CN_PREU))+"€");
+            tvPreu.setText(c.getString(c.getColumnIndex(dbHelper.CN_PREU))+"€");
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
             tvPlaces.setText(places.toString());
 
@@ -111,8 +111,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         switch (item.getItemId()) {
             case R.id.menu_eliminar_funcio:
                 new AlertDialog.Builder(this)
-                        .setTitle("Eliminar obra")
-                        .setMessage("Estàs segur que vols eliminar la funció?")
+                        .setTitle("Eliminar funció")
+                        .setMessage("Estàs segur que vols eliminar la funció? Aquesta " +
+                                "operació només afecta a aquesta sessió, però no es pot" +
+                                "desfer.")
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleFuncio(titol,data);

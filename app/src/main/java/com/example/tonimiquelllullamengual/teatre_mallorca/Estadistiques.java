@@ -34,7 +34,8 @@ public class Estadistiques extends AppCompatActivity {
         int divendres = dbHelper.getVentesDia("Fri");
         int dissabte = dbHelper.getVentesDia("Sat");
         int diumenge = dbHelper.getVentesDia("Sun");
-        tv_total_entrades.setText(String.valueOf(entrades) + "(100%)\n" + "Ganancies: " +
+        if (entrades == 0) return;
+        tv_total_entrades.setText(String.valueOf(entrades) + "(100%)\n" +
                 ""+dbHelper.getTotalVentes()+"€");
         tv_dilluns.setText(String.valueOf(dilluns) + "(" + dilluns*100/entrades + "%)\n" +
                 ""+dbHelper.getVentesDies("Mon")+"€");

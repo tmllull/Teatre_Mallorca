@@ -25,7 +25,8 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     TextView tvTitol;
     Button btComprar;
     String butaques_seleccionades, data, dia_setmana, titol, butaques;
-    Integer places_lliures, preu, entrades;
+    Integer places_lliures, entrades;
+    Double preu;
     ImageView ivComprar;
     Integer descompte;
 
@@ -108,7 +109,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             butaques = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
             butaques_seleccionades = butaques;
             places_lliures = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-            preu = c.getInt(c.getColumnIndex(dbHelper.CN_PREU));
+            preu = c.getDouble(c.getColumnIndex(dbHelper.CN_PREU));
         }
         String aux;
         for (int i = 1; i < 41; ++i) {
@@ -121,10 +122,10 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     }
 
     void confirmar() {
-        int total = entrades * preu;
+        Double total = entrades * preu;
         total -= (total * descompte) / 100;
         Bundle bundle = new Bundle();
-        bundle.putInt("Total", total);
+        bundle.putDouble("Total", total);
         bundle.putInt("Entrades", entrades);
         bundle.putString("Titol", titol);
         bundle.putString("Data", data);
