@@ -31,7 +31,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
     private Boolean ok = true;
 
     TextView tvDia1, tvDia2;
-    ArrayList<String> dates;
+    //ArrayList<String> dates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
 
         formatDate = new SimpleDateFormat("dd/MM/yy");
 
-        dates = new ArrayList<>();
+        //dates = new ArrayList<>();
 
         dbHelper = new DbHelper(this);
 

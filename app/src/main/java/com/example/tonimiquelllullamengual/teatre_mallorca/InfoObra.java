@@ -23,7 +23,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     boolean places_lliures = false;
     String titol, data, dia_setmana;
     ImageView ivComprar;
-    Integer places;
+    Integer places, disponible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,12 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onClick(View v) {
-                if (places_lliures) {
+                if (disponible == 0) {
+                    Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
+                            "No es poden comprar entrades", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (places_lliures) {
                     Bundle bundle = new Bundle();
                     bundle.putString("Titol", titol);
                     bundle.putString("Data", data);
@@ -67,6 +72,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             titol = bundle.getString("Titol");
             data = bundle.getString("Data");
             dia_setmana = bundle.getString("DiaSetmana");
+            disponible = bundle.getInt("Disponible");
         }
 
         Cursor c = dbHelper.getObra(titol, data);

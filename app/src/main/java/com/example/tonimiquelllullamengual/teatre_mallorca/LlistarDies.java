@@ -10,15 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LlistarDies extends AppCompatActivity {
 
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    String titol, filtre, dia_setmana;
+    String titol, filtre, dia_setmana, data;
     TextView tvSessio;
+    Integer places;
 
     Bundle bundle;
 
@@ -31,9 +35,9 @@ public class LlistarDies extends AppCompatActivity {
         setContentView(R.layout.activity_llistar_dies);
 
         tvSessio = (TextView) findViewById(R.id.tv_sessions);
-        //filtre = "No";
-        //carregar_view(filtre);
-        carregar_view();
+        filtre = "No";
+        carregar_view(filtre);
+        //carregar_view();
 
     }
 
@@ -48,8 +52,12 @@ public class LlistarDies extends AppCompatActivity {
         Cursor c = dbHelper.getDatesObra(titol);
         if (c.moveToFirst()) {
             do {
-                Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                boolean disp = comprovar_disponibilitat(data);
+                if (disp) places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                else places = 0;
+                //places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+
                 dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
                 traduir_dia(dia_setmana);
                 if (filtre.equals("No")) {
@@ -100,8 +108,8 @@ public class LlistarDies extends AppCompatActivity {
         Cursor c = dbHelper.getDatesObra(titol);
         if (c.moveToFirst()) {
             do {
-                Integer places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                String data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
+                places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
                 dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
                 traduir_dia(dia_setmana);
                 dia = new Dia(titol, places, data, dia_setmana);
@@ -208,5 +216,30 @@ public class LlistarDies extends AppCompatActivity {
             this.dia_setmana = "Dissabte";
         else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
             this.dia_setmana = "Diumenge";
+    }
+
+    boolean comprovar_disponibilitat(String data) {
+        /////////////////DATA ACTUAL//////////////////////
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        String data_actual = sdf.format(new Date());
+        Date d = null;
+        try {
+            d = sdf.parse(data_actual);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milis = d.getTime();
+        /////////////DATA A COMPROVAR//////////////////
+        Date d2 = null;
+        try {
+            d2 = sdf.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milis2 = d2.getTime();
+            if ((int)milis2 < (int) milis) {
+                return false;
+            }
+        return true;
     }
 }

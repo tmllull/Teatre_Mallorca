@@ -16,7 +16,10 @@ import java.util.Random;
  */
 public class DbHelper extends SQLiteOpenHelper {
 
-    String dataObra, places, dia_setmana;
+    //Variables de generació d'obres automàtiques
+    String titol, descripcio, usuaris, usuari, dataObra, places, dia_setmana, durada, preu;
+    int p;
+    ///////////////////////////
 
     long milliseconds;
 
@@ -347,7 +350,142 @@ public class DbHelper extends SQLiteOpenHelper {
         db.delete(OBRA_TABLE, null, null);
     }
 
+
+    ////////////////Inicialitzem la BD amb 3 obres///////////////////////////////
     public void initData() {
+        ///////////////////////////////Obra 1//////////////////////////////////
+        titol = "El rey leon";
+        descripcio = "Gracias al genio, visión artística y creativa " +
+                "de su directora, Julie Taymor, el género musical da un paso adelante. " +
+                "Con su sorprendente y colorida puesta en escena, EL REY LEÓN transporta " +
+                "al espectador al exotismo africano, con evocadoras músicas, " +
+                "constituyendo un nuevo hito en el mundo del espectáculo, un punto " +
+                "de inflexión en el diseño artístico, y en general, en el género " +
+                "musical, que a nadie deja indiferente. Un genial equipo creativo " +
+                "para un musical inolvidable.\n" +
+                "\n" +
+                "EL REY LEÓN es un musical excepcional, fruto de la unión de " +
+                "reconocidos talentos musicales y teatrales a nivel mundial y " +
+                "de la fusión de las más sofisticadas disciplinas de las artes " +
+                "escénicas africanas, occidentales y asiáticas. \n\n" +
+                "Un espectáculo único cargado de valores familiares, que demuestra " +
+                "la vinculación de cada uno de nosotros con nuestras raíces. " +
+                "EL REY LEÓN hace que el espectador recapacite sobre la importancia " +
+                "de cada una de nuestras acciones y el efecto que causan en nuestro " +
+                "entorno, así como la importancia de sentir que pertenecemos a un " +
+                "grupo, y como todo ello conforma nuestro destino. Además un canto " +
+                "al respeto y al amor por la naturaleza.";
+        durada = "120";
+        preu = "60";
+        calcul_dies(1, 27);
+
+        /////////////////////////////////Obra2//////////////////////////////////
+        titol = "Mamma mia";
+        descripcio = "En una idíl•lica illa grega dies abans de " +
+                "contreure matrimoni, una jove decideix convidar al seu pare al casament.\n" +
+                "Però, qui serà realment? Quin dels tres homes que van passar per " +
+                "la vida de la seva mare ja fa 20 anys hauria de portar-la a l'altar? \n" +
+                "\n" +
+                "Així comença Mamma Mia! La deliciosa comèdia musical que, construïda " +
+                "al voltant de les enganxoses i inoblidables cançons d’ABBA, ha " +
+                "aconseguit que 54 milions d'espectadors a tot el món s'hagin enamorat " +
+                "dels seus personatges, de la seva música, i d'aquesta encantadora " +
+                "història d'amor, d'humor i d'amistat. \n" +
+                "\n" +
+                "Una invitació a cantar, a ballar i a lliurar-se a l'espectacle des " +
+                "del mateix instant en què s'aixeca el teló, gràcies a aquesta injecció " +
+                "d'energia positiva que torna a Espanya per fer-nos viatjar de nou al " +
+                "costat més optimista i reconfortant de la vida.\n" +
+                "\n" +
+                "Et resistiràs?";
+        generar_places();
+        calcul_dies(10, 23);
+
+        ///////////////////////////////////Obra3///////////////////////////////////////////
+        titol = "Queen";
+        descripcio = "La formación original con Brian May y Roger " +
+                "Taylor se une al cantante Adam Lambert para hacernos revivir todo el " +
+                "sonido y espectacularidad de uno de los grupos de nuestra vida.\n" +
+                "Queen + Adam Lambert hicieron la mayor parte de su gira por el " +
+                "hemisferio sur y reservaron una gira de seis fechas en tres países " +
+                "latinoamericanos: Brasil, Argentina y Chile, tocando en seis estadios. " +
+                "La gira agotó las entradas en un tiempo récord y Queen – esta vez liderado " +
+                "por Adam Lambert- hicieron un retorno triunfal al continente, el cual " +
+                "en los ochenta les proporcionó el concierto más multitudinario jamás " +
+                "logrado: sus dos actuaciones en el Rock in Río de 1985 tuvieron una " +
+                "audiencia total de más de medio millón de personas, la audiencia " +
+                "pagada más grande de la historia.\n" +
+                "\n" +
+                "No te lo pierdas y consigue las entradas para el concierto Queen + " +
+                "Adam Lambert. ";
+        generar_places();
+        calcul_dies(5, 28);
+
+    }
+
+    public void calcul_dies(int dia_from_val, int dia_to_val) {
+        for (int i = dia_from_val; i <= dia_to_val; ++i) {
+            dataObra = i + "/" + 06 + "/" + 16;
+            places = "-";
+            dia_setmana = "";
+            for (int j = 1; j < 41; ++j) {
+                //Plaça lliure indicat amb un 1
+                places = places + "1";
+            }
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
+            java.util.Date d = null;
+            try {
+                d = f.parse(dataObra);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            milliseconds = d.getTime();
+            SimpleDateFormat formatter = new SimpleDateFormat("c");
+            dia_setmana = formatter.format(new java.sql.Date(milliseconds));
+            generar_places();
+            /*if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun.") ||
+                    dia_setmana.equals("Tue") || dia_setmana.equals("Mar.") ||
+                    dia_setmana.equals("Wed") || dia_setmana.equals("Mié.") ||
+                    dia_setmana.equals("Thu") || dia_setmana.equals("Jue.") ||
+                    dia_setmana.equals("Fri") || dia_setmana.equals("Vie.") ||
+                    dia_setmana.equals("Sat") || dia_setmana.equals("Sáb.")) {*/
+                ContentValues values = new ContentValues();
+                values.put(this.CN_TITOL, titol);
+                values.put(this.CN_DESCRIPCIO, descripcio);
+                values.put(this.CN_DURADA, durada);
+                values.put(this.CN_PREU, preu);
+                values.put(this.CN_DATA, dataObra.toString());
+                values.put(this.CN_BUTAQUES, places);
+                values.put(this.CN_MILIS, String.valueOf(milliseconds));
+                values.put(this.CN_PLACES_LLIURES, p);
+                values.put(this.CN_COMPRADORS, usuaris);
+                values.put(this.CN_DIA_SETMANA, dia_setmana);
+                this.newObra(values, this.OBRA_TABLE);
+            //}
+        }
+    }
+
+
+    public void generar_places() {
+        usuaris = "^";
+        usuari = "usuari@prova.com";
+        places = "-";
+        p = 0;
+        for (int i = 1; i < 41; ++i) {
+            Random rand = new Random();
+            int n = rand.nextInt(200);
+            if (n % 2 == 0) {
+                places = places + "0";
+                usuaris = i + usuari + "^" + usuaris;
+            } else {
+                places = places + "1";
+                p++;
+            }
+        }
+    }
+
+
+    /*public void initData() {
         String usuaris = "^";
         String usuari = "usuari@prova.com";
         String dataObra = "03/05/16";
@@ -568,27 +706,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         this.newObra(values, this.OBRA_TABLE);
-    }
+    }*/
 
-    public void calcul_dies(int dia_from_val, int dia_to_val) {
-        for (int i = dia_from_val; i <= dia_to_val; ++i) {
-            dataObra = i + "/" + 05 + "/" + 16;
-            places = "-";
-            dia_setmana = "";
-            for (int j = 1; j < 41; ++j) {
-                //Plaça lliure indicat amb un 1
-                places = places + "1";
-            }
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
-            java.util.Date d = null;
-            try {
-                d = f.parse(dataObra);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            milliseconds = d.getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("c");
-            dia_setmana = formatter.format(new java.sql.Date(milliseconds));
-        }
-    }
 }

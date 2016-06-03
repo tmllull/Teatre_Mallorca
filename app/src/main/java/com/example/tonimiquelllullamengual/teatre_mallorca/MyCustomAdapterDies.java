@@ -1,15 +1,23 @@
 package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
@@ -18,9 +26,14 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 
     ArrayList<Dia> dies;
     String data, dia_setmana;
+
     MyCustomAdapterDies() {
         dies = new ArrayList<>();
     }
+
+    DbHelper dbHelper;
+    int disp = 1; //proves
+    //int si = 0; //proves
 
     @Override
     public MyCustomAdapterDies.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -54,16 +67,14 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                 dia_setmana = "Diumenge";*/
             //else return;
             //adapterViewHolder.dia.setText(data);
-            adapterViewHolder.dia.setText(dia_setmana+", "+data);
+            adapterViewHolder.dia.setText(dia_setmana + ", " + data);
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
-            }
-            else {
+            } else {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFECEFF1);
             }
             //adapterViewHolder.tvSessions.setText("Ho hi ha sessions programades");
-        }
-        else {
+        } else {
             //adapterViewHolder.tvSessions.setText("Ho hi ha sessions programades");
         }
     }
@@ -99,26 +110,91 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             //this.tvSessions = (TextView) itemView.findViewById(R.id.tv_sessions);
         }
 
-        public void setItem (String item) {
+        public void setItem(String item) {
             mItem = item;
             mTextView = item;
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
+            //////////Proves////////////
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+            String data_actual = sdf.format(new Date());
+            Date d = null;
+            try {
+                d = sdf.parse(data_actual);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            final long milis = d.getTime();
+            dbHelper = new DbHelper(v.getContext());
+            String nom = dies.get(getAdapterPosition()).getNom();
+            String diia = dies.get(getAdapterPosition()).getDia();
+            //final long milis = System.currentTimeMillis();
+            final Cursor c = dbHelper.getObraData(nom, diia);
+            if (c.moveToFirst()) {
+                if (c.getInt(c.getColumnIndex(dbHelper.CN_MILIS)) < (int)milis) {
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("La sessió ha expirat")
+                            .setMessage("Aquesta sessió ja no està disponible, " +
+                                    "pots consultar la seva informació i usuaris, però no " +
+                                    "podràs comprar entrades")
+                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    disp = 0;
+                                    //si = 1;
+                                    //int aux = c.getInt(c.getColumnIndex(dbHelper.CN_MILIS));
+                                    //long aux2 = (long)aux-milis;
+                                    //Toast.makeText(v.getContext(), String.valueOf(aux2) , Toast.LENGTH_SHORT).show();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
+                                    bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
+                                    bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
+                                    bundle.putInt("Disponible", disp);
+                                    Intent intent = new Intent(v.getContext(), InfoObra.class);
+                                    intent.putExtras(bundle);
+                                    v.getContext().startActivity(intent);
+                                    ((Activity) v.getContext()).finish();
 
-            Bundle bundle = new Bundle();
-            bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
-            bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
-            bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
-            Intent intent = new Intent (v.getContext(), InfoObra.class);
-            intent.putExtras(bundle);
-            v.getContext().startActivity(intent);
-            ((Activity)v.getContext()).finish();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(R.drawable.info)
+                            .show();
+
+                }
+                else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
+                    bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
+                    bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
+                    bundle.putInt("Disponible", disp);
+                    Intent intent = new Intent(v.getContext(), InfoObra.class);
+                    intent.putExtras(bundle);
+                    v.getContext().startActivity(intent);
+                    ((Activity) v.getContext()).finish();
+                }
+            }
+            //if (disp == 0) return;
+            /*else if(disp == 1) {
+                /////////////////////////FI_PROVES/////////////////////////////////////////
+                Bundle bundle = new Bundle();
+                bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
+                bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
+                bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
+                bundle.putInt("Disponible", disp);
+                Intent intent = new Intent(v.getContext(), InfoObra.class);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+                ((Activity) v.getContext()).finish();
+            }*/
         }
     }
 
-    public void setDataSet (ArrayList<Dia> dies) {
+    public void setDataSet(ArrayList<Dia> dies) {
         this.dies = dies;
         notifyDataSetChanged();
     }
