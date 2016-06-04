@@ -52,13 +52,13 @@ public class Estadistiques extends AppCompatActivity {
 
         //Total d'entrades per dies
         int entrades = dbHelper.getTotalEntrades();
-        int dilluns = dbHelper.getEntrades("Mon");
-        int dimarts = dbHelper.getEntrades("Tue");
-        int dimecres = dbHelper.getEntrades("Wed");
-        int dijous = dbHelper.getEntrades("Thu");
-        int divendres = dbHelper.getEntrades("Fri");
-        int dissabte = dbHelper.getEntrades("Sat");
-        int diumenge = dbHelper.getEntrades("Sun");
+        int dilluns = dbHelper.getEntrades("Mon", "Lun.");
+        int dimarts = dbHelper.getEntrades("Tue", "Mar.");
+        int dimecres = dbHelper.getEntrades("Wed", "Mié.");
+        int dijous = dbHelper.getEntrades("Thu", "Jue.");
+        int divendres = dbHelper.getEntrades("Fri", "Vie.");
+        int dissabte = dbHelper.getEntrades("Sat", "Sáb.");
+        int diumenge = dbHelper.getEntrades("Sun", "Dom.");
 
         //Detecció de cap entrada venuda encara per evitar problemes
         if (entrades == 0) return;
@@ -69,37 +69,37 @@ public class Estadistiques extends AppCompatActivity {
         percentatge[0].setDia("Dilluns");
         percentatge[0].setPerc(dilluns * 100 / entrades);
         percentatge[0].setEntrades(dilluns);
-        percentatge[0].setVendes(dbHelper.getRecaptacio("Mon"));
+        percentatge[0].setVendes(dbHelper.getRecaptacio("Mon", "Lun."));
         percentatge[1] = new Percentage();
         percentatge[1].setDia("Dimarts");
         percentatge[1].setPerc(dimarts * 100 / entrades);
         percentatge[1].setEntrades(dimarts);
-        percentatge[1].setVendes(dbHelper.getRecaptacio("Tue"));
+        percentatge[1].setVendes(dbHelper.getRecaptacio("Tue", "Mar."));
         percentatge[2] = new Percentage();
         percentatge[2].setDia("Dimecres");
         percentatge[2].setPerc(dimecres * 100 / entrades);
         percentatge[2].setEntrades(dimecres);
-        percentatge[2].setVendes(dbHelper.getRecaptacio("Wed"));
+        percentatge[2].setVendes(dbHelper.getRecaptacio("Wed", "Mié."));
         percentatge[3] = new Percentage();
         percentatge[3].setDia("Dijous");
         percentatge[3].setPerc(dijous * 100 / entrades);
         percentatge[3].setEntrades(dijous);
-        percentatge[3].setVendes(dbHelper.getRecaptacio("Thu"));
+        percentatge[3].setVendes(dbHelper.getRecaptacio("Thu", "Jue."));
         percentatge[4] = new Percentage();
         percentatge[4].setDia("Divendres");
         percentatge[4].setPerc(divendres * 100 / entrades);
         percentatge[4].setEntrades(divendres);
-        percentatge[4].setVendes(dbHelper.getRecaptacio("Fri"));
+        percentatge[4].setVendes(dbHelper.getRecaptacio("Fri", "Vie."));
         percentatge[5] = new Percentage();
         percentatge[5].setDia("Dissabte");
         percentatge[5].setPerc(dissabte * 100 / entrades);
         percentatge[5].setEntrades(dissabte);
-        percentatge[5].setVendes(dbHelper.getRecaptacio("Sat"));
+        percentatge[5].setVendes(dbHelper.getRecaptacio("Sat", "Sáb."));
         percentatge[6] = new Percentage();
         percentatge[6].setDia("Diumenge");
         percentatge[6].setPerc(diumenge * 100 / entrades);
         percentatge[6].setEntrades(diumenge);
-        percentatge[6].setVendes(dbHelper.getRecaptacio("Sun"));
+        percentatge[6].setVendes(dbHelper.getRecaptacio("Sun", "Dom."));
 
         //Ordenació de major a menor en nombre d'entrades venudes
         Arrays.sort(percentatge);
@@ -121,37 +121,37 @@ public class Estadistiques extends AppCompatActivity {
             if (percentatge[i].getDia().equals("Dilluns")) {
                 tv_entrades_dilluns.setText("Entrades: "+String.valueOf(dilluns) +
                                 "(" + percentatge[i].getPerc() + "%)");
-                tv_dilluns.setText("Recaptació: "+dbHelper.getRecaptacio("Mon") + "€");
+                tv_dilluns.setText("Recaptació: "+dbHelper.getRecaptacio("Mon", "Lun.") + "€");
                 lays[0].setBackgroundColor(colors[i]);
             } else if (percentatge[i].getDia().equals("Dimarts")) {
                 tv_entrades_dimarts.setText("Entrades: "+String.valueOf(dimarts) +
                 "(" + percentatge[i].getPerc() + "%)");
-                tv_dimarts.setText("Recaptació: "+dbHelper.getRecaptacio("Tue") + "€");
+                tv_dimarts.setText("Recaptació: "+dbHelper.getRecaptacio("Tue", "Mar.") + "€");
                 lays[1].setBackgroundColor(colors[i]);
             } else if (percentatge[i].getDia().equals("Dimecres")) {
                 tv_entrades_dimecres.setText("Entrades: "+String.valueOf(dimecres) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dimecres.setText("Recaptació: "+dbHelper.getRecaptacio("Wed") + "€");
+                tv_dimecres.setText("Recaptació: "+dbHelper.getRecaptacio("Wed", "Mié.") + "€");
                 lays[2].setBackgroundColor(colors[i]);
             } else if (percentatge[i].getDia().equals("Dijous")) {
                 tv_entrades_dijous.setText("Entrades: "+String.valueOf(dijous) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dijous.setText("Recaptació: "+dbHelper.getRecaptacio("Tue") + "€");
+                tv_dijous.setText("Recaptació: "+dbHelper.getRecaptacio("Tue", "Jue.") + "€");
                 lays[3].setBackgroundColor(colors[i]);
             } else if (percentatge[i].getDia().equals("Divendres")) {
                 tv_entrades_divendres.setText("Entrades: "+String.valueOf(divendres) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_divendres.setText("Recaptació: "+dbHelper.getRecaptacio("Fri") + "€");
+                tv_divendres.setText("Recaptació: "+dbHelper.getRecaptacio("Fri", "Vie.") + "€");
                 lays[4].setBackgroundColor(colors[i]);
             } else if (percentatge[i].getDia().equals("Dissabte")) {
                 tv_entrades_dissabte.setText("Entrades: "+String.valueOf(dissabte) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dissabte.setText("Recaptació: "+dbHelper.getRecaptacio("Sat") + "€");
+                tv_dissabte.setText("Recaptació: "+dbHelper.getRecaptacio("Sat", "Sáb.") + "€");
                 lays[5].setBackgroundColor(colors[i]);
             } else if (percentatge[i].getDia().equals("Diumenge")) {
                 tv_entrades_diumenge.setText("Entrades: "+String.valueOf(diumenge) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_diumenge.setText("Recaptació: "+dbHelper.getRecaptacio("Sun") + "€");
+                tv_diumenge.setText("Recaptació: "+dbHelper.getRecaptacio("Sun", "Dom.") + "€");
                 lays[6].setBackgroundColor(colors[i]);
             }
         }
