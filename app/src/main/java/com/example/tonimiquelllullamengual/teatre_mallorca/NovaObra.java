@@ -25,6 +25,8 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
 
     private SimpleDateFormat formatDate;
 
+    Bundle bundle;
+
     DbHelper dbHelper;
 
     @Override
@@ -45,6 +47,14 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         prepareCalendar();
 
         dbHelper = new DbHelper(this);
+
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            etNom.setText(bundle.getString("Nom"));
+            etDescripcio.setText(bundle.getString("Descripcio"));
+            etDurada.setText(bundle.getString("Durada"));
+            etPreu.setText(bundle.getString("Preu"));
+        }
 
     }
 
@@ -96,7 +106,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                     break;
                 }
                 Bundle bundle = new Bundle();
-                bundle.putString("Nom",etNom.getText().toString());
+                bundle.putString("Nom",etNom.getText().toString().toUpperCase());
                 bundle.putString("Descripcio", etDescripcio.getText().toString());
                 bundle.putString("Durada", etDurada.getText().toString());
                 bundle.putString("Preu", etPreu.getText().toString());

@@ -12,7 +12,7 @@
             android:title="Esborrar les dades" />
         <item
             android:id="@+id/estadistiques"
-            android:icon="@drawable/add"
+            android:icon="@drawable/statistics"
             android:title="Estadístiques" />
     </group>
 

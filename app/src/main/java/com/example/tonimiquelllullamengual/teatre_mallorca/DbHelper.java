@@ -245,7 +245,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public int getVentesDia(String dia) {
+    public int getEntrades(String dia) {
         Cursor c = this.getDies(dia);
         int cont = 0;
         if (c.moveToFirst()) {
@@ -286,7 +286,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return cont;
     }
 
-    public int getVentesDies(String dia) {
+    public int getRecaptacio(String dia) {
         Cursor c = this.getDies(dia);
         int cont = 0;
         if (c.moveToFirst()) {
@@ -450,7 +450,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     dia_setmana.equals("Fri") || dia_setmana.equals("Vie.") ||
                     dia_setmana.equals("Sat") || dia_setmana.equals("Sáb.")) {*/
                 ContentValues values = new ContentValues();
-                values.put(this.CN_TITOL, titol);
+                values.put(this.CN_TITOL, titol.toUpperCase());
                 values.put(this.CN_DESCRIPCIO, descripcio);
                 values.put(this.CN_DURADA, durada);
                 values.put(this.CN_PREU, preu);

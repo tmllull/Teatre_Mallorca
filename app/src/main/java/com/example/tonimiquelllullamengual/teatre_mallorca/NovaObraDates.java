@@ -2,10 +2,12 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,8 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
     private int cont;
     private Integer dia_from_val, mes_from_val, any_from_val, dia_to_val, mes_to_val, any_to_val;
     private Boolean ok = true;
+    private CheckBox cbDilluns, cbDimarts, cbDimecres, cbDijous, cbDivendres, cbDissabte,
+            cbDiumenge;
 
     TextView tvDia1, tvDia2;
     //ArrayList<String> dates;
@@ -43,6 +47,13 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
         tvDia1 = (TextView) findViewById(R.id.tv_dia_1);
         tvDia2 = (TextView) findViewById(R.id.tv_dia_2);
         btGuardar = (Button) findViewById(R.id.bt_guardar_dates_obra);
+        cbDilluns = (CheckBox) findViewById(R.id.cb_dilluns);
+        cbDimarts = (CheckBox) findViewById(R.id.cb_dimarts);
+        cbDimecres = (CheckBox) findViewById(R.id.cb_dimecres);
+        cbDijous = (CheckBox) findViewById(R.id.cb_dijous);
+        cbDivendres = (CheckBox) findViewById(R.id.cb_divendres);
+        cbDissabte = (CheckBox) findViewById(R.id.cb_dissabte);
+        cbDiumenge = (CheckBox) findViewById(R.id.cb_diumenge);
 
         tvDia1.setOnClickListener(this);
         tvDia2.setOnClickListener(this);
@@ -185,9 +196,51 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             values.put(dbHelper.CN_COMPRADORS, "^");
             values.put(dbHelper.CN_DIA_SETMANA, dia_setmana);
 
+            if (cbDilluns.isChecked()){
+                if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
+            if (cbDimarts.isChecked()) {
+                if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
+            if (cbDimecres.isChecked()) {
+                if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
+            if (cbDijous.isChecked()) {
+                if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
+            if (cbDivendres.isChecked()) {
+                if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
+            if (cbDissabte.isChecked()) {
+                if (dia_setmana.equals("Sat") || dia_setmana.equals("Sáb.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
+            if (cbDiumenge.isChecked()) {
+                if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom.")) {
+                    dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                    ++cont;
+                }
+            }
 
-            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-            ++cont;
+            //dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+            //++cont;
         }
     }
 
@@ -208,6 +261,13 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
+                else if (!cbDilluns.isChecked() && !cbDimarts.isChecked() && !cbDimecres.isChecked() &&
+                        !cbDijous.isChecked() && !cbDivendres.isChecked() && !cbDissabte.isChecked()
+                        && !cbDiumenge.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "Selecciona almenys un dia",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 guardarObra();
                 if (ok) {
                     Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
@@ -218,5 +278,13 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), NovaObra.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

@@ -45,8 +45,12 @@
         <activity
             android:name=".LlistarUsuaris"
             android:label="Usuaris" />
-        <activity android:name=".Help" />
-        <activity android:name=".Estadistiques"></activity>
+        <activity
+            android:name=".Help"
+            android:label="Help"/>
+        <activity
+            android:name=".Estadistiques"
+            android:label="Estadistiques"></activity>
     </application>
 
 </manifest>

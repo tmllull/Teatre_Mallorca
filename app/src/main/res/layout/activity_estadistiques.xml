@@ -16,7 +16,9 @@
         android:text="Estadistiques"
         android:id="@+id/textView41"
         android:textSize="30dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone" />
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -25,117 +27,444 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total d&apos;entrades venudes"
-            android:id="@+id/textView35"
-            android:textSize="20dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cap entrada venuda"
-            android:id="@+id/tv_total_entrades"
-            android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total d&apos;entrades venudes"
+                android:id="@+id/textView35"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#343434" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dilluns"
-            android:id="@+id/textView36"
-            android:textSize="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cap entrada venuda"
+                android:id="@+id/tv_total_entrades"
+                android:textSize="15dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#343434" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_dilluns"
-            android:textSize="15dp" />
+            android:layout_marginTop="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dimarts"
-            android:id="@+id/textView39"
-            android:textSize="20dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_dilluns"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_dimarts"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dilluns"
+                    android:id="@+id/textView36"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#343434" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dimecres"
-            android:id="@+id/textView25"
-            android:textSize="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_dilluns"
+                    android:textColor="#343434" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_dimecres"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_dilluns"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:textColor="#343434" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dijous"
-            android:id="@+id/textView38"
-            android:textSize="20dp" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_dijous"
-            android:textSize="15dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_dimarts"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Divendres"
-            android:id="@+id/textView42"
-            android:textSize="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dimarts"
+                    android:id="@+id/textView39"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#343434" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_divendres"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_dimarts"
+                    android:textColor="#343434" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dissabte"
-            android:id="@+id/textView34"
-            android:textSize="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_dimarts"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:textColor="#343434" />
+            </LinearLayout>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_dissabte"
-            android:textSize="15dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Diumenge"
-            android:id="@+id/textView43"
-            android:textSize="20dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_dimecres"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
 
-        <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dimecres"
+                    android:id="@+id/textView25"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_dimecres"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_dimecres"
+                    android:textSize="15dp"
+                    android:textColor="#343434" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_dijous"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dijous"
+                    android:id="@+id/textView38"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_dijous"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_dijous"
+                    android:textSize="15dp"
+                    android:textColor="#343434" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_divendres"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Divendres"
+                    android:id="@+id/textView42"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_divendres"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_divendres"
+                    android:textSize="15dp"
+                    android:textColor="#343434" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_dissabtes"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dissabte"
+                    android:id="@+id/textView34"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_dissabte"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_dissabte"
+                    android:textSize="15dp"
+                    android:textColor="#343434" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lay_diumenges"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_margin="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diumenge"
+                    android:id="@+id/textView43"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 entrades"
+                    android:id="@+id/tv_entrades_diumenge"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0€"
+                    android:id="@+id/tv_diumenge"
+                    android:textSize="15dp"
+                    android:textColor="#343434" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Llegenda"
+                android:id="@+id/textView52"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#343434" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0€"
-            android:id="@+id/tv_diumenge"
-            android:textSize="15dp" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView45"
+                android:layout_weight="1"
+                android:background="#7fFF3300"
+                android:textColor="#00ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView46"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:background="#7fFF6B00"
+                android:textColor="#00ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView47"
+                android:layout_weight="1"
+                android:background="#7fFFB700"
+                android:textColor="#00ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView48"
+                android:layout_weight="1"
+                android:background="#7fFFF700"
+                android:textColor="#00ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView49"
+                android:layout_weight="1"
+                android:background="#7fC4FF00"
+                android:textColor="#00ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView50"
+                android:layout_weight="1"
+                android:background="#7f77FF00"
+                android:textColor="#00ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView51"
+                android:layout_weight="1"
+                android:background="#7f11FF00"
+                android:textColor="#00ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="- entrades"
+                android:id="@+id/textView53"
+                android:layout_weight="1"
+                android:textColor="#343434" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView54"
+                android:layout_gravity="right"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView55"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView56"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView58"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ entrades"
+                android:id="@+id/textView59"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:textColor="#343434" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
+
 </LinearLayout>

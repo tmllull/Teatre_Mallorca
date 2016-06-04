@@ -52,10 +52,16 @@ public class LlistarDies extends AppCompatActivity {
         Cursor c = dbHelper.getDatesObra(titol);
         if (c.moveToFirst()) {
             do {
+                String milis = c.getString(c.getColumnIndex(dbHelper.CN_MILIS));
+                //Long.valueOf(milis);
                 data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                boolean disp = comprovar_disponibilitat(data);
+                boolean disp = comprovar_disponibilitat(milis);
                 if (disp) places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                else places = 0;
+                else {
+                    //places = 0;
+                    //dbHelper.updatePlacesLliures(titol, data, 0);
+                    places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                }
                 //places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
 
                 dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
@@ -218,9 +224,9 @@ public class LlistarDies extends AppCompatActivity {
             this.dia_setmana = "Diumenge";
     }
 
-    boolean comprovar_disponibilitat(String data) {
+    boolean comprovar_disponibilitat(String milis) {
         /////////////////DATA ACTUAL//////////////////////
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         String data_actual = sdf.format(new Date());
         Date d = null;
         try {
@@ -239,7 +245,9 @@ public class LlistarDies extends AppCompatActivity {
         long milis2 = d2.getTime();
             if ((int)milis2 < (int) milis) {
                 return false;
-            }
+            }*/
+        Long milis_act = System.currentTimeMillis();
+        if (Long.valueOf(milis) < milis_act) return false;
         return true;
     }
 }

@@ -127,19 +127,20 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                 e.printStackTrace();
             }
             final long milis = d.getTime();
+            //Long milis_act = System.currentTimeMillis();
             dbHelper = new DbHelper(v.getContext());
             String nom = dies.get(getAdapterPosition()).getNom();
             String diia = dies.get(getAdapterPosition()).getDia();
             //final long milis = System.currentTimeMillis();
             final Cursor c = dbHelper.getObraData(nom, diia);
             if (c.moveToFirst()) {
-                if (c.getInt(c.getColumnIndex(dbHelper.CN_MILIS)) < (int)milis) {
+                if (Long.valueOf(c.getString(c.getColumnIndex(dbHelper.CN_MILIS))) < milis) {
                     new AlertDialog.Builder(v.getContext())
                             .setTitle("La sessió ha expirat")
-                            .setMessage("Aquesta sessió ja no està disponible, " +
-                                    "pots consultar la seva informació i usuaris, però no " +
+                            .setMessage("Aquesta sessió ja no està disponible. " +
+                                    "Pots consultar la seva informació i usuaris, però no " +
                                     "podràs comprar entrades")
-                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("D'acord", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     disp = 0;
                                     //si = 1;
@@ -158,8 +159,9 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("Tornar", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
+                                    //Toast.makeText(v.getContext(), String.valueOf((int)milis) , Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setIcon(R.drawable.info)
