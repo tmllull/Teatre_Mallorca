@@ -171,8 +171,6 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                 }
             }
             return;
-        } else {
-            //confirmar();
         }
     }
 
@@ -182,6 +180,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
         bundle.putString("Titol", tvTitol.getText().toString());
         bundle.putString("Data", data);
         bundle.putString("DiaSetmana", dia_setmana);
+        bundle.putInt("Disponible", 1);
         Intent intent = new Intent(getApplicationContext(), InfoObra.class);
         intent.putExtras(bundle);
         startActivity(intent);

@@ -43,7 +43,6 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
 
     void carregar_spinner_obres() {
         // Spinner obres
-
         obres.add("Selecciona una obra de la llista");
 
         Cursor c = dbHelper.getAllObresDistinct();

@@ -32,8 +32,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
     }
 
     DbHelper dbHelper;
-    int disp = 1; //proves
-    //int si = 0; //proves
+    int disp = 1;
 
     @Override
     public MyCustomAdapterDies.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -47,35 +46,15 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
     @Override
     public void onBindViewHolder(MyCustomAdapterDies.AdapterViewHolder adapterViewHolder, int position) {
         if (dies != null) {
-//            adapterViewHolder.nom.setText(dies.get(position).getNom());
             adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
             data = dies.get(position).getDia().toString();
             dia_setmana = dies.get(position).getDiaSetmana().toString();
-            /*if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
-                dia_setmana = "Dilluns";
-            else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
-                dia_setmana = "Dimarts";
-            else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié."))
-                dia_setmana = "Dimecres";
-            else if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue."))
-                dia_setmana = "Dijous";
-            else if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie."))
-                dia_setmana = "Divendres";
-            else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sab."))
-                dia_setmana = "Dissabte";
-            else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
-                dia_setmana = "Diumenge";*/
-            //else return;
-            //adapterViewHolder.dia.setText(data);
             adapterViewHolder.dia.setText(dia_setmana + ", " + data);
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
             } else {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFECEFF1);
             }
-            //adapterViewHolder.tvSessions.setText("Ho hi ha sessions programades");
-        } else {
-            //adapterViewHolder.tvSessions.setText("Ho hi ha sessions programades");
         }
     }
 
@@ -93,7 +72,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
         *  llamaríamos a la referencia en el ViewHolder, ahorrándonos procesamiento.
         */
 
-        public TextView tvSessions;
         public TextView places;
         public TextView dia;
         public View v;
@@ -107,7 +85,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             this.v = itemView;
             this.places = (TextView) itemView.findViewById(R.id.tv_places_llista_dies);
             this.dia = (TextView) itemView.findViewById(R.id.tv_dia_dies);
-            //this.tvSessions = (TextView) itemView.findViewById(R.id.tv_sessions);
         }
 
         public void setItem(String item) {
@@ -117,7 +94,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 
         @Override
         public void onClick(final View v) {
-            //////////Proves////////////
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
             String data_actual = sdf.format(new Date());
             Date d = null;
@@ -127,11 +103,9 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                 e.printStackTrace();
             }
             final long milis = d.getTime();
-            //Long milis_act = System.currentTimeMillis();
             dbHelper = new DbHelper(v.getContext());
             String nom = dies.get(getAdapterPosition()).getNom();
             String diia = dies.get(getAdapterPosition()).getDia();
-            //final long milis = System.currentTimeMillis();
             final Cursor c = dbHelper.getObraData(nom, diia);
             if (c.moveToFirst()) {
                 if (Long.valueOf(c.getString(c.getColumnIndex(dbHelper.CN_MILIS))) < milis) {
@@ -143,10 +117,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                             .setPositiveButton("D'acord", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     disp = 0;
-                                    //si = 1;
-                                    //int aux = c.getInt(c.getColumnIndex(dbHelper.CN_MILIS));
-                                    //long aux2 = (long)aux-milis;
-                                    //Toast.makeText(v.getContext(), String.valueOf(aux2) , Toast.LENGTH_SHORT).show();
                                     Bundle bundle = new Bundle();
                                     bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
                                     bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
@@ -161,7 +131,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                             })
                             .setNegativeButton("Tornar", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //Toast.makeText(v.getContext(), String.valueOf((int)milis) , Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setIcon(R.drawable.info)
@@ -180,19 +149,6 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                     ((Activity) v.getContext()).finish();
                 }
             }
-            //if (disp == 0) return;
-            /*else if(disp == 1) {
-                /////////////////////////FI_PROVES/////////////////////////////////////////
-                Bundle bundle = new Bundle();
-                bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
-                bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
-                bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
-                bundle.putInt("Disponible", disp);
-                Intent intent = new Intent(v.getContext(), InfoObra.class);
-                intent.putExtras(bundle);
-                v.getContext().startActivity(intent);
-                ((Activity) v.getContext()).finish();
-            }*/
         }
     }
 

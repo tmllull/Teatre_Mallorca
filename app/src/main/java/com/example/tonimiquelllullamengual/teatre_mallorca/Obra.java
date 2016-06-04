@@ -20,10 +20,6 @@ public class Obra {
         this.sessions = sessions;
     }
 
-    Obra (String nom) {
-        this.nom = nom;
-    }
-
     Obra() {}
 
     public String getNom() {return nom;}

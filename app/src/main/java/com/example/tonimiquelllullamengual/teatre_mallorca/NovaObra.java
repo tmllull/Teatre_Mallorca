@@ -71,31 +71,6 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 calendari.get(Calendar.DAY_OF_MONTH));
     }
 
-    /*public void newObra() {
-        if (etNom.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
-                    Toast.LENGTH_LONG).show();
-            return;
-        }
-        else  {
-            String places = "-";
-            for (int i = 1; i < 41; ++i) {
-                //Plaça lliure indicat amb un 1
-                places = places+"1";
-            }
-            ContentValues values = new ContentValues();
-            values.put(dbHelper.CN_TITOL, etNom.getText().toString());
-            values.put(dbHelper.CN_DESCRIPCIO, etDescripcio.getText().toString());
-            values.put(dbHelper.CN_DURADA, etDurada.getText().toString());
-            values.put(dbHelper.CN_PREU, etPreu.getText().toString());
-            values.put(dbHelper.CN_DATA, tvData.getText().toString());
-            values.put(dbHelper.CN_BUTAQUES, places);
-            values.put(dbHelper.CN_PLACES_LLIURES, 40);
-
-            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-        }
-    }*/
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

@@ -15,12 +15,6 @@ public class Dia {
         this.dia_setmana = dia_setmana;
     }
 
-    Dia(String data, Integer places, String dia_setmana) {
-        this.data = data;
-        this.places = places;
-        this.dia_setmana = dia_setmana;
-    }
-
     Dia() {}
 
     public String getNom() {return nom;}

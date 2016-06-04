@@ -34,7 +34,6 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
     public void onBindViewHolder(MyCustomAdapterObres.AdapterViewHolder adapterViewHolder, int position) {
         if (obres != null) {
             adapterViewHolder.nom.setText(obres.get(position).getNom());
-            //adapterViewHolder.places.setText(obres.get(position).getPlaces().toString());
             adapterViewHolder.sessions.setText(obres.get(position).getSessions().toString());
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
@@ -96,5 +95,4 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
         this.obres = obres;
         notifyDataSetChanged();
     }
-
 }

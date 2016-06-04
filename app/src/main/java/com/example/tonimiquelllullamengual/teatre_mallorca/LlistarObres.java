@@ -15,8 +15,6 @@ public class LlistarObres extends AppCompatActivity {
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    boolean ordre = false;
-
     private MyCustomAdapterObres adapter;
     ArrayList<Obra> obres = new ArrayList<>();
 
@@ -26,7 +24,6 @@ public class LlistarObres extends AppCompatActivity {
         setContentView(R.layout.activity_llistar_obres);
 
         carregar_view();
-
     }
 
     public void carregar_view() {
@@ -62,11 +59,6 @@ public class LlistarObres extends AppCompatActivity {
 
     }
 
-    public void updateData(boolean ordre) {
-        obres = new ArrayList<>();
-        carregar_view();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -83,12 +75,8 @@ public class LlistarObres extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case R.id.menu_seleccionar_dia:
-                //ordre = false;
-                //updateData(ordre);
                 return false;
             case R.id.menu_mostrar_tot:
-                //ordre = true;
-                //updateData(ordre);
                 return false;
             default:
                 return false;

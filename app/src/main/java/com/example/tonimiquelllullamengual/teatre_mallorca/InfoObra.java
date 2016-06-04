@@ -80,7 +80,6 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
             tvTitol.setText(titol);
             tvDescripcio.setText(c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
             tvDurada.setText(c.getInt(c.getColumnIndex(dbHelper.CN_DURADA))+" min.");
-            //PROVES DE MOSTRAR DIA SETMANA
             tvData.setText(dia_setmana+", "+data);
             tvPreu.setText(c.getString(c.getColumnIndex(dbHelper.CN_PREU))+"€");
             places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));

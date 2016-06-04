@@ -35,7 +35,6 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
             cbDiumenge;
 
     TextView tvDia1, tvDia2;
-    //ArrayList<String> dates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +59,6 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
         btGuardar.setOnClickListener(this);
 
         formatDate = new SimpleDateFormat("dd/MM/yy");
-
-        //dates = new ArrayList<>();
 
         dbHelper = new DbHelper(this);
 
@@ -238,9 +235,6 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                     ++cont;
                 }
             }
-
-            //dbHelper.newObra(values, dbHelper.OBRA_TABLE);
-            //++cont;
         }
     }
 

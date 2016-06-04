@@ -10,11 +10,6 @@ public class Percentage implements Comparable{
     private Integer entrades;
     private Integer vendes;
 
-    Percentage(String dia, int perc) {
-        this.dia = dia;
-        this.perc = perc;
-    }
-
     Percentage() {}
 
     public void setDia(String dia) {

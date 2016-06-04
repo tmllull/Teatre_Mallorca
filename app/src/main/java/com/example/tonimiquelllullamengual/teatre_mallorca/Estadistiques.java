@@ -15,7 +15,6 @@ public class Estadistiques extends AppCompatActivity {
             tv_entrades_dimecres, tv_entrades_dijous, tv_entrades_divendres, tv_entrades_dissabte,
             tv_entrades_diumenge;
 
-    LinearLayout l1, l2, l3, l4, l5, l6, l7;
     LinearLayout lays[] = new LinearLayout[7];
 
     Percentage percentatge[];
@@ -51,6 +50,7 @@ public class Estadistiques extends AppCompatActivity {
         lays[6] = (LinearLayout) findViewById(R.id.lay_diumenges);
 
 
+        //Total d'entrades per dies
         int entrades = dbHelper.getTotalEntrades();
         int dilluns = dbHelper.getEntrades("Mon");
         int dimarts = dbHelper.getEntrades("Tue");
@@ -60,8 +60,10 @@ public class Estadistiques extends AppCompatActivity {
         int dissabte = dbHelper.getEntrades("Sat");
         int diumenge = dbHelper.getEntrades("Sun");
 
+        //Detecció de cap entrada venuda encara per evitar problemes
         if (entrades == 0) return;
 
+        //Array on guardem tota la informació de cada dia de la setmana
         percentatge = new Percentage[7];
         percentatge[0] = new Percentage();
         percentatge[0].setDia("Dilluns");
@@ -99,8 +101,10 @@ public class Estadistiques extends AppCompatActivity {
         percentatge[6].setEntrades(diumenge);
         percentatge[6].setVendes(dbHelper.getRecaptacio("Sun"));
 
+        //Ordenació de major a menor en nombre d'entrades venudes
         Arrays.sort(percentatge);
 
+        //Array de colors per pintar-los de forma "dinàmica"
         int colors[] = new int[7];
         colors[0] = 0x6f11FF00;
         colors[1] = 0x6f77FF00;
@@ -110,8 +114,7 @@ public class Estadistiques extends AppCompatActivity {
         colors[5] = 0x6fFF6B00;
         colors[6] = 0x6fFF3300;
 
-
-
+        //Processat de la informació a mostrar
         tv_total_entrades.setText("Entrades: " + String.valueOf(entrades) + "(100%)\n" +
                 "Recaptació: " + dbHelper.getTotalVentes() + "€");
         for (int i = 0; i < 7; ++i) {
@@ -152,6 +155,5 @@ public class Estadistiques extends AppCompatActivity {
                 lays[6].setBackgroundColor(colors[i]);
             }
         }
-
     }
 }

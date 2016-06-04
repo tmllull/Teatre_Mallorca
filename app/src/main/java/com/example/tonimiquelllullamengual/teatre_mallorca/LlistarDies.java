@@ -37,7 +37,6 @@ public class LlistarDies extends AppCompatActivity {
         tvSessio = (TextView) findViewById(R.id.tv_sessions);
         filtre = "No";
         carregar_view(filtre);
-        //carregar_view();
 
     }
 
@@ -55,15 +54,12 @@ public class LlistarDies extends AppCompatActivity {
                 String milis = c.getString(c.getColumnIndex(dbHelper.CN_MILIS));
                 //Long.valueOf(milis);
                 data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                boolean disp = comprovar_disponibilitat(milis);
-                if (disp) places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+                //boolean disp = comprovar_disponibilitat(milis);
+                /*if (disp) places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 else {
-                    //places = 0;
-                    //dbHelper.updatePlacesLliures(titol, data, 0);
                     places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                }
-                //places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-
+                }*/
+                places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
                 traduir_dia(dia_setmana);
                 if (filtre.equals("No")) {
@@ -76,50 +72,6 @@ public class LlistarDies extends AppCompatActivity {
                         dies.add(dia);
                     }
                 }
-                //dies.add(dia);
-            } while (c.moveToNext());
-        }
-
-        if (dies.isEmpty()) tvSessio.setText("Cap sessio programada");
-        else tvSessio.setText("Sessions programades");
-
-        //findViewById del layout activity_main
-        mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);
-
-        //LinearLayoutManager necesita el contexto de la Activity.
-        //El LayoutManager se encarga de posicionar los items dentro del recyclerview
-        //Y de definir la politica de reciclaje de los items no visibles.
-        mLinearLayout = new LinearLayoutManager(this);
-
-        //Asignamos el LinearLayoutManager al recycler:
-        mRecyclerView.setLayoutManager(mLinearLayout);
-
-
-        //El adapter se encarga de  adaptar un objeto definido en el c�digo a una vista en xml
-        //seg�n la estructura definida.
-        //Asignamos nuestro custom Adapter
-        adapter = new MyCustomAdapterDies();
-        mRecyclerView.setAdapter(adapter);
-        adapter.setDataSet(dies);
-
-    }
-
-    public void carregar_view() {
-        dbHelper = new DbHelper(this);
-        bundle = getIntent().getExtras();
-        if (bundle != null) {
-            titol = bundle.getString("Titol");
-        }
-        Dia dia;
-        Cursor c = dbHelper.getDatesObra(titol);
-        if (c.moveToFirst()) {
-            do {
-                places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
-                traduir_dia(dia_setmana);
-                dia = new Dia(titol, places, data, dia_setmana);
-                dies.add(dia);
             } while (c.moveToNext());
         }
 
@@ -166,10 +118,9 @@ public class LlistarDies extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         //noinspection SimplifiableIfStatement
+        //Selecció de dia de filtrat
         switch (item.getItemId()) {
             case R.id.menu_seleccionar_dia:
-                //ordre = false;
-                //updateData(ordre);
                 return false;
             case R.id.dilluns:
                 updateData("Dilluns");
@@ -207,6 +158,7 @@ public class LlistarDies extends AppCompatActivity {
         finish();
     }
 
+    //Traduim el dia que ens retorna el sistema al català (de moment des d'anglès i espanyol)
     void traduir_dia(String dia_setmana) {
         if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
             this.dia_setmana = "Dilluns";
@@ -224,30 +176,11 @@ public class LlistarDies extends AppCompatActivity {
             this.dia_setmana = "Diumenge";
     }
 
+    /*
+    //Comprovem que la sessió no hagi expirat
     boolean comprovar_disponibilitat(String milis) {
-        /////////////////DATA ACTUAL//////////////////////
-        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        String data_actual = sdf.format(new Date());
-        Date d = null;
-        try {
-            d = sdf.parse(data_actual);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long milis = d.getTime();
-        /////////////DATA A COMPROVAR//////////////////
-        Date d2 = null;
-        try {
-            d2 = sdf.parse(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long milis2 = d2.getTime();
-            if ((int)milis2 < (int) milis) {
-                return false;
-            }*/
         Long milis_act = System.currentTimeMillis();
         if (Long.valueOf(milis) < milis_act) return false;
         return true;
-    }
+    }*/
 }
