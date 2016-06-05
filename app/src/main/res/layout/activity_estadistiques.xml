@@ -50,8 +50,7 @@
                 android:id="@+id/tv_total_entrades"
                 android:textSize="15dp"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#343434"
-                android:gravity="center" />
+                android:textColor="#343434" />
         </LinearLayout>
 
         <LinearLayout

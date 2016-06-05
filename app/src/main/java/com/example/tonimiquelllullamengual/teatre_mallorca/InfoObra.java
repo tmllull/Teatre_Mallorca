@@ -123,6 +123,12 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleFuncio(titol,data);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Titol", titol);
+                                Intent intent = new Intent(getApplicationContext(),
+                                        LlistarDies.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
                                 finish();
                             }
                         })
