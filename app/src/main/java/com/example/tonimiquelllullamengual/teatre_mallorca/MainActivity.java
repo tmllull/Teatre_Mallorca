@@ -2,7 +2,9 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -51,7 +53,17 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         dbHelper = new DbHelper(this);
+
+        if (!prefs.getBoolean("firstTime", false)) {
+            dbHelper.initData();
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.commit();
+        }
 
         btAfegir = (Button) findViewById(R.id.bt_afegir_obra_main);
         btEliminar = (Button) findViewById(R.id.bt_eliminar_obra_main);
@@ -78,7 +90,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                Intent intent = new Intent(getApplicationContext(), EliminarObra.class);
                 startActivity(intent);
             }
         });

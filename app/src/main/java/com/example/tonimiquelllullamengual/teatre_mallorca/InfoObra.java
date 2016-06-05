@@ -118,7 +118,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                 new AlertDialog.Builder(this)
                         .setTitle("Eliminar funció")
                         .setMessage("Estàs segur que vols eliminar la funció? Aquesta " +
-                                "operació només afecta a aquesta sessió, però no es pot" +
+                                "operació només afecta a aquesta sessió, però no es pot " +
                                 "desfer.")
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

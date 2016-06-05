@@ -79,7 +79,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
                                     "tens un 30% de descompte")
                             .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    descompte = 20;
+                                    descompte = 30;
                                     confirmar();
                                 }
                             })

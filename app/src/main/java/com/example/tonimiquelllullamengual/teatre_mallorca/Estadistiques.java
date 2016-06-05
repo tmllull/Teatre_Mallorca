@@ -106,53 +106,89 @@ public class Estadistiques extends AppCompatActivity {
 
         //Array de colors per pintar-los de forma "dinàmica"
         int colors[] = new int[7];
-        colors[0] = 0x6f11FF00;
+        colors[0] = 0x6f11FF00; //verd
         colors[1] = 0x6f77FF00;
         colors[2] = 0x6fC4FF00;
         colors[3] = 0x6fFFF700;
         colors[4] = 0x6fFFB700;
         colors[5] = 0x6fFF6B00;
-        colors[6] = 0x6fFF3300;
+        colors[6] = 0x6fFF3300; //vermell
 
         //Processat de la informació a mostrar
         tv_total_entrades.setText("Entrades: " + String.valueOf(entrades) + "(100%)\n" +
-                "Recaptació: " + dbHelper.getTotalVentes() + "€");
-        for (int i = 0; i < 7; ++i) {
+                "Recaptació estimada: " + dbHelper.getTotalVentes() + "€");
+        int aux = percentatge[0].getEntrades();
+        for (int i = 0, j = 0; i < 7; ++i) {
             if (percentatge[i].getDia().equals("Dilluns")) {
                 tv_entrades_dilluns.setText("Entrades: "+String.valueOf(dilluns) +
                                 "(" + percentatge[i].getPerc() + "%)");
-                tv_dilluns.setText("Recaptació: "+dbHelper.getRecaptacio("Mon", "Lun.") + "€");
-                lays[0].setBackgroundColor(colors[i]);
+                tv_dilluns.setText("Rec. estimada: "+dbHelper.getRecaptacio("Mon", "Lun.") + "€");
+                if (dilluns == 0)lays[0].setBackgroundColor(colors[6]);
+                else if (dilluns == aux) lays[0].setBackgroundColor(colors[j]);
+                else {
+                    aux = dilluns;
+                    lays[0].setBackgroundColor(colors[++j]);
+                }
             } else if (percentatge[i].getDia().equals("Dimarts")) {
                 tv_entrades_dimarts.setText("Entrades: "+String.valueOf(dimarts) +
                 "(" + percentatge[i].getPerc() + "%)");
-                tv_dimarts.setText("Recaptació: "+dbHelper.getRecaptacio("Tue", "Mar.") + "€");
-                lays[1].setBackgroundColor(colors[i]);
+                tv_dimarts.setText("Rec. estimada: "+dbHelper.getRecaptacio("Tue", "Mar.") + "€");
+                if (dimarts == 0)lays[1].setBackgroundColor(colors[6]);
+                else if (dimarts == aux) lays[1].setBackgroundColor(colors[j]);
+                else {
+                    aux = dimarts;
+                    lays[1].setBackgroundColor(colors[++j]);
+                }
             } else if (percentatge[i].getDia().equals("Dimecres")) {
                 tv_entrades_dimecres.setText("Entrades: "+String.valueOf(dimecres) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dimecres.setText("Recaptació: "+dbHelper.getRecaptacio("Wed", "Mié.") + "€");
-                lays[2].setBackgroundColor(colors[i]);
+                tv_dimecres.setText("Rec. estimada: "+dbHelper.getRecaptacio("Wed", "Mié.") + "€");
+                if (dimecres == 0)lays[2].setBackgroundColor(colors[6]);
+                else if (dimecres == aux) lays[2].setBackgroundColor(colors[j]);
+                else {
+                    aux = dimecres;
+                    lays[2].setBackgroundColor(colors[++j]);
+                }
             } else if (percentatge[i].getDia().equals("Dijous")) {
                 tv_entrades_dijous.setText("Entrades: "+String.valueOf(dijous) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dijous.setText("Recaptació: "+dbHelper.getRecaptacio("Tue", "Jue.") + "€");
-                lays[3].setBackgroundColor(colors[i]);
+                tv_dijous.setText("Rec. estimada: "+dbHelper.getRecaptacio("Tue", "Jue.") + "€");
+                if (dijous == 0)lays[3].setBackgroundColor(colors[6]);
+                else if (dijous == aux) lays[3].setBackgroundColor(colors[j]);
+                else {
+                    aux = dijous;
+                    lays[3].setBackgroundColor(colors[++j]);
+                }
             } else if (percentatge[i].getDia().equals("Divendres")) {
                 tv_entrades_divendres.setText("Entrades: "+String.valueOf(divendres) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_divendres.setText("Recaptació: "+dbHelper.getRecaptacio("Fri", "Vie.") + "€");
-                lays[4].setBackgroundColor(colors[i]);
+                tv_divendres.setText("Rec. estimada: "+dbHelper.getRecaptacio("Fri", "Vie.") + "€");
+                if (divendres == 0)lays[4].setBackgroundColor(colors[6]);
+                else if (divendres == aux) lays[4].setBackgroundColor(colors[j]);
+                else {
+                    aux = divendres;
+                    lays[4].setBackgroundColor(colors[++j]);
+                }
             } else if (percentatge[i].getDia().equals("Dissabte")) {
                 tv_entrades_dissabte.setText("Entrades: "+String.valueOf(dissabte) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dissabte.setText("Recaptació: "+dbHelper.getRecaptacio("Sat", "Sáb.") + "€");
-                lays[5].setBackgroundColor(colors[i]);
+                tv_dissabte.setText("Rec. estimada: "+dbHelper.getRecaptacio("Sat", "Sáb.") + "€");
+                if (dissabte == 0)lays[5].setBackgroundColor(colors[6]);
+                else if (dissabte == aux) lays[5].setBackgroundColor(colors[j]);
+                else {
+                    aux = dissabte;
+                    lays[5].setBackgroundColor(colors[++j]);
+                }
             } else if (percentatge[i].getDia().equals("Diumenge")) {
                 tv_entrades_diumenge.setText("Entrades: "+String.valueOf(diumenge) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_diumenge.setText("Recaptació: "+dbHelper.getRecaptacio("Sun", "Dom.") + "€");
-                lays[6].setBackgroundColor(colors[i]);
+                tv_diumenge.setText("Rec. estimada: "+dbHelper.getRecaptacio("Sun", "Dom.") + "€");
+                if (diumenge == 0)lays[6].setBackgroundColor(colors[6]);
+                else if (diumenge == aux) lays[6].setBackgroundColor(colors[j]);
+                else {
+                    aux = diumenge;
+                    lays[6].setBackgroundColor(colors[++j]);
+                }
             }
         }
     }

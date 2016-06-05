@@ -81,9 +81,12 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                 if (c.moveToFirst()) {
                     Toast.makeText(getApplicationContext(), "Ja exixteix una obra amb aquest títol",
                             Toast.LENGTH_LONG).show();
-                    return;
+                    break;
                 }
-                if (etNom.getText().toString().isEmpty()) {
+                if (etNom.getText().toString().isEmpty() ||
+                        etDescripcio.getText().toString().isEmpty() ||
+                        etPreu.getText().toString().isEmpty() ||
+                        etDurada.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
                             Toast.LENGTH_LONG).show();
                     break;

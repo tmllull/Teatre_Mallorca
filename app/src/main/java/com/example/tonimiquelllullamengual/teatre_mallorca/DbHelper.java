@@ -67,7 +67,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 values);
     }
 
-    //Obtenir una obra
+    //Comprovar si l'obra existeix
     public Cursor comprovarObra(String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
@@ -278,11 +278,11 @@ public class DbHelper extends SQLiteOpenHelper {
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
+                //if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
                     int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
                     int aux = 40 - lliures;
                     cont += aux * c.getInt(c.getColumnIndex(CN_PREU));
-                }
+                //}
             } while (c.moveToNext());
         }
         return cont;
@@ -294,11 +294,11 @@ public class DbHelper extends SQLiteOpenHelper {
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
+                //if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
                     int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
                     int aux = 40 - lliures;
                     cont += aux * c.getInt(c.getColumnIndex(CN_PREU));
-                }
+                //}
             } while (c.moveToNext());
         }
         return cont;

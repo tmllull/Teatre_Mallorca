@@ -264,9 +264,17 @@ public class NovaObraDates extends AppCompatActivity implements View.OnClickList
                 }
                 guardarObra();
                 if (ok) {
-                    Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
-                            Toast.LENGTH_SHORT).show();
-                    finish();
+                    if (cont == 0) {
+                        Toast.makeText(getApplicationContext(), "No es pot afegir cap sessió " +
+                                "en aquest rang de dates i dies seleccionats",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
+                                Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
                 break;
             default:
