@@ -68,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una obra
-    public Cursor getObra(String titol) {
+    public Cursor comprovarObra(String titol) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
@@ -358,6 +358,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     ////////////////Inicialitzem la BD amb 3 obres///////////////////////////////
     public void initData() {
+        //Eliminem la BD actual i la tornem a generar
+        this.resetAll();
         ///////////////////////////////Obra 1//////////////////////////////////
         titol = "El rey leon";
         descripcio = "Gracias al genio, visión artística y creativa " +
@@ -381,8 +383,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 "grupo, y como todo ello conforma nuestro destino. Además un canto " +
                 "al respeto y al amor por la naturaleza.";
         durada = "120";
-        preu = "60";
-        calcul_dies(1, 27);
+        preu = "50";
+        generar_places();
+        calcul_dies(1, 30);
 
         /////////////////////////////////Obra2//////////////////////////////////
         titol = "Mamma mia";
@@ -403,8 +406,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 "costat més optimista i reconfortant de la vida.\n" +
                 "\n" +
                 "Et resistiràs?";
-        generar_places();
-        calcul_dies(10, 23);
+        durada = "90";
+        preu = "20";
+        //generar_places();
+        calcul_dies(1, 30);
 
         ///////////////////////////////////Obra3///////////////////////////////////////////
         titol = "Queen";
@@ -423,8 +428,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 "\n" +
                 "No te lo pierdas y consigue las entradas para el concierto Queen + " +
                 "Adam Lambert. ";
-        generar_places();
-        calcul_dies(5, 28);
+        durada = "110";
+        preu = "40";
+        //generar_places();
+        calcul_dies(1, 30);
     }
 
     public void calcul_dies(int dia_from_val, int dia_to_val) {
@@ -447,18 +454,23 @@ public class DbHelper extends SQLiteOpenHelper {
             SimpleDateFormat formatter = new SimpleDateFormat("c");
             dia_setmana = formatter.format(new java.sql.Date(milliseconds));
             generar_places();
-            ContentValues values = new ContentValues();
-            values.put(this.CN_TITOL, titol.toUpperCase());
-            values.put(this.CN_DESCRIPCIO, descripcio);
-            values.put(this.CN_DURADA, durada);
-            values.put(this.CN_PREU, preu);
-            values.put(this.CN_DATA, dataObra.toString());
-            values.put(this.CN_BUTAQUES, places);
-            values.put(this.CN_MILIS, String.valueOf(milliseconds));
-            values.put(this.CN_PLACES_LLIURES, p);
-            values.put(this.CN_COMPRADORS, usuaris);
-            values.put(this.CN_DIA_SETMANA, dia_setmana);
-            this.newObra(values, this.OBRA_TABLE);
+            Random rand = new Random();
+            int n = rand.nextInt(500);
+            if (n % 2 == 0) {
+                ContentValues values = new ContentValues();
+                values.put(this.CN_TITOL, titol.toUpperCase());
+                values.put(this.CN_DESCRIPCIO, descripcio);
+                values.put(this.CN_DURADA, durada);
+                values.put(this.CN_PREU, preu);
+                values.put(this.CN_DATA, dataObra.toString());
+                values.put(this.CN_BUTAQUES, places);
+                values.put(this.CN_MILIS, String.valueOf(milliseconds));
+                values.put(this.CN_PLACES_LLIURES, p);
+                values.put(this.CN_COMPRADORS, usuaris);
+                values.put(this.CN_DIA_SETMANA, dia_setmana);
+                this.newObra(values, this.OBRA_TABLE);
+
+            }
         }
     }
 
@@ -469,8 +481,8 @@ public class DbHelper extends SQLiteOpenHelper {
         p = 0;
         for (int i = 1; i < 41; ++i) {
             Random rand = new Random();
-            int n = rand.nextInt(200);
-            if (n % 2 == 0) {
+            int n = rand.nextInt(500);
+            if (n % 3 == 0) {
                 places = places + "0";
                 usuaris = i + usuari + "^" + usuaris;
             } else {

@@ -21,7 +21,7 @@ public class LlistarDies extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
     String titol, filtre, dia_setmana, data;
-    TextView tvSessio;
+    TextView tvSessio, tvTitol;
     Integer places;
 
     Bundle bundle;
@@ -35,6 +35,7 @@ public class LlistarDies extends AppCompatActivity {
         setContentView(R.layout.activity_llistar_dies);
 
         tvSessio = (TextView) findViewById(R.id.tv_sessions);
+        tvTitol = (TextView) findViewById(R.id.tv_llistar_sessions_titol);
         filtre = "No";
         carregar_view(filtre);
 
@@ -75,8 +76,9 @@ public class LlistarDies extends AppCompatActivity {
             } while (c.moveToNext());
         }
 
-        if (dies.isEmpty()) tvSessio.setText("Cap sessio programada");
-        else tvSessio.setText("Sessions programades");
+        if (dies.isEmpty()) tvSessio.setText("Cap sessio programada per");
+        else tvSessio.setText("Escull una sessió per");
+        tvTitol.setText(titol);
 
         //findViewById del layout activity_main
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);

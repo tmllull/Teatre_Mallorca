@@ -16,6 +16,15 @@
         tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.LlistarObres"
         android:background="#ffffff">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una obra"
+            android:id="@+id/textView57"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

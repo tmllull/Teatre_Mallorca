@@ -36,8 +36,12 @@ public class Help extends AppCompatActivity {
                 "de l'obra, el dia de la sessió, el número d'entrades i el preu total (amb " +
                 "el descompte aplicat si escau), i haurem d'introduïr el correu electronic, " +
                 "nom i cognoms del comprador per poder finalitzar la compra.\n\n" +
-                "També podrem eliminar una obra amb totes les seves funcions des de " +
+                "Podem eliminar una obra amb totes les seves funcions des de " +
                 "l'opció 'Eliminar obra', on tan sols haurem d'escollir de la llista quina " +
-                "obra volem eliminar.");
+                "obra volem eliminar.\n\n" +
+                "Com a opció extra, podrem consultar les estadístiques de vendes per dia " +
+                "de la setmana, on veurem cada dia amb la seva corresponent recaptació " +
+                "i número d'entrades venudes, ajudat d'un codi de colors per fer-ho " +
+                "més visual.");
     }
 }

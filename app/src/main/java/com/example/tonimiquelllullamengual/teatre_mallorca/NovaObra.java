@@ -3,6 +3,7 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,13 +76,20 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
+                String titol = etNom.getText().toString().toUpperCase();
+                Cursor c = dbHelper.comprovarObra(titol);
+                if (c.moveToFirst()) {
+                    Toast.makeText(getApplicationContext(), "Ja exixteix una obra amb aquest títol",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (etNom.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
                             Toast.LENGTH_LONG).show();
                     break;
                 }
                 Bundle bundle = new Bundle();
-                bundle.putString("Nom",etNom.getText().toString().toUpperCase());
+                bundle.putString("Nom",titol);
                 bundle.putString("Descripcio", etDescripcio.getText().toString());
                 bundle.putString("Durada", etDurada.getText().toString());
                 bundle.putString("Preu", etPreu.getText().toString());

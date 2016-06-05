@@ -19,11 +19,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sessions programades"
+            android:text="Escull una sessió per"
             android:id="@+id/tv_sessions"
             android:layout_gravity="center_horizontal"
-            android:textSize="25dp"
-            android:layout_marginBottom="10dp" />
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tv_llistar_sessions_titol"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
