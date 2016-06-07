@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -148,6 +149,17 @@ public class LlistarDies extends AppCompatActivity {
             case R.id.menu_mostrar_tot:
                 updateData("No");
                 return false;
+            case R.id.afegir_un_dia:
+                modificar_dates(1);
+                return false;
+            case R.id.ampliar_dates:
+                modificar_dates(2);
+                return false;
+            case R.id.reduir_dates:
+                //modificar_dates(3);
+                Toast.makeText(getApplicationContext(), "Aquesta funcionalitat no està implementada",
+                        Toast.LENGTH_SHORT).show();
+                return false;
             default:
                 return false;
         }
@@ -176,6 +188,16 @@ public class LlistarDies extends AppCompatActivity {
             this.dia_setmana = "Dissabte";
         else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
             this.dia_setmana = "Diumenge";
+    }
+
+    void modificar_dates(int i) {
+        Bundle bundle = new Bundle();
+        bundle.putString("Titol", titol);
+        bundle.putInt("Opcio", i);
+        Intent intent = new Intent(getApplicationContext(), ModificarDates.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     /*

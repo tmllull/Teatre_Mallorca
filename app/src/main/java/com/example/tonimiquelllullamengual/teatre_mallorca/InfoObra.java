@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class InfoObra extends AppCompatActivity implements View.OnClickListener {
 
     Bundle bundle;
-    TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada, tvData;
+    TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada, tvData, tvSeleccioButaques;
     Button comprar;
     DbHelper dbHelper;
     boolean places_lliures = false;
@@ -40,8 +40,10 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvData = (TextView) findViewById(R.id.tv_data_info);
         ivComprar = (ImageView) findViewById(R.id.iv_comprar_entrades);
         comprar = (Button) findViewById(R.id.bt_Comprar_Info);
+        tvSeleccioButaques = (TextView) findViewById(R.id.tv_seleccio_butaques);
 
         comprar.setOnClickListener(this);
+        tvSeleccioButaques.setOnClickListener(this);
 
         ivComprar.setOnClickListener(new View.OnClickListener(){
 
@@ -57,6 +59,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                     bundle.putString("Titol", titol);
                     bundle.putString("Data", data);
                     bundle.putString("DiaSetmana", dia_setmana);
+                    bundle.putInt("Mantenir", 0); //Per indicar que és un accés nou
                     Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
@@ -94,6 +97,25 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.bt_Comprar_Info:
                 break;
+            case R.id.tv_seleccio_butaques:
+                if (disponible == 0) {
+                    Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
+                            "No es poden comprar entrades", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (places_lliures) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Titol", titol);
+                    bundle.putString("Data", data);
+                    bundle.putString("DiaSetmana", dia_setmana);
+                    bundle.putInt("Mantenir", 0); //Per indicar que és un accés nou
+                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                    intent.putExtras(bundle);
+                    v.getContext().startActivity(intent);
+                    finish();
+                }
+                else Toast.makeText(getApplicationContext(), "No queden places per aquesta " +
+                            "funció", Toast.LENGTH_SHORT).show();
             default:
                 break;
         }

@@ -470,7 +470,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comprar entrades"
-                android:id="@+id/textView33"
+                android:id="@+id/tv_comprar_entrades_pati_butaques"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1" />
 

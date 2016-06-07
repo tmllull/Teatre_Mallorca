@@ -1,0 +1,459 @@
+package com.example.tonimiquelllullamengual.teatre_mallorca;
+
+import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class ModificarDates extends AppCompatActivity implements View.OnClickListener {
+
+    Bundle bundle;
+
+    DbHelper dbHelper;
+
+    private DatePickerDialog pdDia1, pdDia2, pdDia3;
+
+    private String from, to, any_from, any_to, mes_from, mes_to, dia_from, dia_to,
+            diaObra, mesObra, anyObra;
+
+    private Integer dia_from_val, mes_from_val, any_from_val, dia_to_val, mes_to_val, any_to_val;
+
+    private Boolean ok = true;
+
+    private int cont;
+
+    TextView tvUnDia, tvDarrerProgramat, tvAmpliarFins, tvTitol;
+
+    Button btUnDia, btAmpliar;
+
+    String titol, milis_darrera_sesio;
+    int opcio;
+
+    private SimpleDateFormat formatDate;
+
+    private CheckBox cbDilluns, cbDimarts, cbDimecres, cbDijous, cbDivendres, cbDissabte,
+            cbDiumenge;
+
+    LinearLayout lyUna, lyAmpliar, lyReduir;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_modificar_dates);
+
+        dbHelper = new DbHelper(this);
+
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            titol = bundle.getString("Titol");
+            opcio = bundle.getInt("Opcio");
+        }
+
+        formatDate = new SimpleDateFormat("dd/MM/yy");
+
+        lyUna = (LinearLayout) findViewById(R.id.ly_modificar_dates_un_dia);
+        lyAmpliar = (LinearLayout) findViewById(R.id.ly_modificar_dates_ampliar);
+        lyReduir = (LinearLayout) findViewById(R.id.ly_modificar_dates_reduir);
+        tvUnDia = (TextView) findViewById(R.id.tv_modificar_dates_un_dia);
+        tvDarrerProgramat = (TextView) findViewById(R.id.tv_modificar_dates_darrer_dia_programat);
+        tvAmpliarFins = (TextView) findViewById(R.id.tv_modificar_dates_ampliar_fins);
+        btUnDia = (Button) findViewById(R.id.bt_modificar_dates_un_dia);
+        btAmpliar = (Button) findViewById(R.id.bt_modificar_dates_ampliar);
+        tvTitol = (TextView) findViewById(R.id.tv_modificar_dates_titol);
+
+        cbDilluns = (CheckBox) findViewById(R.id.checkBox);
+        cbDimarts = (CheckBox) findViewById(R.id.checkBox2);
+        cbDimecres = (CheckBox) findViewById(R.id.checkBox3);
+        cbDijous = (CheckBox) findViewById(R.id.checkBox4);
+        cbDivendres = (CheckBox) findViewById(R.id.checkBox5);
+        cbDissabte = (CheckBox) findViewById(R.id.checkBox6);
+        cbDiumenge = (CheckBox) findViewById(R.id.checkBox7);
+
+        tvUnDia.setOnClickListener(this);
+        btUnDia.setOnClickListener(this);
+        btAmpliar.setOnClickListener(this);
+        tvAmpliarFins.setOnClickListener(this);
+
+        tvTitol.setText(titol);
+
+        if (opcio == 1) { //Un sessio
+            lyUna.setVisibility(View.VISIBLE);
+            lyAmpliar.setVisibility(View.GONE);
+            lyReduir.setVisibility(View.GONE);
+        } else if (opcio == 2) { //Ampliar dates
+            lyUna.setVisibility(View.GONE);
+            lyAmpliar.setVisibility(View.VISIBLE);
+            lyReduir.setVisibility(View.GONE);
+            preparar_pantalla_ampliar();
+        } else { //Reduir dates
+            lyUna.setVisibility(View.GONE);
+            lyAmpliar.setVisibility(View.GONE);
+            lyReduir.setVisibility(View.VISIBLE);
+        }
+
+        prepareCalendar();
+    }
+
+    public void prepareCalendar() {
+
+        Calendar calendari = Calendar.getInstance();
+        pdDia1 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar date = Calendar.getInstance();
+                date.set(year, monthOfYear, dayOfMonth);
+                tvUnDia.setText(formatDate.format(date.getTime()));
+            }
+        }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
+                calendari.get(Calendar.DAY_OF_MONTH));
+        pdDia2 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar date = Calendar.getInstance();
+                date.set(year, monthOfYear, dayOfMonth);
+                tvAmpliarFins.setText(formatDate.format(date.getTime()));
+            }
+        }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
+                calendari.get(Calendar.DAY_OF_MONTH));
+        /*pdDia3 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar date = Calendar.getInstance();
+                date.set(year, monthOfYear, dayOfMonth);
+                tvDia2.setText(formatDate.format(date.getTime()));
+            }
+        }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
+                calendari.get(Calendar.DAY_OF_MONTH));*/
+    }
+
+    void afegirUnDia() {
+        String data = tvUnDia.getText().toString();
+        if (data.equals("Seleccionar data")) {
+            Toast.makeText(getApplicationContext(), "Has de seleccionar una data",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+        char[] aux1 = data.toCharArray();
+        String any = String.valueOf(aux1[6]) + String.valueOf(aux1[7]);
+        String mes = String.valueOf(aux1[3]) + String.valueOf(aux1[4]);
+        Integer mes_val = Integer.valueOf(mes);
+        String dia = String.valueOf(aux1[0]) + String.valueOf(aux1[1]);
+        Integer dia_val = Integer.valueOf(dia);
+
+        String dataObra = dia_val + "/" + mes_val + "/" + any;
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
+        Date d = null;
+        try {
+            d = f.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milliseconds = d.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("c");
+        Cursor c = dbHelper.getDatesObra(titol);
+        if (c.moveToFirst()) {
+            do {
+                if (c.getString(c.getColumnIndex(dbHelper.CN_MILIS)).equals(String.valueOf(milliseconds))) {
+                    Toast.makeText(getApplicationContext(), "Ja hi ha una sessió programada " +
+                                    "per aquesta data",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            } while (c.moveToNext());
+            c.moveToPrevious();
+            String dia_setmana = formatter.format(new java.sql.Date(milliseconds));
+            String places = "-";
+            for (int j = 1; j < 41; ++j) {
+                //Plaça lliure indicat amb un 1
+                places = places + "1";
+            }
+            ContentValues values = new ContentValues();
+            values.put(dbHelper.CN_TITOL, c.getString(c.getColumnIndex(dbHelper.CN_TITOL)));
+            values.put(dbHelper.CN_DESCRIPCIO, c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
+            values.put(dbHelper.CN_DURADA, c.getString(c.getColumnIndex(dbHelper.CN_DURADA)));
+            values.put(dbHelper.CN_PREU, c.getString(c.getColumnIndex(dbHelper.CN_PREU)));
+            values.put(dbHelper.CN_DATA, dataObra.toString());
+            values.put(dbHelper.CN_BUTAQUES, places);
+            values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
+            values.put(dbHelper.CN_PLACES_LLIURES, 40);
+            values.put(dbHelper.CN_COMPRADORS, "^");
+            values.put(dbHelper.CN_DIA_SETMANA, dia_setmana);
+            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+            Toast.makeText(getApplicationContext(), "Nova data afegida correctament",
+                    Toast.LENGTH_LONG).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("Titol", titol);
+            Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    void ampliar_interval() {
+        String from = tvDarrerProgramat.getText().toString();
+        SimpleDateFormat lectura = new SimpleDateFormat("d/M/yy");
+        SimpleDateFormat escritura = new SimpleDateFormat("dd/MM/yy");
+        Date d = null;
+        try {
+            d = lectura.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        /*char[] aux1 = from.toCharArray();
+        if (!String.valueOf(aux1[0]).equals("0"))
+            from = "0" + from;
+        char[] aux2 = from.toCharArray();
+        if (!String.valueOf(aux2[6]).equals("/")) {
+            from = "" + aux2[0] + aux2[1] + aux2[2] + "0" + aux2[3] + aux2[4] + aux2[5] + aux2[6];
+        }*/
+        tvDarrerProgramat.setText(escritura.format(d));
+        guardarObra();
+    }
+
+    void preparar_pantalla_ampliar() {
+        Cursor c = dbHelper.getDatesObraDesc(titol);
+        if (c.moveToFirst()) {
+            tvDarrerProgramat.setText(c.getString(c.getColumnIndex(dbHelper.CN_DATA)));
+            milis_darrera_sesio = c.getString(c.getColumnIndex(dbHelper.CN_MILIS));
+        }
+        String from = tvDarrerProgramat.getText().toString();
+        SimpleDateFormat lectura = new SimpleDateFormat("d/M/yy");
+        SimpleDateFormat escritura = new SimpleDateFormat("dd/MM/yy");
+        Date d = null;
+        try {
+            d = lectura.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        cal.add(Calendar.DATE, 1);
+        Date newDate = cal.getTime();
+        tvDarrerProgramat.setText(escritura.format(newDate));
+    }
+
+    public void guardarObra() {
+
+        //Guardem els valors del dia, mes y any de la data inici
+        from = tvDarrerProgramat.getText().toString();
+        char[] aux1 = from.toCharArray();
+        any_from = String.valueOf(aux1[6]) + String.valueOf(aux1[7]);
+        any_from_val = Integer.valueOf(any_from);
+        mes_from = String.valueOf(aux1[3]) + String.valueOf(aux1[4]);
+        mes_from_val = Integer.valueOf(mes_from);
+        dia_from = String.valueOf(aux1[0]) + String.valueOf(aux1[1]);
+        dia_from_val = Integer.valueOf(dia_from);
+
+        //Guardem els valor del dia, mes i any de la data final
+        to = tvAmpliarFins.getText().toString();
+        char[] aux2 = to.toCharArray();
+        any_to = String.valueOf(aux2[6]) + String.valueOf(aux2[7]);
+        any_to_val = Integer.valueOf(any_to);
+        mes_to = String.valueOf(aux2[3]) + String.valueOf(aux2[4]);
+        mes_to_val = Integer.valueOf(mes_to);
+        dia_to = String.valueOf(aux2[0]) + String.valueOf(aux2[1]);
+        dia_to_val = Integer.valueOf(dia_to);
+
+        //Variables que utilitzarem per formar la data final
+        diaObra = dia_from_val.toString();
+        mesObra = mes_from_val.toString();
+        anyObra = any_from_val.toString();
+
+        if (any_from_val != any_to_val) {
+            Toast.makeText(getApplicationContext(), "Afegir obres entre diferents anys no està " +
+                            "implementat",
+                    Toast.LENGTH_LONG).show();
+            ok = false;
+            return;
+        } else if (mes_from_val > mes_to_val) {
+            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+                    Toast.LENGTH_LONG).show();
+            ok = false;
+            return;
+        } else if (mes_to_val > mes_from_val) {
+            while (mes_to_val > mes_from_val) {
+                mesObra = mes_from_val.toString();
+                if (mes_from_val == 1 || mes_from_val == 3 || mes_from_val == 5 ||
+                        mes_from_val == 7 || mes_from_val == 8 || mes_from_val == 10 ||
+                        mes_from_val == 12) {
+                    calcul_dies(dia_from_val, 31);
+                    dia_from_val = 1;
+                    mes_from_val++;
+                } else if (mes_from_val == 2) {
+                    calcul_dies(dia_from_val, 28);
+                    dia_from_val = 1;
+                    mes_from_val++;
+                } else {
+                    calcul_dies(dia_from_val, 30);
+                    dia_from_val = 1;
+                    mes_from_val++;
+                }
+                mesObra = mes_from_val.toString();
+            }
+            calcul_dies(dia_from_val, dia_to_val);
+            ok = true;
+        } else if (dia_to_val >= dia_from_val) {
+            calcul_dies(dia_from_val, dia_to_val);
+            ok = true;
+        } else {
+            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+                    Toast.LENGTH_LONG).show();
+            ok = false;
+            return;
+        }
+    }
+
+    public void calcul_dies(int dia_from_val, int dia_to_val) {
+        for (int i = dia_from_val; i <= dia_to_val; ++i) {
+            String dataObra = i + "/" + mesObra + "/" + anyObra;
+            String places = "-";
+            String dia_setmana = "";
+            for (int j = 1; j < 41; ++j) {
+                //Plaça lliure indicat amb un 1
+                places = places + "1";
+            }
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
+            Date d = null;
+            try {
+                d = f.parse(dataObra);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long milliseconds = d.getTime();
+            SimpleDateFormat formatter = new SimpleDateFormat("c");
+            Cursor c = dbHelper.getDatesObra(titol);
+            if (c.moveToFirst()) {
+                if (!c.getString(c.getColumnIndex(dbHelper.CN_MILIS)).equals(milliseconds)) {
+                    dia_setmana = formatter.format(new java.sql.Date(milliseconds));
+                    ContentValues values = new ContentValues();
+                    values.put(dbHelper.CN_TITOL, c.getString(c.getColumnIndex(dbHelper.CN_TITOL)));
+                    values.put(dbHelper.CN_DESCRIPCIO, c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
+                    values.put(dbHelper.CN_DURADA, c.getString(c.getColumnIndex(dbHelper.CN_DURADA)));
+                    values.put(dbHelper.CN_PREU, c.getString(c.getColumnIndex(dbHelper.CN_PREU)));
+                    values.put(dbHelper.CN_DATA, dataObra.toString());
+                    values.put(dbHelper.CN_BUTAQUES, places);
+                    values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
+                    values.put(dbHelper.CN_PLACES_LLIURES, 40);
+                    values.put(dbHelper.CN_COMPRADORS, "^");
+                    values.put(dbHelper.CN_DIA_SETMANA, dia_setmana);
+
+                    if (cbDilluns.isChecked()) {
+                        if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                    if (cbDimarts.isChecked()) {
+                        if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                    if (cbDimecres.isChecked()) {
+                        if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                    if (cbDijous.isChecked()) {
+                        if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                    if (cbDivendres.isChecked()) {
+                        if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                    if (cbDissabte.isChecked()) {
+                        if (dia_setmana.equals("Sat") || dia_setmana.equals("Sáb.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                    if (cbDiumenge.isChecked()) {
+                        if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom.")) {
+                            dbHelper.newObra(values, dbHelper.OBRA_TABLE);
+                            ++cont;
+                        }
+                    }
+                }
+                while (c.moveToNext()) ;
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Bundle bundle = new Bundle();
+        bundle.putString("Titol", titol);
+        Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.bt_modificar_dates_un_dia:
+                afegirUnDia();
+                break;
+            case R.id.tv_modificar_dates_un_dia:
+                pdDia1.show();
+                break;
+            case R.id.tv_modificar_dates_ampliar_fins:
+                pdDia2.show();
+                break;
+            case R.id.bt_modificar_dates_ampliar:
+                if (tvAmpliarFins.getText().toString().equals("Seleccionar data")) {
+                    Toast.makeText(getApplicationContext(), "Has de seleccionar data " +
+                                    "de finalització.",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                ampliar_interval();
+                if (ok) {
+                    if (cont == 0) {
+                        Toast.makeText(getApplicationContext(), "No es pot afegir cap sessió " +
+                                        "en aquest rang de dates i dies seleccionats",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
+                                Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Titol", titol);
+                        intent = new Intent(getApplicationContext(), LlistarDies.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}

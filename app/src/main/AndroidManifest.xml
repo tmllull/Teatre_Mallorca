@@ -47,10 +47,13 @@
             android:label="Usuaris" />
         <activity
             android:name=".Help"
-            android:label="Help"/>
+            android:label="Help" />
         <activity
             android:name=".Estadistiques"
-            android:label="Estadistiques"></activity>
+            android:label="Estadistiques" />
+        <activity
+            android:name=".ModificarDates"
+            android:label="Modificar dates" />
     </application>
 
 </manifest>

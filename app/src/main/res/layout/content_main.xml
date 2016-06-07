@@ -25,7 +25,8 @@
             android:text="Teatre Mallorca"
             android:id="@+id/textView10"
             android:textSize="40dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:textColor="#3f3f3f" />
     </TableRow>
 
     <LinearLayout

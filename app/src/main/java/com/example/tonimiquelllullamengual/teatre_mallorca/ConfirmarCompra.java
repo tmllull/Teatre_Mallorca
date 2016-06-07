@@ -50,13 +50,14 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
             entrades = bundle.getInt("Entrades");
             tvEntrades.setText(String.valueOf(entrades));
             total = bundle.getDouble("Total");
-            DecimalFormat total_nou = new DecimalFormat("#.00");
+            DecimalFormat total_nou = new DecimalFormat("0.00");
             tvTotal.setText(total_nou.format(total)+"€");
             places_lliures = bundle.getInt("Places");
             butaques_seleccionades = bundle.getString("Butaques");
             dia_setmana = bundle.getString("DiaSetmana");
             data = bundle.getString("Data");
             tvData.setText(dia_setmana+", "+data);
+            //
         }
     }
 

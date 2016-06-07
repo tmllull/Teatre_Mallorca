@@ -22,7 +22,7 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
     Bundle bundle;
     DbHelper dbHelper;
-    TextView tvTitol;
+    TextView tvTitol, tvComprar;
     Button btComprar;
     String butaques_seleccionades, data, dia_setmana, titol, butaques;
     Integer places_lliures, entrades;
@@ -60,7 +60,38 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
         tvTitol = (TextView) findViewById(R.id.tv_titol_ocupacio);
         btComprar = (Button) findViewById(R.id.bt_Comprar_ocupacio);
+        tvComprar = (TextView) findViewById(R.id.tv_comprar_entrades_pati_butaques);
         btComprar.setOnClickListener(this);
+        tvComprar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (entrades == 0) {
+                    Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
+                                    " una butaca",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Aplicar descompte")
+                            .setMessage("Si tens el carnet Jove o universitari " +
+                                    "tens un 30% de descompte")
+                            .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    descompte = 30;
+                                    confirmar();
+                                }
+                            })
+                            .setNegativeButton("No tinc cap carnet   ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    confirmar();
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(R.drawable.discount)
+                            .show();
+                }
+            }
+        });
 
         descompte = 0;
         ivComprar = (ImageView) findViewById(R.id.iv_compra_pati_butaques);

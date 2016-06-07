@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar butaques"
-                android:id="@+id/textView32" />
+                android:id="@+id/tv_seleccio_butaques" />
 
             <Button
                 android:layout_width="wrap_content"

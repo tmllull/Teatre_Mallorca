@@ -158,6 +158,24 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    //Obtenir totes les dates d'una obra
+    public Cursor getDatesObraDesc(String titol) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
+        String[] where = {titol};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                columns,            // The columns to return
+                "titol=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
+                null,               // don't group the rows
+                null,               // don't filter by row groups
+                CN_MILIS + " DESC"                // The sort order
+        );
+        return c;
+    }
+
     //Obtenir una funció d'una obra a una data determinada
     public Cursor getObraData(String titol, String data) {
         SQLiteDatabase db = this.getWritableDatabase();

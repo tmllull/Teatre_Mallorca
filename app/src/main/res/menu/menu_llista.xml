@@ -28,12 +28,26 @@
             <item
                 android:id="@+id/diumenge"
                 android:title="Diumenge" />
+            <item
+                android:id="@+id/menu_mostrar_tot"
+                android:title="Mostrar tots els dies" />
         </menu>
     </item>
     <item
-        android:id="@+id/menu_mostrar_tot"
+        android:id="@+id/modificar_dates"
         android:orderInCategory="100"
-        android:title="Mostrar tot"
-        app:showAsAction="never" />
-
+        android:title="Modificar dates"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/afegir_un_dia"
+                android:title="Afegir un dia" />
+            <item
+                android:id="@+id/ampliar_dates"
+                android:title="Ampliar dates" />
+            <item
+                android:id="@+id/reduir_dates"
+                android:title="Reduir dates" />
+        </menu>
+    </item>
 </menu>

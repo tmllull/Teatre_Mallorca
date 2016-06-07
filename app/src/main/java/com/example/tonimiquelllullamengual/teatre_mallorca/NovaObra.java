@@ -2,8 +2,10 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +27,8 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
     private DatePickerDialog pickerDialog;
 
     private SimpleDateFormat formatDate;
+
+    String titol;
 
     Bundle bundle;
 
@@ -76,31 +80,62 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
-                String titol = etNom.getText().toString().toUpperCase();
+                titol = etNom.getText().toString().trim().toUpperCase();
                 Cursor c = dbHelper.comprovarObra(titol);
                 if (c.moveToFirst()) {
-                    Toast.makeText(getApplicationContext(), "Ja exixteix una obra amb aquest títol",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Ja existeix una obra amb aquest títol",
+                            Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (etNom.getText().toString().isEmpty() ||
+                if (etNom.getText().toString().trim().isEmpty() ||
                         etDescripcio.getText().toString().isEmpty() ||
                         etPreu.getText().toString().isEmpty() ||
                         etDurada.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     break;
                 }
-                Bundle bundle = new Bundle();
-                bundle.putString("Nom",titol);
-                bundle.putString("Descripcio", etDescripcio.getText().toString());
-                bundle.putString("Durada", etDurada.getText().toString());
-                bundle.putString("Preu", etPreu.getText().toString());
-                Intent intent = new Intent (getApplicationContext(), NovaObraDates.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-                break;
+                if (etPreu.getText().toString().equals("42") ||
+                        etDurada.getText().toString().equals("42")) {
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Don't panic!")
+                            .setMessage("El 42 és un nombre màgic que té la resposta al " +
+                                    "sentit de la vida, l'univers i tot el demés. Vols continuar?")
+                            .setPositiveButton("   Sí", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("Nom",titol);
+                                    bundle.putString("Descripcio", etDescripcio.getText().toString());
+                                    bundle.putString("Durada", etDurada.getText().toString());
+                                    bundle.putString("Preu", etPreu.getText().toString());
+                                    Intent intent = new Intent (getApplicationContext(), NovaObraDates.class);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                    finish();
+                                    //break;
+                                }
+                            })
+                            .setNegativeButton("Millor el canvío   ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(R.drawable.guia)
+                            .show();
+                }
+                else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Nom", titol);
+                    bundle.putString("Descripcio", etDescripcio.getText().toString());
+                    bundle.putString("Durada", etDurada.getText().toString());
+                    bundle.putString("Preu", etPreu.getText().toString());
+                    Intent intent = new Intent(getApplicationContext(), NovaObraDates.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                    break;
+                }
             default:
                 break;
         }
