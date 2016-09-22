@@ -1,2 +1,2 @@
-# Teatre_Mallorca
+# Teatre Mallorca
 Cleaning in progress
