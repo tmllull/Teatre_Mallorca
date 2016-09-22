@@ -32,7 +32,6 @@ public class Estadistiques extends AppCompatActivity {
         setContentView(R.layout.activity_estadistiques);
 
 
-
         ////////////////////////Prova per agafar dies setmana////////////////////////
 
         SimpleDateFormat formatter = new SimpleDateFormat("c");
@@ -41,7 +40,7 @@ public class Estadistiques extends AppCompatActivity {
         calendar.set(Calendar.DAY_OF_WEEK, 2);
         for (int i = 0; i < 7; ++i) {
             days[i] = formatter.format(calendar.getTime());
-            calendar.add(calendar.DAY_OF_WEEK,1);
+            calendar.add(calendar.DAY_OF_WEEK, 1);
         }
 
         /*for (int i = 0; i < days.length; i++) {
@@ -73,8 +72,6 @@ public class Estadistiques extends AppCompatActivity {
         lays[4] = (LinearLayout) findViewById(R.id.lay_divendres);
         lays[5] = (LinearLayout) findViewById(R.id.lay_dissabtes);
         lays[6] = (LinearLayout) findViewById(R.id.lay_diumenges);
-
-
 
 
         //Total d'entrades per dies
@@ -153,13 +150,13 @@ public class Estadistiques extends AppCompatActivity {
 
         //Processat de la informació a mostrar
         tv_total_entrades.setText(R.string.tickets + String.valueOf(entrades) + "(100%)\n" +
-                "Recaptació estimada: " + dbHelper.getTotalVentes() + "€");
+                R.string.estimated + dbHelper.getTotalVentes() + "€");
         int aux = percentatge[0].getEntrades();
         for (int i = 0, j = 0; i < 7; ++i) {
             if (percentatge[i].getDia().equals(days[0])) {
                 tv_entrades_dilluns.setText(R.string.tickets + String.valueOf(dilluns) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dilluns.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[0]) + "€");
+                tv_dilluns.setText(R.string.estimated + dbHelper.getRecaptacio(days[0]) + "€");
                 if (dilluns == 0) lays[0].setBackgroundColor(colors[6]);
                 else if (dilluns == aux) lays[0].setBackgroundColor(colors[j]);
                 else {
@@ -169,7 +166,7 @@ public class Estadistiques extends AppCompatActivity {
             } else if (percentatge[i].getDia().equals(days[1])) {
                 tv_entrades_dimarts.setText(R.string.tickets + String.valueOf(dimarts) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dimarts.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[1]) + "€");
+                tv_dimarts.setText(R.string.estimated + dbHelper.getRecaptacio(days[1]) + "€");
                 if (dimarts == 0) lays[1].setBackgroundColor(colors[6]);
                 else if (dimarts == aux) lays[1].setBackgroundColor(colors[j]);
                 else {
@@ -179,7 +176,7 @@ public class Estadistiques extends AppCompatActivity {
             } else if (percentatge[i].getDia().equals(days[2])) {
                 tv_entrades_dimecres.setText(R.string.tickets + String.valueOf(dimecres) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dimecres.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[2]) + "€");
+                tv_dimecres.setText(R.string.estimated + dbHelper.getRecaptacio(days[2]) + "€");
                 if (dimecres == 0) lays[2].setBackgroundColor(colors[6]);
                 else if (dimecres == aux) lays[2].setBackgroundColor(colors[j]);
                 else {
@@ -189,7 +186,7 @@ public class Estadistiques extends AppCompatActivity {
             } else if (percentatge[i].getDia().equals(days[3])) {
                 tv_entrades_dijous.setText(R.string.tickets + String.valueOf(dijous) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dijous.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[3]) + "€");
+                tv_dijous.setText(R.string.estimated + dbHelper.getRecaptacio(days[3]) + "€");
                 if (dijous == 0) lays[3].setBackgroundColor(colors[6]);
                 else if (dijous == aux) lays[3].setBackgroundColor(colors[j]);
                 else {
@@ -199,7 +196,7 @@ public class Estadistiques extends AppCompatActivity {
             } else if (percentatge[i].getDia().equals(days[4])) {
                 tv_entrades_divendres.setText(R.string.tickets + String.valueOf(divendres) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_divendres.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[4]) + "€");
+                tv_divendres.setText(R.string.estimated + dbHelper.getRecaptacio(days[4]) + "€");
                 if (divendres == 0) lays[4].setBackgroundColor(colors[6]);
                 else if (divendres == aux) lays[4].setBackgroundColor(colors[j]);
                 else {
@@ -209,7 +206,7 @@ public class Estadistiques extends AppCompatActivity {
             } else if (percentatge[i].getDia().equals(days[5])) {
                 tv_entrades_dissabte.setText(R.string.tickets + String.valueOf(dissabte) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_dissabte.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[5]) + "€");
+                tv_dissabte.setText(R.string.estimated + dbHelper.getRecaptacio(days[5]) + "€");
                 if (dissabte == 0) lays[5].setBackgroundColor(colors[6]);
                 else if (dissabte == aux) lays[5].setBackgroundColor(colors[j]);
                 else {
@@ -219,7 +216,7 @@ public class Estadistiques extends AppCompatActivity {
             } else if (percentatge[i].getDia().equals(days[6])) {
                 tv_entrades_diumenge.setText(R.string.tickets + String.valueOf(diumenge) +
                         "(" + percentatge[i].getPerc() + "%)");
-                tv_diumenge.setText("Rec. estimada: " + dbHelper.getRecaptacio(days[6]) + "€");
+                tv_diumenge.setText(R.string.estimated + dbHelper.getRecaptacio(days[6]) + "€");
                 if (diumenge == 0) lays[6].setBackgroundColor(colors[6]);
                 else if (diumenge == aux) lays[6].setBackgroundColor(colors[j]);
                 else {

@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escull una sessió per"
+            android:text="@string/selectDate"
             android:id="@+id/tv_sessions"
             android:layout_gravity="center_horizontal"
             android:textSize="25dp" />
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@string/blankText"
             android:id="@+id/tv_llistar_sessions_titol"
             android:layout_gravity="center_horizontal"
             android:textSize="25dp" />

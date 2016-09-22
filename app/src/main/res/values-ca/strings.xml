@@ -33,4 +33,8 @@
     <string name="duration">"Durada: "</string>
     <string name="price">"Preu: "</string>
     <string name="selectSeats">"Selecciona butaques: "</string>
+    <string name="blankText" translatable="false"></string>
+    <string name="estimated">Rec. estimada</string>
+    <string name="selectPlay">Selecciona una obra</string>
+    <string name="selectDate">"Selecciona una data per "</string>
 </resources>

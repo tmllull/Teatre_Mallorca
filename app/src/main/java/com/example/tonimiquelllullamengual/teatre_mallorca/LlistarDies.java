@@ -14,7 +14,9 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class LlistarDies extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class LlistarDies extends AppCompatActivity {
     Integer places;
 
     Bundle bundle;
+
+    Calendar calendar = new GregorianCalendar();
 
     private MyCustomAdapterDies adapter;
     ArrayList<Dia> dies = new ArrayList<>();
@@ -63,7 +67,7 @@ public class LlistarDies extends AppCompatActivity {
                 }*/
                 places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
                 dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
-                traduir_dia(dia_setmana);
+                //traduir_dia(dia_setmana);
                 if (filtre.equals("No")) {
                     dia = new Dia(titol, places, data, dia_setmana);
                     dies.add(dia);
@@ -78,7 +82,7 @@ public class LlistarDies extends AppCompatActivity {
         }
 
         if (dies.isEmpty()) tvSessio.setText("Cap sessio programada per");
-        else tvSessio.setText("Escull una sessió per");
+        else tvSessio.setText(R.string.selectDate);
         tvTitol.setText(titol);
 
         //findViewById del layout activity_main
@@ -122,29 +126,38 @@ public class LlistarDies extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         //Selecció de dia de filtrat
+
+        SimpleDateFormat formatter = new SimpleDateFormat("c");
+        String days[] = new String[7];
+
+        calendar.set(Calendar.DAY_OF_WEEK, 2);
+        for (int i = 0; i < 7; ++i) {
+            days[i] = formatter.format(calendar.getTime());
+            calendar.add(calendar.DAY_OF_WEEK, 1);
+        }
         switch (item.getItemId()) {
             case R.id.menu_seleccionar_dia:
                 return false;
             case R.id.dilluns:
-                updateData("Dilluns");
+                updateData(days[0]);
                 return false;
             case R.id.dimarts:
-                updateData("Dimarts");
+                updateData(days[1]);
                 return false;
             case R.id.dimecres:
-                updateData("Dimecres");
+                updateData(days[2]);
                 return false;
             case R.id.dijous:
-                updateData("Dijous");
+                updateData(days[3]);
                 return false;
             case R.id.divendres:
-                updateData("Divendres");
+                updateData(days[4]);
                 return false;
             case R.id.dissabte:
-                updateData("Dissabte");
+                updateData(days[5]);
                 return false;
             case R.id.diumenge:
-                updateData("Diumenge");
+                updateData(days[6]);
                 return false;
             case R.id.menu_mostrar_tot:
                 updateData("No");
@@ -173,7 +186,7 @@ public class LlistarDies extends AppCompatActivity {
     }
 
     //Traduim el dia que ens retorna el sistema al català (de moment des d'anglès i espanyol)
-    void traduir_dia(String dia_setmana) {
+    /*void traduir_dia(String dia_setmana) {
         if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
             this.dia_setmana = "Dilluns";
         else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
@@ -188,7 +201,7 @@ public class LlistarDies extends AppCompatActivity {
             this.dia_setmana = "Dissabte";
         else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
             this.dia_setmana = "Diumenge";
-    }
+    }*/
 
     void modificar_dates(int i) {
         Bundle bundle = new Bundle();

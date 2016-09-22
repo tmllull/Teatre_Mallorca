@@ -39,4 +39,7 @@
     <string name="price">"Price: "</string>
     <string name="availableSeats">Available seats:</string>
     <string name="selectSeats">Select seats:</string>
+    <string name="estimated">Est. income</string>
+    <string name="selectPlay">Select a play</string>
+    <string name="selectDate">Select a date for</string>
 </resources>
