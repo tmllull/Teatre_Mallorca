@@ -13,4 +13,24 @@
     <string name="lastName">"Cognoms: "</string>
     <string name="name">"Nom: "</string>
     <string name="confirmButton">Confirmar compra</string>
+    <string name="selectPlayForDelete">Escull de la llista quina obra vols eliminar</string>
+    <string name="delete">Eliminar</string>
+    <string name="wed">Dimecres</string>
+    <string name="fri">Divendres</string>
+    <string name="mon">Dilluns</string>
+    <string name="sat">Dissabte</string>
+    <string name="sun">Diumenge</string>
+    <string name="thu">Dijous</string>
+    <string name="tue">Dimarts</string>
+    <string name="statTitle">Estadístiques de venda</string>
+    <string name="statText">Cap entrada venuda</string>
+    <string name="statDayText">0 entrades</string>
+    <string name="legend">Llegenda</string>
+    <string name="moreTickets">+ entrades</string>
+    <string name="lessTickets">- entrades</string>
+    <string name="availableSeats">"Butaques disponibles: "</string>
+    <string name="description">"Descripció: "</string>
+    <string name="duration">"Durada: "</string>
+    <string name="price">"Preu: "</string>
+    <string name="selectSeats">"Selecciona butaques: "</string>
 </resources>

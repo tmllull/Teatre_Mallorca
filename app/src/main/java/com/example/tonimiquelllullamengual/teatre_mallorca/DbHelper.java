@@ -245,7 +245,25 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir totes les dates d'una obra
-    public Cursor getDies(String dia, String dia2) {
+    public Cursor getDia(String dia) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
+                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
+        String[] where = {dia};
+        Cursor c = db.query(
+                OBRA_TABLE,          // The table to query
+                columns,            // The columns to return
+                "dia_setmana=?",               // The columns for the WHERE clause
+                where,               // The values for the WHERE clause
+                null,               // don't group the rows
+                null,               // don't filter by row groups
+                CN_MILIS + " ASC"                // The sort order
+        );
+        return c;
+    }
+
+    //Obtenir totes les dates d'una obra
+    /*public Cursor getDies(String dia, String dia2) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
                 CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
@@ -260,11 +278,12 @@ public class DbHelper extends SQLiteOpenHelper {
                 CN_MILIS + " ASC"                // The sort order
         );
         return c;
-    }
+    }*/
 
     //Obtenir les entrades venudes en un mateix dia de la setmana (dilluns, dimarts...)
-    public int getEntrades(String dia, String dia2) {
-        Cursor c = this.getDies(dia, dia2);
+    public int getEntrades(String dia) {
+        Cursor c = this.getDia(dia);
+        //Cursor c = this.getDies(dia, dia2);
         int cont = 0;
         if (c.moveToFirst()) {
             do {
@@ -275,6 +294,20 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return cont;
     }
+
+    //Obtenir les entrades venudes en un mateix dia de la setmana (dilluns, dimarts...)
+    /*public int getEntrades(String dia, String dia2) {
+        Cursor c = this.getDies(dia, dia2);
+        int cont = 0;
+        if (c.moveToFirst()) {
+            do {
+                int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
+                int aux = 40 - lliures;
+                cont += aux;
+            } while (c.moveToNext());
+        }
+        return cont;
+    }*/
 
     //Obtenir el total d'entrades venudes en tot el teatre
     public int getTotalEntrades() {
@@ -307,8 +340,9 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir la recaptació d'un mateix dia de la setmana (dilluns, dimarts...)
-    public int getRecaptacio(String dia, String dia2) {
-        Cursor c = this.getDies(dia, dia2);
+    public int getRecaptacio(String dia) {
+        Cursor c = this.getDia(dia);
+        //Cursor c = this.getDies(dia, dia2);
         int cont = 0;
         if (c.moveToFirst()) {
             do {

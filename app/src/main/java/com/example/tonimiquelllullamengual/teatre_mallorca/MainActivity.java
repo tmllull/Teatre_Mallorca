@@ -68,14 +68,12 @@ public class MainActivity extends AppCompatActivity
         btAfegir = (Button) findViewById(R.id.bt_afegir_obra_main);
         btEliminar = (Button) findViewById(R.id.bt_eliminar_obra_main);
         btButaques = (Button) findViewById(R.id.bt_llistar_obres_main);
-        btUsuaris = (Button) findViewById(R.id.bt_mostrar_usuaris_main);
         ivLlistar = (ImageView) findViewById(R.id.iv_main_llistar);
         ivEliminar = (ImageView) findViewById(R.id.iv_main_eliminar);
 
         btAfegir.setOnClickListener(this);
         btEliminar.setOnClickListener(this);
         btButaques.setOnClickListener(this);
-        btUsuaris.setOnClickListener(this);
 
         ivLlistar.setOnClickListener(new View.OnClickListener() {
 

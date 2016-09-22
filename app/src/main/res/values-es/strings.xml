@@ -13,4 +13,25 @@
     <string name="lastName">"Apellidos: "</string>
     <string name="name">"Nombre: "</string>
     <string name="confirmButton">Confirmar compra</string>
+    <string name="selectPlayForDelete">Selecciona de la lista la obra que quieres eliminar</string>
+    <string name="delete">Eliminar</string>
+    <string name="wed">Miércoles</string>
+    <string name="fri">Viernes</string>
+    <string name="mon">Lunes</string>
+    <string name="sat">Sábado</string>
+    <string name="sun">Domingo</string>
+    <string name="thu">Jueves</string>
+    <string name="tue">Martes</string>
+    <string name="statTitle">Estadísticas de venta</string>
+    <string name="statText">Ninguna entrada vendida</string>
+    <string name="statDayText">0 entradas</string>
+    <string name="legend">Leyenda</string>
+    <string name="moreTickets">+ entradas</string>
+    <string name="lessTickets">- entradas</string>
+    <string name="availableSeats">"Butacas disponibles: "</string>
+    <string name="blankText"></string>
+    <string name="description">"Descripción: "</string>
+    <string name="duration">"Duración: "</string>
+    <string name="price">"Precio: "</string>
+    <string name="selectSeats">"Selecciona butacas: "</string>
 </resources>

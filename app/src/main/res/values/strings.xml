@@ -18,4 +18,25 @@
     <string name="name">"Name: "</string>
     <string name="lastName">"Last name: "</string>
     <string name="confirmButton">Confirm</string>
+    <string name="selectPlayForDelete">Select from the list what play do you want to delete</string>
+    <string name="delete">Delete</string>
+    <string name="mon">Monday</string>
+    <string name="tue">Tuesday</string>
+    <string name="wed">Wednesday</string>
+    <string name="thu">Thursday</string>
+    <string name="fri">Friday</string>
+    <string name="sat">Saturday</string>
+    <string name="sun">Sunday</string>
+    <string name="statTitle">Statistics</string>
+    <string name="statText">No information</string>
+    <string name="statDayText">0 tickets</string>
+    <string name="legend">Legend</string>
+    <string name="moreTickets">+ tickets</string>
+    <string name="lessTickets">- tickets</string>
+    <string name="blankText" translatable="false">Blank text</string>
+    <string name="description">"Description: "</string>
+    <string name="duration">"Duration: "</string>
+    <string name="price">"Price: "</string>
+    <string name="availableSeats">Available seats:</string>
+    <string name="selectSeats">Select seats:</string>
 </resources>

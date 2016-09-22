@@ -39,10 +39,9 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
         tvDurada = (TextView) findViewById(R.id.tv_Durada_Info);
         tvData = (TextView) findViewById(R.id.tv_data_info);
         ivComprar = (ImageView) findViewById(R.id.iv_comprar_entrades);
-        comprar = (Button) findViewById(R.id.bt_Comprar_Info);
         tvSeleccioButaques = (TextView) findViewById(R.id.tv_seleccio_butaques);
 
-        comprar.setOnClickListener(this);
+        //comprar.setOnClickListener(this);
         tvSeleccioButaques.setOnClickListener(this);
 
         ivComprar.setOnClickListener(new View.OnClickListener(){
@@ -95,8 +94,6 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_Comprar_Info:
-                break;
             case R.id.tv_seleccio_butaques:
                 if (disponible == 0) {
                     Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
