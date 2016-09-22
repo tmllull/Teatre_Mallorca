@@ -29,7 +29,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confirmar compra"
+                    android:text="@string/purchaseTitle"
                     android:textSize="30dp" />
             </TableRow>
 
@@ -42,7 +42,7 @@
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Títol: "
+                    android:text="@string/title"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data: "
+                    android:text="@string/date"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                     android:id="@+id/textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nº entrades: "
+                    android:text="@string/tickets"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -106,7 +106,7 @@
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total: "
+                    android:text="@string/total"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Per confirmar la compra, introdueix les següents dades:" />
+                    android:text="@string/purchaseTextConfirm" />
             </TableRow>
 
             <LinearLayout
@@ -144,7 +144,7 @@
                         android:id="@+id/textView19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="e-mail: " />
+                        android:text="@string/email" />
 
                     <EditText
                         android:id="@+id/et_mail_compra"
@@ -162,7 +162,7 @@
                         android:id="@+id/textView28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nom: " />
+                        android:text="@string/name" />
 
                     <EditText
                         android:id="@+id/editText"
@@ -178,7 +178,7 @@
                         android:id="@+id/textView27"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cognom: " />
+                        android:text="@string/lastName" />
 
                     <EditText
                         android:id="@+id/editText2"
@@ -197,7 +197,7 @@
                     android:id="@+id/bt_confirmar_compra"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confirmar compra" />
+                    android:text="@string/confirmButton" />
             </TableRow>
         </LinearLayout>
     </ScrollView>

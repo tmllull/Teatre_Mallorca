@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teatre Mallorca"
+            android:text="@string/app_name"
             android:id="@+id/textView10"
             android:textSize="40dp"
             android:textStyle="bold|italic"
@@ -46,7 +46,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Llistar obres"
+            android:text="@string/playList"
             android:id="@+id/bt_llistar_obres_main"
             android:minHeight="60dp"
             android:minWidth="120dp"
@@ -90,7 +90,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eliminar obra"
+            android:text="@string/deletePlay"
             android:id="@+id/bt_eliminar_obra_main"
             android:minHeight="60dp"
             android:minWidth="120dp"
@@ -99,23 +99,5 @@
             android:background="#00ffffff"
             android:textSize="30dp" />
     </LinearLayout>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:visibility="gone">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mostrar usuaris"
-            android:id="@+id/bt_mostrar_usuaris_main"
-            android:minHeight="60dp"
-            android:minWidth="120dp"
-            android:maxWidth="120dp"
-            android:maxHeight="60dp" />
-    </TableRow>
 
 </LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Configuració</string>
+    <string name="deletePlay">Eliminar obra</string>
+    <string name="navigation_drawer_close">Tancar Drawer</string>
+    <string name="navigation_drawer_open">Obrir Drawer</string>
+    <string name="playList">Llistat d\'obres</string>
+    <string name="tickets">"Nº Entrades: "</string>
+    <string name="title">"Títol: "</string>
+    <string name="date">"Data: "</string>
+    <string name="purchaseTitle">Confirmar compra</string>
+    <string name="purchaseTextConfirm">Per confirmar la compra, introdueix les següents dades:</string>
+    <string name="lastName">"Cognoms: "</string>
+    <string name="name">"Nom: "</string>
+    <string name="confirmButton">Confirmar compra</string>
+</resources>

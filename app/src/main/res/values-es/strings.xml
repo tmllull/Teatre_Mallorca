@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Ajustes</string>
+    <string name="navigation_drawer_close">Cerrar Navitation Drawer</string>
+    <string name="navigation_drawer_open">Abrir Navigation Drawer</string>
+    <string name="deletePlay">Eliminar obra</string>
+    <string name="playList">Lista de obras</string>
+    <string name="tickets">"Nº Entradas: "</string>
+    <string name="title">"Título: "</string>
+    <string name="date">"Fecha: "</string>
+    <string name="purchaseTitle">Confirmar compra</string>
+    <string name="purchaseTextConfirm">Para confirmar la compra, introduce los siguientes datos:</string>
+    <string name="lastName">"Apellidos: "</string>
+    <string name="name">"Nombre: "</string>
+    <string name="confirmButton">Confirmar compra</string>
+</resources>

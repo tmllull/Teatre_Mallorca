@@ -51,13 +51,12 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
             tvEntrades.setText(String.valueOf(entrades));
             total = bundle.getDouble("Total");
             DecimalFormat total_nou = new DecimalFormat("0.00");
-            tvTotal.setText(total_nou.format(total)+"€");
+            tvTotal.setText(total_nou.format(total) + "€");
             places_lliures = bundle.getInt("Places");
             butaques_seleccionades = bundle.getString("Butaques");
             dia_setmana = bundle.getString("DiaSetmana");
             data = bundle.getString("Data");
-            tvData.setText(dia_setmana+", "+data);
-            //
+            tvData.setText(dia_setmana + ", " + data);
         }
     }
 
@@ -65,10 +64,10 @@ public class ConfirmarCompra extends AppCompatActivity implements View.OnClickLi
         if (!etMail.getText().toString().isEmpty()) {
             dbHelper.updateOcupacio(tvTitol.getText().toString(), data, butaques_seleccionades);
             dbHelper.updatePlacesLliures(tvTitol.getText().toString(), data, places_lliures);
-            Cursor c = dbHelper.getUsuaris(tvTitol.getText().toString(),data);
+            Cursor c = dbHelper.getUsuaris(tvTitol.getText().toString(), data);
             if (c.moveToFirst()) {
                 String usuari = c.getString(c.getColumnIndex(dbHelper.CN_COMPRADORS));
-                usuari = etMail.getText().toString()+"^"+usuari;
+                usuari = etMail.getText().toString() + "^" + usuari;
                 dbHelper.updateCompradors(tvTitol.getText().toString(), data, usuari);
             }
             Toast.makeText(getApplicationContext(), "La seva compra s'ha realitzat correctament",

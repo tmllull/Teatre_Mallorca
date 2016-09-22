@@ -1,8 +1,21 @@
 <resources>
-    <string name="app_name">Teatre Mallorca</string>
+    <string name="app_name" translatable="false">Teatre Mallorca</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    
+    <string name="playList">Play List</string>
+    <string name="deletePlay">Delete Play</string>
+    <string name="title">"Title: "</string>
+    <string name="date">"Date: "</string>
+    <string name="tickets">"Nº Tickets: "</string>
+    <string name="total" translatable="false">"Total: "</string>
+    <string name="purchaseTitle">Purchase</string>
+    <string name="purchaseTextConfirm">Please, complete the next information:</string>
+    <string name="email" translatable="false">"e-mail: "</string>
+    <string name="name">"Name: "</string>
+    <string name="lastName">"Last name: "</string>
+    <string name="confirmButton">Confirm</string>
 </resources>
