@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity
 
     DbHelper dbHelper;
 
-    Button btAfegir, btEliminar, btButaques, btUsuaris;
+    Button btAdd, btDelete, btShows;
 
-    ImageView ivLlistar, ivEliminar;
+    ImageView ivLlist, ivDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NovaObra.class);
+                Intent intent = new Intent(getApplicationContext(), NewShow.class);
                 startActivity(intent);
             }
         });
@@ -65,30 +65,30 @@ public class MainActivity extends AppCompatActivity
             editor.commit();
         }
 
-        btAfegir = (Button) findViewById(R.id.bt_afegir_obra_main);
-        btEliminar = (Button) findViewById(R.id.bt_eliminar_obra_main);
-        btButaques = (Button) findViewById(R.id.bt_llistar_obres_main);
-        ivLlistar = (ImageView) findViewById(R.id.iv_main_llistar);
-        ivEliminar = (ImageView) findViewById(R.id.iv_main_eliminar);
+        btAdd = (Button) findViewById(R.id.btMainNewShow);
+        btDelete = (Button) findViewById(R.id.btMainDeleteShow);
+        btShows = (Button) findViewById(R.id.btMainListShows);
+        ivLlist = (ImageView) findViewById(R.id.ivMainListShows);
+        ivDelete = (ImageView) findViewById(R.id.ivMainDeleteShow);
 
-        btAfegir.setOnClickListener(this);
-        btEliminar.setOnClickListener(this);
-        btButaques.setOnClickListener(this);
+        btAdd.setOnClickListener(this);
+        btDelete.setOnClickListener(this);
+        btShows.setOnClickListener(this);
 
-        ivLlistar.setOnClickListener(new View.OnClickListener() {
+        ivLlist.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+                Intent intent = new Intent(getApplicationContext(), ShowList.class);
                 startActivity(intent);
             }
         });
 
-        ivEliminar.setOnClickListener(new View.OnClickListener() {
+        ivDelete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EliminarObra.class);
+                Intent intent = new Intent(getApplicationContext(), DeleteList.class);
                 startActivity(intent);
             }
         });
@@ -160,8 +160,8 @@ public class MainActivity extends AppCompatActivity
                     .setIcon(R.drawable.info)
                     .show();
         }
-        else if (id == R.id.estadistiques) {
-            intent = new Intent(getApplicationContext(), Estadistiques.class);
+        else if (id == R.id.statistics) {
+            intent = new Intent(getApplicationContext(), Statistics.class);
             startActivity(intent);
         }
 
@@ -174,16 +174,16 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.bt_afegir_obra_main:
-                intent = new Intent(getApplicationContext(), NovaObra.class);
+            case R.id.btMainNewShow:
+                intent = new Intent(getApplicationContext(), NewShow.class);
                 startActivity(intent);
                 break;
-            case R.id.bt_eliminar_obra_main:
-                intent = new Intent(getApplicationContext(), EliminarObra.class);
+            case R.id.btMainDeleteShow:
+                intent = new Intent(getApplicationContext(), DeleteList.class);
                 startActivity(intent);
                 break;
-            case R.id.bt_llistar_obres_main:
-                intent = new Intent(getApplicationContext(), LlistarObres.class);
+            case R.id.btMainListShows:
+                intent = new Intent(getApplicationContext(), ShowList.class);
                 startActivity(intent);
                 break;
             default:

@@ -19,40 +19,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OcupacioButaques"
+            android:name=".PlacesOcupacy"
             android:label="Pati de butaques" />
         <activity
-            android:name=".NovaObra"
+            android:name=".NewShow"
             android:label="Nova obra" />
         <activity
-            android:name=".NovaObraDates"
+            android:name=".NewShowDates"
             android:label="Selecció de dates" />
         <activity
-            android:name=".LlistarObres"
+            android:name=".ShowList"
             android:label="Llistat obres" />
         <activity
-            android:name=".ConfirmarCompra"
+            android:name=".ConfirmPurchase"
             android:label="Confirmar la compra" />
         <activity
-            android:name=".EliminarObra"
+            android:name=".DeleteList"
             android:label="Eliminar obra" />
         <activity
-            android:name=".InfoObra"
+            android:name=".InfoShow"
             android:label="Info obra" />
         <activity
-            android:name=".LlistarDies"
+            android:name=".DaysList"
             android:label="Llista de funcions" />
         <activity
-            android:name=".LlistarUsuaris"
+            android:name=".UsersList"
             android:label="Usuaris" />
         <activity
             android:name=".Help"
             android:label="Help" />
         <activity
-            android:name=".Estadistiques"
+            android:name=".Statistics"
             android:label="Estadistiques" />
         <activity
-            android:name=".ModificarDates"
+            android:name=".ModifyDates"
             android:label="Modificar dates" />
     </application>
 

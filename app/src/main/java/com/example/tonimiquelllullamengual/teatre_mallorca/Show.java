@@ -3,24 +3,24 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
-public class Obra {
+public class Show {
 
     private String nom, dia, sessions;
     private Integer places;
 
-    Obra(String nom, Integer places, String dia, String sessions) {
+    Show(String nom, Integer places, String dia, String sessions) {
         this.nom = nom;
         this.places = places;
         this.dia = dia;
         this.sessions = sessions;
     }
 
-    Obra(String nom, String sessions) {
+    Show(String nom, String sessions) {
         this.nom = nom;
         this.sessions = sessions;
     }
 
-    Obra() {}
+    Show() {}
 
     public String getNom() {return nom;}
 

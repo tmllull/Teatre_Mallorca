@@ -15,59 +15,59 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EliminarObra extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
+public class DeleteList extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
         View.OnClickListener {
 
-    Spinner spinner_obres;
+    Spinner spinnerShows;
 
-    List<String> obres = new ArrayList<>();
-    Button btEliminar;
+    List<String> shows = new ArrayList<>();
+    Button btDelete;
 
     DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eliminar_obra);
+        setContentView(R.layout.activity_delete_show);
 
         dbHelper = new DbHelper(this);
 
-        spinner_obres = (Spinner) findViewById(R.id.sp_obres);
-        btEliminar = (Button) findViewById(R.id.bt_eliminar_eliminar);
+        spinnerShows = (Spinner) findViewById(R.id.spShows);
+        btDelete = (Button) findViewById(R.id.btDeleteShow);
 
-        carregar_spinner_obres();
-        spinner_obres.setOnItemSelectedListener(this);
-        btEliminar.setOnClickListener(this);
+        LoadSpinnerShows();
+        spinnerShows.setOnItemSelectedListener(this);
+        btDelete.setOnClickListener(this);
 
     }
 
-    void carregar_spinner_obres() {
-        // Spinner obres
-        obres.add("Selecciona una obra de la llista");
+    void LoadSpinnerShows() {
+        // Spinner shows
+        shows.add("Selecciona una obra de la llista");
 
-        Cursor c = dbHelper.getAllObresDistinct();
-        //Cursor c = dbHelper.getAllObres();
+        Cursor c = dbHelper.getAllShowsDistinct();
+        //Cursor c = dbHelper.getAllShows();
         if (c.moveToFirst()) {
             do {
-                String nom = c.getString(c.getColumnIndex(dbHelper.CN_TITOL));
-                obres.add(nom);
+                String name = c.getString(c.getColumnIndex(dbHelper.CN_TITLE));
+                shows.add(name);
             } while (c.moveToNext());
         }
 
         // Creem adaptador
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, obres);
+                android.R.layout.simple_spinner_item, shows);
 
         //
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
-        spinner_obres.setAdapter(dataAdapter);
+        // attaching date adapter to spinner
+        spinnerShows.setAdapter(dataAdapter);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String obra = parent.getItemAtPosition(position).toString();
+        String show = parent.getItemAtPosition(position).toString();
 
     }
 
@@ -79,9 +79,9 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_eliminar_eliminar:
-                final String obra_sel = spinner_obres.getSelectedItem().toString();
-                if (!obra_sel.equals("Selecciona una obra de la llista")) {
+            case R.id.btDeleteShow:
+                final String showSelected = spinnerShows.getSelectedItem().toString();
+                if (!showSelected.equals("Selecciona una obra de la llista")) {
                     new AlertDialog.Builder(this)
                             .setTitle("Eliminar obra")
                             .setMessage("Aquesta acció no es pot desfer. " +
@@ -89,7 +89,7 @@ public class EliminarObra extends AppCompatActivity implements AdapterView.OnIte
                                     "les seves funcions?")
                             .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    dbHelper.deteleObra(obra_sel);
+                                    dbHelper.deteleShow(showSelected);
                                     finish();
                                 }
                             })

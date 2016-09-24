@@ -6,20 +6,25 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.TimeZone;
 
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
 public class DbHelper extends SQLiteOpenHelper {
 
-    //Variables de generació d'obres automàtiques
-    String titol, descripcio, usuaris, usuari, dataObra, places, dia_setmana, durada, preu;
+    //Variables de generació d'shows automàtiques
+    String title, description, users, user, showDate, places, dayOfTheWeek, duration, price;
     int p;
     long milliseconds;
+
+    Calendar calendar = new GregorianCalendar();
 
     //Versió de la base de datos
     public static final int DATABASE_VERSION = 1;
@@ -28,38 +33,38 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "database.sqlite";
 
     //Nom de la taula
-    public static final String OBRA_TABLE = "Obra";
+    public static final String SHOW_TABLE = "Show";
 
-    public static final String CN_TITOL = "titol";
-    public static final String CN_DESCRIPCIO = "descripcio";
-    public static final String CN_DATA = "data";
-    public static final String CN_DURADA = "durada";
-    public static final String CN_PREU = "preu";
-    public static final String CN_BUTAQUES = "butaques";
-    public static final String CN_PLACES_LLIURES = "places_lliures";
+    public static final String CN_TITLE = "title";
+    public static final String CN_DESCRIPTION = "description";
+    public static final String CN_DATE = "date";
+    public static final String CN_DURATION = "duration";
+    public static final String CN_PRICE = "price";
+    public static final String CN_SEATS = "seats";
+    public static final String CN_FREE_SEATS = "freePlaces";
     public static final String CN_MILIS = "milis";
-    public static final String CN_COMPRADORS = "compradors";
-    public static final String CN_DIA_SETMANA = "dia_setmana";
+    public static final String CN_CLIENTS = "clients";
+    public static final String CN_DAY_OF_THE_WEEK = "dayOfTheWeek";
 
 
-    public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + "( " +
-            CN_TITOL + " TEXT, " +
-            CN_DESCRIPCIO + " TEXT, " +
-            CN_DATA + " TEXT, " +
-            CN_DURADA + " INTEGER, " +
-            CN_PREU + " INTEGER, " +
-            CN_BUTAQUES + " TEXT, " +
-            CN_PLACES_LLIURES + " INTEGER, " +
+    public static final String SHOW_TABLE_CREATE = "CREATE TABLE " + SHOW_TABLE + "( " +
+            CN_TITLE + " TEXT, " +
+            CN_DESCRIPTION + " TEXT, " +
+            CN_DATE + " TEXT, " +
+            CN_DURATION + " INTEGER, " +
+            CN_PRICE + " INTEGER, " +
+            CN_SEATS + " TEXT, " +
+            CN_FREE_SEATS + " INTEGER, " +
             CN_MILIS + " TEXT, " +
-            CN_COMPRADORS + " TEXT, " +
-            CN_DIA_SETMANA + " TEXT, " +
-            "PRIMARY KEY (titol,data));";
+            CN_CLIENTS + " TEXT, " +
+            CN_DAY_OF_THE_WEEK + " TEXT, " +
+            "PRIMARY KEY (title,date));";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void newObra(ContentValues values, String tableName) {
+    public void newShow(ContentValues values, String tableName) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(
                 tableName,
@@ -68,15 +73,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Comprovar si l'obra existeix
-    public Cursor comprovarObra(String titol) {
+    public Cursor checkShow(String title) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {title};
         Cursor c = db.query(
-                OBRA_TABLE,  // The table to query
+                SHOW_TABLE,  // The table to query
                 columns,                                    // The columns to return
-                "titol=?",                                   // The columns for the WHERE clause
+                "title=?",                                   // The columns for the WHERE clause
                 where,                                      // The values for the WHERE clause
                 null,                                       // don't group the rows
                 null,                                       // don't filter by row groups
@@ -86,15 +91,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir una sessió en concret
-    public Cursor getObra(String titol, String data) {
+    public Cursor getShow(String title, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol, data};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {title, date};
         Cursor c = db.query(
-                OBRA_TABLE,  // The table to query
+                SHOW_TABLE,  // The table to query
                 columns,                                    // The columns to return
-                "titol=?" + " and " + "data=?",                                   // The columns for the WHERE clause
+                "title=?" + " and " + "date=?",                                   // The columns for the WHERE clause
                 where,                                      // The values for the WHERE clause
                 null,                                       // don't group the rows
                 null,                                       // don't filter by row groups
@@ -103,53 +108,53 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //Obtenir totes les obres amb repetició
-    public Cursor getAllObres() {
+    //Obtenir totes les shows amb repetició
+    public Cursor getAllShows() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        //Cursor c = db.rawQuery( "SELECT DISTINCT nom FROM Obra", null);
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        //Cursor c = db.rawQuery( "SELECT DISTINCT name FROM Show", null);
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
                 null,               // The columns for the WHERE clause
                 null,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
-                CN_TITOL + " ASC"                // The sort order
+                CN_TITLE + " ASC"                // The sort order
         );
         return c;
     }
 
-    //Obtenir totes les obres ordenades pel nom, sense repetir
-    public Cursor getAllObresDistinct() {
+    //Obtenir totes les shows ordenades pel name, sense repetir
+    public Cursor getAllShowsDistinct() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {CN_TITOL};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {CN_TITLE};
         Cursor c = db.query(true,
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
                 null,               // The columns for the WHERE clause
                 null,               // The values for the WHERE clause
-                CN_TITOL,             // don't group the rows
+                CN_TITLE,             // don't group the rows
                 null,               // don't filter by row groups
-                CN_TITOL + " ASC",    // The sort order
+                CN_TITLE + " ASC",    // The sort order
                 null
         );
         return c;
     }
 
     //Obtenir totes les dates d'una obra
-    public Cursor getDatesObra(String titol) {
+    public Cursor getDatesShow(String title) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {title};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
-                "titol=?",               // The columns for the WHERE clause
+                "title=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -159,15 +164,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir totes les dates d'una obra
-    public Cursor getDatesObraDesc(String titol) {
+    public Cursor getDatesShowDesc(String title) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {title};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
-                "titol=?",               // The columns for the WHERE clause
+                "title=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -176,32 +181,32 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //Obtenir una funció d'una obra a una data determinada
-    public Cursor getObraData(String titol, String data) {
+    //Obtenir una funció d'una obra a una date determinada
+    public Cursor getShowDate(String title, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol, data};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {title, date};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
-                "titol=?" + " and " + "data=?",               // The columns for the WHERE clause
+                "title=?" + " and " + "date=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
-                CN_DATA + " ASC"                // The sort order
+                CN_DATE + " ASC"                // The sort order
         );
         return c;
     }
 
     //Compta quantes sessions hi ha programades per una obra
-    public int comptarSessions(String titol) {
+    public int sessionsCounter(String title) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] where = {titol};
+        String[] where = {title};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 null,            // The columns to return
-                "titol=?",               // The columns for the WHERE clause
+                "title=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -211,31 +216,31 @@ public class DbHelper extends SQLiteOpenHelper {
         return cnt;
     }
 
-    //Retorna un array amb tots els usuaris per separat d'una sessió
-    public String[] consultarUsuaris(String titol, String data) {
-        Cursor c = this.getUsuaris(titol, data);
-        String[] usuaris;
-        String s_usuaris = new String();
+    //Retorna un array amb tots els users per separat d'una sessió
+    public String[] consultUsers(String title, String date) {
+        Cursor c = this.getUsers(title, date);
+        String[] users;
+        String s_users = new String();
         if (c.moveToFirst()) {
-            s_usuaris = c.getString(c.getColumnIndex(CN_COMPRADORS));
+            s_users = c.getString(c.getColumnIndex(CN_CLIENTS));
         }
-        if (s_usuaris != null) {
-            usuaris = s_usuaris.split("\\^");
-            return usuaris;
+        if (s_users != null) {
+            users = s_users.split("\\^");
+            return users;
         }
         return null;
     }
 
-    //Obtenir els usuaris d'una obra a una data determinada
-    public Cursor getUsuaris(String titol, String data) {
+    //Obtenir els users d'una obra a una date determinada
+    public Cursor getUsers(String title, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {titol, data};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {title, date};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
-                "titol=?" + " and " + "data=?",               // The columns for the WHERE clause
+                "title=?" + " and " + "date=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -245,15 +250,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir totes les dates d'una obra
-    public Cursor getDia(String dia) {
+    public Cursor getDay(String day) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {dia};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {day};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
-                "dia_setmana=?",               // The columns for the WHERE clause
+                "dayOfTheWeek=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -263,15 +268,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir totes les dates d'una obra
-    /*public Cursor getDies(String dia, String dia2) {
+    /*public Cursor getDies(String day, String dia2) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL, CN_DESCRIPCIO, CN_DATA, CN_DURADA, CN_PREU, CN_BUTAQUES,
-                CN_PLACES_LLIURES, CN_MILIS, CN_COMPRADORS, CN_DIA_SETMANA};
-        String[] where = {dia, dia2};
+        String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
+                CN_FREE_SEATS, CN_MILIS, CN_CLIENTS, CN_DAY_OF_THE_WEEK};
+        String[] where = {day, dia2};
         Cursor c = db.query(
-                OBRA_TABLE,          // The table to query
+                SHOW_TABLE,          // The table to query
                 columns,            // The columns to return
-                "dia_setmana=?" + " or " + "dia_setmana=?",               // The columns for the WHERE clause
+                "dayOfTheWeek=?" + " or " + "dayOfTheWeek=?",               // The columns for the WHERE clause
                 where,               // The values for the WHERE clause
                 null,               // don't group the rows
                 null,               // don't filter by row groups
@@ -280,28 +285,28 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }*/
 
-    //Obtenir les entrades venudes en un mateix dia de la setmana (dilluns, dimarts...)
-    public int getEntrades(String dia) {
-        Cursor c = this.getDia(dia);
-        //Cursor c = this.getDies(dia, dia2);
+    //Obtenir les tickets venudes en un mateix day de la setmana (dilluns, dimarts...)
+    public int getEntries(String day) {
+        Cursor c = this.getDay(day);
+        //Cursor c = this.getDies(day, dia2);
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
-                int aux = 40 - lliures;
+                int free = c.getInt(c.getColumnIndex(CN_FREE_SEATS));
+                int aux = 40 - free;
                 cont += aux;
             } while (c.moveToNext());
         }
         return cont;
     }
 
-    //Obtenir les entrades venudes en un mateix dia de la setmana (dilluns, dimarts...)
-    /*public int getEntrades(String dia, String dia2) {
-        Cursor c = this.getDies(dia, dia2);
+    //Obtenir les tickets venudes en un mateix day de la setmana (dilluns, dimarts...)
+    /*public int getEntries(String day, String dia2) {
+        Cursor c = this.getDies(day, dia2);
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
+                int lliures = c.getInt(c.getColumnIndex(CN_FREE_SEATS));
                 int aux = 40 - lliures;
                 cont += aux;
             } while (c.moveToNext());
@@ -309,14 +314,14 @@ public class DbHelper extends SQLiteOpenHelper {
         return cont;
     }*/
 
-    //Obtenir el total d'entrades venudes en tot el teatre
-    public int getTotalEntrades() {
-        Cursor c = this.getAllObres();
+    //Obtenir el total d'tickets venudes en tot el teatre
+    public int getTotalEntries() {
+        Cursor c = this.getAllShows();
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
-                int aux = 40 - lliures;
+                int free = c.getInt(c.getColumnIndex(CN_FREE_SEATS));
+                int aux = 40 - free;
                 cont += aux;
             } while (c.moveToNext());
         }
@@ -324,77 +329,77 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir el total de la recaptació de tot el teatre
-    public int getTotalVentes() {
-        Cursor c = this.getAllObres();
+    public int getTotalSells() {
+        Cursor c = this.getAllShows();
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                //if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
-                    int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
-                    int aux = 40 - lliures;
-                    cont += aux * c.getInt(c.getColumnIndex(CN_PREU));
+                //if (c.getInt(c.getColumnIndex(CN_FREE_SEATS)) != 0) {
+                    int free = c.getInt(c.getColumnIndex(CN_FREE_SEATS));
+                    int aux = 40 - free;
+                    cont += aux * c.getInt(c.getColumnIndex(CN_PRICE));
                 //}
             } while (c.moveToNext());
         }
         return cont;
     }
 
-    //Obtenir la recaptació d'un mateix dia de la setmana (dilluns, dimarts...)
-    public int getRecaptacio(String dia) {
-        Cursor c = this.getDia(dia);
-        //Cursor c = this.getDies(dia, dia2);
+    //Obtenir la recaptació d'un mateix day de la setmana (dilluns, dimarts...)
+    public int getIncome(String day) {
+        Cursor c = this.getDay(day);
+        //Cursor c = this.getDies(day, dia2);
         int cont = 0;
         if (c.moveToFirst()) {
             do {
-                //if (c.getInt(c.getColumnIndex(CN_PLACES_LLIURES)) != 0) {
-                    int lliures = c.getInt(c.getColumnIndex(CN_PLACES_LLIURES));
-                    int aux = 40 - lliures;
-                    cont += aux * c.getInt(c.getColumnIndex(CN_PREU));
+                //if (c.getInt(c.getColumnIndex(CN_FREE_SEATS)) != 0) {
+                    int free = c.getInt(c.getColumnIndex(CN_FREE_SEATS));
+                    int aux = 40 - free;
+                    cont += aux * c.getInt(c.getColumnIndex(CN_PRICE));
                 //}
             } while (c.moveToNext());
         }
         return cont;
     }
 
-    //Actualitzar butaques ocupades
-    public void updateOcupacio(String titol, String data, String ocupacio) {
+    //Actualitzar seats ocupades
+    public void updatePlaces(String title, String date, String occupation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(CN_BUTAQUES, ocupacio);
-        db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
+        values.put(CN_SEATS, occupation);
+        db.update(SHOW_TABLE, values, CN_TITLE + "=?" + " and " + "date=?", new String[]{title, date});
     }
 
     //Actualitzar places lliures
-    public void updatePlacesLliures(String titol, String data, int places) {
+    public void updateFreePlaces(String title, String date, int places) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(CN_PLACES_LLIURES, places);
-        db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
+        values.put(CN_FREE_SEATS, places);
+        db.update(SHOW_TABLE, values, CN_TITLE + "=?" + " and " + "date=?", new String[]{title, date});
     }
 
     //Actualitzar llista de compradors
-    public void updateCompradors(String titol, String data, String compradors) {
+    public void updateClients(String title, String date, String clients) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(CN_COMPRADORS, compradors);
-        db.update(OBRA_TABLE, values, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
+        values.put(CN_CLIENTS, clients);
+        db.update(SHOW_TABLE, values, CN_TITLE + "=?" + " and " + "date=?", new String[]{title, date});
     }
 
     //Eliminar una obra amb totes les seves sessions
-    public void deteleObra(String titol) {
+    public void deteleShow(String title) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(OBRA_TABLE, CN_TITOL + "=?", new String[]{titol});
+        db.delete(SHOW_TABLE, CN_TITLE + "=?", new String[]{title});
     }
 
     //Eliminar una funció d'una obra
-    public void deteleFuncio(String titol, String data) {
+    public void deteleSession(String title, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(OBRA_TABLE, CN_TITOL + "=?" + " and " + "data=?", new String[]{titol, data});
+        db.delete(SHOW_TABLE, CN_TITLE + "=?" + " and " + "date=?", new String[]{title, date});
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(OBRA_TABLE_CREATE);
+        db.execSQL(SHOW_TABLE_CREATE);
     }
 
     @Override
@@ -405,16 +410,16 @@ public class DbHelper extends SQLiteOpenHelper {
     //Esborrar BD
     public void resetAll() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(OBRA_TABLE, null, null);
+        db.delete(SHOW_TABLE, null, null);
     }
 
-    ////////////////Inicialitzem la BD amb 3 obres///////////////////////////////
+    ////////////////Inicialitzem la BD amb 3 shows///////////////////////////////
     public void initData() {
         //Eliminem la BD actual i la tornem a generar
         this.resetAll();
-        ///////////////////////////////Obra 1//////////////////////////////////
-        titol = "El rey leon";
-        descripcio = "Gracias al genio, visión artística y creativa " +
+        ///////////////////////////////Show 1//////////////////////////////////
+        title = "El rey leon";
+        description = "Gracias al genio, visión artística y creativa " +
                 "de su directora, Julie Taymor, el género musical da un paso adelante. " +
                 "Con su sorprendente y colorida puesta en escena, EL REY LEÓN transporta " +
                 "al espectador al exotismo africano, con evocadoras músicas, " +
@@ -434,14 +439,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "entorno, así como la importancia de sentir que pertenecemos a un " +
                 "grupo, y como todo ello conforma nuestro destino. Además un canto " +
                 "al respeto y al amor por la naturaleza.";
-        durada = "120";
-        preu = "50";
-        generar_places();
-        calcul_dies(1, 30);
+        duration = "120";
+        price = "50";
+        generate_places();
+        daysCalculator(1, 30);
 
         /////////////////////////////////Obra2//////////////////////////////////
-        titol = "Mamma mia";
-        descripcio = "En una idíl•lica illa grega dies abans de " +
+        title = "Mamma mia";
+        description = "En una idíl•lica illa grega days abans de " +
                 "contreure matrimoni, una jove decideix convidar al seu pare al casament.\n" +
                 "Però, qui serà realment? Quin dels tres homes que van passar per " +
                 "la vida de la seva mare ja fa 20 anys hauria de portar-la a l'altar? \n" +
@@ -458,14 +463,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "costat més optimista i reconfortant de la vida.\n" +
                 "\n" +
                 "Et resistiràs?";
-        durada = "90";
-        preu = "20";
-        //generar_places();
-        calcul_dies(1, 30);
+        duration = "90";
+        price = "20";
+        //generate_places();
+        daysCalculator(1, 30);
 
         ///////////////////////////////////Obra3///////////////////////////////////////////
-        titol = "Queen";
-        descripcio = "La formación original con Brian May y Roger " +
+        title = "Queen";
+        description = "La formación original con Brian May y Roger " +
                 "Taylor se une al cantante Adam Lambert para hacernos revivir todo el " +
                 "sonido y espectacularidad de uno de los grupos de nuestra vida.\n" +
                 "Queen + Adam Lambert hicieron la mayor parte de su gira por el " +
@@ -480,17 +485,35 @@ public class DbHelper extends SQLiteOpenHelper {
                 "\n" +
                 "No te lo pierdas y consigue las entradas para el concierto Queen + " +
                 "Adam Lambert. ";
-        durada = "110";
-        preu = "40";
-        //generar_places();
-        calcul_dies(1, 30);
+        duration = "110";
+        price = "40";
+        //generate_places();
+        daysCalculator(1, 30);
     }
 
-    public void calcul_dies(int dia_from_val, int dia_to_val) {
-        for (int i = dia_from_val; i <= dia_to_val; ++i) {
-            dataObra = i + "/" + 06 + "/" + 16;
+    public void daysCalculator(int day_from_val, int day_to_val) {
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+
+        int month = calendar.getInstance(TimeZone.getDefault()).get(Calendar.MONTH)+1;
+
+        //formatter = new SimpleDateFormat("YY");
+
+        int year = calendar.get(Calendar.YEAR);
+
+        /*String days[] = new String[7];
+
+        calendar.set(Calendar.DAY_OF_WEEK, 2);
+        for (int i = 0; i < 7; ++i) {
+            days[i] = formatter.format(calendar.getTime());
+            calendar.add(calendar.DAY_OF_WEEK, 1);
+        }*/
+
+        for (int i = day_from_val; i <= day_to_val; ++i) {
+            showDate = i + "/" + month + "/" + year;
             places = "-";
-            dia_setmana = "";
+            dayOfTheWeek = "";
             for (int j = 1; j < 41; ++j) {
                 //Plaça lliure indicat amb un 1
                 places = places + "1";
@@ -498,37 +521,37 @@ public class DbHelper extends SQLiteOpenHelper {
             SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
             java.util.Date d = null;
             try {
-                d = f.parse(dataObra);
+                d = f.parse(showDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             milliseconds = d.getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("c");
-            dia_setmana = formatter.format(new java.sql.Date(milliseconds));
-            generar_places();
+            formatter = new SimpleDateFormat("c");
+            dayOfTheWeek = formatter.format(new java.sql.Date(milliseconds));
+            generate_places();
             Random rand = new Random();
             int n = rand.nextInt(500);
             if (n % 2 == 0) {
                 ContentValues values = new ContentValues();
-                values.put(this.CN_TITOL, titol.toUpperCase());
-                values.put(this.CN_DESCRIPCIO, descripcio);
-                values.put(this.CN_DURADA, durada);
-                values.put(this.CN_PREU, preu);
-                values.put(this.CN_DATA, dataObra.toString());
-                values.put(this.CN_BUTAQUES, places);
+                values.put(this.CN_TITLE, title.toUpperCase());
+                values.put(this.CN_DESCRIPTION, description);
+                values.put(this.CN_DURATION, duration);
+                values.put(this.CN_PRICE, price);
+                values.put(this.CN_DATE, showDate.toString());
+                values.put(this.CN_SEATS, places);
                 values.put(this.CN_MILIS, String.valueOf(milliseconds));
-                values.put(this.CN_PLACES_LLIURES, p);
-                values.put(this.CN_COMPRADORS, usuaris);
-                values.put(this.CN_DIA_SETMANA, dia_setmana);
-                this.newObra(values, this.OBRA_TABLE);
+                values.put(this.CN_FREE_SEATS, p);
+                values.put(this.CN_CLIENTS, users);
+                values.put(this.CN_DAY_OF_THE_WEEK, dayOfTheWeek);
+                this.newShow(values, this.SHOW_TABLE);
 
             }
         }
     }
 
-    public void generar_places() {
-        usuaris = "^";
-        usuari = "usuari@prova.com";
+    public void generate_places() {
+        users = "^";
+        user = "user@test.com";
         places = "-";
         p = 0;
         for (int i = 1; i < 41; ++i) {
@@ -536,7 +559,7 @@ public class DbHelper extends SQLiteOpenHelper {
             int n = rand.nextInt(500);
             if (n % 3 == 0) {
                 places = places + "0";
-                usuaris = i + usuari + "^" + usuaris;
+                users = i + user + "^" + users;
             } else {
                 places = places + "1";
                 p++;

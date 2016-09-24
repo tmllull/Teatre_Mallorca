@@ -12,7 +12,7 @@ public class Percentage implements Comparable{
 
     Percentage() {}
 
-    public void setDia(String dia) {
+    public void setDay(String dia) {
         this.dia = dia;
     }
 
@@ -20,19 +20,19 @@ public class Percentage implements Comparable{
         this.perc = perc;
     }
 
-    public void setEntrades(int entrades) {
+    public void setEntries(int entrades) {
         this.entrades = entrades;
     }
 
-    public void setVendes(int vendes) {
+    public void setSales(int vendes) {
         this.vendes = vendes;
     }
 
-    public int getEntrades() {
+    public int getEntries() {
         return entrades;
     }
 
-    public String getDia() {
+    public String getDay() {
         return dia;
     }
 
@@ -48,6 +48,6 @@ public class Percentage implements Comparable{
     public int compareTo(Object another) {
         //return ((Percentage)another).getVendes() - this.vendes; //Ordenar per ingressos
         //return ((Percentage)another).getPerc() - this.perc; //Ordenar per %
-        return ((Percentage)another).getEntrades() - this.entrades; //Ordenar per entrades
+        return ((Percentage)another).getEntries() - this.entrades; //Ordenar per tickets
     }
 }

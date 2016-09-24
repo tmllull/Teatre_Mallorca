@@ -10,31 +10,31 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class LlistarObres extends AppCompatActivity {
+public class ShowList extends AppCompatActivity {
 
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    private MyCustomAdapterObres adapter;
-    ArrayList<Obra> obres = new ArrayList<>();
+    private MyCustomAdapterShows adapter;
+    ArrayList<Show> shows = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_llistar_obres);
+        setContentView(R.layout.activity_show_list);
 
-        carregar_view();
+        viewLoad();
     }
 
-    public void carregar_view() {
+    public void viewLoad() {
         dbHelper = new DbHelper(this);
-        Cursor c = dbHelper.getAllObresDistinct();
+        Cursor c = dbHelper.getAllShowsDistinct();
         if (c.moveToFirst()) {
             do {
-                String titol = c.getString(c.getColumnIndex(dbHelper.CN_TITOL));
-                Integer sessions = dbHelper.comptarSessions(titol);
-                Obra obra = new Obra(titol,sessions.toString());
-                obres.add(obra);
+                String title = c.getString(c.getColumnIndex(dbHelper.CN_TITLE));
+                Integer sessions = dbHelper.sessionsCounter(title);
+                Show show = new Show(title,sessions.toString());
+                shows.add(show);
             } while (c.moveToNext());
         }
 
@@ -53,9 +53,9 @@ public class LlistarObres extends AppCompatActivity {
         //El adapter se encarga de  adaptar un objeto definido en el c�digo a una vista en xml
         //seg�n la estructura definida.
         //Asignamos nuestro custom Adapter
-        adapter = new MyCustomAdapterObres();
+        adapter = new MyCustomAdapterShows();
         mRecyclerView.setAdapter(adapter);
-        adapter.setDataSet(obres);
+        adapter.setDataSet(shows);
 
     }
 
@@ -74,9 +74,9 @@ public class LlistarObres extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.menu_seleccionar_dia:
+            case R.id.menuDaySelection:
                 return false;
-            case R.id.menu_mostrar_tot:
+            case R.id.menuSeeAll:
                 return false;
             default:
                 return false;

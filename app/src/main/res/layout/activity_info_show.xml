@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.InfoObra"
+    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.InfoShow"
     android:background="#ffffff">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/blankText"
-            android:id="@+id/tv_Titol_Info"
+            android:id="@+id/tvInfoTitle"
             android:textSize="36dp" />
     </LinearLayout>
 
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/tv_Descripcio_Info"
+                android:id="@+id/tvInfoDescription"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/tv_Durada_Info"
+                android:id="@+id/tvInfoDuration"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/tv_data_info"
+                android:id="@+id/tvInfoDate"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/tv_Preu_Info"
+                android:id="@+id/tvInfoPrice"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/tv_Places_Info"
+                android:id="@+id/tvInfoPlaces"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -152,7 +152,7 @@
             <ImageView
                 android:layout_width="89dp"
                 android:layout_height="87dp"
-                android:id="@+id/iv_comprar_entrades"
+                android:id="@+id/ivInfoBuy"
                 android:src="@drawable/butaques"
                 android:background="#f1f1f1" />
 
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/selectSeats"
-                android:id="@+id/tv_seleccio_butaques" />
+                android:id="@+id/tvSeatSelection" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

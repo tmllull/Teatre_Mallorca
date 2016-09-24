@@ -11,79 +11,68 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class LlistarDies extends AppCompatActivity {
+public class DaysList extends AppCompatActivity {
 
     DbHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    String titol, filtre, dia_setmana, data;
-    TextView tvSessio, tvTitol;
+    String title, filter, dayOfTheWeek, date;
+    TextView tvSession, tvTitle;
     Integer places;
 
     Bundle bundle;
 
     Calendar calendar = new GregorianCalendar();
 
-    private MyCustomAdapterDies adapter;
-    ArrayList<Dia> dies = new ArrayList<>();
+    private MyCustomAdapterDays adapter;
+    ArrayList<Day> days = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_llistar_dies);
+        setContentView(R.layout.activity_list_days);
 
-        tvSessio = (TextView) findViewById(R.id.tv_sessions);
-        tvTitol = (TextView) findViewById(R.id.tv_llistar_sessions_titol);
-        filtre = "No";
-        carregar_view(filtre);
+        tvSession = (TextView) findViewById(R.id.tvSessions);
+        tvTitle = (TextView) findViewById(R.id.tvListSessionsTitle);
+        filter = "No";
+        loadView(filter);
 
     }
 
-    public void carregar_view(String filtre) {
+    public void loadView(String filter) {
         dbHelper = new DbHelper(this);
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            titol = bundle.getString("Titol");
+            title = bundle.getString("Title");
         }
-        Dia dia = new Dia();
-        Cursor c = dbHelper.getDatesObra(titol);
+        Day day;
+        Cursor c = dbHelper.getDatesShow(title);
         if (c.moveToFirst()) {
             do {
-                String milis = c.getString(c.getColumnIndex(dbHelper.CN_MILIS));
-                //Long.valueOf(milis);
-                data = c.getString(c.getColumnIndex(dbHelper.CN_DATA));
-                //boolean disp = comprovar_disponibilitat(milis);
-                /*if (disp) places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                else {
-                    places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                }*/
-                places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-                dia_setmana = c.getString(c.getColumnIndex(dbHelper.CN_DIA_SETMANA));
-                //traduir_dia(dia_setmana);
-                if (filtre.equals("No")) {
-                    dia = new Dia(titol, places, data, dia_setmana);
-                    dies.add(dia);
-                }
-                else {
-                    if (filtre.equals(dia_setmana)) {
-                        dia = new Dia(titol, places, data, dia_setmana);
-                        dies.add(dia);
+                date = c.getString(c.getColumnIndex(dbHelper.CN_DATE));
+                places = c.getInt(c.getColumnIndex(dbHelper.CN_FREE_SEATS));
+                dayOfTheWeek = c.getString(c.getColumnIndex(dbHelper.CN_DAY_OF_THE_WEEK));
+                if (filter.equals("No")) {
+                    day = new Day(title, places, date, dayOfTheWeek);
+                    days.add(day);
+                } else {
+                    if (filter.equals(dayOfTheWeek)) {
+                        day = new Day(title, places, date, dayOfTheWeek);
+                        days.add(day);
                     }
                 }
             } while (c.moveToNext());
         }
 
-        if (dies.isEmpty()) tvSessio.setText("Cap sessio programada per");
-        else tvSessio.setText(R.string.selectDate);
-        tvTitol.setText(titol);
+        if (days.isEmpty()) tvSession.setText("Cap sessio programada per");
+        else tvSession.setText(R.string.selectDate);
+        tvTitle.setText(title);
 
         //findViewById del layout activity_main
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerViewDies);
@@ -100,21 +89,21 @@ public class LlistarDies extends AppCompatActivity {
         //El adapter se encarga de  adaptar un objeto definido en el c�digo a una vista en xml
         //seg�n la estructura definida.
         //Asignamos nuestro custom Adapter
-        adapter = new MyCustomAdapterDies();
+        adapter = new MyCustomAdapterDays();
         mRecyclerView.setAdapter(adapter);
-        adapter.setDataSet(dies);
+        adapter.setDataSet(days);
 
     }
 
-    public void updateData(String filtre) {
-        dies = new ArrayList<>();
-        carregar_view(filtre);
+    public void updateData(String filter) {
+        days = new ArrayList<>();
+        loadView(filter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_llista, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
@@ -125,7 +114,7 @@ public class LlistarDies extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         //noinspection SimplifiableIfStatement
-        //Selecció de dia de filtrat
+        //Selecció de day de filtrat
 
         SimpleDateFormat formatter = new SimpleDateFormat("c");
         String days[] = new String[7];
@@ -136,7 +125,7 @@ public class LlistarDies extends AppCompatActivity {
             calendar.add(calendar.DAY_OF_WEEK, 1);
         }
         switch (item.getItemId()) {
-            case R.id.menu_seleccionar_dia:
+            case R.id.menuDaySelection:
                 return false;
             case R.id.dilluns:
                 updateData(days[0]);
@@ -159,7 +148,7 @@ public class LlistarDies extends AppCompatActivity {
             case R.id.diumenge:
                 updateData(days[6]);
                 return false;
-            case R.id.menu_mostrar_tot:
+            case R.id.menuSeeAll:
                 updateData("No");
                 return false;
             case R.id.afegir_un_dia:
@@ -180,34 +169,34 @@ public class LlistarDies extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), LlistarObres.class);
+        Intent intent = new Intent(getApplicationContext(), ShowList.class);
         startActivity(intent);
         finish();
     }
 
-    //Traduim el dia que ens retorna el sistema al català (de moment des d'anglès i espanyol)
-    /*void traduir_dia(String dia_setmana) {
-        if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
-            this.dia_setmana = "Dilluns";
-        else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
-            this.dia_setmana = "Dimarts";
-        else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié."))
-            this.dia_setmana = "Dimecres";
-        else if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue."))
-            this.dia_setmana = "Dijous";
-        else if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie."))
-            this.dia_setmana = "Divendres";
-        else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sáb."))
-            this.dia_setmana = "Dissabte";
-        else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
-            this.dia_setmana = "Diumenge";
+    //Traduim el day que ens retorna el sistema al català (de moment des d'anglès i espanyol)
+    /*void traduir_dia(String dayOfTheWeek) {
+        if (dayOfTheWeek.equals("Mon") || dayOfTheWeek.equals("Lun."))
+            this.dayOfTheWeek = "Dilluns";
+        else if (dayOfTheWeek.equals("Tue") || dayOfTheWeek.equals("Mar."))
+            this.dayOfTheWeek = "Dimarts";
+        else if (dayOfTheWeek.equals("Wed") || dayOfTheWeek.equals("Mié."))
+            this.dayOfTheWeek = "Dimecres";
+        else if (dayOfTheWeek.equals("Thu") || dayOfTheWeek.equals("Jue."))
+            this.dayOfTheWeek = "Dijous";
+        else if (dayOfTheWeek.equals("Fri") || dayOfTheWeek.equals("Vie."))
+            this.dayOfTheWeek = "Divendres";
+        else if (dayOfTheWeek.equals("Sat") || dayOfTheWeek.equals("Sáb."))
+            this.dayOfTheWeek = "Dissabte";
+        else if (dayOfTheWeek.equals("Sun") || dayOfTheWeek.equals("Dom."))
+            this.dayOfTheWeek = "Diumenge";
     }*/
 
     void modificar_dates(int i) {
         Bundle bundle = new Bundle();
-        bundle.putString("Titol", titol);
-        bundle.putInt("Opcio", i);
-        Intent intent = new Intent(getApplicationContext(), ModificarDates.class);
+        bundle.putString("Title", title);
+        bundle.putInt("Option", i);
+        Intent intent = new Intent(getApplicationContext(), ModifyDates.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

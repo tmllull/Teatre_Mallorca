@@ -15,20 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class OcupacioButaques extends AppCompatActivity implements View.OnClickListener {
+public class PlacesOcupacy extends AppCompatActivity implements View.OnClickListener {
 
-    private Button[] butaca = new Button[41];
-    private int[] butaca_clicada = new int[41];
+    private Button[] seat = new Button[41];
+    private int[] clickedSeat = new int[41];
 
     Bundle bundle;
     DbHelper dbHelper;
-    TextView tvTitol, tvComprar;
-    Button btComprar;
-    String butaques_seleccionades, data, dia_setmana, titol, butaques;
-    Integer places_lliures, entrades;
-    Double preu;
-    ImageView ivComprar;
-    Integer descompte;
+    TextView tvTitle, tvPurchase;
+    Button btPurchase;
+    String selectedSeats, date, dayOfTheWeek, title, seats;
+    Integer freePlaces, tickets;
+    Double price;
+    ImageView ivPurchase;
+    Integer discount;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -48,36 +48,36 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ocupacio_butaques);
+        setContentView(R.layout.activity_ocupation_seats);
 
         Resources r = getResources();
         String name = getPackageName();
         for (int i = 1; i < 41; i++) {
-            butaca[i] = (Button) findViewById(r.getIdentifier("button" + i, "id", name));
-            butaca[i].setOnClickListener(this);
-            butaca_clicada[i] = 0;
+            seat[i] = (Button) findViewById(r.getIdentifier("button" + i, "id", name));
+            seat[i].setOnClickListener(this);
+            clickedSeat[i] = 0;
         }
 
-        tvTitol = (TextView) findViewById(R.id.tv_titol_ocupacio);
-        btComprar = (Button) findViewById(R.id.bt_Comprar_ocupacio);
-        tvComprar = (TextView) findViewById(R.id.tv_comprar_entrades_pati_butaques);
-        btComprar.setOnClickListener(this);
-        tvComprar.setOnClickListener(new View.OnClickListener() {
+        tvTitle = (TextView) findViewById(R.id.tvOcupationTitle);
+        btPurchase = (Button) findViewById(R.id.btOcupationPurchase);
+        tvPurchase = (TextView) findViewById(R.id.tvPit);
+        btPurchase.setOnClickListener(this);
+        tvPurchase.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (entrades == 0) {
+                if (tickets == 0) {
                     Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
-                                    " una butaca",
+                                    " una seat",
                             Toast.LENGTH_SHORT).show();
                 } else {
                     new AlertDialog.Builder(v.getContext())
-                            .setTitle("Aplicar descompte")
+                            .setTitle("Aplicar discount")
                             .setMessage("Si tens el carnet Jove o universitari " +
-                                    "tens un 30% de descompte")
+                                    "tens un 30% de discount")
                             .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    descompte = 30;
+                                    discount = 30;
                                     confirmar();
                                 }
                             })
@@ -93,24 +93,24 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        descompte = 0;
-        ivComprar = (ImageView) findViewById(R.id.iv_compra_pati_butaques);
-        ivComprar.setOnClickListener(new View.OnClickListener() {
+        discount = 0;
+        ivPurchase = (ImageView) findViewById(R.id.ivPit);
+        ivPurchase.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (entrades == 0) {
+                if (tickets == 0) {
                     Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
-                                    " una butaca",
+                                    " una seat",
                             Toast.LENGTH_SHORT).show();
                 } else {
                     new AlertDialog.Builder(v.getContext())
-                            .setTitle("Aplicar descompte")
+                            .setTitle("Aplicar discount")
                             .setMessage("Si tens el carnet Jove o universitari " +
-                                    "tens un 30% de descompte")
+                                    "tens un 30% de discount")
                             .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    descompte = 30;
+                                    discount = 30;
                                     confirmar();
                                 }
                             })
@@ -126,44 +126,44 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        entrades = 0;
+        tickets = 0;
         dbHelper = new DbHelper(this);
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            titol = bundle.getString("Titol");
-            data = bundle.getString("Data");
-            dia_setmana = bundle.getString("DiaSetmana");
+            title = bundle.getString("Title");
+            date = bundle.getString("Date");
+            dayOfTheWeek = bundle.getString("DayOfTheWeek");
         }
-        tvTitol.setText(titol);
-        Cursor c = dbHelper.getObraData(titol, data);
+        tvTitle.setText(title);
+        Cursor c = dbHelper.getShowDate(title, date);
         if (c.moveToFirst()) {
-            butaques = c.getString(c.getColumnIndex(dbHelper.CN_BUTAQUES));
-            butaques_seleccionades = butaques;
-            places_lliures = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
-            preu = c.getDouble(c.getColumnIndex(dbHelper.CN_PREU));
+            seats = c.getString(c.getColumnIndex(dbHelper.CN_SEATS));
+            selectedSeats = seats;
+            freePlaces = c.getInt(c.getColumnIndex(dbHelper.CN_FREE_SEATS));
+            price = c.getDouble(c.getColumnIndex(dbHelper.CN_PRICE));
         }
         String aux;
         for (int i = 1; i < 41; ++i) {
-            aux = Character.toString(butaques.charAt(i));
+            aux = Character.toString(seats.charAt(i));
             if (aux.equals("0")) {
-                butaca[i].setBackgroundColor(0xffd3d3d3);
-                butaca[i].setOnClickListener(null);
+                seat[i].setBackgroundColor(0xffd3d3d3);
+                seat[i].setOnClickListener(null);
             }
         }
     }
 
     void confirmar() {
-        Double total = entrades * preu;
-        total -= (total * descompte) / 100;
+        Double total = tickets * price;
+        total -= (total * discount) / 100;
         Bundle bundle = new Bundle();
         bundle.putDouble("Total", total);
-        bundle.putInt("Entrades", entrades);
-        bundle.putString("Titol", titol);
-        bundle.putString("Data", data);
-        bundle.putString("Butaques", butaques_seleccionades);
-        bundle.putInt("Places", places_lliures);
-        bundle.putString("DiaSetmana", dia_setmana);
-        Intent intent = new Intent(getApplicationContext(), ConfirmarCompra.class);
+        bundle.putInt("Tickets", tickets);
+        bundle.putString("Title", title);
+        bundle.putString("Date", date);
+        bundle.putString("Seats", selectedSeats);
+        bundle.putInt("Places", freePlaces);
+        bundle.putString("DayOfTheWeek", dayOfTheWeek);
+        Intent intent = new Intent(getApplicationContext(), ConfirmPurchase.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -177,25 +177,25 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v.getId() != R.id.bt_Comprar_ocupacio) {
+        if (v.getId() != R.id.btOcupationPurchase) {
             for (Integer i = 1; i < 41; i++) {
-                if (findViewById(v.getId()).equals(butaca[i])) {
-                    if (butaca_clicada[i] == 0) { //Butaca no clicada
-                        butaca_clicada[i] = 1;
-                        char[] aux2 = butaques_seleccionades.toCharArray();
+                if (findViewById(v.getId()).equals(seat[i])) {
+                    if (clickedSeat[i] == 0) { //Butaca no clicada
+                        clickedSeat[i] = 1;
+                        char[] aux2 = selectedSeats.toCharArray();
                         aux2[i] = '0';
-                        butaques_seleccionades = String.valueOf(aux2);
-                        places_lliures--;
-                        entrades++;
+                        selectedSeats = String.valueOf(aux2);
+                        freePlaces--;
+                        tickets++;
                         Button aux = (Button) findViewById(v.getId());
                         aux.setBackgroundColor(0xffff0000);
                     } else {
-                        butaca_clicada[i] = 0;
-                        char[] aux2 = butaques_seleccionades.toCharArray();
+                        clickedSeat[i] = 0;
+                        char[] aux2 = selectedSeats.toCharArray();
                         aux2[i] = '1';
-                        butaques_seleccionades = String.valueOf(aux2);
-                        places_lliures++;
-                        entrades--;
+                        selectedSeats = String.valueOf(aux2);
+                        freePlaces++;
+                        tickets--;
                         Button aux = (Button) findViewById(v.getId());
                         aux.setBackgroundColor(0xff4efe4b);
                     }
@@ -208,11 +208,11 @@ public class OcupacioButaques extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Titol", tvTitol.getText().toString());
-        bundle.putString("Data", data);
-        bundle.putString("DiaSetmana", dia_setmana);
-        bundle.putInt("Disponible", 1);
-        Intent intent = new Intent(getApplicationContext(), InfoObra.class);
+        bundle.putString("Title", tvTitle.getText().toString());
+        bundle.putString("Date", date);
+        bundle.putString("DayOfTheWeek", dayOfTheWeek);
+        bundle.putInt("Available", 1);
+        Intent intent = new Intent(getApplicationContext(), InfoShow.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

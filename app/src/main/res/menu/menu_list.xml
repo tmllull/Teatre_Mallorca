@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_seleccionar_dia"
+        android:id="@+id/menuDaySelection"
         android:orderInCategory="100"
         android:title="Filtrar per dia de la setmana"
         app:showAsAction="never">
@@ -29,7 +29,7 @@
                 android:id="@+id/diumenge"
                 android:title="Diumenge" />
             <item
-                android:id="@+id/menu_mostrar_tot"
+                android:id="@+id/menuSeeAll"
                 android:title="Mostrar tots els dies" />
         </menu>
     </item>

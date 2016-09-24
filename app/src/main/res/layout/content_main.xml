@@ -40,14 +40,14 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:id="@+id/iv_main_llistar"
+            android:id="@+id/ivMainListShows"
             android:src="@drawable/llistat" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/playList"
-            android:id="@+id/bt_llistar_obres_main"
+            android:id="@+id/btMainListShows"
             android:minHeight="60dp"
             android:minWidth="120dp"
             android:maxWidth="120dp"
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Afegir obra"
-            android:id="@+id/bt_afegir_obra_main"
+            android:id="@+id/btMainNewShow"
             android:minHeight="60dp"
             android:minWidth="120dp"
             android:maxWidth="120dp"
@@ -84,14 +84,14 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:id="@+id/iv_main_eliminar"
+            android:id="@+id/ivMainDeleteShow"
             android:src="@drawable/trash" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/deletePlay"
-            android:id="@+id/bt_eliminar_obra_main"
+            android:id="@+id/btMainDeleteShow"
             android:minHeight="60dp"
             android:minWidth="120dp"
             android:maxWidth="120dp"

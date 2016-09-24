@@ -6,8 +6,8 @@
 
     <string name="action_settings">Settings</string>
     
-    <string name="playList">Play List</string>
-    <string name="deletePlay">Delete Play</string>
+    <string name="playList">Show List</string>
+    <string name="deletePlay">Delete Show</string>
     <string name="title">"Title: "</string>
     <string name="date">"Date: "</string>
     <string name="tickets">"Nº Tickets: "</string>
@@ -40,6 +40,6 @@
     <string name="availableSeats">Available seats:</string>
     <string name="selectSeats">Select seats:</string>
     <string name="estimated">Est. income</string>
-    <string name="selectPlay">Select a play</string>
+    <string name="selectPlay">Select show</string>
     <string name="selectDate">Select a date for</string>
 </resources>

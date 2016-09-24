@@ -14,15 +14,15 @@ import java.util.ArrayList;
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
-public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterObres.AdapterViewHolder> {
+public class MyCustomAdapterShows extends RecyclerView.Adapter<MyCustomAdapterShows.AdapterViewHolder> {
 
-    ArrayList<Obra> obres;
-    MyCustomAdapterObres() {
-        obres = new ArrayList<>();
+    ArrayList<Show> shows;
+    MyCustomAdapterShows() {
+        shows = new ArrayList<>();
     }
 
     @Override
-    public MyCustomAdapterObres.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MyCustomAdapterShows.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //Instancia un layout XML en la correspondiente vista.
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         //Inflamos en la vista el layout para cada elemento
@@ -31,10 +31,10 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
     }
 
     @Override
-    public void onBindViewHolder(MyCustomAdapterObres.AdapterViewHolder adapterViewHolder, int position) {
-        if (obres != null) {
-            adapterViewHolder.nom.setText(obres.get(position).getNom());
-            adapterViewHolder.sessions.setText(obres.get(position).getSessions().toString());
+    public void onBindViewHolder(MyCustomAdapterShows.AdapterViewHolder adapterViewHolder, int position) {
+        if (shows != null) {
+            adapterViewHolder.name.setText(shows.get(position).getNom());
+            adapterViewHolder.sessions.setText(shows.get(position).getSessions().toString());
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
             }
@@ -46,7 +46,7 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
 
     @Override
     public int getItemCount() {
-        if (obres != null) return obres.size();
+        if (shows != null) return shows.size();
         return 0;
     }
 
@@ -58,7 +58,7 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
         *  llamaríamos a la referencia en el ViewHolder, ahorrándonos procesamiento.
         */
 
-        public TextView nom;
+        public TextView name;
         public TextView places;
         public TextView sessions;
         public View v;
@@ -70,7 +70,7 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
             itemView.setOnClickListener(this);
             mTextView = itemView.toString();
             this.v = itemView;
-            this.nom = (TextView) itemView.findViewById(R.id.tv_nom_row);
+            this.name = (TextView) itemView.findViewById(R.id.tv_nom_row);
             this.sessions = (TextView) itemView.findViewById(R.id.tv_sessions_row);
         }
 
@@ -83,16 +83,16 @@ public class MyCustomAdapterObres extends RecyclerView.Adapter<MyCustomAdapterOb
         public void onClick(View v) {
 
             Bundle bundle = new Bundle();
-            bundle.putString("Titol", obres.get(getAdapterPosition()).getNom());
-            Intent intent = new Intent (v.getContext(), LlistarDies.class);
+            bundle.putString("Title", shows.get(getAdapterPosition()).getNom());
+            Intent intent = new Intent (v.getContext(), DaysList.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
             ((Activity)v.getContext()).finish();
         }
     }
 
-    public void setDataSet (ArrayList<Obra> obres) {
-        this.obres = obres;
+    public void setDataSet (ArrayList<Show> shows) {
+        this.shows = shows;
         notifyDataSetChanged();
     }
 }

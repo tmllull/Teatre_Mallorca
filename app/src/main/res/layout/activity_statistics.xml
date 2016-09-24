@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.Estadistiques">
+    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.Statistics">
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statText"
-                android:id="@+id/tv_total_entrades"
+                android:id="@+id/tvTotalEntries"
                 android:textSize="15dp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#343434"
@@ -64,7 +64,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_dilluns"
+                android:id="@+id/layMon"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -83,14 +83,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_dilluns"
+                    android:id="@+id/tvMonEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_dilluns"
+                    android:id="@+id/tvMonday"
                     android:textSize="15dp"
                     android:gravity="center"
                     android:textColor="#343434" />
@@ -101,7 +101,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_dimarts"
+                android:id="@+id/layTue"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -120,14 +120,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_dimarts"
+                    android:id="@+id/tvTueEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_dimarts"
+                    android:id="@+id/tvTuesday"
                     android:textSize="15dp"
                     android:gravity="center"
                     android:textColor="#343434" />
@@ -143,7 +143,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_dimecres"
+                android:id="@+id/layWed"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -161,14 +161,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_dimecres"
+                    android:id="@+id/tvWedEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_dimecres"
+                    android:id="@+id/tvWednesday"
                     android:textSize="15dp"
                     android:textColor="#343434" />
             </LinearLayout>
@@ -177,7 +177,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_dijous"
+                android:id="@+id/layThu"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -195,14 +195,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_dijous"
+                    android:id="@+id/tvThuEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_dijous"
+                    android:id="@+id/tvThursday"
                     android:textSize="15dp"
                     android:textColor="#343434" />
             </LinearLayout>
@@ -217,7 +217,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_divendres"
+                android:id="@+id/layFri"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -235,14 +235,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_divendres"
+                    android:id="@+id/tvFriEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_divendres"
+                    android:id="@+id/tvFriday"
                     android:textSize="15dp"
                     android:textColor="#343434" />
             </LinearLayout>
@@ -251,7 +251,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_dissabtes"
+                android:id="@+id/laySat"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -269,14 +269,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_dissabte"
+                    android:id="@+id/tvSatEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_dissabte"
+                    android:id="@+id/tvSaturday"
                     android:textSize="15dp"
                     android:textColor="#343434" />
             </LinearLayout>
@@ -291,7 +291,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lay_diumenges"
+                android:id="@+id/laySun"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_margin="3dp">
@@ -309,14 +309,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statDayText"
-                    android:id="@+id/tv_entrades_diumenge"
+                    android:id="@+id/tvSunEntries"
                     android:textColor="#343434" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0€"
-                    android:id="@+id/tv_diumenge"
+                    android:id="@+id/tvSunday"
                     android:textSize="15dp"
                     android:textColor="#343434" />
             </LinearLayout>

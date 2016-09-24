@@ -9,57 +9,55 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InfoObra extends AppCompatActivity implements View.OnClickListener {
+public class InfoShow extends AppCompatActivity implements View.OnClickListener {
 
     Bundle bundle;
-    TextView tvTitol, tvDescripcio, tvPreu, tvPlaces, tvDurada, tvData, tvSeleccioButaques;
-    Button comprar;
+    TextView tvTitle, tvDescription, tvPrice, tvPlaces, tvDuration, tvDate, tvSeatsSelection;
     DbHelper dbHelper;
-    boolean places_lliures = false;
-    String titol, data, dia_setmana;
-    ImageView ivComprar;
-    Integer places, disponible;
+    boolean freePlaces = false;
+    String title, date, dayOfTheWeek;
+    ImageView ivBuy;
+    Integer places, available;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_obra);
+        setContentView(R.layout.activity_info_show);
 
         dbHelper = new DbHelper(this);
 
-        tvTitol = (TextView) findViewById(R.id.tv_Titol_Info);
-        tvDescripcio = (TextView) findViewById(R.id.tv_Descripcio_Info);
-        tvPreu = (TextView) findViewById(R.id.tv_Preu_Info);
-        tvPlaces = (TextView) findViewById(R.id.tv_Places_Info);
-        tvDurada = (TextView) findViewById(R.id.tv_Durada_Info);
-        tvData = (TextView) findViewById(R.id.tv_data_info);
-        ivComprar = (ImageView) findViewById(R.id.iv_comprar_entrades);
-        tvSeleccioButaques = (TextView) findViewById(R.id.tv_seleccio_butaques);
+        tvTitle = (TextView) findViewById(R.id.tvInfoTitle);
+        tvDescription = (TextView) findViewById(R.id.tvInfoDescription);
+        tvPrice = (TextView) findViewById(R.id.tvInfoPrice);
+        tvPlaces = (TextView) findViewById(R.id.tvInfoPlaces);
+        tvDuration = (TextView) findViewById(R.id.tvInfoDuration);
+        tvDate = (TextView) findViewById(R.id.tvInfoDate);
+        ivBuy = (ImageView) findViewById(R.id.ivInfoBuy);
+        tvSeatsSelection = (TextView) findViewById(R.id.tvSeatSelection);
 
         //comprar.setOnClickListener(this);
-        tvSeleccioButaques.setOnClickListener(this);
+        tvSeatsSelection.setOnClickListener(this);
 
-        ivComprar.setOnClickListener(new View.OnClickListener(){
+        ivBuy.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                if (disponible == 0) {
+                if (available == 0) {
                     Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
-                            "No es poden comprar entrades", Toast.LENGTH_SHORT).show();
+                            "No es poden comprar tickets", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if (places_lliures) {
+                else if (freePlaces) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Titol", titol);
-                    bundle.putString("Data", data);
-                    bundle.putString("DiaSetmana", dia_setmana);
-                    bundle.putInt("Mantenir", 0); //Per indicar que és un accés nou
-                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                    bundle.putString("Title", title);
+                    bundle.putString("Date", date);
+                    bundle.putString("DayOfTheWeek", dayOfTheWeek);
+                    bundle.putInt("Hold", 0); //Per indicar que és un accés nou
+                    Intent intent = new Intent(getApplicationContext(), PlacesOcupacy.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
                     finish();
@@ -71,42 +69,42 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            titol = bundle.getString("Titol");
-            data = bundle.getString("Data");
-            dia_setmana = bundle.getString("DiaSetmana");
-            disponible = bundle.getInt("Disponible");
+            title = bundle.getString("Title");
+            date = bundle.getString("Date");
+            dayOfTheWeek = bundle.getString("DayOfTheWeek");
+            available = bundle.getInt("Available");
         }
 
-        Cursor c = dbHelper.getObra(titol, data);
+        Cursor c = dbHelper.getShow(title, date);
         if (c.moveToFirst()) {
-            tvTitol.setText(titol);
-            tvDescripcio.setText(c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPCIO)));
-            tvDurada.setText(c.getInt(c.getColumnIndex(dbHelper.CN_DURADA))+" min.");
-            tvData.setText(dia_setmana+", "+data);
-            tvPreu.setText(c.getString(c.getColumnIndex(dbHelper.CN_PREU))+"€");
-            places = c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES));
+            tvTitle.setText(title);
+            tvDescription.setText(c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPTION)));
+            tvDuration.setText(c.getInt(c.getColumnIndex(dbHelper.CN_DURATION))+" min.");
+            tvDate.setText(dayOfTheWeek +", "+ date);
+            tvPrice.setText(c.getString(c.getColumnIndex(dbHelper.CN_PRICE))+"€");
+            places = c.getInt(c.getColumnIndex(dbHelper.CN_FREE_SEATS));
             tvPlaces.setText(places.toString());
 
-            if (c.getInt(c.getColumnIndex(dbHelper.CN_PLACES_LLIURES)) > 0) places_lliures = true;
+            if (c.getInt(c.getColumnIndex(dbHelper.CN_FREE_SEATS)) > 0) freePlaces = true;
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_seleccio_butaques:
-                if (disponible == 0) {
+            case R.id.tvSeatSelection:
+                if (available == 0) {
                     Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
-                            "No es poden comprar entrades", Toast.LENGTH_SHORT).show();
+                            "No es poden comprar tickets", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if (places_lliures) {
+                else if (freePlaces) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Titol", titol);
-                    bundle.putString("Data", data);
-                    bundle.putString("DiaSetmana", dia_setmana);
-                    bundle.putInt("Mantenir", 0); //Per indicar que és un accés nou
-                    Intent intent = new Intent(getApplicationContext(), OcupacioButaques.class);
+                    bundle.putString("Title", title);
+                    bundle.putString("Date", date);
+                    bundle.putString("DayOfTheWeek", dayOfTheWeek);
+                    bundle.putInt("Hold", 0); //Per indicar que és un accés nou
+                    Intent intent = new Intent(getApplicationContext(), PlacesOcupacy.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
                     finish();
@@ -121,7 +119,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_info_obra, menu);
+        getMenuInflater().inflate(R.menu.menu_info_show, menu);
         return true;
     }
 
@@ -133,7 +131,7 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.menu_eliminar_funcio:
+            case R.id.menuDeleteShow:
                 new AlertDialog.Builder(this)
                         .setTitle("Eliminar funció")
                         .setMessage("Estàs segur que vols eliminar la funció? Aquesta " +
@@ -141,11 +139,11 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                                 "desfer.")
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                dbHelper.deteleFuncio(titol,data);
+                                dbHelper.deteleSession(title, date);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("Titol", titol);
+                                bundle.putString("Title", title);
                                 Intent intent = new Intent(getApplicationContext(),
-                                        LlistarDies.class);
+                                        DaysList.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                                 finish();
@@ -158,11 +156,11 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
                         .setIcon(R.drawable.trash)
                         .show();
                 return false;
-            case R.id.menu_usuaris_obra:
+            case R.id.menuUsersShow:
                 Bundle bundle = new Bundle();
-                bundle.putString("Titol", titol);
-                bundle.putString("Data", data);
-                Intent intent = new Intent(getApplicationContext(), LlistarUsuaris.class);
+                bundle.putString("Title", title);
+                bundle.putString("Date", date);
+                Intent intent = new Intent(getApplicationContext(), UsersList.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return false;
@@ -174,8 +172,8 @@ public class InfoObra extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Titol", titol);
-        Intent intent = new Intent(getApplicationContext(), LlistarDies.class);
+        bundle.putString("Title", title);
+        Intent intent = new Intent(getApplicationContext(), DaysList.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

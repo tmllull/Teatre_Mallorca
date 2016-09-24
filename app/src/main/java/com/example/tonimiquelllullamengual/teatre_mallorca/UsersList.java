@@ -8,7 +8,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LlistarUsuaris extends AppCompatActivity {
+public class UsersList extends AppCompatActivity {
 
     DbHelper dbHelper;
     Bundle bundle;
@@ -30,7 +30,7 @@ public class LlistarUsuaris extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
         List<String> llista = new ArrayList<String>();
-        String[] usuaris = dbHelper.consultarUsuaris(titol, data);
+        String[] usuaris = dbHelper.consultUsers(titol, data);
         if (usuaris != null) {
             for (int i = 0; i < usuaris.length; ++i) {
                 if (!usuaris[i].isEmpty())

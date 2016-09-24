@@ -1,7 +1,6 @@
 package com.example.tonimiquelllullamengual.teatre_mallorca;
 
 import android.app.DatePickerDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class NovaObra extends AppCompatActivity implements View.OnClickListener {
+public class NewShow extends AppCompatActivity implements View.OnClickListener {
 
     private Button btNew;
     private EditText etNom, etDescripcio, etDurada, etPreu, etData;
@@ -81,7 +80,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.bt_confirmarNovaObra:
                 titol = etNom.getText().toString().trim().toUpperCase();
-                Cursor c = dbHelper.comprovarObra(titol);
+                Cursor c = dbHelper.checkShow(titol);
                 if (c.moveToFirst()) {
                     Toast.makeText(getApplicationContext(), "Ja existeix una obra amb aquest títol",
                             Toast.LENGTH_SHORT).show();
@@ -108,7 +107,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                                     bundle.putString("Descripcio", etDescripcio.getText().toString());
                                     bundle.putString("Durada", etDurada.getText().toString());
                                     bundle.putString("Preu", etPreu.getText().toString());
-                                    Intent intent = new Intent (getApplicationContext(), NovaObraDates.class);
+                                    Intent intent = new Intent (getApplicationContext(), NewShowDates.class);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
                                     finish();
@@ -130,7 +129,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                     bundle.putString("Descripcio", etDescripcio.getText().toString());
                     bundle.putString("Durada", etDurada.getText().toString());
                     bundle.putString("Preu", etPreu.getText().toString());
-                    Intent intent = new Intent(getApplicationContext(), NovaObraDates.class);
+                    Intent intent = new Intent(getApplicationContext(), NewShowDates.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

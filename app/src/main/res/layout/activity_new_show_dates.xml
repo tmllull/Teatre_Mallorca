@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.NovaObraDates"
+    tools:context="com.example.tonimiquelllullamengual.teatre_mallorca.NewShowDates"
     android:background="#ffffff">
 
     <LinearLayout
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar data"
-                android:id="@+id/tv_dia_1"
+                android:id="@+id/tvDay1"
                 android:layout_marginLeft="40dp"
                 android:textSize="20dp" />
         </LinearLayout>
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar data"
-                android:id="@+id/tv_dia_2"
+                android:id="@+id/tvDay2"
                 android:layout_marginLeft="65dp"
                 android:textSize="20dp" />
         </LinearLayout>
@@ -96,43 +96,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dilluns"
-                android:id="@+id/cb_dilluns" />
+                android:id="@+id/cbMon" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dimarts"
-                android:id="@+id/cb_dimarts" />
+                android:id="@+id/cbTue" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dimecres"
-                android:id="@+id/cb_dimecres" />
+                android:id="@+id/cbWeb" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dijous"
-                android:id="@+id/cb_dijous" />
+                android:id="@+id/cbThu" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Divendres"
-                android:id="@+id/cb_divendres" />
+                android:id="@+id/cbFri" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dissabte"
-                android:id="@+id/cb_dissabte" />
+                android:id="@+id/cbSat" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Diumenge"
-                android:id="@+id/cb_diumenge" />
+                android:id="@+id/cbSun" />
         </LinearLayout>
 
         <LinearLayout
@@ -145,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Guardar"
-                android:id="@+id/bt_guardar_dates_obra" />
+                android:id="@+id/btSaveDatesShow" />
         </LinearLayout>
     </LinearLayout>
 

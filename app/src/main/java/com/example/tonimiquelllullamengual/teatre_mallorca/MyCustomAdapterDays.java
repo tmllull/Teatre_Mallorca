@@ -5,14 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,34 +20,34 @@ import java.util.Date;
 /**
  * Created by tonimiquelllullamengual on 17/5/16.
  */
-public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDies.AdapterViewHolder> {
+public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDays.AdapterViewHolder> {
 
-    ArrayList<Dia> dies;
-    String data, dia_setmana;
+    ArrayList<Day> days;
+    String date, dayOfTheWeek;
 
-    MyCustomAdapterDies() {
-        dies = new ArrayList<>();
+    MyCustomAdapterDays() {
+        days = new ArrayList<>();
     }
 
     DbHelper dbHelper;
     int disp = 1;
 
     @Override
-    public MyCustomAdapterDies.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MyCustomAdapterDays.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         //Instancia un layout XML en la correspondiente vista.
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         //Inflamos en la vista el layout para cada elemento
-        View view = inflater.inflate(R.layout.row_layout_dies, viewGroup, false);
+        View view = inflater.inflate(R.layout.row_layout_days, viewGroup, false);
         return new AdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyCustomAdapterDies.AdapterViewHolder adapterViewHolder, int position) {
-        if (dies != null) {
-            adapterViewHolder.places.setText(dies.get(position).getPlaces().toString());
-            data = dies.get(position).getDia().toString();
-            dia_setmana = dies.get(position).getDiaSetmana().toString();
-            adapterViewHolder.dia.setText(dia_setmana + ", " + data);
+    public void onBindViewHolder(MyCustomAdapterDays.AdapterViewHolder adapterViewHolder, int position) {
+        if (days != null) {
+            adapterViewHolder.places.setText(days.get(position).getPlaces().toString());
+            date = days.get(position).getDate().toString();
+            dayOfTheWeek = days.get(position).getDayOfTheWeek().toString();
+            adapterViewHolder.day.setText(dayOfTheWeek + ", " + date);
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
             } else {
@@ -60,7 +58,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
 
     @Override
     public int getItemCount() {
-        if (dies != null) return dies.size();
+        if (days != null) return days.size();
         return 0;
     }
 
@@ -73,7 +71,7 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
         */
 
         public TextView places;
-        public TextView dia;
+        public TextView day;
         public View v;
         private String mTextView;
         private String mItem;
@@ -83,8 +81,8 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
             itemView.setOnClickListener(this);
             mTextView = itemView.toString();
             this.v = itemView;
-            this.places = (TextView) itemView.findViewById(R.id.tv_places_llista_dies);
-            this.dia = (TextView) itemView.findViewById(R.id.tv_dia_dies);
+            this.places = (TextView) itemView.findViewById(R.id.tvDaysListPlaces);
+            this.day = (TextView) itemView.findViewById(R.id.tvDaysListDay);
         }
 
         public void setItem(String item) {
@@ -95,34 +93,34 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
         @Override
         public void onClick(final View v) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-            String data_actual = sdf.format(new Date());
+            String actualDate = sdf.format(new Date());
             Date d = null;
             try {
-                d = sdf.parse(data_actual);
+                d = sdf.parse(actualDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             final long milis = d.getTime();
             dbHelper = new DbHelper(v.getContext());
-            String nom = dies.get(getAdapterPosition()).getNom();
-            String diia = dies.get(getAdapterPosition()).getDia();
-            final Cursor c = dbHelper.getObraData(nom, diia);
+            String name = days.get(getAdapterPosition()).getName();
+            String daay = days.get(getAdapterPosition()).getDate();
+            final Cursor c = dbHelper.getShowDate(name, daay);
             if (c.moveToFirst()) {
                 if (Long.valueOf(c.getString(c.getColumnIndex(dbHelper.CN_MILIS))) < milis) {
                     new AlertDialog.Builder(v.getContext())
                             .setTitle("La sessió ha expirat")
-                            .setMessage("Aquesta sessió ja no està disponible. " +
-                                    "Pots consultar la seva informació i usuaris, però no " +
-                                    "podràs comprar entrades")
+                            .setMessage("Aquesta sessió ja no està available. " +
+                                    "Pots consultar la seva informació i users, però no " +
+                                    "podràs comprar tickets")
                             .setPositiveButton("D'acord", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     disp = 0;
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
-                                    bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
-                                    bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
-                                    bundle.putInt("Disponible", disp);
-                                    Intent intent = new Intent(v.getContext(), InfoObra.class);
+                                    bundle.putString("Title", days.get(getAdapterPosition()).getName());
+                                    bundle.putString("Date", days.get(getAdapterPosition()).getDate());
+                                    bundle.putString("DayOfTheWeek", days.get(getAdapterPosition()).getDayOfTheWeek());
+                                    bundle.putInt("Available", disp);
+                                    Intent intent = new Intent(v.getContext(), InfoShow.class);
                                     intent.putExtras(bundle);
                                     v.getContext().startActivity(intent);
                                     ((Activity) v.getContext()).finish();
@@ -139,11 +137,11 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
                 }
                 else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Titol", dies.get(getAdapterPosition()).getNom());
-                    bundle.putString("Data", dies.get(getAdapterPosition()).getDia());
-                    bundle.putString("DiaSetmana", dies.get(getAdapterPosition()).getDiaSetmana());
-                    bundle.putInt("Disponible", disp);
-                    Intent intent = new Intent(v.getContext(), InfoObra.class);
+                    bundle.putString("Title", days.get(getAdapterPosition()).getName());
+                    bundle.putString("Date", days.get(getAdapterPosition()).getDate());
+                    bundle.putString("DayOfTheWeek", days.get(getAdapterPosition()).getDayOfTheWeek());
+                    bundle.putInt("Available", disp);
+                    Intent intent = new Intent(v.getContext(), InfoShow.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
                     ((Activity) v.getContext()).finish();
@@ -152,8 +150,8 @@ public class MyCustomAdapterDies extends RecyclerView.Adapter<MyCustomAdapterDie
         }
     }
 
-    public void setDataSet(ArrayList<Dia> dies) {
-        this.dies = dies;
+    public void setDataSet(ArrayList<Day> days) {
+        this.days = days;
         notifyDataSetChanged();
     }
 }

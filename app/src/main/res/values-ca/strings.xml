@@ -37,4 +37,5 @@
     <string name="estimated">Rec. estimada</string>
     <string name="selectPlay">Selecciona una obra</string>
     <string name="selectDate">"Selecciona una data per "</string>
+    <string name="app_name" translatable="false"></string>
 </resources>
