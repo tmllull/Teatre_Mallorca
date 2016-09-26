@@ -26,8 +26,7 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
     private SimpleDateFormat formatDate;
     private Bundle bundle;
     private DbHelper dbHelper;
-    private String from, to, yearFrom, yearTo, monthFrom, monthTo, dayFrom, dayTo,
-            dayShow, monthShow, yearShow;
+    private String from, yearFrom, monthFrom, dayFrom, monthShow, yearShow;
     private int cont;
     private int dayFromVal, monthFromVal, yearFromVal, dayToVal, monthToVal, yearToVal;
     private Boolean ok = true;
@@ -106,7 +105,7 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
         dayFromVal = Integer.valueOf(dayFrom);
 
         yearFromVal = date1.get(date1.YEAR);
-        monthFromVal = date1.get(date1.MONTH)+1;
+        monthFromVal = date1.get(date1.MONTH) + 1;
         dayFromVal = date1.get(date1.DAY_OF_MONTH);
 
 
@@ -121,11 +120,10 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
         dayToVal = Integer.valueOf(dayTo);*/
 
         yearToVal = date2.get(date2.YEAR);
-        monthToVal = date2.get(date2.MONTH)+1;
+        monthToVal = date2.get(date2.MONTH) + 1;
         dayToVal = date2.get(date2.DAY_OF_MONTH);
 
         //Variables que utilitzarem per formar la date final
-        dayShow = String.valueOf(dayFromVal);
         monthShow = String.valueOf(monthFromVal);
         yearShow = String.valueOf(yearFromVal);
 
@@ -173,11 +171,11 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void calcul_dies(int dia_from_val, int dia_to_val) {
-        for (int i = dia_from_val; i <= dia_to_val; ++i) {
-            String dataObra = i + "/" + monthShow + "/" + yearShow;
+    public void calcul_dies(int dayFromVal, int dayToVal) {
+        for (int i = dayFromVal; i <= dayToVal; ++i) {
+            String showDate = i + "/" + monthShow + "/" + yearShow;
             String places = "-";
-            String dia_setmana = "";
+            String dayOfTheWeek = "";
             for (int j = 1; j < 41; ++j) {
                 //Plaça lliure indicat amb un 1
                 places = places + "1";
@@ -185,24 +183,24 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
             SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
             Date d = null;
             try {
-                d = f.parse(dataObra);
+                d = f.parse(showDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             long milliseconds = d.getTime();
             SimpleDateFormat formatter = new SimpleDateFormat("c");
-            dia_setmana = formatter.format(new java.sql.Date(milliseconds));
+            dayOfTheWeek = formatter.format(new java.sql.Date(milliseconds));
             ContentValues values = new ContentValues();
-            values.put(dbHelper.CN_TITLE, bundle.getString("Nom"));
-            values.put(dbHelper.CN_DESCRIPTION, bundle.getString("Descripcio"));
-            values.put(dbHelper.CN_DURATION, bundle.getString("Durada"));
-            values.put(dbHelper.CN_PRICE, String.valueOf(bundle.getString("Preu")));
-            values.put(dbHelper.CN_DATE, dataObra.toString());
+            values.put(dbHelper.CN_TITLE, bundle.getString(String.valueOf(R.string.bundleTitle)));
+            values.put(dbHelper.CN_DESCRIPTION, bundle.getString(String.valueOf(R.string.bundleDescription)));
+            values.put(dbHelper.CN_DURATION, bundle.getString(String.valueOf(R.string.bundleDuration)));
+            values.put(dbHelper.CN_PRICE, String.valueOf(bundle.getString(String.valueOf(R.string.bundlePrice))));
+            values.put(dbHelper.CN_DATE, showDate.toString());
             values.put(dbHelper.CN_SEATS, places);
             values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
             values.put(dbHelper.CN_FREE_SEATS, 40);
             values.put(dbHelper.CN_CLIENTS, "^");
-            values.put(dbHelper.CN_DAY_OF_THE_WEEK, dia_setmana);
+            values.put(dbHelper.CN_DAY_OF_THE_WEEK, dayOfTheWeek);
 
             SimpleDateFormat formatter2 = new SimpleDateFormat("c");
             String days[] = new String[7];
@@ -213,44 +211,44 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
                 calendar.add(calendar.DAY_OF_WEEK, 1);
             }
 
-            if (cbMon.isChecked()){
-                if (dia_setmana.equals(days[0])) {
+            if (cbMon.isChecked()) {
+                if (dayOfTheWeek.equals(days[0])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
             }
             if (cbTue.isChecked()) {
-                if (dia_setmana.equals(days[1])) {
+                if (dayOfTheWeek.equals(days[1])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
             }
             if (cbWed.isChecked()) {
-                if (dia_setmana.equals(days[2])) {
+                if (dayOfTheWeek.equals(days[2])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
             }
             if (cbThu.isChecked()) {
-                if (dia_setmana.equals(days[3])) {
+                if (dayOfTheWeek.equals(days[3])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
             }
             if (cbFri.isChecked()) {
-                if (dia_setmana.equals(days[4])) {
+                if (dayOfTheWeek.equals(days[4])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
             }
             if (cbSat.isChecked()) {
-                if (dia_setmana.equals(days[5])) {
+                if (dayOfTheWeek.equals(days[5])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
             }
             if (cbSun.isChecked()) {
-                if (dia_setmana.equals(days[6])) {
+                if (dayOfTheWeek.equals(days[6])) {
                     dbHelper.newShow(values, dbHelper.SHOW_TABLE);
                     ++cont;
                 }
@@ -274,8 +272,7 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
                                     " i date de fi",
                             Toast.LENGTH_SHORT).show();
                     break;
-                }
-                else if (!cbMon.isChecked() && !cbTue.isChecked() && !cbWed.isChecked() &&
+                } else if (!cbMon.isChecked() && !cbTue.isChecked() && !cbWed.isChecked() &&
                         !cbThu.isChecked() && !cbFri.isChecked() && !cbSat.isChecked()
                         && !cbSun.isChecked()) {
                     Toast.makeText(getApplicationContext(), "Selecciona almenys un day",
@@ -286,11 +283,10 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
                 if (ok) {
                     if (cont == 0) {
                         Toast.makeText(getApplicationContext(), "No es pot afegir cap sessió " +
-                                "en aquest rang de dates i days seleccionats",
+                                        "en aquest rang de dates i days seleccionats",
                                 Toast.LENGTH_SHORT).show();
                         break;
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
                                 Toast.LENGTH_SHORT).show();
                         finish();

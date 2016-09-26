@@ -23,13 +23,10 @@ import java.util.GregorianCalendar;
 public class ModifyDates extends AppCompatActivity implements View.OnClickListener {
 
     Bundle bundle;
-
     DbHelper dbHelper;
-
     private DatePickerDialog pdDay1, pdDay2;
-
     private String from, to, yearFrom, yearTo, monthFrom, monthTo, dayFrom, dayTo,
-            showDay, showMonth, showYear;
+            showMonth, showYear;
 
     private Integer dayFromVal, monthFromVal, yearFromVal, dayToVal, monthToVal, yearToVal;
 
@@ -63,8 +60,8 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            title = bundle.getString("Title");
-            option = bundle.getInt("Option");
+            title = bundle.getString(String.valueOf(R.string.bundleTitle));
+            option = bundle.getInt(String.valueOf(R.string.bundleOption));
         }
 
         SimpleDateFormat formatter = new SimpleDateFormat("c");
@@ -268,7 +265,6 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
         dayToVal = Integer.valueOf(dayTo);
 
         //Variables que utilitzarem per formar la date final
-        showDay = dayFromVal.toString();
         showMonth = monthFromVal.toString();
         showYear = yearFromVal.toString();
 
@@ -401,7 +397,7 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Title", title);
+        bundle.putString(String.valueOf(R.string.bundleTitle), title);
         Intent intent = new Intent(getApplicationContext(), DaysList.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -439,7 +435,7 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
                         Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
                                 Toast.LENGTH_SHORT).show();
                         Bundle bundle = new Bundle();
-                        bundle.putString("Title", title);
+                        bundle.putString(String.valueOf(R.string.bundleTitle), title);
                         intent = new Intent(getApplicationContext(), DaysList.class);
                         intent.putExtras(bundle);
                         startActivity(intent);

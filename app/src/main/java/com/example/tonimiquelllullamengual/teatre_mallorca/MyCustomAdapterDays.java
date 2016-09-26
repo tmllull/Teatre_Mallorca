@@ -116,10 +116,13 @@ public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDay
                                 public void onClick(DialogInterface dialog, int which) {
                                     disp = 0;
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("Title", days.get(getAdapterPosition()).getName());
-                                    bundle.putString("Date", days.get(getAdapterPosition()).getDate());
-                                    bundle.putString("DayOfTheWeek", days.get(getAdapterPosition()).getDayOfTheWeek());
-                                    bundle.putInt("Available", disp);
+                                    bundle.putString(String.valueOf(R.string.bundleTitle),
+                                            days.get(getAdapterPosition()).getName());
+                                    bundle.putString(String.valueOf(R.string.bundleDate),
+                                            days.get(getAdapterPosition()).getDate());
+                                    bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek),
+                                            days.get(getAdapterPosition()).getDayOfTheWeek());
+                                    bundle.putInt(String.valueOf(R.string.bundleAvailable), disp);
                                     Intent intent = new Intent(v.getContext(), InfoShow.class);
                                     intent.putExtras(bundle);
                                     v.getContext().startActivity(intent);
@@ -127,7 +130,7 @@ public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDay
 
                                 }
                             })
-                            .setNegativeButton("Tornar", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
                             })
@@ -137,10 +140,13 @@ public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDay
                 }
                 else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Title", days.get(getAdapterPosition()).getName());
-                    bundle.putString("Date", days.get(getAdapterPosition()).getDate());
-                    bundle.putString("DayOfTheWeek", days.get(getAdapterPosition()).getDayOfTheWeek());
-                    bundle.putInt("Available", disp);
+                    bundle.putString(String.valueOf(R.string.bundleTitle),
+                            days.get(getAdapterPosition()).getName());
+                    bundle.putString(String.valueOf(R.string.bundleDate),
+                            days.get(getAdapterPosition()).getDate());
+                    bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek),
+                            days.get(getAdapterPosition()).getDayOfTheWeek());
+                    bundle.putInt(String.valueOf(R.string.bundleAvailable), disp);
                     Intent intent = new Intent(v.getContext(), InfoShow.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);

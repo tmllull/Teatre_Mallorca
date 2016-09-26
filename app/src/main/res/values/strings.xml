@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
     
     <string name="playList">Show List</string>
-    <string name="deletePlay">Delete Show</string>
+    <string name="deleteShow">Delete Show</string>
     <string name="title">"Title: "</string>
     <string name="date">"Date: "</string>
     <string name="tickets">"Nº Tickets: "</string>
@@ -18,7 +18,7 @@
     <string name="name">"Name: "</string>
     <string name="lastName">"Last name: "</string>
     <string name="confirmButton">Confirm</string>
-    <string name="selectPlayForDelete">Select from the list what play do you want to delete</string>
+    <string name="selectShowForDelete">Select from the list what show do you want to delete</string>
     <string name="delete">Delete</string>
     <string name="mon">Monday</string>
     <string name="tue">Tuesday</string>
@@ -40,6 +40,30 @@
     <string name="availableSeats">Available seats:</string>
     <string name="selectSeats">Select seats:</string>
     <string name="estimated">Est. income</string>
-    <string name="selectPlay">Select show</string>
+    <string name="selectShow">Select show</string>
     <string name="selectDate">Select a date for</string>
+    <string name="purchaseOk">Purchase OK</string>
+    <string name="purchaseNeedMail">email is required</string>
+    <string name="bundleTitle" translatable="false">Title</string>
+    <string name="bundleDate" translatable="false">Date</string>
+    <string name="bundleDayOfTheWeek" translatable="false">DayOfTheWeek</string>
+    <string name="bundleTickets" translatable="false">Tickets</string>
+    <string name="bundleTotal" translatable="false">Total</string>
+    <string name="bundlePlaces" translatable="false">Places</string>
+    <string name="bundleSeats" translatable="false">Seats</string>
+    <string name="bundleOption" translatable="false">Option</string>
+    <string name="bundleHold" translatable="false">Hold</string>
+    <string name="bundleAvailable" translatable="false">Available</string>
+    <string name="back">Back</string>
+    <string name="yes">Yes</string>
+    <string name="no" translatable="false">No</string>
+    <string name="notImplemented">Not implementet (yet)</string>
+    <string name="noSessions">No sessions</string>
+    <string name="deleteWarning">Delete Warning</string>
+    <string name="showNeeded">You must to select a show</string>
+    <string name="deleteFunction">Delete fuction</string>
+    <string name="deleteFunctionWarning">Delete function warning</string>
+    <string name="bundlePrice" translatable="false">Price</string>
+    <string name="bundleDuration" translatable="false">Duration</string>
+    <string name="bundleDescription" translatable="false">Description</string>
 </resources>

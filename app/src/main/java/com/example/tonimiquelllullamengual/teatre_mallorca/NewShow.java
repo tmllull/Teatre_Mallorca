@@ -1,6 +1,5 @@
 package com.example.tonimiquelllullamengual.teatre_mallorca;
 
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,25 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class NewShow extends AppCompatActivity implements View.OnClickListener {
 
     private Button btNew;
-    private EditText etNom, etDescripcio, etDurada, etPreu, etData;
-    private TextView tvData;
+    private EditText etTitle, etDescription, etDuration, etPrice;
 
-    private DatePickerDialog pickerDialog;
-
-    private SimpleDateFormat formatDate;
-
-    String titol;
+    String title;
 
     Bundle bundle;
 
@@ -36,66 +25,50 @@ public class NewShow extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nova_obra);
+        setContentView(R.layout.activity_new_show);
 
-        btNew = (Button) findViewById(R.id.bt_confirmarNovaObra);
-        etNom = (EditText) findViewById(R.id.et_nomNovaObra);
-        etDescripcio = (EditText) findViewById(R.id.et_descripcioNovaObra);
-        etDurada = (EditText) findViewById(R.id.et_duradaNovaObra);
-        etPreu = (EditText) findViewById(R.id.et_preuNovaObra);
+        btNew = (Button) findViewById(R.id.btNewShowConfirm);
+        etTitle = (EditText) findViewById(R.id.etNewShowTitle);
+        etDescription = (EditText) findViewById(R.id.etNewShowDescription);
+        etDuration = (EditText) findViewById(R.id.etNewShowDuration);
+        etPrice = (EditText) findViewById(R.id.etNewShowPrice);
 
         btNew.setOnClickListener(this);
-
-        formatDate = new SimpleDateFormat("dd/MM/yy");
-
-        prepareCalendar();
 
         dbHelper = new DbHelper(this);
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            etNom.setText(bundle.getString("Nom"));
-            etDescripcio.setText(bundle.getString("Descripcio"));
-            etDurada.setText(bundle.getString("Durada"));
-            etPreu.setText(bundle.getString("Preu"));
+            etTitle.setText(bundle.getString(String.valueOf(R.string.bundleTitle)));
+            etDescription.setText(bundle.getString(String.valueOf(R.string.bundleDescription)));
+            etDuration.setText(bundle.getString(String.valueOf(R.string.bundleDuration)));
+            etPrice.setText(bundle.getString(String.valueOf(R.string.bundlePrice)));
         }
-
-    }
-
-    public void prepareCalendar() {
-        Calendar calendari = Calendar.getInstance();
-        pickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar date = Calendar.getInstance();
-                date.set(year, monthOfYear, dayOfMonth);
-                tvData.setText(formatDate.format(date.getTime()));
-            }
-        }, calendari.get(Calendar.YEAR), calendari.get(Calendar.MONTH),
-                calendari.get(Calendar.DAY_OF_MONTH));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_confirmarNovaObra:
-                titol = etNom.getText().toString().trim().toUpperCase();
-                Cursor c = dbHelper.checkShow(titol);
+            case R.id.btNewShowConfirm:
+                title = etTitle.getText().toString().trim().toUpperCase();
+                Cursor c = dbHelper.checkShow(title);
                 if (c.moveToFirst()) {
                     Toast.makeText(getApplicationContext(), "Ja existeix una obra amb aquest títol",
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (etNom.getText().toString().trim().isEmpty() ||
-                        etDescripcio.getText().toString().isEmpty() ||
-                        etPreu.getText().toString().isEmpty() ||
-                        etDurada.getText().toString().isEmpty()) {
+                if (etTitle.getText().toString().trim().isEmpty() ||
+                        etDescription.getText().toString().isEmpty() ||
+                        etPrice.getText().toString().isEmpty() ||
+                        etDuration.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps",
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (etPreu.getText().toString().equals("42") ||
-                        etDurada.getText().toString().equals("42")) {
+
+                //EASTER
+                if (etPrice.getText().toString().equals("42") ||
+                        etDuration.getText().toString().equals("42")) {
                     new AlertDialog.Builder(v.getContext())
                             .setTitle("Don't panic!")
                             .setMessage("El 42 és un nombre màgic que té la resposta al " +
@@ -103,11 +76,15 @@ public class NewShow extends AppCompatActivity implements View.OnClickListener {
                             .setPositiveButton("   Sí", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("Nom",titol);
-                                    bundle.putString("Descripcio", etDescripcio.getText().toString());
-                                    bundle.putString("Durada", etDurada.getText().toString());
-                                    bundle.putString("Preu", etPreu.getText().toString());
-                                    Intent intent = new Intent (getApplicationContext(), NewShowDates.class);
+                                    bundle.putString(String.valueOf(R.string.bundleTitle), title);
+                                    bundle.putString(String.valueOf(R.string.bundleDescription),
+                                            etDescription.getText().toString());
+                                    bundle.putString(String.valueOf(R.string.bundleDuration),
+                                            etDuration.getText().toString());
+                                    bundle.putString(String.valueOf(R.string.bundlePrice),
+                                            etPrice.getText().toString());
+                                    Intent intent = new Intent(getApplicationContext(),
+                                            NewShowDates.class);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
                                     finish();
@@ -122,13 +99,15 @@ public class NewShow extends AppCompatActivity implements View.OnClickListener {
                             })
                             .setIcon(R.drawable.ic_menu_slideshow)
                             .show();
-                }
-                else {
+                } else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Nom", titol);
-                    bundle.putString("Descripcio", etDescripcio.getText().toString());
-                    bundle.putString("Durada", etDurada.getText().toString());
-                    bundle.putString("Preu", etPreu.getText().toString());
+                    bundle.putString(String.valueOf(R.string.bundleTitle), title);
+                    bundle.putString(String.valueOf(R.string.bundleDescription),
+                            etDescription.getText().toString());
+                    bundle.putString(String.valueOf(R.string.bundleDuration),
+                            etDuration.getText().toString());
+                    bundle.putString(String.valueOf(R.string.bundlePrice),
+                            etPrice.getText().toString());
                     Intent intent = new Intent(getApplicationContext(), NewShowDates.class);
                     intent.putExtras(bundle);
                     startActivity(intent);

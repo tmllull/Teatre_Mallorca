@@ -249,7 +249,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    //Obtenir totes les dates d'una obra
+    //
     public Cursor getDay(String day) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITLE, CN_DESCRIPTION, CN_DATE, CN_DURATION, CN_PRICE, CN_SEATS,
@@ -286,7 +286,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }*/
 
     //Obtenir les tickets venudes en un mateix day de la setmana (dilluns, dimarts...)
-    public int getEntries(String day) {
+    public int getTickets(String day) {
         Cursor c = this.getDay(day);
         //Cursor c = this.getDies(day, dia2);
         int cont = 0;
@@ -301,7 +301,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Obtenir les tickets venudes en un mateix day de la setmana (dilluns, dimarts...)
-    /*public int getEntries(String day, String dia2) {
+    /*public int getTickets(String day, String dia2) {
         Cursor c = this.getDies(day, dia2);
         int cont = 0;
         if (c.moveToFirst()) {

@@ -43,7 +43,7 @@ public class DeleteList extends AppCompatActivity implements AdapterView.OnItemS
 
     void LoadSpinnerShows() {
         // Spinner shows
-        shows.add("Selecciona una obra de la llista");
+        shows.add(String.valueOf(R.string.selectShow));
 
         Cursor c = dbHelper.getAllShowsDistinct();
         //Cursor c = dbHelper.getAllShows();
@@ -81,19 +81,17 @@ public class DeleteList extends AppCompatActivity implements AdapterView.OnItemS
         switch (v.getId()) {
             case R.id.btDeleteShow:
                 final String showSelected = spinnerShows.getSelectedItem().toString();
-                if (!showSelected.equals("Selecciona una obra de la llista")) {
+                if (!showSelected.equals(R.string.selectShowForDelete)) {
                     new AlertDialog.Builder(this)
-                            .setTitle("Eliminar obra")
-                            .setMessage("Aquesta acció no es pot desfer. " +
-                                    "Estàs segur que vols eliminar l'obra i totes " +
-                                    "les seves funcions?")
-                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.deleteShow)
+                            .setMessage(R.string.deleteWarning)
+                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dbHelper.deteleShow(showSelected);
                                     finish();
                                 }
                             })
-                            .setNegativeButton("No!!", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
                             })
@@ -102,7 +100,7 @@ public class DeleteList extends AppCompatActivity implements AdapterView.OnItemS
                     break;
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Has de seleccionar una obra",
+                    Toast.makeText(getApplicationContext(), R.string.showNeeded,
                             Toast.LENGTH_LONG).show();
                 }
             default:

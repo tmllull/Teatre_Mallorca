@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
 
     Button btAdd, btDelete, btShows;
 
-    ImageView ivLlist, ivDelete;
+    ImageView ivList, ivDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +68,14 @@ public class MainActivity extends AppCompatActivity
         btAdd = (Button) findViewById(R.id.btMainNewShow);
         btDelete = (Button) findViewById(R.id.btMainDeleteShow);
         btShows = (Button) findViewById(R.id.btMainListShows);
-        ivLlist = (ImageView) findViewById(R.id.ivMainListShows);
+        ivList = (ImageView) findViewById(R.id.ivMainListShows);
         ivDelete = (ImageView) findViewById(R.id.ivMainDeleteShow);
 
         btAdd.setOnClickListener(this);
         btDelete.setOnClickListener(this);
         btShows.setOnClickListener(this);
 
-        ivLlist.setOnClickListener(new View.OnClickListener() {
+        ivList.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

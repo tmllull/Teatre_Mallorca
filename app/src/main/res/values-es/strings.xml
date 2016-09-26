@@ -3,7 +3,6 @@
     <string name="action_settings">Ajustes</string>
     <string name="navigation_drawer_close">Cerrar Navitation Drawer</string>
     <string name="navigation_drawer_open">Abrir Navigation Drawer</string>
-    <string name="deletePlay">Eliminar obra</string>
     <string name="playList">Lista de obras</string>
     <string name="tickets">"Nº Entradas: "</string>
     <string name="title">"Título: "</string>
@@ -13,7 +12,7 @@
     <string name="lastName">"Apellidos: "</string>
     <string name="name">"Nombre: "</string>
     <string name="confirmButton">Confirmar compra</string>
-    <string name="selectPlayForDelete">Selecciona de la lista la obra que quieres eliminar</string>
+    <string name="selectShowForDelete">Selecciona de la lista la obra que quieres eliminar</string>
     <string name="delete">Eliminar</string>
     <string name="wed">Miércoles</string>
     <string name="fri">Viernes</string>
@@ -29,12 +28,22 @@
     <string name="moreTickets">+ entradas</string>
     <string name="lessTickets">- entradas</string>
     <string name="availableSeats">"Butacas disponibles: "</string>
-    <string name="blankText"></string>
     <string name="description">"Descripción: "</string>
     <string name="duration">"Duración: "</string>
     <string name="price">"Precio: "</string>
     <string name="selectSeats">"Selecciona butacas: "</string>
     <string name="estimated">Rec. estimada</string>
-    <string name="selectPlay">Selecciona una obra</string>
+    <string name="selectShow">Selecciona una obra</string>
     <string name="selectDate">"Selecciona una fecha para "</string>
+    <string name="purchaseOk">Su compra se ha realizado correctamente</string>
+    <string name="purchaseNeedMail">Tienes que introducir al menos un email</string>
+    <string name="back">Volver</string>
+    <string name="yes">Sí</string>
+    <string name="notImplemented">No implementado (de momento)</string>
+    <string name="noSessions">Ninguna sesión programada</string>
+    <string name="deleteShow">Elimiar obra</string>
+    <string name="deleteWarning">Esta acción no se puede deshacer. ¿Estás seguro que quieres eliminar la obra y todas sus funciones?</string>
+    <string name="showNeeded">Tienes que seleccionar una obra</string>
+    <string name="deleteFunction">Eliminar función</string>
+    <string name="deleteFunctionWarning">Esta acción no se puede deshacer. ¿Estás seguro que quieres eliminar esta función?</string>
 </resources>

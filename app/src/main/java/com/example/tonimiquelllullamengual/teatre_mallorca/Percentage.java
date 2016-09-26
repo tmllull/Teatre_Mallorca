@@ -3,51 +3,52 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
 /**
  * Created by tonimiquelllullamengual on 4/6/16.
  */
-public class Percentage implements Comparable{
+public class Percentage implements Comparable {
 
-    private String dia;
+    private String day;
     private Integer perc;
-    private Integer entrades;
-    private Integer vendes;
+    private Integer tickets;
+    private Integer sales;
 
-    Percentage() {}
+    Percentage() {
+    }
 
-    public void setDay(String dia) {
-        this.dia = dia;
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public void setPerc(int perc) {
         this.perc = perc;
     }
 
-    public void setEntries(int entrades) {
-        this.entrades = entrades;
+    public void setTickets(int tickets) {
+        this.tickets = tickets;
     }
 
-    public void setSales(int vendes) {
-        this.vendes = vendes;
+    public void setSales(int sales) {
+        this.sales = sales;
     }
 
-    public int getEntries() {
-        return entrades;
+    public int getTickets() {
+        return tickets;
     }
 
     public String getDay() {
-        return dia;
+        return day;
     }
 
     public int getPerc() {
         return perc;
     }
 
-    public int getVendes() {
-        return vendes;
+    public int getSales() {
+        return sales;
     }
 
     @Override
     public int compareTo(Object another) {
-        //return ((Percentage)another).getVendes() - this.vendes; //Ordenar per ingressos
+        //return ((Percentage)another).getSales() - this.sales; //Ordenar per ingressos
         //return ((Percentage)another).getPerc() - this.perc; //Ordenar per %
-        return ((Percentage)another).getEntries() - this.entrades; //Ordenar per tickets
+        return ((Percentage) another).getTickets() - this.tickets; //Ordenar per tickets
     }
 }

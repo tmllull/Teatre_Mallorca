@@ -24,8 +24,8 @@ public class UsersList extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            titol = bundle.getString("Titol");
-            data = bundle.getString("Data");
+            titol = bundle.getString(String.valueOf(R.string.bundleTitle));
+            data = bundle.getString(String.valueOf(R.string.bundleDate));
         }
 
         dbHelper = new DbHelper(this);

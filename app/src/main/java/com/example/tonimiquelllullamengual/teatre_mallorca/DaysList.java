@@ -49,7 +49,7 @@ public class DaysList extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            title = bundle.getString("Title");
+            title = bundle.getString(String.valueOf(R.string.bundleTitle));
         }
         Day day;
         Cursor c = dbHelper.getDatesShow(title);
@@ -58,7 +58,7 @@ public class DaysList extends AppCompatActivity {
                 date = c.getString(c.getColumnIndex(dbHelper.CN_DATE));
                 places = c.getInt(c.getColumnIndex(dbHelper.CN_FREE_SEATS));
                 dayOfTheWeek = c.getString(c.getColumnIndex(dbHelper.CN_DAY_OF_THE_WEEK));
-                if (filter.equals("No")) {
+                if (filter.equals(R.string.no)) {
                     day = new Day(title, places, date, dayOfTheWeek);
                     days.add(day);
                 } else {
@@ -70,7 +70,7 @@ public class DaysList extends AppCompatActivity {
             } while (c.moveToNext());
         }
 
-        if (days.isEmpty()) tvSession.setText("Cap sessio programada per");
+        if (days.isEmpty()) tvSession.setText(R.string.noSessions);
         else tvSession.setText(R.string.selectDate);
         tvTitle.setText(title);
 
@@ -149,7 +149,7 @@ public class DaysList extends AppCompatActivity {
                 updateData(days[6]);
                 return false;
             case R.id.menuSeeAll:
-                updateData("No");
+                updateData(String.valueOf(R.string.no));
                 return false;
             case R.id.afegir_un_dia:
                 modificar_dates(1);
@@ -159,7 +159,7 @@ public class DaysList extends AppCompatActivity {
                 return false;
             case R.id.reduir_dates:
                 //modificar_dates(3);
-                Toast.makeText(getApplicationContext(), "Aquesta funcionalitat no està implementada",
+                Toast.makeText(getApplicationContext(), R.string.notImplemented,
                         Toast.LENGTH_SHORT).show();
                 return false;
             default:
@@ -194,8 +194,8 @@ public class DaysList extends AppCompatActivity {
 
     void modificar_dates(int i) {
         Bundle bundle = new Bundle();
-        bundle.putString("Title", title);
-        bundle.putInt("Option", i);
+        bundle.putString(String.valueOf(R.string.bundleTitle), title);
+        bundle.putInt(String.valueOf(R.string.bundleOption), i);
         Intent intent = new Intent(getApplicationContext(), ModifyDates.class);
         intent.putExtras(bundle);
         startActivity(intent);

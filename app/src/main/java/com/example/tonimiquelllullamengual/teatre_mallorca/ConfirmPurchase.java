@@ -45,17 +45,17 @@ public class ConfirmPurchase extends AppCompatActivity implements View.OnClickLi
         Double total;
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            title = bundle.getString("Title");
+            title = bundle.getString(String.valueOf(R.string.bundleTitle));
             tvTitle.setText(title);
-            tickets = bundle.getInt("Tickets");
+            tickets = bundle.getInt(String.valueOf(R.string.bundleTickets));
             tvTickets.setText(String.valueOf(tickets));
-            total = bundle.getDouble("Total");
+            total = bundle.getDouble(String.valueOf(R.string.bundleTotal));
             DecimalFormat newTotal = new DecimalFormat("0.00");
             tvTotal.setText(newTotal.format(total) + "€");
-            freePlaces = bundle.getInt("Places");
-            selectedPlaces = bundle.getString("Seats");
-            dayOfTheWeek = bundle.getString("DayOfTheWeek");
-            date = bundle.getString("Date");
+            freePlaces = bundle.getInt(String.valueOf(R.string.bundlePlaces));
+            selectedPlaces = bundle.getString(String.valueOf(R.string.bundleSeats));
+            dayOfTheWeek = bundle.getString(String.valueOf(R.string.bundleDayOfTheWeek));
+            date = bundle.getString(String.valueOf(R.string.bundleDate));
             tvDate.setText(dayOfTheWeek + ", " + date);
         }
     }
@@ -70,11 +70,11 @@ public class ConfirmPurchase extends AppCompatActivity implements View.OnClickLi
                 user = etMail.getText().toString() + "^" + user;
                 dbHelper.updateClients(tvTitle.getText().toString(), date, user);
             }
-            Toast.makeText(getApplicationContext(), "La seva compra s'ha realitzat correctament",
+            Toast.makeText(getApplicationContext(), R.string.purchaseOk,
                     Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(getApplicationContext(), "Has d'emplenar el mail com a mínim",
+            Toast.makeText(getApplicationContext(), R.string.purchaseNeedMail,
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -94,9 +94,9 @@ public class ConfirmPurchase extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Title", title);
-        bundle.putString("Date", date);
-        bundle.putString("DayOfTheWeek", dayOfTheWeek);
+        bundle.putString(String.valueOf(R.string.bundleTitle), title);
+        bundle.putString(String.valueOf(R.string.bundleDate), date);
+        bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek), dayOfTheWeek);
         Intent intent = new Intent(getApplicationContext(), PlacesOcupacy.class);
         intent.putExtras(bundle);
         startActivity(intent);

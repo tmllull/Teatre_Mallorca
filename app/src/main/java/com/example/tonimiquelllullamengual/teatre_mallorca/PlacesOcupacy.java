@@ -130,9 +130,9 @@ public class PlacesOcupacy extends AppCompatActivity implements View.OnClickList
         dbHelper = new DbHelper(this);
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            title = bundle.getString("Title");
-            date = bundle.getString("Date");
-            dayOfTheWeek = bundle.getString("DayOfTheWeek");
+            title = bundle.getString(String.valueOf(R.string.bundleTitle));
+            date = bundle.getString(String.valueOf(R.string.bundleDate));
+            dayOfTheWeek = bundle.getString(String.valueOf(R.string.bundleDayOfTheWeek));
         }
         tvTitle.setText(title);
         Cursor c = dbHelper.getShowDate(title, date);
@@ -156,13 +156,13 @@ public class PlacesOcupacy extends AppCompatActivity implements View.OnClickList
         Double total = tickets * price;
         total -= (total * discount) / 100;
         Bundle bundle = new Bundle();
-        bundle.putDouble("Total", total);
-        bundle.putInt("Tickets", tickets);
-        bundle.putString("Title", title);
-        bundle.putString("Date", date);
-        bundle.putString("Seats", selectedSeats);
-        bundle.putInt("Places", freePlaces);
-        bundle.putString("DayOfTheWeek", dayOfTheWeek);
+        bundle.putDouble(String.valueOf(R.string.bundleTotal), total);
+        bundle.putInt(String.valueOf(R.string.bundleTickets), tickets);
+        bundle.putString(String.valueOf(R.string.bundleTitle), title);
+        bundle.putString(String.valueOf(R.string.bundleDate), date);
+        bundle.putString(String.valueOf(R.string.bundleSeats), selectedSeats);
+        bundle.putInt(String.valueOf(R.string.bundlePlaces), freePlaces);
+        bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek), dayOfTheWeek);
         Intent intent = new Intent(getApplicationContext(), ConfirmPurchase.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -208,10 +208,10 @@ public class PlacesOcupacy extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Title", tvTitle.getText().toString());
-        bundle.putString("Date", date);
-        bundle.putString("DayOfTheWeek", dayOfTheWeek);
-        bundle.putInt("Available", 1);
+        bundle.putString(String.valueOf(R.string.bundleTitle), tvTitle.getText().toString());
+        bundle.putString(String.valueOf(R.string.bundleDate), date);
+        bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek), dayOfTheWeek);
+        bundle.putInt(String.valueOf(R.string.bundleAvailable), 1);
         Intent intent = new Intent(getApplicationContext(), InfoShow.class);
         intent.putExtras(bundle);
         startActivity(intent);

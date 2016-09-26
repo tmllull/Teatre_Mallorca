@@ -72,64 +72,64 @@ public class Statistics extends AppCompatActivity {
 
 
         //Total d'tickets per days
-        int entries = dbHelper.getTotalEntries();
-        int monday = dbHelper.getEntries(days[0]);
-        int tuesday = dbHelper.getEntries(days[1]);
-        int wednesday = dbHelper.getEntries(days[2]);
-        int thursday = dbHelper.getEntries(days[3]);
-        int friday = dbHelper.getEntries(days[4]);
-        int saturday = dbHelper.getEntries(days[5]);
-        int sunday = dbHelper.getEntries(days[6]);
+        int tickets = dbHelper.getTotalEntries();
+        int monday = dbHelper.getTickets(days[0]);
+        int tuesday = dbHelper.getTickets(days[1]);
+        int wednesday = dbHelper.getTickets(days[2]);
+        int thursday = dbHelper.getTickets(days[3]);
+        int friday = dbHelper.getTickets(days[4]);
+        int saturday = dbHelper.getTickets(days[5]);
+        int sunday = dbHelper.getTickets(days[6]);
 
         /*
-        int dilluns = dbHelper.getEntries("Mon", "Lun.");
-        int dimarts = dbHelper.getEntries("Tue", "Mar.");
-        int dimecres = dbHelper.getEntries("Wed", "Mié.");
-        int dijous = dbHelper.getEntries("Thu", "Jue.");
-        int divendres = dbHelper.getEntries("Fri", "Vie.");
-        int dissabte = dbHelper.getEntries("Sat", "Sáb.");
-        int diumenge = dbHelper.getEntries("Sun", "Dom.");
+        int dilluns = dbHelper.getTickets("Mon", "Lun.");
+        int dimarts = dbHelper.getTickets("Tue", "Mar.");
+        int dimecres = dbHelper.getTickets("Wed", "Mié.");
+        int dijous = dbHelper.getTickets("Thu", "Jue.");
+        int divendres = dbHelper.getTickets("Fri", "Vie.");
+        int dissabte = dbHelper.getTickets("Sat", "Sáb.");
+        int diumenge = dbHelper.getTickets("Sun", "Dom.");
         */
 
         //Detecció de cap entrada venuda encara per evitar problemes
-        if (entries == 0) return;
+        if (tickets == 0) return;
 
         //Array on guardem tota la informació de cada day de la setmana
         percentage = new Percentage[7];
         percentage[0] = new Percentage();
         percentage[0].setDay(days[0]);
-        percentage[0].setPerc(monday * 100 / entries);
-        percentage[0].setEntries(monday);
+        percentage[0].setPerc(monday * 100 / tickets);
+        percentage[0].setTickets(monday);
         percentage[0].setSales(dbHelper.getIncome(days[0]));
         percentage[1] = new Percentage();
         percentage[1].setDay(days[1]);
-        percentage[1].setPerc(tuesday * 100 / entries);
-        percentage[1].setEntries(tuesday);
+        percentage[1].setPerc(tuesday * 100 / tickets);
+        percentage[1].setTickets(tuesday);
         percentage[1].setSales(dbHelper.getIncome(days[1]));
         percentage[2] = new Percentage();
         percentage[2].setDay(days[2]);
-        percentage[2].setPerc(wednesday * 100 / entries);
-        percentage[2].setEntries(wednesday);
+        percentage[2].setPerc(wednesday * 100 / tickets);
+        percentage[2].setTickets(wednesday);
         percentage[2].setSales(dbHelper.getIncome(days[2]));
         percentage[3] = new Percentage();
         percentage[3].setDay(days[3]);
-        percentage[3].setPerc(thursday * 100 / entries);
-        percentage[3].setEntries(thursday);
+        percentage[3].setPerc(thursday * 100 / tickets);
+        percentage[3].setTickets(thursday);
         percentage[3].setSales(dbHelper.getIncome(days[3]));
         percentage[4] = new Percentage();
         percentage[4].setDay(days[4]);
-        percentage[4].setPerc(friday * 100 / entries);
-        percentage[4].setEntries(friday);
+        percentage[4].setPerc(friday * 100 / tickets);
+        percentage[4].setTickets(friday);
         percentage[4].setSales(dbHelper.getIncome(days[4]));
         percentage[5] = new Percentage();
         percentage[5].setDay(days[5]);
-        percentage[5].setPerc(saturday * 100 / entries);
-        percentage[5].setEntries(saturday);
+        percentage[5].setPerc(saturday * 100 / tickets);
+        percentage[5].setTickets(saturday);
         percentage[5].setSales(dbHelper.getIncome(days[5]));
         percentage[6] = new Percentage();
         percentage[6].setDay(days[6]);
-        percentage[6].setPerc(sunday * 100 / entries);
-        percentage[6].setEntries(sunday);
+        percentage[6].setPerc(sunday * 100 / tickets);
+        percentage[6].setTickets(sunday);
         percentage[6].setSales(dbHelper.getIncome(days[6]));
 
         //Ordenació de major a menor en nombre d'tickets venudes
@@ -146,9 +146,9 @@ public class Statistics extends AppCompatActivity {
         colors[6] = 0x6fFF3300; //vermell
 
         //Processat de la informació a mostrar
-        tvTotalEntries.setText(R.string.tickets + String.valueOf(entries) + "(100%)\n" +
+        tvTotalEntries.setText(R.string.tickets + String.valueOf(tickets) + "(100%)\n" +
                 R.string.estimated + dbHelper.getTotalSells() + "€");
-        int aux = percentage[0].getEntries();
+        int aux = percentage[0].getTickets();
         for (int i = 0, j = 0; i < 7; ++i) {
             if (percentage[i].getDay().equals(days[0])) {
                 tvMonEntries.setText(R.string.tickets + String.valueOf(monday) +

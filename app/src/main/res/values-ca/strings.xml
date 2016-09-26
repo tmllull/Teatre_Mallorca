@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">Configuració</string>
-    <string name="deletePlay">Eliminar obra</string>
     <string name="navigation_drawer_close">Tancar Drawer</string>
     <string name="navigation_drawer_open">Obrir Drawer</string>
     <string name="playList">Llistat d\'obres</string>
@@ -13,7 +12,7 @@
     <string name="lastName">"Cognoms: "</string>
     <string name="name">"Nom: "</string>
     <string name="confirmButton">Confirmar compra</string>
-    <string name="selectPlayForDelete">Escull de la llista quina obra vols eliminar</string>
+    <string name="selectShowForDelete">Escull de la llista quina obra vols eliminar</string>
     <string name="delete">Eliminar</string>
     <string name="wed">Dimecres</string>
     <string name="fri">Divendres</string>
@@ -33,9 +32,18 @@
     <string name="duration">"Durada: "</string>
     <string name="price">"Preu: "</string>
     <string name="selectSeats">"Selecciona butaques: "</string>
-    <string name="blankText" translatable="false"></string>
     <string name="estimated">Rec. estimada</string>
-    <string name="selectPlay">Selecciona una obra</string>
+    <string name="selectShow">Selecciona una obra</string>
     <string name="selectDate">"Selecciona una data per "</string>
-    <string name="app_name" translatable="false"></string>
+    <string name="purchaseOk">La seva compra s\'ha realitzat correctament</string>
+    <string name="purchaseNeedMail">Has d\'introduir com a mínim un email</string>
+    <string name="back">Tornar</string>
+    <string name="yes">Sí</string>
+    <string name="notImplemented">No implementat (de moment)</string>
+    <string name="noSessions">Cap sessió programada</string>
+    <string name="deleteShow">Eliminar obra</string>
+    <string name="deleteWarning">Aquesta acció no es pot desfer. Estàs segur que vols eliminar l\'obra i totes les seves funcions?</string>
+    <string name="showNeeded">Has de seleccionar una obra</string>
+    <string name="deleteFunction">Eliminar funció</string>
+    <string name="deleteFunctionWarning">Aquesta acció no es pot desfer. Estàs segur que vols eliminar aquesta funció?</string>
 </resources>

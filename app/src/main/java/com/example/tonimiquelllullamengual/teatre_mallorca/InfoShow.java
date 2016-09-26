@@ -53,10 +53,10 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
                 }
                 else if (freePlaces) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Title", title);
-                    bundle.putString("Date", date);
-                    bundle.putString("DayOfTheWeek", dayOfTheWeek);
-                    bundle.putInt("Hold", 0); //Per indicar que és un accés nou
+                    bundle.putString(String.valueOf(R.string.bundleTitle), title);
+                    bundle.putString(String.valueOf(R.string.bundleDate), date);
+                    bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek), dayOfTheWeek);
+                    bundle.putInt(String.valueOf(R.string.bundleHold), 0); //Per indicar que és un accés nou
                     Intent intent = new Intent(getApplicationContext(), PlacesOcupacy.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
@@ -69,10 +69,10 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            title = bundle.getString("Title");
-            date = bundle.getString("Date");
-            dayOfTheWeek = bundle.getString("DayOfTheWeek");
-            available = bundle.getInt("Available");
+            title = bundle.getString(String.valueOf(R.string.bundleTitle));
+            date = bundle.getString(String.valueOf(R.string.bundleDate));
+            dayOfTheWeek = bundle.getString(String.valueOf(R.string.bundleDayOfTheWeek));
+            available = bundle.getInt(String.valueOf(R.string.bundleAvailable));
         }
 
         Cursor c = dbHelper.getShow(title, date);
@@ -100,10 +100,10 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
                 }
                 else if (freePlaces) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("Title", title);
-                    bundle.putString("Date", date);
-                    bundle.putString("DayOfTheWeek", dayOfTheWeek);
-                    bundle.putInt("Hold", 0); //Per indicar que és un accés nou
+                    bundle.putString(String.valueOf(R.string.bundleTitle), title);
+                    bundle.putString(String.valueOf(R.string.bundleDate), date);
+                    bundle.putString(String.valueOf(R.string.bundleDayOfTheWeek), dayOfTheWeek);
+                    bundle.putInt(String.valueOf(R.string.bundleHold), 0); //Per indicar que és un accés nou
                     Intent intent = new Intent(getApplicationContext(), PlacesOcupacy.class);
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
@@ -133,15 +133,13 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
         switch (item.getItemId()) {
             case R.id.menuDeleteShow:
                 new AlertDialog.Builder(this)
-                        .setTitle("Eliminar funció")
-                        .setMessage("Estàs segur que vols eliminar la funció? Aquesta " +
-                                "operació només afecta a aquesta sessió, però no es pot " +
-                                "desfer.")
-                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.deleteFunction)
+                        .setMessage(R.string.deleteFunctionWarning)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.deteleSession(title, date);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("Title", title);
+                                bundle.putString(String.valueOf(R.string.bundleTitle), title);
                                 Intent intent = new Intent(getApplicationContext(),
                                         DaysList.class);
                                 intent.putExtras(bundle);
@@ -149,7 +147,7 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
                                 finish();
                             }
                         })
-                        .setNegativeButton("No!!!", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                             }
                         })
@@ -158,8 +156,8 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
                 return false;
             case R.id.menuUsersShow:
                 Bundle bundle = new Bundle();
-                bundle.putString("Title", title);
-                bundle.putString("Date", date);
+                bundle.putString(String.valueOf(R.string.bundleTitle), title);
+                bundle.putString(String.valueOf(R.string.bundleDate), date);
                 Intent intent = new Intent(getApplicationContext(), UsersList.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -172,7 +170,7 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onBackPressed() {
         Bundle bundle = new Bundle();
-        bundle.putString("Title", title);
+        bundle.putString(String.valueOf(R.string.bundleTitle), title);
         Intent intent = new Intent(getApplicationContext(), DaysList.class);
         intent.putExtras(bundle);
         startActivity(intent);
