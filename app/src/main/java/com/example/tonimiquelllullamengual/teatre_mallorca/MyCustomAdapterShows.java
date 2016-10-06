@@ -33,7 +33,7 @@ public class MyCustomAdapterShows extends RecyclerView.Adapter<MyCustomAdapterSh
     @Override
     public void onBindViewHolder(MyCustomAdapterShows.AdapterViewHolder adapterViewHolder, int position) {
         if (shows != null) {
-            adapterViewHolder.name.setText(shows.get(position).getNom());
+            adapterViewHolder.name.setText(shows.get(position).getTitle());
             adapterViewHolder.sessions.setText(shows.get(position).getSessions().toString());
             if (position % 2 == 0) {
                 adapterViewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
@@ -83,7 +83,7 @@ public class MyCustomAdapterShows extends RecyclerView.Adapter<MyCustomAdapterSh
         public void onClick(View v) {
 
             Bundle bundle = new Bundle();
-            bundle.putString("Title", shows.get(getAdapterPosition()).getNom());
+            bundle.putString("Title", shows.get(getAdapterPosition()).getTitle());
             Intent intent = new Intent (v.getContext(), DaysList.class);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);

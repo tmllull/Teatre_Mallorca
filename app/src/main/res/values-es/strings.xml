@@ -46,4 +46,21 @@
     <string name="showNeeded">Tienes que seleccionar una obra</string>
     <string name="deleteFunction">Eliminar función</string>
     <string name="deleteFunctionWarning">Esta acción no se puede deshacer. ¿Estás seguro que quieres eliminar esta función?</string>
+    <string name="expiredSession">Esta sesión ha expirado</string>
+    <string name="noPlaces">No quedan plazas para esta sesión</string>
+    <string name="selectOneDate">Selecciona una fecha</string>
+    <string name="mustSelectDate">Tienes que seleccionar una fecha</string>
+    <string name="alreadyExistsShow">Ya existe una sesión con esta fecha</string>
+    <string name="newDateAdded">Nueva fecha añadida correctamente</string>
+    <string name="wrongDates">El rango de fechas es incorrecto</string>
+    <string name="noSessionsAdded">No es posible añadir ninguna sesión en este rango de fechas</string>
+    <string name="added">"Añadidas "</string>
+    <string name="dates">" dates"</string>
+    <string name="mustSelectStartFinish">Tienes que seleccionar una fecha de inicio y una de finalización</string>
+    <string name="atLeastOneDay">Selecciona almenos un día</string>
+    <string name="atLeastOneSeat">Selecciona almenos una butaca</string>
+    <string name="discountApply">Aplicar descuento</string>
+    <string name="discountCard">Si tienes el carnet joven, tienes un 30% de descuento</string>
+    <string name="yesIHaveIt">"     Sí, lo tengo"</string>
+    <string name="noHavent">"No, no lo tengo     "</string>
 </resources>

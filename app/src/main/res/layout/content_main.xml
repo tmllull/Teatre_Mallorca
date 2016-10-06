@@ -90,7 +90,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deletePlay"
+            android:text="@string/deleteShow"
             android:id="@+id/btMainDeleteShow"
             android:minHeight="60dp"
             android:minWidth="120dp"

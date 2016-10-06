@@ -37,11 +37,11 @@
     <string name="description">"Description: "</string>
     <string name="duration">"Duration: "</string>
     <string name="price">"Price: "</string>
-    <string name="availableSeats">Available seats:</string>
-    <string name="selectSeats">Select seats:</string>
+    <string name="availableSeats">"Available seats: "</string>
+    <string name="selectSeats">"Select seats: "</string>
     <string name="estimated">Est. income</string>
     <string name="selectShow">Select show</string>
-    <string name="selectDate">Select a date for</string>
+    <string name="selectDate">"Select a date for "</string>
     <string name="purchaseOk">Purchase OK</string>
     <string name="purchaseNeedMail">email is required</string>
     <string name="bundleTitle" translatable="false">Title</string>
@@ -66,4 +66,21 @@
     <string name="bundlePrice" translatable="false">Price</string>
     <string name="bundleDuration" translatable="false">Duration</string>
     <string name="bundleDescription" translatable="false">Description</string>
+    <string name="expiredSession">This session has expired</string>
+    <string name="noPlaces">This session is full</string>
+    <string name="selectOneDate">Select a date</string>
+    <string name="mustSelectDate">You must select a date</string>
+    <string name="alreadyExistsShow">Already exists a show whith this date</string>
+    <string name="newDateAdded">New date added</string>
+    <string name="wrongDates">Wrong dates</string>
+    <string name="noSessionsAdded">Not possible add sessions in this range</string>
+    <string name="added">"Added "</string>
+    <string name="dates">" dates"</string>
+    <string name="mustSelectStartFinish">You must select start and finish dates</string>
+    <string name="atLeastOneDay">Select at least one day</string>
+    <string name="atLeastOneSeat">Select at least one seat</string>
+    <string name="discountApply">Discount apply</string>
+    <string name="discountCard">If you have a discount card, You have 30% discount</string>
+    <string name="yesIHaveIt">"     Yes, I have it"</string>
+    <string name="noHavent">No, I haven\'t</string>
 </resources>

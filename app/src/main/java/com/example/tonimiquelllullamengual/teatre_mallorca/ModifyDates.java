@@ -142,14 +142,14 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
     }
 
     void addOneDay() {
-        String data = tvOneDay.getText().toString();
-        if (data.equals("Seleccionar date")) {
-            Toast.makeText(getApplicationContext(), "Has de seleccionar una date",
+        String date = tvOneDay.getText().toString();
+        if (date.equals(R.string.selectOneDate)) {
+            Toast.makeText(getApplicationContext(), R.string.mustSelectDate,
                     Toast.LENGTH_SHORT).show();
 
             return;
         }
-        char[] aux1 = data.toCharArray();
+        char[] aux1 = date.toCharArray();
         String year = String.valueOf(aux1[6]) + String.valueOf(aux1[7]);
         String month = String.valueOf(aux1[3]) + String.valueOf(aux1[4]);
         Integer month_val = Integer.valueOf(month);
@@ -160,7 +160,7 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy");
         Date d = null;
         try {
-            d = f.parse(data);
+            d = f.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -170,8 +170,7 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
         if (c.moveToFirst()) {
             do {
                 if (c.getString(c.getColumnIndex(dbHelper.CN_MILIS)).equals(String.valueOf(milliseconds))) {
-                    Toast.makeText(getApplicationContext(), "Ja hi ha una sessió programada " +
-                                    "per aquesta date",
+                    Toast.makeText(getApplicationContext(), R.string.alreadyExistsShow,
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -195,10 +194,10 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
             values.put(dbHelper.CN_CLIENTS, "^");
             values.put(dbHelper.CN_DAY_OF_THE_WEEK, dayOfTheWeek);
             dbHelper.newShow(values, dbHelper.SHOW_TABLE);
-            Toast.makeText(getApplicationContext(), "Nova date afegida correctament",
+            Toast.makeText(getApplicationContext(), R.string.newDateAdded,
                     Toast.LENGTH_LONG).show();
             Bundle bundle = new Bundle();
-            bundle.putString("Title", title);
+            bundle.putString(String.valueOf(R.string.date), title);
             Intent intent = new Intent(getApplicationContext(), DaysList.class);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -269,13 +268,12 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
         showYear = yearFromVal.toString();
 
         if (yearFromVal != yearToVal) {
-            Toast.makeText(getApplicationContext(), "Afegir shows entre diferents anys no està " +
-                            "implementat",
+            Toast.makeText(getApplicationContext(), R.string.notImplemented,
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
         } else if (monthFromVal > monthToVal) {
-            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+            Toast.makeText(getApplicationContext(), R.string.wrongDates,
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
@@ -305,7 +303,7 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
             calculateDays(dayFromVal, dayToVal);
             ok = true;
         } else {
-            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+            Toast.makeText(getApplicationContext(), R.string.wrongDates,
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
@@ -335,10 +333,14 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
                 if (!c.getString(c.getColumnIndex(dbHelper.CN_MILIS)).equals(milliseconds)) {
                     dayOfTheWeek = formatter.format(new java.sql.Date(milliseconds));
                     ContentValues values = new ContentValues();
-                    values.put(dbHelper.CN_TITLE, c.getString(c.getColumnIndex(dbHelper.CN_TITLE)));
-                    values.put(dbHelper.CN_DESCRIPTION, c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPTION)));
-                    values.put(dbHelper.CN_DURATION, c.getString(c.getColumnIndex(dbHelper.CN_DURATION)));
-                    values.put(dbHelper.CN_PRICE, c.getString(c.getColumnIndex(dbHelper.CN_PRICE)));
+                    values.put(dbHelper.CN_TITLE,
+                            c.getString(c.getColumnIndex(dbHelper.CN_TITLE)));
+                    values.put(dbHelper.CN_DESCRIPTION,
+                            c.getString(c.getColumnIndex(dbHelper.CN_DESCRIPTION)));
+                    values.put(dbHelper.CN_DURATION,
+                            c.getString(c.getColumnIndex(dbHelper.CN_DURATION)));
+                    values.put(dbHelper.CN_PRICE,
+                            c.getString(c.getColumnIndex(dbHelper.CN_PRICE)));
                     values.put(dbHelper.CN_DATE, showDate.toString());
                     values.put(dbHelper.CN_SEATS, places);
                     values.put(dbHelper.CN_MILIS, String.valueOf(milliseconds));
@@ -418,21 +420,20 @@ public class ModifyDates extends AppCompatActivity implements View.OnClickListen
                 pdDay2.show();
                 break;
             case R.id.btChangeDatesAdd:
-                if (tvAddTo.getText().toString().equals("Seleccionar date")) {
-                    Toast.makeText(getApplicationContext(), "Has de seleccionar date " +
-                                    "de finalització.",
+                if (tvAddTo.getText().toString().equals(R.string.selectOneDate)) {
+                    Toast.makeText(getApplicationContext(), R.string.mustSelectDate,
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
                 extendDates();
                 if (ok) {
                     if (cont == 0) {
-                        Toast.makeText(getApplicationContext(), "No es pot afegir cap sessió " +
-                                        "en aquest rang de dates i days seleccionats",
+                        Toast.makeText(getApplicationContext(), R.string.noSessionsAdded,
                                 Toast.LENGTH_SHORT).show();
                         break;
                     } else {
-                        Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
+                        Toast.makeText(getApplicationContext(), R.string.added +
+                                        String.valueOf(cont) + R.string.dates,
                                 Toast.LENGTH_SHORT).show();
                         Bundle bundle = new Bundle();
                         bundle.putString(String.valueOf(R.string.bundleTitle), title);

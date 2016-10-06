@@ -12,25 +12,25 @@ public class UsersList extends AppCompatActivity {
 
     DbHelper dbHelper;
     Bundle bundle;
-    ListView lvUsuaris;
-    String titol, data;
+    ListView lvUsers;
+    String title, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_llistar_usuaris);
+        setContentView(R.layout.activity_user_list);
 
-        lvUsuaris = (ListView) findViewById(R.id.lv_usuaris);
+        lvUsers = (ListView) findViewById(R.id.lsUsers);
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            titol = bundle.getString(String.valueOf(R.string.bundleTitle));
-            data = bundle.getString(String.valueOf(R.string.bundleDate));
+            title = bundle.getString(String.valueOf(R.string.bundleTitle));
+            date = bundle.getString(String.valueOf(R.string.bundleDate));
         }
 
         dbHelper = new DbHelper(this);
         List<String> llista = new ArrayList<String>();
-        String[] usuaris = dbHelper.consultUsers(titol, data);
+        String[] usuaris = dbHelper.consultUsers(title, date);
         if (usuaris != null) {
             for (int i = 0; i < usuaris.length; ++i) {
                 if (!usuaris[i].isEmpty())
@@ -38,7 +38,7 @@ public class UsersList extends AppCompatActivity {
             }
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     this, android.R.layout.simple_list_item_1, usuaris);
-            lvUsuaris.setAdapter(adapter);
+            lvUsers.setAdapter(adapter);
         }
     }
 }

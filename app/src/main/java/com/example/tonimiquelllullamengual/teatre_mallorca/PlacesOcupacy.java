@@ -67,21 +67,19 @@ public class PlacesOcupacy extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 if (tickets == 0) {
-                    Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
-                                    " una seat",
+                    Toast.makeText(getApplicationContext(), R.string.atLeastOneSeat,
                             Toast.LENGTH_SHORT).show();
                 } else {
                     new AlertDialog.Builder(v.getContext())
-                            .setTitle("Aplicar discount")
-                            .setMessage("Si tens el carnet Jove o universitari " +
-                                    "tens un 30% de discount")
-                            .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.discountApply)
+                            .setMessage(R.string.discountCard)
+                            .setPositiveButton(R.string.yesIHaveIt, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     discount = 30;
                                     confirmar();
                                 }
                             })
-                            .setNegativeButton("No tinc cap carnet   ", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.noHavent, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     confirmar();
                                     // do nothing
@@ -100,21 +98,19 @@ public class PlacesOcupacy extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 if (tickets == 0) {
-                    Toast.makeText(getApplicationContext(), "Has de seleccionar com a mínim" +
-                                    " una seat",
+                    Toast.makeText(getApplicationContext(), R.string.atLeastOneSeat,
                             Toast.LENGTH_SHORT).show();
                 } else {
                     new AlertDialog.Builder(v.getContext())
-                            .setTitle("Aplicar discount")
-                            .setMessage("Si tens el carnet Jove o universitari " +
-                                    "tens un 30% de discount")
-                            .setPositiveButton("   Sí, el tinc", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.discountApply)
+                            .setMessage(R.string.discountCard)
+                            .setPositiveButton(R.string.yesIHaveIt, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     discount = 30;
                                     confirmar();
                                 }
                             })
-                            .setNegativeButton("No tinc cap carnet   ", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.noHavent, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     confirmar();
                                     // do nothing

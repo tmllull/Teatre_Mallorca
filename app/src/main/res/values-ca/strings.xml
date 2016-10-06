@@ -46,4 +46,21 @@
     <string name="showNeeded">Has de seleccionar una obra</string>
     <string name="deleteFunction">Eliminar funció</string>
     <string name="deleteFunctionWarning">Aquesta acció no es pot desfer. Estàs segur que vols eliminar aquesta funció?</string>
+    <string name="expiredSession">Aquesta sessió ha expirat</string>
+    <string name="noPlaces">No queden places per aquesta sessió</string>
+    <string name="selectOneDate">Selecciona una data</string>
+    <string name="mustSelectDate">Has de seleccionar una data</string>
+    <string name="alreadyExistsShow">Ja existeix una sessió amb aquesta data</string>
+    <string name="newDateAdded">Nova data afegida correctament</string>
+    <string name="wrongDates">El rang de dates és incorrecte</string>
+    <string name="noSessionsAdded">No és possible afegir cap sessió dins d\'aquest rang de dates</string>
+    <string name="added">"Afegides "</string>
+    <string name="dates">" dates"</string>
+    <string name="mustSelectStartFinish">Has de seleccionar una data d\'inici i una data de fi</string>
+    <string name="atLeastOneDay">Selecciona almenys un dia</string>
+    <string name="atLeastOneSeat">Selecciona almenys una butaca</string>
+    <string name="discountApply">Aplicar descompte</string>
+    <string name="discountCard">Si tens el carnet jove, tens un 30% de descompte</string>
+    <string name="yesIHaveIt">"     Sí, el tinc"</string>
+    <string name="noHavent">"No, no el tinc     "</string>
 </resources>

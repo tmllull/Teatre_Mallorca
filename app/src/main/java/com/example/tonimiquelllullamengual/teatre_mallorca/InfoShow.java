@@ -47,8 +47,8 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 if (available == 0) {
-                    Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
-                            "No es poden comprar tickets", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.expiredSession,
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (freePlaces) {
@@ -62,8 +62,8 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
                     v.getContext().startActivity(intent);
                     finish();
                 }
-                else Toast.makeText(getApplicationContext(), "No queden places per aquesta " +
-                        "funció", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), R.string.noPlaces,
+                            Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -94,8 +94,8 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.tvSeatSelection:
                 if (available == 0) {
-                    Toast.makeText(getApplicationContext(), "Aquesta sessió ha expirat. " +
-                            "No es poden comprar tickets", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.expiredSession,
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (freePlaces) {
@@ -109,8 +109,8 @@ public class InfoShow extends AppCompatActivity implements View.OnClickListener 
                     v.getContext().startActivity(intent);
                     finish();
                 }
-                else Toast.makeText(getApplicationContext(), "No queden places per aquesta " +
-                            "funció", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), R.string.noPlaces,
+                            Toast.LENGTH_SHORT).show();
             default:
                 break;
         }

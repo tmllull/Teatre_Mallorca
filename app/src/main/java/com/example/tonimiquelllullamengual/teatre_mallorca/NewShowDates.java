@@ -128,13 +128,12 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
         yearShow = String.valueOf(yearFromVal);
 
         if (yearFromVal != yearToVal) {
-            Toast.makeText(getApplicationContext(), "Afegir shows entre diferents anys no està " +
-                            "implementat",
+            Toast.makeText(getApplicationContext(), R.string.notImplemented,
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
         } else if (monthFromVal > monthToVal) {
-            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+            Toast.makeText(getApplicationContext(), R.string.wrongDates,
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
@@ -164,7 +163,7 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
             calcul_dies(dayFromVal, dayToVal);
             ok = true;
         } else {
-            Toast.makeText(getApplicationContext(), "El rang de dates és incorrecte",
+            Toast.makeText(getApplicationContext(), R.string.wrongDates,
                     Toast.LENGTH_LONG).show();
             ok = false;
             return;
@@ -266,28 +265,27 @@ public class NewShowDates extends AppCompatActivity implements View.OnClickListe
                 pdDay2.show();
                 break;
             case R.id.btSaveDatesShow:
-                if (tvDay1.getText().toString().equals("Seleccionar date") ||
-                        tvDay2.getText().toString().equals("Seleccionar date")) {
-                    Toast.makeText(getApplicationContext(), "Has de seleccionar date d'inici" +
-                                    " i date de fi",
+                if (tvDay1.getText().toString().equals(R.string.selectOneDate) ||
+                        tvDay2.getText().toString().equals(R.string.selectOneDate)) {
+                    Toast.makeText(getApplicationContext(), R.string.mustSelectStartFinish,
                             Toast.LENGTH_SHORT).show();
                     break;
                 } else if (!cbMon.isChecked() && !cbTue.isChecked() && !cbWed.isChecked() &&
                         !cbThu.isChecked() && !cbFri.isChecked() && !cbSat.isChecked()
                         && !cbSun.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "Selecciona almenys un day",
+                    Toast.makeText(getApplicationContext(), R.string.atLeastOneDay,
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
                 saveShow();
                 if (ok) {
                     if (cont == 0) {
-                        Toast.makeText(getApplicationContext(), "No es pot afegir cap sessió " +
-                                        "en aquest rang de dates i days seleccionats",
+                        Toast.makeText(getApplicationContext(), R.string.noSessionsAdded,
                                 Toast.LENGTH_SHORT).show();
                         break;
                     } else {
-                        Toast.makeText(getApplicationContext(), "S'han afegit " + String.valueOf(cont) + " dates",
+                        Toast.makeText(getApplicationContext(), R.string.added +
+                                        String.valueOf(cont) + R.string.dates,
                                 Toast.LENGTH_SHORT).show();
                         finish();
                     }

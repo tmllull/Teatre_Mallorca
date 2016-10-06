@@ -5,30 +5,30 @@ package com.example.tonimiquelllullamengual.teatre_mallorca;
  */
 public class Show {
 
-    private String nom, dia, sessions;
+    private String title, day, sessions;
     private Integer places;
 
-    Show(String nom, Integer places, String dia, String sessions) {
-        this.nom = nom;
+    Show(String title, Integer places, String day, String sessions) {
+        this.title = title;
         this.places = places;
-        this.dia = dia;
+        this.day = day;
         this.sessions = sessions;
     }
 
-    Show(String nom, String sessions) {
-        this.nom = nom;
+    Show(String title, String sessions) {
+        this.title = title;
         this.sessions = sessions;
     }
 
     Show() {}
 
-    public String getNom() {return nom;}
+    public String getTitle() {return title;}
 
     public Integer getPlaces() {return places;}
 
-    public String getDia() {return dia;}
+    public String getDay() {return day;}
 
-    public void setNom(String nom){this.nom = nom;}
+    public void setTitle(String title){this.title = title;}
 
     public String getSessions() {return sessions;}
 }

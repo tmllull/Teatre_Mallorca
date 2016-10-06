@@ -39,7 +39,7 @@ public class DaysList extends AppCompatActivity {
 
         tvSession = (TextView) findViewById(R.id.tvSessions);
         tvTitle = (TextView) findViewById(R.id.tvListSessionsTitle);
-        filter = "No";
+        filter = String.valueOf(R.string.no);
         loadView(filter);
 
     }
@@ -127,38 +127,38 @@ public class DaysList extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuDaySelection:
                 return false;
-            case R.id.dilluns:
+            case R.id.monday:
                 updateData(days[0]);
                 return false;
-            case R.id.dimarts:
+            case R.id.tuesday:
                 updateData(days[1]);
                 return false;
-            case R.id.dimecres:
+            case R.id.wednesday:
                 updateData(days[2]);
                 return false;
-            case R.id.dijous:
+            case R.id.thursday:
                 updateData(days[3]);
                 return false;
-            case R.id.divendres:
+            case R.id.friday:
                 updateData(days[4]);
                 return false;
-            case R.id.dissabte:
+            case R.id.saturday:
                 updateData(days[5]);
                 return false;
-            case R.id.diumenge:
+            case R.id.sunday:
                 updateData(days[6]);
                 return false;
             case R.id.menuSeeAll:
                 updateData(String.valueOf(R.string.no));
                 return false;
-            case R.id.afegir_un_dia:
-                modificar_dates(1);
+            case R.id.addOneDay:
+                modifyDates(1);
                 return false;
-            case R.id.ampliar_dates:
-                modificar_dates(2);
+            case R.id.extendDates:
+                modifyDates(2);
                 return false;
-            case R.id.reduir_dates:
-                //modificar_dates(3);
+            case R.id.reduceDates:
+                //modifyDates(3);
                 Toast.makeText(getApplicationContext(), R.string.notImplemented,
                         Toast.LENGTH_SHORT).show();
                 return false;
@@ -192,7 +192,7 @@ public class DaysList extends AppCompatActivity {
             this.dayOfTheWeek = "Diumenge";
     }*/
 
-    void modificar_dates(int i) {
+    void modifyDates(int i) {
         Bundle bundle = new Bundle();
         bundle.putString(String.valueOf(R.string.bundleTitle), title);
         bundle.putInt(String.valueOf(R.string.bundleOption), i);

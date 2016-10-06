@@ -8,25 +8,25 @@
         app:showAsAction="never">
         <menu>
             <item
-                android:id="@+id/dilluns"
+                android:id="@+id/monday"
                 android:title="Dilluns" />
             <item
-                android:id="@+id/dimarts"
+                android:id="@+id/tuesday"
                 android:title="Dimarts" />
             <item
-                android:id="@+id/dimecres"
+                android:id="@+id/wednesday"
                 android:title="Dimecres" />
             <item
-                android:id="@+id/dijous"
+                android:id="@+id/thursday"
                 android:title="Dijous" />
             <item
-                android:id="@+id/divendres"
+                android:id="@+id/friday"
                 android:title="Divendres" />
             <item
-                android:id="@+id/dissabte"
+                android:id="@+id/saturday"
                 android:title="Dissabte" />
             <item
-                android:id="@+id/diumenge"
+                android:id="@+id/sunday"
                 android:title="Diumenge" />
             <item
                 android:id="@+id/menuSeeAll"
@@ -40,13 +40,13 @@
         app:showAsAction="never">
         <menu>
             <item
-                android:id="@+id/afegir_un_dia"
+                android:id="@+id/addOneDay"
                 android:title="Afegir un dia" />
             <item
-                android:id="@+id/ampliar_dates"
+                android:id="@+id/extendDates"
                 android:title="Ampliar dates" />
             <item
-                android:id="@+id/reduir_dates"
+                android:id="@+id/reduceDates"
                 android:title="Reduir dates" />
         </menu>
     </item>
