@@ -126,25 +126,25 @@ public class LlistarDies extends AppCompatActivity {
             case R.id.menu_seleccionar_dia:
                 return false;
             case R.id.dilluns:
-                updateData("Dilluns");
+                updateData("Lunes");
                 return false;
             case R.id.dimarts:
-                updateData("Dimarts");
+                updateData("Martes");
                 return false;
             case R.id.dimecres:
-                updateData("Dimecres");
+                updateData("Miércoles");
                 return false;
             case R.id.dijous:
-                updateData("Dijous");
+                updateData("Jueves");
                 return false;
             case R.id.divendres:
-                updateData("Divendres");
+                updateData("Viernes");
                 return false;
             case R.id.dissabte:
-                updateData("Dissabte");
+                updateData("Sábado");
                 return false;
             case R.id.diumenge:
-                updateData("Diumenge");
+                updateData("Domingo");
                 return false;
             case R.id.menu_mostrar_tot:
                 updateData("No");
@@ -175,19 +175,19 @@ public class LlistarDies extends AppCompatActivity {
     //Traduim el dia que ens retorna el sistema al català (de moment des d'anglès i espanyol)
     void traduir_dia(String dia_setmana) {
         if (dia_setmana.equals("Mon") || dia_setmana.equals("Lun."))
-            this.dia_setmana = "Dilluns";
+            this.dia_setmana = "Lunes";
         else if (dia_setmana.equals("Tue") || dia_setmana.equals("Mar."))
-            this.dia_setmana = "Dimarts";
+            this.dia_setmana = "Martes";
         else if (dia_setmana.equals("Wed") || dia_setmana.equals("Mié."))
-            this.dia_setmana = "Dimecres";
+            this.dia_setmana = "Miércoles";
         else if (dia_setmana.equals("Thu") || dia_setmana.equals("Jue."))
-            this.dia_setmana = "Dijous";
+            this.dia_setmana = "Jueves";
         else if (dia_setmana.equals("Fri") || dia_setmana.equals("Vie."))
-            this.dia_setmana = "Divendres";
+            this.dia_setmana = "Viernes";
         else if (dia_setmana.equals("Sat") || dia_setmana.equals("Sáb."))
-            this.dia_setmana = "Dissabte";
+            this.dia_setmana = "Sábado";
         else if (dia_setmana.equals("Sun") || dia_setmana.equals("Dom."))
-            this.dia_setmana = "Diumenge";
+            this.dia_setmana = "Domingo";
     }
 
     void modificar_dates(int i) {

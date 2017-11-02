@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Títol"
+        android:text="Título"
         android:id="@+id/tv_modificar_dates_titol"
         android:textSize="30dp"
         android:layout_gravity="center_horizontal"
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Escull un dia per afegir:"
+                android:text="Escoge un dia para añadir:"
                 android:id="@+id/textView60"
                 android:textSize="20dp"
                 android:textColor="#3f3f3f" />
@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccionar data"
+                android:text="Seleccionar fecha"
                 android:id="@+id/tv_modificar_dates_un_dia"
                 android:textSize="20dp"
                 android:layout_marginTop="10dp" />
@@ -51,7 +51,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Afegir nova data"
+            android:text="Añadir nueva fecha"
             android:id="@+id/bt_modificar_dates_un_dia"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp" />
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Primera data disponible: "
+                android:text="Primera fecha disponible: "
                 android:id="@+id/textView62"
                 android:textSize="20dp"
                 android:textColor="#3f3f3f" />
@@ -93,7 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ampliar fins:"
+                android:text="Ampliar hasta:"
                 android:id="@+id/textView64"
                 android:textSize="20dp"
                 android:textColor="#3f3f3f" />
@@ -101,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccionar data"
+                android:text="Seleccionar fecha"
                 android:id="@+id/tv_modificar_dates_ampliar_fins"
                 android:textSize="20dp" />
         </LinearLayout>
@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dies en que es representarà l&apos;obra"
+                android:text="Dias en que se representará la obra"
                 android:id="@+id/textView66"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#3f3f3f" />
@@ -123,43 +123,43 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dilluns"
+                android:text="Lunes"
                 android:id="@+id/checkBox" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dimarts"
+                android:text="Martes"
                 android:id="@+id/checkBox2" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dimecres"
+                android:text="Miércoles"
                 android:id="@+id/checkBox3" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dijous"
+                android:text="Jueves"
                 android:id="@+id/checkBox4" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Divendres"
+                android:text="Viernes"
                 android:id="@+id/checkBox5" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dissabte"
+                android:text="Sábado"
                 android:id="@+id/checkBox6" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Diumenge"
+                android:text="Domingo"
                 android:id="@+id/checkBox7" />
         </LinearLayout>
 

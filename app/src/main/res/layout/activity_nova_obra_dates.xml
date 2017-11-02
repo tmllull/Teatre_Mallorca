@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selecciona les dates"
+                android:text="Selecciona las fechas"
                 android:id="@+id/textView30"
                 android:textSize="25dp"
                 android:textAlignment="center"
@@ -41,14 +41,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Des de:"
+                android:text="Desde:"
                 android:id="@+id/textView31"
                 android:textSize="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccionar data"
+                android:text="Seleccionar fecha"
                 android:id="@+id/tv_dia_1"
                 android:layout_marginLeft="40dp"
                 android:textSize="20dp" />
@@ -63,14 +63,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fins:"
+                android:text="Hasta:"
                 android:id="@+id/textView37"
                 android:textSize="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccionar data"
+                android:text="Seleccionar fecha"
                 android:id="@+id/tv_dia_2"
                 android:layout_marginLeft="65dp"
                 android:textSize="20dp" />
@@ -85,7 +85,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dies en que es farà l&apos;obra"
+                android:text="Dias en los que se hará la obra"
                 android:id="@+id/textView44"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
@@ -95,43 +95,43 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dilluns"
+                android:text="Lunes"
                 android:id="@+id/cb_dilluns" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dimarts"
+                android:text="Martes"
                 android:id="@+id/cb_dimarts" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dimecres"
+                android:text="Miércoles"
                 android:id="@+id/cb_dimecres" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dijous"
+                android:text="Jueves"
                 android:id="@+id/cb_dijous" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Divendres"
+                android:text="Viernes"
                 android:id="@+id/cb_divendres" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dissabte"
+                android:text="Sábado"
                 android:id="@+id/cb_dissabte" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Diumenge"
+                android:text="Domingo"
                 android:id="@+id/cb_diumenge" />
         </LinearLayout>
 

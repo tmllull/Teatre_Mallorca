@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Llistat d&apos;usuaris"
+        android:text="Listado de usuarios"
         android:id="@+id/textView23"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp" />

@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripció: "
+                android:text="Descripción: "
                 android:id="@+id/textView11"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Durada: "
+                android:text="Duración: "
                 android:id="@+id/textView12"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -85,7 +85,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data:"
+                android:text="Fecha:"
                 android:id="@+id/textView29"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -107,7 +107,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Preu: "
+                android:text="Precio: "
                 android:id="@+id/textView13"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -129,7 +129,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Butaques lliures: "
+                android:text="Butacas Libres: "
                 android:id="@+id/textView14"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -159,13 +159,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccionar butaques"
+                android:text="Seleccionar butacas"
                 android:id="@+id/tv_seleccio_butaques" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comprar Entrades"
+                android:text="Comprar Entradas"
                 android:id="@+id/bt_Comprar_Info"
                 android:visibility="gone" />
 

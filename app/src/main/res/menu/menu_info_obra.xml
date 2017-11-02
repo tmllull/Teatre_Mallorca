@@ -4,11 +4,11 @@
     <item
         android:id="@+id/menu_eliminar_funcio"
         android:orderInCategory="100"
-        android:title="Eliminar funció"
+        android:title="Eliminar función"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_usuaris_obra"
         android:orderInCategory="100"
-        android:title="Consultar compradors"
+        android:title="Consultar compradores"
         app:showAsAction="never" />
 </menu>

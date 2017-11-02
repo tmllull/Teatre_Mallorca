@@ -22,7 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dia:"
+                    android:text="Día:"
                     android:id="@+id/textView40"
                     android:textSize="25dp"
                     android:visibility="gone" />
@@ -45,7 +45,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Butaques lliures:"
+                    android:text="Butacas libres:"
                     android:id="@+id/textView26"
                     android:textSize="15dp" />
 

@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estadistiques"
+        android:text="Estadísticas"
         android:id="@+id/textView41"
         android:textSize="30dp"
         android:layout_gravity="center_horizontal"
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total d&apos;entrades venudes"
+                android:text="Total de entradas vendidas"
                 android:id="@+id/textView35"
                 android:textSize="20dp"
                 android:layout_gravity="center_horizontal"
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cap entrada venuda"
+                android:text="Ninguna entrada vendida"
                 android:id="@+id/tv_total_entrades"
                 android:textSize="15dp"
                 android:layout_gravity="center_horizontal"
@@ -72,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dilluns"
+                    android:text="Lunes"
                     android:id="@+id/textView36"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -82,7 +82,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_dilluns"
                     android:textColor="#343434" />
 
@@ -109,7 +109,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dimarts"
+                    android:text="Martes"
                     android:id="@+id/textView39"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -119,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_dimarts"
                     android:textColor="#343434" />
 
@@ -151,7 +151,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dimecres"
+                    android:text="Miercoles"
                     android:id="@+id/textView25"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -160,7 +160,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_dimecres"
                     android:textColor="#343434" />
 
@@ -185,7 +185,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dijous"
+                    android:text="Jueves"
                     android:id="@+id/textView38"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -194,7 +194,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_dijous"
                     android:textColor="#343434" />
 
@@ -225,7 +225,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Divendres"
+                    android:text="Viernes"
                     android:id="@+id/textView42"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -234,7 +234,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_divendres"
                     android:textColor="#343434" />
 
@@ -259,7 +259,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dissabte"
+                    android:text="Sábado"
                     android:id="@+id/textView34"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -268,7 +268,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_dissabte"
                     android:textColor="#343434" />
 
@@ -299,7 +299,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Diumenge"
+                    android:text="Domingo"
                     android:id="@+id/textView43"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -308,7 +308,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 entrades"
+                    android:text="0 entradas"
                     android:id="@+id/tv_entrades_diumenge"
                     android:textColor="#343434" />
 
@@ -339,7 +339,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Llegenda"
+                android:text="Leyenda"
                 android:id="@+id/textView52"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20dp"
@@ -424,7 +424,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="- entrades"
+                android:text="- entradas"
                 android:id="@+id/textView53"
                 android:layout_weight="1"
                 android:textColor="#343434" />
@@ -457,7 +457,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+ entrades"
+                android:text="+ entradas"
                 android:id="@+id/textView59"
                 android:layout_weight="1"
                 android:layout_gravity="right"

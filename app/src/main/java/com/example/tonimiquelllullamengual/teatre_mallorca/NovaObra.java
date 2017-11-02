@@ -121,7 +121,7 @@ public class NovaObra extends AppCompatActivity implements View.OnClickListener 
                                     // do nothing
                                 }
                             })
-                            .setIcon(R.drawable.guia)
+                            .setIcon(R.drawable.discount)
                             .show();
                 }
                 else {

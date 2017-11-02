@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escull una sessió per"
+            android:text="Escoge una sesión para"
             android:id="@+id/tv_sessions"
             android:layout_gravity="center_horizontal"
             android:textSize="25dp" />

@@ -4,50 +4,50 @@
     <item
         android:id="@+id/menu_seleccionar_dia"
         android:orderInCategory="100"
-        android:title="Filtrar per dia de la setmana"
+        android:title="Filtrar por dia de la semana"
         app:showAsAction="never">
         <menu>
             <item
                 android:id="@+id/dilluns"
-                android:title="Dilluns" />
+                android:title="Lunes" />
             <item
                 android:id="@+id/dimarts"
-                android:title="Dimarts" />
+                android:title="Martes" />
             <item
                 android:id="@+id/dimecres"
-                android:title="Dimecres" />
+                android:title="Miércoles" />
             <item
                 android:id="@+id/dijous"
-                android:title="Dijous" />
+                android:title="Jueves" />
             <item
                 android:id="@+id/divendres"
-                android:title="Divendres" />
+                android:title="Viernes" />
             <item
                 android:id="@+id/dissabte"
-                android:title="Dissabte" />
+                android:title="Sábado" />
             <item
                 android:id="@+id/diumenge"
-                android:title="Diumenge" />
+                android:title="Domingo" />
             <item
                 android:id="@+id/menu_mostrar_tot"
-                android:title="Mostrar tots els dies" />
+                android:title="Mostrar todos los dias" />
         </menu>
     </item>
     <item
         android:id="@+id/modificar_dates"
         android:orderInCategory="100"
-        android:title="Modificar dates"
+        android:title="Modificar fechas"
         app:showAsAction="never">
         <menu>
             <item
                 android:id="@+id/afegir_un_dia"
-                android:title="Afegir un dia" />
+                android:title="Añadir un día" />
             <item
                 android:id="@+id/ampliar_dates"
-                android:title="Ampliar dates" />
+                android:title="Ampliar fechas" />
             <item
                 android:id="@+id/reduir_dates"
-                android:title="Reduir dates" />
+                android:title="Reducir fechas" />
         </menu>
     </item>
 </menu>

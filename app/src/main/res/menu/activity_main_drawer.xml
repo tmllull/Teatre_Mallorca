@@ -5,18 +5,18 @@
         <item
             android:id="@+id/init_data"
             android:icon="@drawable/add"
-            android:title="Inicialitzar dades" />
+            android:title="Inicializar datos" />
         <item
             android:id="@+id/delete_data"
             android:icon="@drawable/garbage"
-            android:title="Esborrar les dades" />
+            android:title="Borrar los datos" />
         <item
             android:id="@+id/estadistiques"
             android:icon="@drawable/statistics"
-            android:title="Estadístiques" />
+            android:title="Estadísticas" />
     </group>
 
-    <item android:title="Més informació">
+    <item android:title="Mas información">
         <menu>
             <item
                 android:id="@+id/nav_help"
